@@ -50,6 +50,7 @@ Setiap menjalankan container, WAJIB me-_mounting_ direktori ini sebagai working 
 - Setiap penambahan skill lewat skills.sh, WAJIB gunakan opsi `-y` agar bersifat non-interactive
 - SELALU pastikan hasil build dalam kondisi clean (no error, no warning) sebelum melanjutkan ke task berikutnya
 - SELALU gunakan bahasa Indonesia dalam dokumentasi. Kecuali kodingan, WAJIB bahasa Inggris (komentar, deklarasi, dll.)
+- SELALU gunakan git yang ada didalam container saat melakukan aksi-aksi terkait git (`commit/pull/push/etc`)
 
 ## Aturan umum yang DILARANG dilakukan
 
