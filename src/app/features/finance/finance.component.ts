@@ -19,10 +19,12 @@ import Chart from 'chart.js/auto';
 })
 export class FinanceComponent implements OnDestroy {
   private chart: Chart | null = null;
+  protected readonly chartReady = signal(false);
 
   constructor() {
     afterNextRender(() => {
-      this.initChart();
+      this.chartReady.set(true);
+      requestAnimationFrame(() => this.initChart());
     });
   }
 

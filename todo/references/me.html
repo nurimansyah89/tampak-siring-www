@@ -1,0 +1,473 @@
+<!doctype html>
+
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Akun Saya - Tampaksiring Smart Cluster</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-surface': '#2b1613',
+              'surface-container-highest': '#ffdad4',
+              'surface-container': '#ffe9e5',
+              'on-tertiary-fixed': '#321200',
+              'on-background': '#2b1613',
+              'on-tertiary': '#ffffff',
+              'on-primary-fixed': '#291801',
+              'on-error-container': '#93000a',
+              error: '#ba1a1a',
+              'surface-bright': '#fff8f6',
+              'inverse-surface': '#422a26',
+              'error-container': '#ffdad6',
+              'surface-tint': '#735a3a',
+              'secondary-fixed-dim': '#c7c6c4',
+              outline: '#80756b',
+              'on-primary': '#ffffff',
+              background: '#fff8f6',
+              surface: '#fff8f6',
+              'inverse-on-surface': '#ffedea',
+              'secondary-container': '#e0e0dd',
+              'primary-fixed': '#ffddb6',
+              'on-secondary-fixed': '#1a1c1a',
+              'surface-container-high': '#ffe2dd',
+              'on-secondary': '#ffffff',
+              'on-tertiary-fixed-variant': '#763400',
+              primary: '#705838',
+              'outline-variant': '#d1c4b8',
+              'on-primary-fixed-variant': '#594325',
+              'primary-fixed-dim': '#e2c19b',
+              'on-secondary-container': '#626361',
+              'on-primary-container': '#fffbff',
+              'on-error': '#ffffff',
+              'inverse-primary': '#e2c19b',
+              'on-tertiary-container': '#fffbff',
+              'tertiary-fixed-dim': '#ffb68d',
+              'tertiary-fixed': '#ffdbc9',
+              'surface-container-low': '#fff0ee',
+              tertiary: '#974400',
+              'surface-dim': '#f8d1cb',
+              secondary: '#5e5f5d',
+              'secondary-fixed': '#e3e2e0',
+              'surface-variant': '#ffdad4',
+              'on-surface-variant': '#4e453c',
+              'tertiary-container': '#bb5808',
+              'on-secondary-fixed-variant': '#464745',
+              'surface-container-lowest': '#ffffff',
+              'primary-container': '#8b704f',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              'max-width-desktop': '1280px',
+              lg: '48px',
+              base: '8px',
+              xl: '80px',
+              md: '24px',
+              'margin-mobile': '16px',
+              gutter: '24px',
+              xs: '4px',
+              sm: '12px',
+            },
+            fontFamily: {
+              'title-md': ['Inter'],
+              'label-md': ['Inter'],
+              'display-lg': ['Inter'],
+              'body-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'label-sm': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'headline-lg': ['Inter'],
+            },
+            fontSize: {
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      body {
+        background-color: #faf9f6; /* Philosophy-driven light level 0 */
+      }
+      .custom-shadow-level-1 {
+        box-shadow: 0px 4px 20px rgba(62, 39, 35, 0.05);
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-surface">
+    <!-- Desktop Sidebar Navigation -->
+    <aside
+      class="flex flex-col h-full p-md space-y-2 bg-surface-container-low dark:bg-surface-container-lowest h-screen w-64 fixed left-0 top-0 hidden md:flex shadow-md z-50"
+    >
+      <div class="mb-8 flex items-center gap-3">
+        <img
+          alt="Cluster Logo"
+          class="w-12 h-12 rounded-lg"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0KfMhnsRs1L2qwzFA2wyviD796DUgGNcoRISA9trlG_afZ7VZTE5lTKY1mTkZwEqDo8MbtHNYLfacXw46Rxv-bN4H1moFH9K5rtzTTSL7SsHsNX-QU2hvyIFK2qk3HIo4X4Qtil_oLMp4BnlNJQYN609K65XK_EmC_3Lx1y1u9wC_lGbLGImZzsx7Ps_-vLLofqWKj-17QChNI2RXGEOjyfHOnFX8G7ICe3_vQSMrvZWDsif3tlvWpMu8eHA_ZxN9ywY8jTkUhdY"
+        />
+        <div>
+          <h1 class="font-headline-lg text-[18px] font-bold text-primary">Tampaksiring</h1>
+          <p class="font-label-sm text-on-surface-variant">Smart Cluster Portal</p>
+        </div>
+      </div>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 flex items-center gap-3 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+          <span class="font-label-md">Dashboard</span>
+        </a>
+        <a
+          class="text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 flex items-center gap-3 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="payments">payments</span>
+          <span class="font-label-md">Iuran Warga</span>
+        </a>
+        <a
+          class="text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 flex items-center gap-3 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="map">map</span>
+          <span class="font-label-md">Peta Klaster</span>
+        </a>
+        <a
+          class="text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 flex items-center gap-3 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="group">group</span>
+          <span class="font-label-md">Daftar Warga</span>
+        </a>
+        <a
+          class="text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 flex items-center gap-3 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+          <span class="font-label-md">Tiket Keluhan</span>
+        </a>
+        <!-- Active State: Akun Saya -->
+        <a
+          class="bg-primary-container text-on-primary-container font-semibold rounded-lg px-4 py-3 flex items-center gap-3"
+          href="#"
+        >
+          <span
+            class="material-symbols-outlined"
+            data-icon="person"
+            style="font-variation-settings: 'FILL' 1"
+            >person</span
+          >
+          <span class="font-label-md">Akun Saya</span>
+        </a>
+        <a
+          class="text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 flex items-center gap-3 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="home_work">home_work</span>
+          <span class="font-label-md">Informasi Rumah</span>
+        </a>
+      </nav>
+      <div class="pt-4 border-t border-outline-variant">
+        <button
+          class="w-full bg-primary text-on-primary font-label-md py-3 rounded-lg mb-4 hover:opacity-90 transition-opacity"
+        >
+          Hubungi Admin
+        </button>
+        <a
+          class="text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 flex items-center gap-3 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="logout">logout</span>
+          <span class="font-label-md">Keluar</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Top App Bar (Mobile Only) -->
+    <header
+      class="flex justify-between items-center w-full px-margin-mobile md:px-lg h-16 sticky top-0 z-40 bg-surface shadow-sm md:hidden"
+    >
+      <h1 class="font-title-md text-title-md font-bold text-primary">Akun Saya</h1>
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary" data-icon="notifications"
+          >notifications</span
+        >
+        <div class="w-8 h-8 rounded-full overflow-hidden bg-outline-variant">
+          <img
+            alt="User profile photo"
+            class="w-full h-full object-cover"
+            data-alt="A professional studio headshot of a middle-aged man with a warm and approachable expression. He has short dark hair and is wearing a clean, casual linen shirt. The lighting is soft and natural against a minimalist, warm cream background, perfectly matching the premium and earthy aesthetic of a high-end residential portal. The overall mood is sophisticated, secure, and personal."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ6LiuLhwC2KD9lWAnlO41rwsvDQIUooNGu7fQMZoXk9tqrbuwYgJgxaWmzn5x0-wdkYJn3eQ5XIwarGTi3WugLG8TndJ_xMWAGxW_JBaJ5VqtY-JB_V2iQ35ziXr3_QnO61fTJP8EI-JAquVDuRuqveDYJgGbi7tb37X4VBI6lxL2mSzjNoqOHYzSiiS9BCmTKRD5ApavpHRShb34FkxvGOw8qxhqANwC3XQZdYsT-ze8Foorm72luaewMpbMGVvwfJRSFlJgFOw"
+          />
+        </div>
+      </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="md:ml-64 min-h-screen pb-24 md:pb-8">
+      <div class="max-w-[1280px] mx-auto p-margin-mobile md:p-lg space-y-gutter">
+        <!-- Breadcrumbs / Header Desktop -->
+        <div class="hidden md:block">
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">Pengaturan Akun</h2>
+          <p class="font-body-md text-on-surface-variant">
+            Kelola informasi profil dan keamanan akun Anda.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+          <!-- Profile Section Card -->
+          <section class="lg:col-span-4 flex flex-col gap-gutter">
+            <div
+              class="bg-surface-container-lowest p-md rounded-xl custom-shadow-level-1 border border-outline-variant/20 text-center"
+            >
+              <div class="relative w-32 h-32 mx-auto mb-4">
+                <img
+                  alt="Andi Wijaya Profile"
+                  class="w-full h-full object-cover rounded-full border-4 border-surface-container"
+                  data-alt="Close up portrait of a male resident named Andi Wijaya, looking friendly and professional. He is depicted in a high-quality lifestyle photograph with soft, diffused sunlight casting a warm glow on his face. The setting is a modern, minimalist home environment with subtle wooden textures and natural stone colors in the blurred background, reinforcing the cluster's luxury identity."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9SGoj6pJEvLjrpHTthPZ4uir7-mdz2DdbPm5Vms87TGuoMW8PF3oSdfGZtczQ0UIb3yi2Ob-Lz3WIZmy7owpqVFUADwCjiYD_shBt_cuCsh_bMaMhpq8zpGWkIc1axrGXQxJuPH59TrJRuTdAZ1OLpi98BXDRVfLVVy5esXw_qaxrccY_QY2ebDIstKd3BxIJNt2x-UQuupb0E_JEotEC5QgIyT8jLlgfXe-FD7oVZZoLDwO9MvT8N4WKTVvddfRbgoMb9Olqvsc"
+                />
+                <button
+                  class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full shadow-md hover:scale-105 transition-transform"
+                >
+                  <span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span>
+                </button>
+              </div>
+              <h3 class="font-title-md text-title-md text-on-surface">Andi Wijaya</h3>
+              <div
+                class="inline-flex items-center gap-1 px-3 py-1 bg-primary-container/10 text-primary rounded-full mt-2"
+              >
+                <span class="material-symbols-outlined text-[16px]" data-icon="location_on"
+                  >location_on</span
+                >
+                <span class="font-label-sm">Blok A-12</span>
+              </div>
+              <p class="font-label-md text-on-surface-variant mt-1">ID Warga: TSC-2024-089</p>
+            </div>
+            <div
+              class="bg-surface-container-lowest p-md rounded-xl custom-shadow-level-1 border border-outline-variant/20"
+            >
+              <h4 class="font-label-md font-bold text-on-surface mb-4">Status Akun</h4>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <span class="font-body-md text-on-surface-variant">Status Iuran</span>
+                  <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full font-label-sm"
+                    >Lunas</span
+                  >
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="font-body-md text-on-surface-variant">Verifikasi</span>
+                  <span
+                    class="px-3 py-1 bg-primary-container text-on-primary-container rounded-full font-label-sm"
+                    >Terverifikasi</span
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Information Form Section -->
+          <section class="lg:col-span-8 space-y-gutter">
+            <!-- Account Info Fields -->
+            <div
+              class="bg-surface-container-lowest p-md rounded-xl custom-shadow-level-1 border border-outline-variant/20"
+            >
+              <div class="flex items-center gap-2 mb-6 border-b border-outline-variant pb-4">
+                <span class="material-symbols-outlined text-primary" data-icon="badge">badge</span>
+                <h3 class="font-title-md text-title-md">Informasi Pribadi</h3>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label class="font-label-md text-on-surface-variant block">Nama Lengkap</label>
+                  <input
+                    class="w-full bg-surface-bright border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md"
+                    type="text"
+                    value="Andi Wijaya"
+                  />
+                </div>
+                <div class="space-y-2">
+                  <label class="font-label-md text-on-surface-variant block">Nomor Telepon</label>
+                  <input
+                    class="w-full bg-surface-bright border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md"
+                    type="tel"
+                    value="+62 812 3456 7890"
+                  />
+                </div>
+                <div class="space-y-2 md:col-span-2">
+                  <label class="font-label-md text-on-surface-variant block">Alamat Email</label>
+                  <input
+                    class="w-full bg-surface-bright border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md"
+                    type="email"
+                    value="andi.wijaya@email.com"
+                  />
+                </div>
+                <div class="space-y-2 md:col-span-2">
+                  <label class="font-label-md text-on-surface-variant block"
+                    >Alamat Rumah (Sesuai Sertifikat)</label
+                  >
+                  <textarea
+                    class="w-full bg-surface-container border border-outline-variant/30 rounded-lg px-4 py-3 font-body-md text-on-surface-variant cursor-not-allowed"
+                    readonly=""
+                  >
+Jalan Tampaksiring Raya No. 12, Blok A-12, Smart Cluster Residential, Jakarta Timur</textarea
+                  >
+                </div>
+              </div>
+              <div class="mt-8 flex justify-end">
+                <button
+                  class="bg-primary text-on-primary font-label-md px-8 py-3 rounded-lg hover:opacity-90 active:scale-95 transition-all"
+                >
+                  Simpan Perubahan
+                </button>
+              </div>
+            </div>
+            <!-- Change Password Section -->
+            <div
+              class="bg-surface-container-lowest p-md rounded-xl custom-shadow-level-1 border border-outline-variant/20"
+            >
+              <div class="flex items-center gap-2 mb-6 border-b border-outline-variant pb-4">
+                <span class="material-symbols-outlined text-primary" data-icon="lock">lock</span>
+                <h3 class="font-title-md text-title-md">Ganti Password</h3>
+              </div>
+              <form class="space-y-6 max-w-lg">
+                <div class="space-y-2">
+                  <label class="font-label-md text-on-surface-variant block"
+                    >Password Saat Ini</label
+                  >
+                  <div class="relative">
+                    <input
+                      class="w-full bg-surface-bright border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md"
+                      placeholder="••••••••"
+                      type="password"
+                    />
+                    <span
+                      class="material-symbols-outlined absolute right-4 top-3 text-on-surface-variant cursor-pointer"
+                      data-icon="visibility"
+                      >visibility</span
+                    >
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <label class="font-label-md text-on-surface-variant block">Password Baru</label>
+                    <input
+                      class="w-full bg-surface-bright border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md"
+                      placeholder="Min. 8 karakter"
+                      type="password"
+                    />
+                  </div>
+                  <div class="space-y-2">
+                    <label class="font-label-md text-on-surface-variant block"
+                      >Konfirmasi Password Baru</label
+                    >
+                    <input
+                      class="w-full bg-surface-bright border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md"
+                      placeholder="Ulangi password"
+                      type="password"
+                    />
+                  </div>
+                </div>
+                <div class="pt-4">
+                  <button
+                    class="bg-primary text-on-primary font-label-md px-8 py-3 rounded-lg hover:opacity-90 active:scale-95 transition-all w-full md:w-auto"
+                    type="submit"
+                  >
+                    Simpan Password
+                  </button>
+                </div>
+              </form>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <!-- Bottom Navigation Bar (Mobile Only) -->
+    <nav
+      class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 border-t border-outline-variant bg-surface md:hidden shadow-lg rounded-t-xl"
+    >
+      <a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+        <span class="material-symbols-outlined" data-icon="home">home</span>
+        <span class="font-label-sm text-[10px]">Home</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+        <span class="material-symbols-outlined" data-icon="payments">payments</span>
+        <span class="font-label-sm text-[10px]">Iuran</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+        <span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+        <span class="font-label-sm text-[10px]">Lapor</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+        <span class="material-symbols-outlined" data-icon="group">group</span>
+        <span class="font-label-sm text-[10px]">Warga</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1"
+        href="#"
+      >
+        <span
+          class="material-symbols-outlined"
+          data-icon="person"
+          style="font-variation-settings: 'FILL' 1"
+          >person</span
+        >
+        <span class="font-label-sm text-[10px]">Akun</span>
+      </a>
+    </nav>
+    <script>
+      // Simple Interaction for Visibility Toggle
+      document.querySelectorAll('[data-icon="visibility"]').forEach((icon) => {
+        icon.addEventListener('click', function () {
+          const input = this.previousElementSibling;
+          if (input.type === 'password') {
+            input.type = 'text';
+            this.textContent = 'visibility_off';
+          } else {
+            input.type = 'password';
+            this.textContent = 'visibility';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

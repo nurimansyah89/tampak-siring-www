@@ -1,0 +1,174 @@
+<app-main-layout>
+  <div class="px-margin-mobile md:px-gutter pt-8 pb-xl">
+    <!-- Desktop Header -->
+    <header class="hidden md:block mb-8">
+      <h1 class="font-headline-lg text-headline-lg font-bold text-primary">Pengaturan Akun</h1>
+      <p class="font-body-md text-on-surface-variant mt-2">
+        Kelola informasi profil dan keamanan akun Anda.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+      <!-- Left Column: Profile Card + Status -->
+      <section class="lg:col-span-4 flex flex-col gap-gutter">
+        <!-- Profile Card -->
+        <div
+          class="bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30 text-center"
+        >
+          <div class="relative w-32 h-32 mx-auto mb-4">
+            <img
+              alt="{{ profile.name }}"
+              class="w-full h-full object-cover rounded-full border-4 border-surface-container"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9SGoj6pJEvLjrpHTthPZ4uir7-mdz2DdbPm5Vms87TGuoMW8PF3oSdfGZtczQ0UIb3yi2Ob-Lz3WIZmy7owpqVFUADwCjiYD_shBt_cuCsh_bMaMhpq8zpGWkIc1axrGXQxJuPH59TrJRuTdAZ1OLpi98BXDRVfLVVy5esXw_qaxrccY_QY2ebDIstKd3BxIJNt2x-UQuupb0E_JEotEC5QgIyT8jLlgfXe-FD7oVZZoLDwO9MvT8N4WKTVvddfRbgoMb9Olqvsc"
+            />
+            <button
+              class="absolute bottom-0 right-0 bg-primary text-white w-9 h-9 flex items-center justify-center rounded-full shadow-md hover:scale-105 transition-transform"
+              type="button"
+            >
+              <span class="material-symbols-outlined text-[18px]">edit</span>
+            </button>
+          </div>
+          <h3 class="font-title-md text-title-md text-primary">{{ profile.name }}</h3>
+          <div
+            class="inline-flex items-center gap-1 px-3 py-1 bg-primary-fixed/30 text-primary rounded-full mt-2"
+          >
+            <span class="material-symbols-outlined text-[16px]">location_on</span>
+            <span class="font-label-sm">{{ profile.block }}</span>
+          </div>
+          <p class="font-label-md text-on-surface-variant mt-1">ID Warga: {{ profile.residentId }}</p>
+        </div>
+
+        <!-- Account Status Card -->
+        <div
+          class="bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30"
+        >
+          <h4 class="font-label-md font-bold text-on-surface mb-4">Status Akun</h4>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <span class="font-body-md text-on-surface-variant">Status Iuran</span>
+              <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full font-label-sm">{{ profile.paymentStatus }}</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Forms -->
+      <section class="lg:col-span-8 flex flex-col gap-gutter">
+        <!-- Personal Info Form -->
+        <div
+          class="bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30"
+        >
+          <div class="flex items-center gap-2 mb-6 border-b border-outline-variant/30 pb-4">
+            <span class="material-symbols-outlined text-primary">badge</span>
+            <h3 class="font-title-md text-title-md text-primary">Informasi Pribadi</h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <app-input
+              label="Nama Lengkap"
+              type="text"
+              [ngModel]="editName()"
+              (ngModelChange)="editName.set($event)"
+            />
+            <app-input
+              label="Nomor Telepon"
+              type="text"
+              [ngModel]="editPhone()"
+              (ngModelChange)="editPhone.set($event)"
+            />
+            <div class="md:col-span-2">
+              <app-input
+                label="Alamat Email"
+                type="text"
+                [ngModel]="editEmail()"
+                (ngModelChange)="editEmail.set($event)"
+              />
+            </div>
+            <div class="space-y-2 md:col-span-2">
+              <label class="font-label-md text-on-surface-variant block">Alamat Rumah (Sesuai Sertifikat)</label>
+              <textarea
+                class="w-full bg-surface border border-outline-variant/30 rounded-lg px-4 py-3 font-body-md text-on-surface-variant cursor-not-allowed resize-none"
+                readonly
+              >{{ profile.address }}</textarea>
+            </div>
+          </div>
+          <div class="mt-8 md:flex">
+            <div class="w-full md:w-fit">
+              <app-button variant="primary" (click)="saveProfile()">Simpan Perubahan</app-button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Change Password Form -->
+        <div
+          class="bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30"
+        >
+          <div class="flex items-center gap-2 mb-6 border-b border-outline-variant/30 pb-4">
+            <span class="material-symbols-outlined text-primary">lock</span>
+            <h3 class="font-title-md text-title-md text-primary">Ganti Password</h3>
+          </div>
+          <form (ngSubmit)="changePassword()">
+            <div class="space-y-6">
+              <div class="space-y-2">
+                <label class="font-label-md text-on-surface-variant block">Password Saat Ini</label>
+                <div class="relative">
+                  <input
+                    class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 pr-12 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md"
+                    placeholder="••••••••"
+                    [type]="showCurrentPassword() ? 'text' : 'password'"
+                    [ngModel]="currentPassword()"
+                    (ngModelChange)="currentPassword.set($event)"
+                    name="currentPassword"
+                  />
+                  <span
+                    class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant cursor-pointer select-none"
+                    (click)="toggleCurrentPassword()"
+                  >{{ showCurrentPassword() ? 'visibility_off' : 'visibility' }}</span>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label class="font-label-md text-on-surface-variant block">Password Baru</label>
+                  <div class="relative">
+                    <input
+                      class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 pr-12 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md"
+                      placeholder="Min. 8 karakter"
+                      [type]="showNewPassword() ? 'text' : 'password'"
+                      [ngModel]="newPassword()"
+                      (ngModelChange)="newPassword.set($event)"
+                      name="newPassword"
+                    />
+                    <span
+                      class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant cursor-pointer select-none"
+                      (click)="toggleNewPassword()"
+                    >{{ showNewPassword() ? 'visibility_off' : 'visibility' }}</span>
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <label class="font-label-md text-on-surface-variant block">Konfirmasi Password Baru</label>
+                  <div class="relative">
+                    <input
+                      class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 pr-12 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md"
+                      placeholder="Ulangi password"
+                      [type]="showConfirmPassword() ? 'text' : 'password'"
+                      [ngModel]="confirmPassword()"
+                      (ngModelChange)="confirmPassword.set($event)"
+                      name="confirmPassword"
+                    />
+                    <span
+                      class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant cursor-pointer select-none"
+                      (click)="toggleConfirmPassword()"
+                    >{{ showConfirmPassword() ? 'visibility_off' : 'visibility' }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-4 w-full md:w-fit">
+                <app-button variant="primary" type="submit">Simpan Password</app-button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+</app-main-layout>

@@ -26,9 +26,19 @@ export const routes: Routes = [
       import('./features/security/security.routes').then((m) => m.securityRoutes),
   },
   {
+    path: 'complaints',
+    loadChildren: () =>
+      import('./features/complaints/complaints.routes').then((m) => m.complaintRoutes),
+  },
+  {
     path: 'finance',
     loadChildren: () =>
       import('./features/finance/finance.routes').then((m) => m.financeRoutes),
+  },
+  {
+    path: 'me',
+    loadComponent: () =>
+      import('./features/me/me.component').then((m) => m.MeComponent),
   },
   {
     path: 'me/finance',

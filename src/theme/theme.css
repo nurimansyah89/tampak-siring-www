@@ -64,6 +64,10 @@
   --color-error-container: #ffdad6;
   --color-on-error-container: #93000a;
 
+  /* Semantic — Success */
+  --color-success: #6b8f71;
+  --color-on-success: #ffffff;
+
   /* ═══════════════════════════════════════
      TYPOGRAPHY — Font Family
      ═══════════════════════════════════════ */

@@ -1,0 +1,608 @@
+<!doctype html>
+<html class="light" lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .active-tab {
+        border-bottom: 2px solid #705838;
+        color: #705838;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'tertiary-container': '#bb5808',
+              'on-primary': '#ffffff',
+              'on-surface-variant': '#4e453c',
+              'surface-container-highest': '#ffdad4',
+              secondary: '#5e5f5d',
+              'surface-container-low': '#fff0ee',
+              'tertiary-fixed-dim': '#ffb68d',
+              'error-container': '#ffdad6',
+              'on-secondary-container': '#626361',
+              'on-secondary-fixed': '#1a1c1a',
+              'on-primary-fixed': '#291801',
+              'on-tertiary-fixed': '#321200',
+              'primary-fixed': '#ffddb6',
+              'inverse-primary': '#e2c19b',
+              'primary-fixed-dim': '#e2c19b',
+              'surface-container': '#ffe9e5',
+              'on-primary-container': '#fffbff',
+              surface: '#fff8f6',
+              'on-tertiary-container': '#fffbff',
+              'on-surface': '#2b1613',
+              'primary-container': '#8b704f',
+              'surface-variant': '#ffdad4',
+              'inverse-surface': '#422a26',
+              'secondary-fixed-dim': '#c7c6c4',
+              'on-tertiary-fixed-variant': '#763400',
+              error: '#ba1a1a',
+              'surface-container-high': '#ffe2dd',
+              'surface-bright': '#fff8f6',
+              'on-secondary': '#ffffff',
+              'secondary-container': '#e0e0dd',
+              'outline-variant': '#d1c4b8',
+              'surface-container-lowest': '#ffffff',
+              background: '#fff8f6',
+              primary: '#705838',
+              'surface-dim': '#f8d1cb',
+              'on-primary-fixed-variant': '#594325',
+              'on-error-container': '#93000a',
+              'surface-tint': '#735a3a',
+              'on-secondary-fixed-variant': '#464745',
+              'tertiary-fixed': '#ffdbc9',
+              'secondary-fixed': '#e3e2e0',
+              outline: '#80756b',
+              'on-error': '#ffffff',
+              'on-background': '#2b1613',
+              'on-tertiary': '#ffffff',
+              'inverse-on-surface': '#ffedea',
+              tertiary: '#974400',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              base: '8px',
+              lg: '48px',
+              sm: '12px',
+              'max-width-desktop': '1280px',
+              xl: '80px',
+              md: '24px',
+              gutter: '24px',
+              'margin-mobile': '16px',
+              xs: '4px',
+            },
+            fontFamily: {
+              'body-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'headline-lg': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'title-md': ['Inter'],
+              'display-lg': ['Inter'],
+            },
+            fontSize: {
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background text-on-background min-h-screen">
+    <!-- Top App Bar -->
+    <header
+      class="fixed top-0 w-full z-50 bg-surface shadow-md h-16 flex justify-between items-center px-margin-mobile md:px-gutter max-w-max-width-desktop mx-auto"
+    >
+      <div class="h-12 w-auto flex items-center">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxVYK252Tr4rM3Wuox493SB0WvnWpM5q7b9_eWxWaec-ou6-HMqJ4wlEUT2WllzonMdjV1_edSQ1MmEqn_Rd1d1yy1OfLkfvoRBbLXSdK0_bXFmzP2mkVIvXBEwzd1R3slVT_58hdkYiDxkNxcqbyBQsZgzG21dnz1Iu0vEZFUEmHBKeJrS3lsLXgbmMyPnQVzIETcsUQ-nx9qzOLkHGbcWi3gg2UPS7O8E1vEzdacr--RfNYVQw576asc3N8bW-yIdZHjlocl52E"
+          alt="Tampaksiring Smart Cluster Logo"
+          class="h-full w-auto object-contain"
+        />
+      </div>
+      <div class="flex items-center gap-4">
+        <span
+          class="material-symbols-outlined text-primary cursor-pointer hover:bg-surface-container-high p-2 rounded-full transition-colors"
+          >notifications</span
+        >
+        <span
+          class="material-symbols-outlined text-primary cursor-pointer hover:bg-surface-container-high p-2 rounded-full transition-colors"
+          >account_circle</span
+        >
+      </div>
+    </header>
+    <!-- Sidebar (Desktop) -->
+    <aside
+      class="fixed left-0 top-0 h-full w-64 hidden lg:flex flex-col py-6 bg-surface-container-low border-r border-outline-variant z-40 pt-20"
+    >
+      <nav class="flex-grow">
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">payments</span>
+          <span class="font-label-md text-label-md">Iuran Warga</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">map</span>
+          <span class="font-label-md text-label-md">Peta Klaster</span>
+        </a>
+        <a
+          class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 mx-2 transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">confirmation_number</span>
+          <span class="font-label-md text-label-md">Tiket Keluhan</span>
+        </a>
+      </nav>
+      <div class="mt-auto px-4">
+        <button
+          class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-md text-label-md shadow-md active:scale-95 transition-transform"
+        >
+          Lapor Masalah
+        </button>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="lg:ml-64 pt-24 pb-24 px-margin-mobile md:px-gutter max-w-max-width-desktop">
+      <section class="max-w-4xl mx-auto">
+        <!-- Header Section -->
+        <div class="mb-8">
+          <h1 class="font-headline-lg text-headline-lg text-primary mb-2">Aduan Cluster</h1>
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            Sampaikan keluhan atau saran Anda untuk kenyamanan bersama di Tampaksiring Smart
+            Cluster.
+          </p>
+        </div>
+        <!-- Tab Navigation -->
+        <div
+          class="flex border-b border-outline-variant mb-8 bg-surface-container-lowest rounded-t-xl overflow-hidden"
+        >
+          <button
+            class="flex-1 py-4 font-label-md text-label-md active-tab transition-all hover:bg-surface-container-low flex items-center justify-center gap-2"
+            id="tab-list"
+            onclick="switchTab('list')"
+          >
+            <span class="material-symbols-outlined">list_alt</span> Daftar Aduan
+          </button>
+          <button
+            class="flex-1 py-4 font-label-md text-label-md text-on-surface-variant transition-all hover:bg-surface-container-low flex items-center justify-center gap-2"
+            id="tab-form"
+            onclick="switchTab('form')"
+          >
+            <span class="material-symbols-outlined">add_comment</span> Buat Aduan
+          </button>
+        </div>
+        <!-- Content: Daftar Aduan -->
+        <div class="space-y-6" id="content-list">
+          <!-- Filters & Search -->
+          <div
+            class="flex flex-col md:flex-row gap-4 justify-between items-center bg-surface p-4 rounded-xl shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant/30"
+          >
+            <div class="relative w-full md:w-96">
+              <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+                >search</span
+              >
+              <input
+                class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                placeholder="Cari aduan..."
+                type="text"
+              />
+            </div>
+            <div class="flex gap-2 w-full md:w-auto">
+              <button
+                class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-white border border-outline-variant rounded-lg font-label-sm text-label-sm hover:bg-surface-container-high transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px]">filter_list</span> Filter
+              </button>
+              <button
+                class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-white border border-outline-variant rounded-lg font-label-sm text-label-sm hover:bg-surface-container-high transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px]">sort</span> Urutkan
+              </button>
+            </div>
+          </div>
+          <!-- Desktop Table -->
+          <div
+            class="hidden md:block overflow-hidden rounded-xl border border-outline-variant shadow-[0px_4px_20px_rgba(62,39,35,0.05)] bg-white"
+          >
+            <table class="w-full text-left border-collapse">
+              <thead class="bg-surface-container-low">
+                <tr>
+                  <th
+                    class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >
+                    Tanggal
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >
+                    Judul
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >
+                    Warga
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-center"
+                  >
+                    Prioritas
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-center"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-outline-variant/30">
+                <tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer">
+                  <td class="px-6 py-4 font-body-md text-body-md">12 Okt 2023</td>
+                  <td class="px-6 py-4 font-title-md text-[16px] font-semibold">
+                    Lampu Jalan Padam di Blok A
+                  </td>
+                  <td class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">
+                    Bpk. Slamet
+                  </td>
+                  <td class="px-6 py-4 text-center">
+                    <span
+                      class="px-3 py-1 bg-error/10 text-error rounded-full text-[12px] font-bold"
+                      >Tinggi</span
+                    >
+                  </td>
+                  <td class="px-6 py-4 text-center">
+                    <span
+                      class="px-3 py-1 bg-primary/10 text-primary rounded-full text-[12px] font-bold"
+                      >Proses</span
+                    >
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer">
+                  <td class="px-6 py-4 font-body-md text-body-md">10 Okt 2023</td>
+                  <td class="px-6 py-4 font-title-md text-[16px] font-semibold">
+                    Sampah Belum Diangkut
+                  </td>
+                  <td class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">
+                    Anonim
+                  </td>
+                  <td class="px-6 py-4 text-center">
+                    <span
+                      class="px-3 py-1 bg-tertiary-container/10 text-tertiary-container rounded-full text-[12px] font-bold"
+                      >Sedang</span
+                    >
+                  </td>
+                  <td class="px-6 py-4 text-center">
+                    <span
+                      class="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-[12px] font-bold"
+                      >Terkirim</span
+                    >
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer">
+                  <td class="px-6 py-4 font-body-md text-body-md">08 Okt 2023</td>
+                  <td class="px-6 py-4 font-title-md text-[16px] font-semibold">
+                    Pohon Tumbang Jalur Utama
+                  </td>
+                  <td class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">
+                    Ibu Ratna
+                  </td>
+                  <td class="px-6 py-4 text-center">
+                    <span
+                      class="px-3 py-1 bg-error/10 text-error rounded-full text-[12px] font-bold"
+                      >Tinggi</span
+                    >
+                  </td>
+                  <td class="px-6 py-4 text-center">
+                    <span
+                      class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-[12px] font-bold"
+                      >Selesai</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Mobile Card List -->
+          <div class="md:hidden space-y-4">
+            <div class="bg-white p-4 rounded-xl border border-outline-variant shadow-sm">
+              <div class="flex justify-between items-start mb-2">
+                <span class="font-label-sm text-label-sm text-on-surface-variant">12 Okt 2023</span>
+                <span class="px-2 py-0.5 bg-error/10 text-error rounded-full text-[10px] font-bold"
+                  >Tinggi</span
+                >
+              </div>
+              <h4 class="font-title-md text-title-md mb-1">Lampu Jalan Padam di Blok A</h4>
+              <div class="flex justify-between items-center mt-3">
+                <span class="text-on-surface-variant text-[14px]">Oleh: Bpk. Slamet</span>
+                <span
+                  class="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-[10px] font-bold uppercase"
+                  >Proses</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Pagination -->
+          <div class="flex items-center justify-between pt-4">
+            <p class="font-label-sm text-label-sm text-on-surface-variant">
+              Menampilkan 3 dari 24 aduan
+            </p>
+            <div class="flex gap-2">
+              <button
+                class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-high transition-colors disabled:opacity-30"
+                disabled=""
+              >
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <button
+                class="p-2 border border-outline-variant rounded-lg bg-primary text-on-primary"
+              >
+                1
+              </button>
+              <button
+                class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-high transition-colors"
+              >
+                2
+              </button>
+              <button
+                class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-high transition-colors"
+              >
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Content: Buat Aduan -->
+        <div class="hidden" id="content-form">
+          <form
+            class="bg-white p-6 md:p-8 rounded-xl border border-outline-variant shadow-[0px_8px_30px_rgba(62,39,35,0.08)] space-y-6"
+          >
+            <div>
+              <label class="block font-label-md text-label-md text-on-surface mb-2"
+                >Judul Aduan</label
+              >
+              <input
+                class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                placeholder="Misal: Perbaikan jalan berlubang"
+                type="text"
+              />
+            </div>
+            <div>
+              <label class="block font-label-md text-label-md text-on-surface mb-2"
+                >Detail Aduan</label
+              >
+              <textarea
+                class="w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                placeholder="Jelaskan secara detail keluhan Anda..."
+                rows="4"
+              ></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block font-label-md text-label-md text-on-surface mb-4"
+                  >Tingkat Prioritas</label
+                >
+                <div class="space-y-3">
+                  <label class="flex items-center gap-3 cursor-pointer group">
+                    <input
+                      class="w-5 h-5 text-primary focus:ring-primary border-outline-variant"
+                      name="priority"
+                      type="radio"
+                      value="low"
+                    />
+                    <span
+                      class="font-body-md text-body-md group-hover:text-primary transition-colors"
+                      >Rendah</span
+                    >
+                  </label>
+                  <label class="flex items-center gap-3 cursor-pointer group">
+                    <input
+                      checked=""
+                      class="w-5 h-5 text-primary focus:ring-primary border-outline-variant"
+                      name="priority"
+                      type="radio"
+                      value="medium"
+                    />
+                    <span
+                      class="font-body-md text-body-md group-hover:text-primary transition-colors"
+                      >Sedang</span
+                    >
+                  </label>
+                  <label class="flex items-center gap-3 cursor-pointer group">
+                    <input
+                      class="w-5 h-5 text-primary focus:ring-primary border-outline-variant"
+                      name="priority"
+                      type="radio"
+                      value="high"
+                    />
+                    <span
+                      class="font-body-md text-body-md group-hover:text-primary transition-colors"
+                      >Tinggi (Mendesak)</span
+                    >
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label class="block font-label-md text-label-md text-on-surface mb-2"
+                  >Unggah Foto (Opsional)</label
+                >
+                <div
+                  class="border-2 border-dashed border-outline-variant rounded-xl p-8 text-center bg-surface hover:bg-surface-container-low transition-colors cursor-pointer group"
+                >
+                  <span class="material-symbols-outlined text-primary text-4xl mb-2"
+                    >cloud_upload</span
+                  >
+                  <p class="font-label-sm text-label-sm text-on-surface-variant">
+                    Klik atau seret gambar ke sini
+                  </p>
+                  <input class="hidden" type="file" />
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-outline-variant/50"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary">visibility_off</span>
+                <div>
+                  <p class="font-label-md text-label-md">Tampil sebagai Anonim</p>
+                  <p class="text-[12px] text-on-surface-variant leading-tight">
+                    Identitas Anda tidak akan publik.
+                  </p>
+                </div>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input class="sr-only peer" type="checkbox" value="" />
+                <div
+                  class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+                ></div>
+              </label>
+            </div>
+            <div class="pt-4">
+              <button
+                class="w-full bg-primary text-on-primary py-4 rounded-xl font-title-md text-title-md shadow-lg hover:shadow-xl active:scale-95 transition-all flex items-center justify-center gap-3"
+                type="submit"
+              >
+                <span class="material-symbols-outlined">send</span> Kirim Aduan Sekarang
+              </button>
+              <p class="text-center mt-4 text-[12px] text-on-surface-variant">
+                Dengan mengirimkan aduan, Anda menyetujui syarat &amp; ketentuan cluster.
+              </p>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <!-- Mobile Bottom Nav -->
+    <nav
+      class="md:hidden fixed bottom-0 w-full z-50 bg-surface border-t border-outline-variant shadow-[0px_-4px_20px_rgba(62,39,35,0.05)] h-20 pb-safe flex justify-around items-center"
+    >
+      <a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-label-sm text-label-sm">Beranda</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+        <span class="material-symbols-outlined">account_balance_wallet</span>
+        <span class="font-label-sm text-label-sm">Keuangan</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1"
+        href="#"
+      >
+        <span class="material-symbols-outlined">support_agent</span>
+        <span class="font-label-sm text-label-sm">Layanan</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+        <span class="material-symbols-outlined">person</span>
+        <span class="font-label-sm text-label-sm">Profil</span>
+      </a>
+    </nav>
+    <script>
+      function switchTab(tab) {
+        const listBtn = document.getElementById('tab-list');
+        const formBtn = document.getElementById('tab-form');
+        const listContent = document.getElementById('content-list');
+        const formContent = document.getElementById('content-form');
+
+        if (tab === 'list') {
+          listBtn.classList.add('active-tab', 'text-primary');
+          listBtn.classList.remove('text-on-surface-variant');
+          formBtn.classList.remove('active-tab', 'text-primary');
+          formBtn.classList.add('text-on-surface-variant');
+
+          listContent.classList.remove('hidden');
+          formContent.classList.add('hidden');
+        } else {
+          formBtn.classList.add('active-tab', 'text-primary');
+          formBtn.classList.remove('text-on-surface-variant');
+          listBtn.classList.remove('active-tab', 'text-primary');
+          listBtn.classList.add('text-on-surface-variant');
+
+          formContent.classList.remove('hidden');
+          listContent.classList.add('hidden');
+        }
+      }
+
+      // Simple form animation
+      document.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML =
+          '<span class="material-symbols-outlined animate-spin">sync</span> Mengirim...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+          btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Terkirim!';
+          btn.classList.replace('bg-primary', 'bg-green-600');
+          setTimeout(() => {
+            btn.innerHTML = originalHtml;
+            btn.classList.replace('bg-green-600', 'bg-primary');
+            btn.disabled = false;
+            switchTab('list');
+          }, 1500);
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

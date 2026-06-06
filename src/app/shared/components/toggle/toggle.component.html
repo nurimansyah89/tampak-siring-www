@@ -1,0 +1,27 @@
+<div class="flex items-center justify-between">
+  <div class="flex items-center gap-3">
+    <span class="material-symbols-outlined text-primary">visibility_off</span>
+    <div>
+      <p class="font-label-md text-label-md text-on-surface">{{ label() }}</p>
+      @if (description()) {
+        <p class="text-[12px] text-on-surface-variant leading-tight">{{ description() }}</p>
+      }
+    </div>
+  </div>
+  <button
+    type="button"
+    role="switch"
+    [attr.aria-checked]="checked()"
+    [disabled]="disabled()"
+    (click)="onToggle()"
+    class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+    [class.bg-primary]="checked()"
+    [class.bg-outline-variant]="!checked()"
+  >
+    <span
+      class="inline-block h-5 w-5 transform rounded-full bg-white transition-transform duration-200 shadow-sm"
+      [class.translate-x-[22px]]="checked()"
+      [class.translate-x-[2px]]="!checked()"
+    ></span>
+  </button>
+</div>

@@ -1,0 +1,20 @@
+<div
+  class="flex border-b border-outline-variant bg-surface-container-lowest rounded-md overflow-hidden"
+>
+  @for (tab of tabs(); track tab.id) {
+    <button
+      type="button"
+      (click)="onTabClick(tab.id)"
+      class="flex-1 py-3 font-label-md text-label-md transition-all hover:bg-surface-container-low flex items-center justify-center gap-2"
+      [class.text-primary]="tab.id === activeTab()"
+      [class.text-on-surface-variant]="tab.id !== activeTab()"
+      [class.border-b-2]="tab.id === activeTab()"
+      [class.border-primary]="tab.id === activeTab()"
+    >
+      @if (tab.icon) {
+        <span class="material-symbols-outlined text-[20px]">{{ tab.icon }}</span>
+      }
+      {{ tab.label }}
+    </button>
+  }
+</div>

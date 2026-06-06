@@ -97,9 +97,11 @@
           </div>
         </div>
       </div>
-      <div class="h-64">
-        <canvas id="cashflowChart"></canvas>
-      </div>
+      @if (chartReady()) {
+        <div class="h-64">
+          <canvas id="cashflowChart"></canvas>
+        </div>
+      }
     </section>
 
     <!-- Transaction Table Section -->
@@ -124,29 +126,55 @@
         </div>
       </div>
 
-      <app-table [columns]="columns" [loading]="isSearching()">
+      <!-- Desktop Table -->
+      <div class="hidden md:block">
+        <app-table [columns]="columns" [loading]="isSearching()">
+          @for (tx of filteredTransactions(); track tx.ref) {
+            <tr class="hover:bg-surface-container-high transition-colors">
+              <td class="px-md py-4 font-label-md text-on-surface-variant">{{ tx.date }}</td>
+              <td class="px-md py-4">
+                <div class="flex flex-col">
+                  <span class="font-label-md text-on-surface">{{ tx.description }}</span>
+                  <span class="text-label-sm text-on-surface-variant">{{ tx.ref }}</span>
+                </div>
+              </td>
+              <td class="px-md py-4">
+                @if (tx.type === 'MASUK') {
+                  <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-[11px] font-bold">MASUK</span>
+                } @else {
+                  <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-[11px] font-bold">KELUAR</span>
+                }
+              </td>
+              <td class="px-md py-4 text-right font-bold" [class.text-primary]="tx.type === 'MASUK'" [class.text-tertiary]="tx.type === 'KELUAR'">
+                Rp {{ formatCurrency(tx.nominal) }}
+              </td>
+            </tr>
+          }
+        </app-table>
+      </div>
+
+      <!-- Mobile Card List -->
+      <div class="block md:hidden divide-y divide-outline-variant">
         @for (tx of filteredTransactions(); track tx.ref) {
-          <tr class="hover:bg-surface-container-high transition-colors">
-            <td class="px-md py-4 font-label-md text-on-surface-variant">{{ tx.date }}</td>
-            <td class="px-md py-4">
-              <div class="flex flex-col">
-                <span class="font-label-md text-on-surface">{{ tx.description }}</span>
+          <div class="p-4 flex flex-col gap-2 hover:bg-surface-container-low transition-colors">
+            <div class="flex items-start justify-between gap-3">
+              <div class="min-w-0 flex-1">
+                <p class="font-label-md text-on-surface">{{ tx.description }}</p>
                 <span class="text-label-sm text-on-surface-variant">{{ tx.ref }}</span>
               </div>
-            </td>
-            <td class="px-md py-4">
               @if (tx.type === 'MASUK') {
-                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-[11px] font-bold">MASUK</span>
+                <span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-[10px] font-bold shrink-0">MASUK</span>
               } @else {
-                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-[11px] font-bold">KELUAR</span>
+                <span class="bg-red-100 text-red-800 px-2 py-0.5 rounded-full text-[10px] font-bold shrink-0">KELUAR</span>
               }
-            </td>
-            <td class="px-md py-4 text-right font-bold" [class.text-primary]="tx.type === 'MASUK'" [class.text-tertiary]="tx.type === 'KELUAR'">
-              Rp {{ formatCurrency(tx.nominal) }}
-            </td>
-          </tr>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="font-label-sm text-label-sm text-on-surface-variant">{{ tx.date }}</span>
+              <span class="font-bold text-label-md" [class.text-primary]="tx.type === 'MASUK'" [class.text-tertiary]="tx.type === 'KELUAR'">Rp {{ formatCurrency(tx.nominal) }}</span>
+            </div>
+          </div>
         }
-      </app-table>
+      </div>
 
       @if (!showAll()) {
         <div class="p-md bg-surface-container-low flex justify-center">

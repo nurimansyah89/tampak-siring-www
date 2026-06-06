@@ -1,0 +1,202 @@
+<app-main-layout>
+  @if (complaint) {
+    <div class="px-margin-mobile md:px-gutter pt-8 pb-xl max-w-desktop mx-auto">
+      <!-- Back & Header -->
+      <div class="flex items-center gap-4 mb-6">
+        <a
+          routerLink="/complaints"
+          class="inline-flex items-center justify-center p-2 hover:bg-surface-container rounded-full transition-colors active:scale-95 duration-200"
+        >
+          <span class="material-symbols-outlined text-primary">arrow_back</span>
+        </a>
+        <div>
+          <nav aria-label="Breadcrumb">
+            <ol class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+              <li>Aduan Warga</li>
+              <li class="flex items-center">
+                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+              </li>
+              <li class="font-bold text-primary">Detail</li>
+            </ol>
+          </nav>
+          <h1 class="font-headline-lg text-headline-lg text-primary mt-1">{{ complaint.title }}</h1>
+          <div class="flex flex-wrap items-center gap-2 mt-2">
+            <span
+              class="px-4 py-1.5 rounded-full font-label-sm font-bold flex items-center gap-1 border"
+              [class]="getStatusClass(complaint.status)"
+              [class.border-tertiary/20]="complaint.status === 'Proses'"
+              [class.border-secondary/20]="complaint.status === 'Terkirim'"
+              [class.border-green-700/20]="complaint.status === 'Selesai'"
+            >
+              <span class="material-symbols-outlined text-[18px]">history</span>
+              {{ getStatusLabel(complaint.status) }}
+            </span>
+            <span
+              class="px-4 py-1.5 rounded-full font-label-sm font-bold flex items-center gap-1"
+              [class]="getPriorityClass(complaint.priority)"
+            >
+              <span class="material-symbols-outlined text-[18px]">priority_high</span>
+              {{ getPriorityLabel(complaint.priority) }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bento Layout Content -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
+        <!-- Left Column: Details & Evidence -->
+        <div class="lg:col-span-2 space-y-md">
+          <!-- Metadata Section -->
+          <div class="bg-surface-container-low rounded-xl p-md shadow-level-1 border border-outline-variant/30">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-md">
+              <div class="space-y-1">
+                <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pelapor</p>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[20px]">person</span>
+                  <p class="font-body-md text-body-md font-bold">{{ complaint.resident }}</p>
+                </div>
+              </div>
+              <div class="space-y-1">
+                <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Tanggal Lapor</p>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[20px]">calendar_today</span>
+                  <p class="font-body-md text-body-md font-bold">{{ complaint.date }}</p>
+                </div>
+              </div>
+              <div class="space-y-1">
+                <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Kategori</p>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[20px]">category</span>
+                  <p class="font-body-md text-body-md font-bold">{{ complaint.category }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description Section -->
+          <div class="bg-surface-container-low rounded-xl p-md shadow-level-1 border border-outline-variant/30">
+            <h3 class="font-title-md text-title-md text-on-surface mb-4 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">description</span>
+              Deskripsi Masalah
+            </h3>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              {{ complaint.description }}
+            </p>
+          </div>
+
+          <!-- Evidence Section -->
+          @if (complaint.imageUrls.length > 0) {
+            <div class="bg-surface-container-low rounded-xl p-md shadow-level-1 border border-outline-variant/30">
+              <h3 class="font-title-md text-title-md text-on-surface mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">image</span>
+                Bukti Foto
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+                @for (imgUrl of complaint.imageUrls; track $index) {
+                  <div
+                    class="relative group cursor-pointer overflow-hidden rounded-lg aspect-video"
+                    (click)="openLightbox($index)"
+                  >
+                    <img
+                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      [src]="imgUrl"
+                      alt="Bukti foto aduan"
+                    />
+                    <div
+                      class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                    >
+                      <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+
+          <!-- Discussion Section -->
+          <div class="bg-surface rounded-xl p-md border border-outline-variant shadow-level-1">
+            <h3 class="font-title-md text-title-md text-on-surface mb-6 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">forum</span>
+              Diskusi Warga
+            </h3>
+            <app-discussion
+              [comments]="complaint.comments"
+              (submitComment)="onAddComment($event)"
+            />
+          </div>
+        </div>
+
+        <!-- Right Column: Actions, Timeline & Quick Actions -->
+        <div class="space-y-md">
+          <!-- Action Buttons -->
+          <div class="bg-surface-container-low rounded-xl p-md shadow-level-1 border border-outline-variant/30 space-y-3">
+            <h3 class="font-title-md text-title-md text-on-surface mb-2 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">settings_suggest</span>
+              Tindakan Aduan
+            </h3>
+            <div class="flex flex-col gap-2">
+              <app-button variant="primary" size="md">
+                <span class="material-symbols-outlined">edit</span>
+                Update Aduan
+              </app-button>
+              <app-button variant="success" size="md">
+                <span class="material-symbols-outlined">check_circle</span>
+                Selesaikan Aduan
+              </app-button>
+              <app-button variant="danger" size="md">
+                <span class="material-symbols-outlined">cancel</span>
+                Tutup Aduan
+              </app-button>
+            </div>
+          </div>
+
+          <!-- Timeline Section -->
+          <div class="bg-surface-container-low rounded-xl p-md shadow-level-1 border border-outline-variant/30">
+            <h3 class="font-title-md text-title-md text-on-surface mb-6 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">timeline</span>
+              Timeline Update
+            </h3>
+            <app-timeline [events]="complaint.timeline" />
+          </div>
+
+          <!-- Quick Actions Card -->
+          <div class="bg-primary p-md rounded-xl text-on-primary shadow-lg relative overflow-hidden">
+            <div class="relative z-10">
+              <h3 class="font-title-md text-title-md mb-2">Butuh Bantuan?</h3>
+              <p class="font-label-md text-label-md opacity-90 mb-4">
+                Hubungi Customer Service Cluster untuk respon lebih cepat.
+              </p>
+              <button
+                class="w-full bg-white text-primary py-3 rounded-lg font-label-md text-label-md font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all cursor-pointer"
+              >
+                <span class="material-symbols-outlined">call</span>
+                Hubungi CS
+              </button>
+            </div>
+            <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+      <span class="material-symbols-outlined text-6xl text-outline-variant mb-4">report_off</span>
+      <h3 class="font-title-md text-title-md text-on-surface mb-2">Aduan Tidak Ditemukan</h3>
+      <p class="text-on-surface-variant font-body-md text-body-md mb-6">Aduan dengan ID tersebut tidak tersedia.</p>
+      <a
+        routerLink="/complaints"
+        class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all"
+      >
+        Kembali ke Daftar Aduan
+      </a>
+    </div>
+  }
+
+  @if (complaint && showLightbox()) {
+    <app-lightbox
+      [images]="complaint.imageUrls"
+      [(currentIndex)]="lightboxIndex"
+      (close)="closeLightbox()"
+    />
+  }
+</app-main-layout>

@@ -1,0 +1,60 @@
+<div class="space-y-6">
+  @for (comment of comments(); track comment.id) {
+    <div class="flex gap-4">
+      @if (comment.isAdmin) {
+        <div
+          class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0"
+        >
+          <span class="material-symbols-outlined text-on-primary-container">support_agent</span>
+        </div>
+      } @else {
+        <div
+          class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0"
+        >
+          <span class="material-symbols-outlined text-primary">person</span>
+        </div>
+      }
+      <div
+        class="flex-1 rounded-xl p-4 border border-outline-variant"
+        [class.bg-surface]="!comment.isAdmin"
+        [class.bg-surface-container-high]="comment.isAdmin"
+      >
+        <div class="flex justify-between items-center mb-1">
+          <h4
+            class="font-label-md text-label-md font-bold"
+            [class.text-primary]="comment.isAdmin"
+            [class.text-on-surface]="!comment.isAdmin"
+          >
+            {{ comment.author }}
+          </h4>
+          <span class="font-label-sm text-label-sm text-on-surface-variant">{{ comment.date }}</span>
+        </div>
+        <p class="font-body-md text-body-md text-on-surface-variant">{{ comment.content }}</p>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="mt-8 flex gap-4">
+  <div
+    class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0"
+  >
+    <span class="material-symbols-outlined text-primary">account_circle</span>
+  </div>
+  <div class="flex-1 flex gap-2">
+    <textarea
+      class="flex-1 bg-surface border border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none h-20"
+      placeholder="Tulis komentar atau info tambahan..."
+      [ngModel]="newComment()"
+      (ngModelChange)="newComment.set($event)"
+    ></textarea>
+    <app-button
+      variant="primary"
+      size="sm"
+      class="self-end"
+      (click)="onSend()"
+    >
+      <span class="material-symbols-outlined">send</span>
+    </app-button>
+  </div>
+</div>

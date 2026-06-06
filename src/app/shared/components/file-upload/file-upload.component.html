@@ -1,0 +1,40 @@
+@if (!selectedFile()) {
+  <div
+    (click)="openFilePicker()"
+    class="border-2 border-dashed rounded-xl p-8 text-center bg-surface hover:bg-surface-container-low transition-colors cursor-pointer"
+    [class.border-primary]="isDragOver()"
+    [class.border-outline-variant]="!isDragOver()"
+  >
+    <span class="material-symbols-outlined text-primary text-4xl mb-2">cloud_upload</span>
+    <p class="font-label-sm text-label-sm text-on-surface-variant">{{ hint() }}</p>
+    <input
+      type="file"
+      [accept]="accept()"
+      class="hidden"
+      (change)="onFileSelected($event)"
+    />
+  </div>
+} @else {
+  <div
+    class="border border-outline-variant rounded-xl p-4 bg-surface flex items-center justify-between"
+  >
+    <div class="flex items-center gap-3 min-w-0">
+      <span class="material-symbols-outlined text-primary text-2xl shrink-0">description</span>
+      <div class="min-w-0">
+        <p class="font-label-md text-label-md text-on-surface truncate">
+          {{ selectedFile()?.name }}
+        </p>
+        <p class="font-label-sm text-label-sm text-on-surface-variant">
+          {{ (selectedFile()?.size ?? 0) / 1024 | number:'1.0-0' }} KB
+        </p>
+      </div>
+    </div>
+    <button
+      type="button"
+      (click)="removeFile()"
+      class="p-1 hover:bg-surface-container-high rounded-full transition-colors shrink-0"
+    >
+      <span class="material-symbols-outlined text-on-surface-variant">close</span>
+    </button>
+  </div>
+}
