@@ -1,0 +1,46 @@
+<div
+  class="px-6 py-4 bg-surface-container-lowest border-t border-outline-variant flex items-center justify-between flex-wrap gap-4"
+>
+  <p class="text-label-sm font-label-sm text-on-surface-variant">
+    Menampilkan {{ startItem() }}-{{ endItem() }} dari {{ totalItems() }} Warga
+  </p>
+  <div class="flex gap-2 items-center">
+    <button
+      class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-high disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+      [disabled]="currentPage() <= 1"
+      (click)="goToPage(currentPage() - 1)"
+      type="button"
+    >
+      <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+    </button>
+
+    @for (page of pages(); track $index) {
+      @if (page === 'ellipsis') {
+        <span class="px-2 text-on-surface-variant font-label-md">...</span>
+      } @else {
+        <button
+          class="w-10 h-10 rounded-full font-label-md transition-colors"
+          [class.bg-primary]="page === currentPage()"
+          [class.text-on-primary]="page === currentPage()"
+          [class.border]="page !== currentPage()"
+          [class.border-outline-variant]="page !== currentPage()"
+          [class.text-on-surface-variant]="page !== currentPage()"
+          [class.hover:bg-surface-container-high]="page !== currentPage()"
+          (click)="goToPage(page)"
+          type="button"
+        >
+          {{ page }}
+        </button>
+      }
+    }
+
+    <button
+      class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-high disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+      [disabled]="currentPage() >= totalPages()"
+      (click)="goToPage(currentPage() + 1)"
+      type="button"
+    >
+      <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+    </button>
+  </div>
+</div>

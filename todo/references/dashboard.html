@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dashboard | Tampaksiring Smart Cluster</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'tertiary-container': '#bb5808',
+              'on-primary': '#ffffff',
+              'on-surface-variant': '#4e453c',
+              'surface-container-highest': '#ffdad4',
+              secondary: '#5e5f5d',
+              'surface-container-low': '#fff0ee',
+              'tertiary-fixed-dim': '#ffb68d',
+              'error-container': '#ffdad6',
+              'on-secondary-container': '#626361',
+              'on-secondary-fixed': '#1a1c1a',
+              'on-primary-fixed': '#291801',
+              'on-tertiary-fixed': '#321200',
+              'primary-fixed': '#ffddb6',
+              'inverse-primary': '#e2c19b',
+              'primary-fixed-dim': '#e2c19b',
+              'surface-container': '#ffe9e5',
+              'on-primary-container': '#fffbff',
+              surface: '#fff8f6',
+              'on-tertiary-container': '#fffbff',
+              'on-surface': '#2b1613',
+              'primary-container': '#8b704f',
+              'surface-variant': '#ffdad4',
+              'inverse-surface': '#422a26',
+              'secondary-fixed-dim': '#c7c6c4',
+              'on-tertiary-fixed-variant': '#763400',
+              error: '#ba1a1a',
+              'surface-container-high': '#ffe2dd',
+              'surface-bright': '#fff8f6',
+              'on-secondary': '#ffffff',
+              'secondary-container': '#e0e0dd',
+              'outline-variant': '#d1c4b8',
+              'surface-container-lowest': '#ffffff',
+              background: '#fff8f6',
+              primary: '#705838',
+              'surface-dim': '#f8d1cb',
+              'on-primary-fixed-variant': '#594325',
+              'on-error-container': '#93000a',
+              'surface-tint': '#735a3a',
+              'on-secondary-fixed-variant': '#464745',
+              'tertiary-fixed': '#ffdbc9',
+              'secondary-fixed': '#e3e2e0',
+              outline: '#80756b',
+              'on-error': '#ffffff',
+              'on-background': '#2b1613',
+              'on-tertiary': '#ffffff',
+              'inverse-on-surface': '#ffedea',
+              tertiary: '#974400',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              base: '8px',
+              lg: '48px',
+              sm: '12px',
+              'max-width-desktop': '1280px',
+              xl: '80px',
+              md: '24px',
+              gutter: '24px',
+              'margin-mobile': '16px',
+              xs: '4px',
+            },
+            fontFamily: {
+              'body-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'headline-lg': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'title-md': ['Inter'],
+              'display-lg': ['Inter'],
+            },
+            fontSize: {
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #fff8f6;
+        color: #2b1613;
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(112, 88, 56, 0.1);
+      }
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+      }
+      .slide {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        position: absolute;
+        inset: 0;
+      }
+      .slide.active {
+        opacity: 1;
+        z-index: 10;
+      }
+      .dot.active {
+        background-color: white;
+        width: 24px;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <!-- TopAppBar -->
+    <header class="fixed top-0 w-full z-50 bg-surface shadow-[0px_8px_30px_rgba(62,39,35,0.08)]">
+      <nav
+        class="flex justify-between items-center px-margin-mobile md:px-gutter h-16 w-full max-w-max-width-desktop mx-auto"
+      >
+        <div class="flex items-center gap-3">
+          <img
+            alt="Tampaksiring Logo"
+            class="h-10 w-10 object-contain"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9bLE3LuZGiI6zNI4wLeL4qMJVtfvGl-wKYgYygPcPTdmJz93ojiAamcVUeLFd81AF_cxku2yQ4UJZDtY9-GqSf_ylfVjvhY4IGdoAFpKHg2EcXzziMJ8NwwxhianBuJadunAZb1DNQlDIfDVWH9AFjOW_fVyXuoIWUT-uD77vKZMhDCr4lKZqhgL-tV8M3KoyTp86GHp9weJWUSmN3UrQHq7i1pHmOe2OSmmPcKNJ0Ljq60YI4IRX7cnZccu5Rjzin4gU4_zFvu4"
+          />
+          <span
+            class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg font-bold text-primary"
+            >Tampaksiring</span
+          >
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="p-2 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full active:scale-95 duration-200"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <div class="flex items-center gap-3 pl-2 border-l border-outline-variant">
+            <div class="text-right hidden sm:block">
+              <p class="font-label-md text-label-md text-on-surface font-bold">Andi Wijaya</p>
+              <p class="font-label-sm text-label-sm text-on-surface-variant">Blok A-12</p>
+            </div>
+            <div
+              class="h-10 w-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden border-2 border-primary-container"
+            >
+              <span class="material-symbols-outlined text-primary" data-icon="account_circle"
+                >account_circle</span
+              >
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="pt-16 pb-24 md:pb-8 max-w-max-width-desktop mx-auto">
+      <!-- Banner Slideshow Section -->
+      <section class="px-margin-mobile md:px-gutter mt-8">
+        <div
+          class="relative w-full h-[300px] md:h-[450px] rounded-xl overflow-hidden shadow-lg group bg-black"
+        >
+          <!-- Slide 1 -->
+          <div class="slide active" id="slide-0">
+            <img
+              alt="Residential Cluster"
+              class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk-K-TvvsEVgX5LqPW6y3ecpiIRODdyCJdzQXDGrmOOKaQyKFALf2S_aU2uUBt21Uq8xVHvcxyhXY4R5ufk6Y0iXizRmLm-cb3WM4q3JkOy4zVECG6BPbBA_iYW5yXMsKS28t6CcmxRo1M11WpXt_AYkIJqz-E2dhcAdJ7-pwXJRKjhZqWlqADoF_gzKvCs7Wjhy5B1k1ecn7ezob9IzuCsY3t5g7YOThPVjRks7pGZjXTS4Z7ADJZIQiHbs3hIkIanKhbw84P_Lg"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-12"
+            >
+              <span
+                class="inline-block px-3 py-1 bg-tertiary text-white font-label-sm text-label-sm rounded-full w-fit mb-4"
+                >Pengumuman Terbaru</span
+              >
+              <h1
+                class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-white mb-2 max-w-2xl"
+              >
+                Jadwal Fogging Rutin dan Kerja Bakti Lingkungan Cluster
+              </h1>
+              <p class="font-body-md text-body-md text-white/90 max-w-xl">
+                Kegiatan akan dilaksanakan pada hari Minggu ini untuk menjaga kebersihan dan
+                kesehatan lingkungan kita bersama.
+              </p>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="slide" id="slide-1">
+            <img
+              alt="Security Discussion"
+              class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt5qL6z6fgh3KKMqfrzsmvJO5BmicpFu1D8zy8cWdJ4Fkdg6RkB2GmpPhJ2iGT4d3xlNUvOVpV8UN5BEvtijWJkLx3U91jvm2FqAD8M6FcKHeD0bYbVRTYaOJ5OZb8RN3y26NMINzwO2sIGjrBnzJHmGxk9umYGvHSLKzVs7qdid6G57nNQV4D2x2E0Vq7OowkHpqOkhdK5n9GylpHzY8ewOlgtyOCy3o9ZYaxXDaZEa0t_KTyE81r8BRE8A4I8jra66TaYcfzR4o"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-12"
+            >
+              <span
+                class="inline-block px-3 py-1 bg-primary text-white font-label-sm text-label-sm rounded-full w-fit mb-4"
+                >Agenda Warga</span
+              >
+              <h1
+                class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-white mb-2 max-w-2xl"
+              >
+                Sosialisasi Keamanan Lingkungan
+              </h1>
+              <p class="font-body-md text-body-md text-white/90 max-w-xl">
+                Mari berdiskusi tentang keamanan cluster pada Sabtu ini di Balai Warga.
+              </p>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="slide" id="slide-2">
+            <img
+              alt="Green Community"
+              class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL4erJGUx2qwKUDJeWv-lQApiwKiqZOjOYnDa5iLCKqBQbYR3vf04JOHJMnmvlVU46ymy3NNeqjOL5ltq1Cr2h_fE0w1rftzGRCOdmrMnQlA-NTeLTvF8XiKpb6PqS3hA9H6Xp4u5_nM3HxyRoh8HWS7-QDmG6-cHmIqmz2K6mh1DXgXSfbooKhPeGDhA1GHtrcDnFQCsG4E74BTAS4-5t0w4gbXXlTiU7XWM3ZK13ttUVFEapIY3KOawyBBkg3LPVVsUZI8BziEo"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-12"
+            >
+              <span
+                class="inline-block px-3 py-1 bg-green-700 text-white font-label-sm text-label-sm rounded-full w-fit mb-4"
+                >Program Lingkungan</span
+              >
+              <h1
+                class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-white mb-2 max-w-2xl"
+              >
+                Program Hijau Tampaksiring
+              </h1>
+              <p class="font-body-md text-body-md text-white/90 max-w-xl">
+                Dapatkan bibit tanaman gratis untuk setiap rumah mulai hari Senin.
+              </p>
+            </div>
+          </div>
+          <!-- Navigation Arrows -->
+          <button
+            class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/30 hover:bg-black/50 text-white rounded-full transition-all opacity-0 group-hover:opacity-100"
+            onclick="prevSlide()"
+          >
+            <span class="material-symbols-outlined">chevron_left</span>
+          </button>
+          <button
+            class="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/30 hover:bg-black/50 text-white rounded-full transition-all opacity-0 group-hover:opacity-100"
+            onclick="nextSlide()"
+          >
+            <span class="material-symbols-outlined">chevron_right</span>
+          </button>
+          <!-- Pagination Dots -->
+          <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+            <button
+              class="dot w-2 h-2 rounded-full bg-white/40 transition-all active"
+              id="dot-0"
+              onclick="goToSlide(0)"
+            ></button>
+            <button
+              class="dot w-2 h-2 rounded-full bg-white/40 transition-all"
+              id="dot-1"
+              onclick="goToSlide(1)"
+            ></button>
+            <button
+              class="dot w-2 h-2 rounded-full bg-white/40 transition-all"
+              id="dot-2"
+              onclick="goToSlide(2)"
+            ></button>
+          </div>
+        </div>
+      </section>
+      <!-- Menu Grid Section -->
+      <section class="px-margin-mobile md:px-gutter mt-12">
+        <div class="mb-8">
+          <h2 class="font-title-md text-title-md text-on-surface">Layanan &amp; Informasi</h2>
+          <div class="h-1 w-12 bg-primary mt-2 rounded-full"></div>
+        </div>
+        <div class="bento-grid">
+          <!-- Peta Cluster -->
+          <div
+            class="group cursor-pointer bg-surface border border-outline-variant rounded-xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] hover:shadow-[0px_8px_30px_rgba(62,39,35,0.08)] transition-all duration-300"
+          >
+            <div
+              class="w-12 h-12 bg-primary-fixed rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+            >
+              <span class="material-symbols-outlined text-primary text-[32px]" data-icon="map"
+                >map</span
+              >
+            </div>
+            <h3 class="font-title-md text-title-md text-on-surface mb-2">Peta Klaster</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Navigasi blok, fasilitas umum, dan titik penting di lingkungan klaster.
+            </p>
+            <div
+              class="mt-6 flex items-center text-primary font-label-md text-label-md group-hover:gap-2 transition-all"
+            >
+              <span class="">Lihat Detail</span>
+              <span class="material-symbols-outlined ml-1">arrow_forward</span>
+            </div>
+          </div>
+          <!-- Daftar Warga -->
+          <div
+            class="group cursor-pointer bg-surface border border-outline-variant rounded-xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] hover:shadow-[0px_8px_30px_rgba(62,39,35,0.08)] transition-all duration-300"
+          >
+            <div
+              class="w-12 h-12 bg-surface-container-low rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+            >
+              <span
+                class="material-symbols-outlined text-on-secondary-container text-[32px]"
+                data-icon="group"
+                >group</span
+              >
+            </div>
+            <h3 class="font-title-md text-title-md text-on-surface mb-2">Daftar Warga</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Direktori tetangga dan informasi kontak darurat sesama penghuni.
+            </p>
+            <div
+              class="mt-6 flex items-center text-primary font-label-md text-label-md group-hover:gap-2 transition-all"
+            >
+              <span class="">Lihat Direktori</span>
+              <span class="material-symbols-outlined ml-1">arrow_forward</span>
+            </div>
+          </div>
+          <!-- Data Keuangan -->
+          <div
+            class="group cursor-pointer bg-surface border border-outline-variant rounded-xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] hover:shadow-[0px_8px_30px_rgba(62,39,35,0.08)] transition-all duration-300"
+          >
+            <div
+              class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+            >
+              <span
+                class="material-symbols-outlined text-white text-[32px]"
+                data-icon="account_balance_wallet"
+                >account_balance_wallet</span
+              >
+            </div>
+            <h3 class="font-title-md text-title-md text-on-surface mb-2">Keuangan Klaster</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Laporan iuran bulanan, tagihan, dan transparansi dana klaster.
+            </p>
+            <div
+              class="mt-6 flex items-center text-primary font-label-md text-label-md group-hover:gap-2 transition-all"
+            >
+              <span class="">Cek Tagihan</span>
+              <span class="material-symbols-outlined ml-1">arrow_forward</span>
+            </div>
+          </div>
+          <!-- Informasi Security -->
+          <div
+            class="group cursor-pointer bg-surface border border-outline-variant rounded-xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] hover:shadow-[0px_8px_30px_rgba(62,39,35,0.08)] transition-all duration-300"
+          >
+            <div
+              class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+            >
+              <span
+                class="material-symbols-outlined text-on-secondary-fixed-variant text-[32px]"
+                data-icon="security"
+                >security</span
+              >
+            </div>
+            <h3 class="font-title-md text-title-md text-on-surface mb-2">Informasi Security</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Jadwal patroli, lapor tamu, dan kontak pos keamanan 24 jam.
+            </p>
+            <div
+              class="mt-6 flex items-center text-primary font-label-md text-label-md group-hover:gap-2 transition-all"
+            >
+              <span class="">Hubungi Security</span>
+              <span class="material-symbols-outlined ml-1">arrow_forward</span>
+            </div>
+          </div>
+          <!-- Aduan Cluster -->
+          <div
+            class="group cursor-pointer bg-surface border border-outline-variant rounded-xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] hover:shadow-[0px_8px_30px_rgba(62,39,35,0.08)] transition-all duration-300 md:col-span-2 lg:col-span-1"
+          >
+            <div
+              class="w-12 h-12 bg-tertiary-fixed rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+            >
+              <span
+                class="material-symbols-outlined text-tertiary text-[32px]"
+                data-icon="confirmation_number"
+                >confirmation_number</span
+              >
+            </div>
+            <h3 class="font-title-md text-title-md text-on-surface mb-2">Aduan Warga</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Laporkan masalah fasilitas atau ketertiban di lingkungan klaster secara online.
+            </p>
+            <div
+              class="mt-6 flex items-center text-primary font-label-md text-label-md group-hover:gap-2 transition-all"
+            >
+              <span class="">Buat Laporan</span>
+              <span class="material-symbols-outlined ml-1">arrow_forward</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Quick Summary / Stats -->
+      <section class="px-margin-mobile md:px-gutter mt-16">
+        <div
+          class="bg-surface-container-low rounded-2xl p-8 flex flex-wrap gap-8 items-center justify-between border border-outline-variant/30"
+        >
+          <div class="flex-1 min-w-[200px]">
+            <p
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1"
+            >
+              Status Iuran Anda
+            </p>
+            <div class="flex items-baseline gap-2">
+              <span class="font-display-lg text-display-lg text-primary">Lunas</span>
+              <span class="font-label-md text-label-md text-tertiary">Oktober 2023</span>
+            </div>
+          </div>
+          <div class="flex-1 min-w-[200px]">
+            <p
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1"
+            >
+              Informasi Terkini
+            </p>
+            <p class="font-title-md text-title-md text-on-surface">3 Pengumuman Aktif</p>
+          </div>
+          <button
+            class="px-6 py-3 bg-primary text-white rounded-lg font-label-md text-label-md hover:shadow-lg transition-all active:scale-95"
+          >
+            Akses Dasbor Lengkap
+          </button>
+        </div>
+      </section>
+    </main>
+    <!-- BottomNavBar (Mobile Only) -->
+    <nav
+      class="md:hidden fixed bottom-0 w-full z-50 bg-surface border-t border-outline-variant shadow-[0px_-4px_20px_rgba(62,39,35,0.05)]"
+    >
+      <div class="flex justify-around items-center w-full h-20 pb-safe px-2">
+        <!-- Beranda (Active) -->
+        <a
+          class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="home">home</span>
+          <span class="font-label-sm text-label-sm">Beranda</span>
+        </a>
+        <!-- Keuangan -->
+        <a
+          class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="account_balance_wallet"
+            >account_balance_wallet</span
+          >
+          <span class="font-label-sm text-label-sm">Keuangan</span>
+        </a>
+        <!-- Layanan -->
+        <a
+          class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+          <span class="font-label-sm text-label-sm">Layanan</span>
+        </a>
+        <!-- Profil -->
+        <a
+          class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="person">person</span>
+          <span class="font-label-sm text-label-sm">Profil</span>
+        </a>
+      </div>
+    </nav>
+    <script>
+      // Slideshow Logic
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.dot');
+      let slideInterval;
+
+      function showSlide(index) {
+        slides.forEach((slide) => slide.classList.remove('active'));
+        dots.forEach((dot) => dot.classList.remove('active'));
+
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        currentSlide = index;
+      }
+
+      function nextSlide() {
+        let next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+        resetTimer();
+      }
+
+      function prevSlide() {
+        let prev = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prev);
+        resetTimer();
+      }
+
+      function goToSlide(index) {
+        showSlide(index);
+        resetTimer();
+      }
+
+      function startTimer() {
+        slideInterval = setInterval(nextSlide, 5000);
+      }
+
+      function resetTimer() {
+        clearInterval(slideInterval);
+        startTimer();
+      }
+
+      startTimer();
+
+      // Sticky Header Effect
+      window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 20) {
+          header.classList.add('bg-opacity-95', 'backdrop-blur-md');
+        } else {
+          header.classList.remove('bg-opacity-95', 'backdrop-blur-md');
+        }
+      });
+    </script>
+  </body>
+</html>

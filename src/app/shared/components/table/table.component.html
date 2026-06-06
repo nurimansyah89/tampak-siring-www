@@ -1,0 +1,30 @@
+<div class="overflow-x-auto">
+  <table class="w-full text-left">
+    <thead>
+      <tr class="bg-surface-container-low text-on-surface-variant font-label-sm uppercase tracking-wider">
+        @for (col of columns(); track col.key) {
+          <th
+            [class]="'px-md py-4' + (col.headerClass ? ' ' + col.headerClass : '')"
+          >
+            {{ col.header }}
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-outline-variant/30">
+      @if (loading()) {
+        @for (row of [].constructor(loadingRowCount()); track $index) {
+          <tr class="hover:bg-surface-container-high transition-colors">
+            @for (col of columns(); track col.key) {
+              <td class="px-md py-4">
+                <div class="h-4 bg-surface-container-high rounded animate-pulse w-3/4"></div>
+              </td>
+            }
+          </tr>
+        }
+      } @else {
+        <ng-content />
+      }
+    </tbody>
+  </table>
+</div>

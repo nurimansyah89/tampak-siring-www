@@ -1,0 +1,36 @@
+@if (link()) {
+  <a
+    [routerLink]="link()"
+    class="group h-full flex flex-col bg-surface border border-outline-variant rounded-lg p-6 shadow-level-1 hover:shadow-level-2 transition-all duration-300"
+  >
+    <div
+      class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+      [class]="iconBg()"
+    >
+      <span class="material-symbols-outlined text-[32px]" [class]="iconColor()">{{ icon() }}</span>
+    </div>
+    <h3 class="font-title-md text-title-md text-on-surface mb-2">{{ title() }}</h3>
+    <p class="font-body-md text-body-md text-on-surface-variant flex-1">{{ description() }}</p>
+    <div class="mt-auto flex items-center text-primary font-label-md text-label-md group-hover:gap-2 transition-all">
+      <span>{{ actionText() }}</span>
+      <span class="material-symbols-outlined ml-1">arrow_forward</span>
+    </div>
+  </a>
+} @else {
+  <div
+    class="group h-full flex flex-col bg-surface border border-outline-variant rounded-lg p-6 shadow-level-1 hover:shadow-level-2 transition-all duration-300"
+  >
+    <div
+      class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+      [class]="iconBg()"
+    >
+      <span class="material-symbols-outlined text-[32px]" [class]="iconColor()">{{ icon() }}</span>
+    </div>
+    <h3 class="font-title-md text-title-md text-on-surface mb-2">{{ title() }}</h3>
+    <p class="font-body-md text-body-md text-on-surface-variant flex-1">{{ description() }}</p>
+    <div class="mt-auto flex items-center text-primary font-label-md text-label-md group-hover:gap-2 transition-all">
+      <span>{{ actionText() }}</span>
+      <span class="material-symbols-outlined ml-1">arrow_forward</span>
+    </div>
+  </div>
+}

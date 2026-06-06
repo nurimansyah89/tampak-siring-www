@@ -1,0 +1,34 @@
+@if (link()) {
+  <a
+    [routerLink]="link()"
+    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border font-label-md transition-all active:scale-95 hover:opacity-90"
+    [class.bg-green-100]="variant() === 'success'"
+    [class.text-green-800]="variant() === 'success'"
+    [class.border-green-600]="variant() === 'success'"
+    [class.bg-red-100]="variant() === 'alert'"
+    [class.text-red-800]="variant() === 'alert'"
+    [class.border-red-600]="variant() === 'alert'"
+    [class.border-opacity-20]="true"
+  >
+    <span class="material-symbols-outlined text-[18px]">
+      {{ variant() === 'success' ? 'check_circle' : 'warning' }}
+    </span>
+    <span>{{ message() }}</span>
+  </a>
+} @else {
+  <div
+    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border font-label-md"
+    [class.bg-green-100]="variant() === 'success'"
+    [class.text-green-800]="variant() === 'success'"
+    [class.border-green-600]="variant() === 'success'"
+    [class.bg-red-100]="variant() === 'alert'"
+    [class.text-red-800]="variant() === 'alert'"
+    [class.border-red-600]="variant() === 'alert'"
+    [class.border-opacity-20]="true"
+  >
+    <span class="material-symbols-outlined text-[18px]">
+      {{ variant() === 'success' ? 'check_circle' : 'warning' }}
+    </span>
+    <span>{{ message() }}</span>
+  </div>
+}

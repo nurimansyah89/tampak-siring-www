@@ -1,0 +1,539 @@
+<!doctype html>
+
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>History Pembayaran Iuran - Tampaksiring Smart Cluster</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              surface: '#fff8f6',
+              'on-tertiary-fixed': '#321200',
+              'surface-dim': '#f8d1cb',
+              'primary-fixed': '#ffddb6',
+              'on-surface': '#2b1613',
+              'tertiary-container': '#bb5808',
+              'surface-container-lowest': '#ffffff',
+              'secondary-fixed': '#e3e2e0',
+              'inverse-on-surface': '#ffedea',
+              'on-tertiary': '#ffffff',
+              error: '#ba1a1a',
+              'primary-fixed-dim': '#e2c19b',
+              'on-secondary-fixed-variant': '#464745',
+              'on-primary-fixed': '#291801',
+              'on-secondary-container': '#626361',
+              'on-tertiary-fixed-variant': '#763400',
+              'inverse-surface': '#422a26',
+              primary: '#705838',
+              'outline-variant': '#d1c4b8',
+              'surface-container-high': '#ffe2dd',
+              background: '#fff8f6',
+              tertiary: '#974400',
+              'on-tertiary-container': '#fffbff',
+              'on-primary-container': '#fffbff',
+              outline: '#80756b',
+              'on-primary': '#ffffff',
+              'tertiary-fixed-dim': '#ffb68d',
+              'surface-container': '#ffe9e5',
+              'tertiary-fixed': '#ffdbc9',
+              'on-surface-variant': '#4e453c',
+              'surface-tint': '#735a3a',
+              'secondary-fixed-dim': '#c7c6c4',
+              'on-error': '#ffffff',
+              'inverse-primary': '#e2c19b',
+              'surface-container-highest': '#ffdad4',
+              'on-background': '#2b1613',
+              'error-container': '#ffdad6',
+              'surface-container-low': '#fff0ee',
+              'surface-bright': '#fff8f6',
+              secondary: '#5e5f5d',
+              'on-primary-fixed-variant': '#594325',
+              'on-secondary': '#ffffff',
+              'primary-container': '#8b704f',
+              'surface-variant': '#ffdad4',
+              'secondary-container': '#e0e0dd',
+              'on-secondary-fixed': '#1a1c1a',
+              'on-error-container': '#93000a',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              base: '8px',
+              xs: '4px',
+              xl: '80px',
+              sm: '12px',
+              lg: '48px',
+              gutter: '24px',
+              'max-width-desktop': '1280px',
+              md: '24px',
+              'margin-mobile': '16px',
+            },
+            fontFamily: {
+              'body-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'title-md': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'headline-lg': ['Inter'],
+              'display-lg': ['Inter'],
+            },
+            fontSize: {
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      body {
+        background-color: #fff8f6;
+        color: #2b1613;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <!-- SideNavBar (Desktop) -->
+    <aside
+      class="fixed left-0 top-0 h-full w-64 bg-surface-container-low border-r border-outline-variant hidden lg:flex flex-col py-6 z-40"
+    >
+      <div class="px-6 mb-8 flex items-center gap-3">
+        <img
+          alt="Logo"
+          class="w-10 h-10 rounded-lg object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAiLyONRDVyZIYxCaTaXJfRGt-mzkSOAO5OBsOHkzsvNcEeor_c9JRtwPYlu8j71Zm-aRa7WZ3JC0CYnhl7D8LHDpicH2LwnfB00K6bkFtXWl6av621_MJXGOglW7Zx1rPew1kX51MIA2cS38hfq1fV5YpaY63rxO9D0aWGnPwZ6k5yeap8eXC5RIb14uSl6rJkjnCTPIR9A-XIF_BiIZGSr8dUl3RxF9VNbgWiYegJLV8UGpFkJfrkHS9E3tLaC8CfYnRh0UrfE0"
+        />
+        <div>
+          <h2 class="font-title-md text-title-md font-bold text-primary">Tampaksiring</h2>
+          <p class="text-on-surface-variant font-label-sm text-label-sm">Smart Cluster</p>
+        </div>
+      </div>
+      <nav class="flex-grow space-y-1">
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 mx-2"
+          href="#"
+        >
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+            >payments</span
+          >
+          <span class="font-label-md text-label-md">Iuran Warga</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">map</span>
+          <span class="font-label-md text-label-md">Peta Klaster</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">group</span>
+          <span class="font-label-md text-label-md">Daftar Warga</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">confirmation_number</span>
+          <span class="font-label-md text-label-md">Tiket Keluhan</span>
+        </a>
+      </nav>
+      <div class="mt-auto px-2 space-y-1">
+        <div class="p-4 bg-surface-container rounded-xl mb-4 mx-2">
+          <p class="font-label-sm text-label-sm text-on-surface-variant">Blok A-12</p>
+          <p class="font-label-md text-label-md font-bold text-primary">Resident Profile</p>
+        </div>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-label-md text-label-md">Pengaturan</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-label-md text-label-md">Keluar</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="lg:ml-64 min-h-screen pb-20 lg:pb-12">
+      <!-- TopAppBar (Mobile & Desktop Header) -->
+      <header class="sticky top-0 w-full z-30 bg-surface shadow-[0px_8px_30px_rgba(62,39,35,0.08)]">
+        <div
+          class="flex justify-between items-center px-margin-mobile md:px-gutter h-16 w-full max-w-max-width-desktop mx-auto"
+        >
+          <div class="flex items-center gap-4">
+            <button
+              class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors active:scale-95"
+            >
+              <span class="material-symbols-outlined text-primary">arrow_back</span>
+            </button>
+            <h1
+              class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary"
+            >
+              History Iuran
+            </h1>
+          </div>
+          <div class="flex items-center gap-2">
+            <span
+              class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full cursor-pointer"
+              >notifications</span
+            >
+            <span
+              class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full cursor-pointer"
+              >account_circle</span
+            >
+          </div>
+        </div>
+      </header>
+      <div class="max-w-max-width-desktop mx-auto px-margin-mobile md:px-gutter py-8">
+        <!-- Summary Section: Bento Style -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <!-- Total Paid -->
+          <div
+            class="bg-surface shadow-[0px_4px_20px_rgba(62,39,35,0.05)] rounded-xl p-6 border-l-4 border-primary"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <span class="material-symbols-outlined text-primary p-2 bg-primary-fixed rounded-lg"
+                >payments</span
+              >
+              <span class="text-xs font-bold text-tertiary px-2 py-1 bg-tertiary-fixed rounded-full"
+                >Tahun 2023</span
+              >
+            </div>
+            <p class="font-label-md text-label-md text-on-surface-variant">Total Iuran Dibayar</p>
+            <h3 class="font-headline-lg text-headline-lg text-primary mt-1">Rp 4.200.000</h3>
+          </div>
+          <!-- Balance/Debt -->
+          <div
+            class="bg-surface shadow-[0px_4px_20px_rgba(62,39,35,0.05)] rounded-xl p-6 border-l-4 border-error"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <span class="material-symbols-outlined text-error p-2 bg-error-container rounded-lg"
+                >pending_actions</span
+              >
+              <span class="text-xs font-bold text-error px-2 py-1 bg-error-container rounded-full"
+                >Perhatian</span
+              >
+            </div>
+            <p class="font-label-md text-label-md text-on-surface-variant">Sisa Tunggakan</p>
+            <h3 class="font-headline-lg text-headline-lg text-error mt-1">Rp 350.000</h3>
+          </div>
+          <!-- Current Period -->
+          <div
+            class="bg-primary-container shadow-[0px_4px_20px_rgba(62,39,35,0.08)] rounded-xl p-6 text-on-primary-container"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <span class="material-symbols-outlined p-2 bg-white/20 rounded-lg"
+                >calendar_month</span
+              >
+            </div>
+            <p class="font-label-md text-label-md opacity-90">Periode Berjalan</p>
+            <h3 class="font-headline-lg text-headline-lg mt-1">Desember 2023</h3>
+            <p class="font-label-sm text-label-sm mt-2 opacity-80">Jatuh tempo: 10 Des 2023</p>
+          </div>
+        </section>
+        <!-- Detailed Table Section -->
+        <section
+          class="bg-surface shadow-[0px_4px_20px_rgba(62,39,35,0.05)] rounded-xl overflow-hidden border border-outline-variant"
+        >
+          <div
+            class="p-6 border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between gap-4"
+          >
+            <h2 class="font-title-md text-title-md text-primary">Rincian Pembayaran Bulanan</h2>
+            <div class="flex gap-2">
+              <button
+                class="flex items-center gap-2 px-4 py-2 bg-surface-container-high rounded-lg text-on-surface font-label-md hover:bg-outline-variant transition-colors"
+              >
+                <span class="material-symbols-outlined text-sm">filter_list</span> Filter
+              </button>
+              <button
+                class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-on-primary font-label-md hover:opacity-90 transition-opacity"
+              >
+                <span class="material-symbols-outlined text-sm">download</span> Unduh PDF
+              </button>
+            </div>
+          </div>
+          <!-- Desktop Table -->
+          <div class="hidden md:block overflow-x-auto">
+            <table class="w-full text-left">
+              <thead
+                class="bg-surface-container-low text-on-surface-variant border-b border-outline-variant"
+              >
+                <tr>
+                  <th class="px-6 py-4 font-label-md">Bulan/Tahun</th>
+                  <th class="px-6 py-4 font-label-md">Tanggal Bayar</th>
+                  <th class="px-6 py-4 font-label-md">Metode</th>
+                  <th class="px-6 py-4 font-label-md">Jumlah</th>
+                  <th class="px-6 py-4 font-label-md">Status</th>
+                  <th class="px-6 py-4 font-label-md">Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-outline-variant">
+                <tr class="hover:bg-surface-container-low transition-colors">
+                  <td class="px-6 py-4 font-body-md font-bold">Nov 2023</td>
+                  <td class="px-6 py-4 font-body-md">05 Nov 2023</td>
+                  <td class="px-6 py-4 font-body-md">Transfer Bank (BCA)</td>
+                  <td class="px-6 py-4 font-body-md">Rp 350.000</td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold"
+                      >Lunas</span
+                    >
+                  </td>
+                  <td class="px-6 py-4">
+                    <button class="text-primary hover:underline font-label-sm">Detail</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container-low transition-colors">
+                  <td class="px-6 py-4 font-body-md font-bold">Okt 2023</td>
+                  <td class="px-6 py-4 font-body-md">02 Okt 2023</td>
+                  <td class="px-6 py-4 font-body-md">E-Wallet (OVO)</td>
+                  <td class="px-6 py-4 font-body-md">Rp 350.000</td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold"
+                      >Lunas</span
+                    >
+                  </td>
+                  <td class="px-6 py-4">
+                    <button class="text-primary hover:underline font-label-sm">Detail</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container-low transition-colors bg-error-container/10">
+                  <td class="px-6 py-4 font-body-md font-bold">Sep 2023</td>
+                  <td class="px-6 py-4 font-body-md text-on-surface-variant italic">-</td>
+                  <td class="px-6 py-4 font-body-md text-on-surface-variant italic">-</td>
+                  <td class="px-6 py-4 font-body-md text-error">Rp 350.000</td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="px-3 py-1 bg-error-container text-error rounded-full text-xs font-bold"
+                      >Menunggak</span
+                    >
+                  </td>
+                  <td class="px-6 py-4">
+                    <button class="text-primary hover:underline font-label-sm">Bayar</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container-low transition-colors">
+                  <td class="px-6 py-4 font-body-md font-bold">Agt 2023</td>
+                  <td class="px-6 py-4 font-body-md">12 Agt 2023</td>
+                  <td class="px-6 py-4 font-body-md">Virtual Account</td>
+                  <td class="px-6 py-4 font-body-md">Rp 350.000</td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold"
+                      >Lunas</span
+                    >
+                  </td>
+                  <td class="px-6 py-4">
+                    <button class="text-primary hover:underline font-label-sm">Detail</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Mobile List (Responsive Fallback) -->
+          <div class="md:hidden divide-y divide-outline-variant">
+            <div class="p-4 space-y-2">
+              <div class="flex justify-between">
+                <span class="font-bold text-on-surface">Nov 2023</span>
+                <span
+                  class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-[10px] font-bold"
+                  >Lunas</span
+                >
+              </div>
+              <div class="flex justify-between text-on-surface-variant text-sm">
+                <span>05 Nov 2023</span>
+                <span class="font-medium">Rp 350.000</span>
+              </div>
+            </div>
+            <div class="p-4 space-y-2">
+              <div class="flex justify-between">
+                <span class="font-bold text-on-surface">Okt 2023</span>
+                <span
+                  class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-[10px] font-bold"
+                  >Lunas</span
+                >
+              </div>
+              <div class="flex justify-between text-on-surface-variant text-sm">
+                <span>02 Okt 2023</span>
+                <span class="font-medium">Rp 350.000</span>
+              </div>
+            </div>
+            <div class="p-4 space-y-2 bg-error-container/5">
+              <div class="flex justify-between">
+                <span class="font-bold text-on-surface">Sep 2023</span>
+                <span
+                  class="px-3 py-1 bg-error-container text-error rounded-full text-[10px] font-bold"
+                  >Menunggak</span
+                >
+              </div>
+              <div class="flex justify-between text-on-surface-variant text-sm">
+                <span class="italic text-error">Belum Dibayar</span>
+                <span class="font-medium text-error">Rp 350.000</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Decorative Card (Asymmetric Layout Element) -->
+        <section class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div class="order-2 md:order-1">
+            <h4 class="font-title-md text-title-md text-primary mb-2">
+              Punya Pertanyaan Mengenai Tagihan?
+            </h4>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+              Jika Anda merasa ada ketidaksesuaian data pada riwayat pembayaran, silakan hubungi tim
+              administrasi klaster melalui tiket keluhan atau WhatsApp.
+            </p>
+            <div class="flex gap-4">
+              <button
+                class="px-6 py-3 border border-primary text-primary rounded-lg font-label-md hover:bg-primary-fixed transition-colors"
+              >
+                Bantuan Admin
+              </button>
+              <button
+                class="px-6 py-3 bg-primary text-white rounded-lg font-label-md hover:opacity-90 shadow-md"
+              >
+                Buat Laporan
+              </button>
+            </div>
+          </div>
+          <div
+            class="order-1 md:order-2 rounded-2xl overflow-hidden shadow-xl aspect-video relative group"
+          >
+            <img
+              alt="Financial Report"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              data-alt="A professional top-down workspace view featuring a sleek modern laptop, a cup of artisanal coffee, and neatly organized paper documents on a textured wooden desk. The lighting is warm and golden, casting soft shadows that enhance the corporate yet tactile residential atmosphere. The color palette consists of rich earthy browns, soft creams, and deep primary accents, creating a sense of professional financial management and security."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUQ1vwhAYKGfv_r7Goj5_7M1KBLhu4b7yjzbmDcMMqkr46USVIG4vquFBIW_jTxhdGhNuawc7ArKzu4RK2uX6GXzLDq-aLUoFdpgwOlA39mRfZcs5gTUdtHT3DPx3Jo17o_TZmmB24cTCPKqmAiWLT5umb_PTEuMVygpKIZeCgursqI1hAmlfARWrEljdsWykFhq4Po1BR950LiK3M6VgPvKZ-gSMRMs-iNyU50op9QVAe7laOBkMgH8lQ2YM81JQodyqLaE4T7Do"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 text-white">
+              <p class="font-label-sm text-label-sm opacity-80 uppercase tracking-widest">
+                Tips Klaster
+              </p>
+              <h5 class="font-title-md text-title-md">Bayar Tepat Waktu, Klaster Makin Maju</h5>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- BottomNavBar (Mobile) -->
+    <nav
+      class="fixed bottom-0 w-full z-50 bg-surface border-t border-outline-variant shadow-[0px_-4px_20px_rgba(62,39,35,0.05)] md:hidden"
+    >
+      <div class="flex justify-around items-center w-full h-20 pb-safe px-2">
+        <a
+          class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150"
+          href="#"
+        >
+          <span class="material-symbols-outlined">home</span>
+          <span class="font-label-sm text-label-sm">Beranda</span>
+        </a>
+        <a
+          class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 active:scale-90 duration-150"
+          href="#"
+        >
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+            >account_balance_wallet</span
+          >
+          <span class="font-label-sm text-label-sm">Keuangan</span>
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150"
+          href="#"
+        >
+          <span class="material-symbols-outlined">support_agent</span>
+          <span class="font-label-sm text-label-sm">Layanan</span>
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150"
+          href="#"
+        >
+          <span class="material-symbols-outlined">person</span>
+          <span class="font-label-sm text-label-sm">Profil</span>
+        </a>
+      </div>
+    </nav>
+    <script>
+      // Simple interaction for back button
+      document.querySelector('header button').addEventListener('click', () => {
+        console.log('Navigating back to Finance dashboard...');
+        // In a real app, this would be window.history.back();
+      });
+
+      // Add subtle hover shadow effect to cards
+      const cards = document.querySelectorAll('section > div');
+      cards.forEach((card) => {
+        card.addEventListener('mouseenter', () => {
+          if (card.classList.contains('shadow-[0px_4px_20px_rgba(62,39,35,0.05)]')) {
+            card.style.boxShadow = '0px 8px 30px rgba(62, 39, 35, 0.1)';
+          }
+        });
+        card.addEventListener('mouseleave', () => {
+          if (card.classList.contains('shadow-[0px_4px_20px_rgba(62,39,35,0.05)]')) {
+            card.style.boxShadow = '0px 4px 20px rgba(62, 39, 35, 0.05)';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

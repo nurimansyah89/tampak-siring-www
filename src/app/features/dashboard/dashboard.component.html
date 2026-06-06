@@ -1,0 +1,63 @@
+<app-navbar />
+<main class="pt-16 pb-24 md:pb-8 max-w-desktop mx-auto">
+  <section class="px-margin-mobile md:px-gutter mt-8">
+    <app-slideshow [slides]="slides" />
+  </section>
+  <section class="px-margin-mobile md:px-gutter mt-12">
+    <div class="mb-8">
+      <h2 class="font-title-md text-title-md text-on-surface">Layanan &amp; Informasi</h2>
+      <div class="h-1 w-12 bg-primary mt-2 rounded-full"></div>
+    </div>
+    <div class="bento-grid">
+      <app-bento-card
+        icon="map"
+        iconBg="bg-primary-fixed"
+        iconColor="text-primary"
+        title="Peta Klaster"
+        description="Navigasi blok, fasilitas umum, dan titik penting di lingkungan klaster."
+        actionText="Lihat Detail"
+        link="/cluster-map"
+      />
+      <app-bento-card
+        icon="group"
+        iconBg="bg-surface-container-low"
+        iconColor="text-on-secondary-container"
+        title="Daftar Warga"
+        description="Direktori tetangga dan informasi kontak darurat sesama penghuni."
+        actionText="Lihat Direktori"
+        link="/residents"
+      />
+      <app-bento-card
+        icon="account_balance_wallet"
+        iconBg="bg-primary-container"
+        iconColor="text-white"
+        title="Keuangan Klaster"
+        description="Laporan iuran bulanan, tagihan, dan transparansi dana klaster."
+        actionText="Cek Tagihan"
+        link="/finance"
+      />
+      <app-bento-card
+        icon="security"
+        iconBg="bg-secondary-container"
+        iconColor="text-on-secondary-fixed-variant"
+        title="Informasi Security"
+        description="Jadwal patroli, lapor tamu, dan kontak pos keamanan 24 jam."
+        actionText="Hubungi Security"
+        link="/security"
+      />
+      <app-bento-card
+        icon="confirmation_number"
+        iconBg="bg-tertiary-fixed"
+        iconColor="text-tertiary"
+        title="Aduan Warga"
+        description="Laporkan masalah fasilitas atau ketertiban di lingkungan klaster secara online."
+        actionText="Buat Laporan"
+        link="/complaints"
+      />
+    </div>
+  </section>
+  <div class="px-gutter mt-xl pb-lg">
+    <app-footer />
+  </div>
+</main>
+<app-bottom-nav />

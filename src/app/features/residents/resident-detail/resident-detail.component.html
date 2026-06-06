@@ -1,0 +1,89 @@
+<app-main-layout>
+  @if (resident) {
+    <div class="px-margin-mobile md:px-gutter pt-8 pb-xl">
+      <!-- Header -->
+      <div class="flex items-center gap-4 mb-8">
+        <a
+          routerLink="/residents"
+          class="inline-flex items-center justify-center p-2 hover:bg-surface-container rounded-full transition-colors active:scale-95 duration-200"
+        >
+          <span class="material-symbols-outlined text-primary">arrow_back</span>
+        </a>
+        <h2 class="font-title-md text-title-md text-primary font-bold">Detail Warga</h2>
+      </div>
+
+      <!-- Bento Grid -->
+      <div class="grid grid-cols-12 gap-6">
+        <!-- Left Column: Profile Card -->
+        <div class="col-span-12 lg:col-span-4">
+          <app-resident-profile-card
+            [resident]="resident"
+            (contact)="openModal()"
+          />
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-span-12 lg:col-span-8 space-y-6">
+          <!-- Family Members -->
+          <app-resident-family-card [familyMembers]="resident.familyMembers" />
+
+          <!-- Pets -->
+          <app-resident-pets-card [pets]="resident.pets" />
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+      <span class="material-symbols-outlined text-6xl text-outline-variant mb-4">person_off</span>
+      <h3 class="font-title-md text-title-md text-on-surface mb-2">Warga Tidak Ditemukan</h3>
+      <p class="text-on-surface-variant font-body-md text-body-md mb-6">Data warga dengan ID tersebut tidak tersedia.</p>
+      <a
+        routerLink="/residents"
+        class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all"
+      >
+        Kembali ke Daftar Warga
+      </a>
+    </div>
+  }
+</app-main-layout>
+
+<!-- Modal "Segera Hadir" -->
+@if (showModal()) {
+  <div
+    class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm"
+  >
+    <div
+      class="bg-surface w-full max-w-[480px] mx-4 rounded-2xl p-6 shadow-level-3 border border-outline-variant text-center"
+    >
+      <div
+        class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-4"
+      >
+        <span
+          class="material-symbols-outlined text-primary text-2xl"
+        >construction</span>
+      </div>
+      <h3 class="font-title-md text-title-md text-on-surface mb-1">
+        Segera Hadir
+      </h3>
+      <p class="text-on-surface-variant font-body-md text-body-md mb-6">
+        Fitur komunikasi langsung antar warga sedang dalam tahap pengembangan untuk privasi dan
+        keamanan Anda.
+      </p>
+      <button
+        class="w-full py-3 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:opacity-90 transition-all shadow-md"
+        (click)="closeModal()"
+        type="button"
+      >
+        Dimengerti
+      </button>
+    </div>
+  </div>
+}
+
+@if (showModal()) {
+  <div
+    class="sr-only"
+    (keydown.escape)="closeModal()"
+    tabindex="0"
+  ></div>
+}

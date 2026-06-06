@@ -14,11 +14,10 @@ const angularApp = new AngularNodeAppEngine();
 
 /**
  * Runtime configuration endpoint — exposes non-sensitive config to the client.
+ * Tambahkan properti yang ingin di-expose ke client di sini.
  */
 app.get('/api/config', (_req, res) => {
-  res.json({
-    maintenanceMode: process.env['MAINTENANCE_MODE'] === 'true',
-  });
+  res.json({});
 });
 
 /**

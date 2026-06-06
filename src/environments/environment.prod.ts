@@ -1,9 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://api.tampaksiring.com/v1',
-  appName: 'Tampak Siring',
-  featureFlags: {
-    enableGallery: true,
-    enableBooking: true,
-  },
+  turnstileSiteKey: '1x00000000000000000000AA',
 };

@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Informasi Keamanan - Tampaksiring Smart Cluster</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'tertiary-container': '#bb5808',
+              'on-primary': '#ffffff',
+              'on-surface-variant': '#4e453c',
+              'surface-container-highest': '#ffdad4',
+              secondary: '#5e5f5d',
+              'surface-container-low': '#fff0ee',
+              'tertiary-fixed-dim': '#ffb68d',
+              'error-container': '#ffdad6',
+              'on-secondary-container': '#626361',
+              'on-secondary-fixed': '#1a1c1a',
+              'on-primary-fixed': '#291801',
+              'on-tertiary-fixed': '#321200',
+              'primary-fixed': '#ffddb6',
+              'inverse-primary': '#e2c19b',
+              'primary-fixed-dim': '#e2c19b',
+              'surface-container': '#ffe9e5',
+              'on-primary-container': '#fffbff',
+              surface: '#fff8f6',
+              'on-tertiary-container': '#fffbff',
+              'on-surface': '#2b1613',
+              'primary-container': '#8b704f',
+              'surface-variant': '#ffdad4',
+              'inverse-surface': '#422a26',
+              'secondary-fixed-dim': '#c7c6c4',
+              'on-tertiary-fixed-variant': '#763400',
+              error: '#ba1a1a',
+              'surface-container-high': '#ffe2dd',
+              'surface-bright': '#fff8f6',
+              'on-secondary': '#ffffff',
+              'secondary-container': '#e0e0dd',
+              'outline-variant': '#d1c4b8',
+              'surface-container-lowest': '#ffffff',
+              background: '#fff8f6',
+              primary: '#705838',
+              'surface-dim': '#f8d1cb',
+              'on-primary-fixed-variant': '#594325',
+              'on-error-container': '#93000a',
+              'surface-tint': '#735a3a',
+              'on-secondary-fixed-variant': '#464745',
+              'tertiary-fixed': '#ffdbc9',
+              'secondary-fixed': '#e3e2e0',
+              outline: '#80756b',
+              'on-error': '#ffffff',
+              'on-background': '#2b1613',
+              'on-tertiary': '#ffffff',
+              'inverse-on-surface': '#ffedea',
+              tertiary: '#974400',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              base: '8px',
+              lg: '48px',
+              sm: '12px',
+              'max-width-desktop': '1280px',
+              xl: '80px',
+              md: '24px',
+              gutter: '24px',
+              'margin-mobile': '16px',
+              xs: '4px',
+            },
+            fontFamily: {
+              'body-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'headline-lg': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'title-md': ['Inter'],
+              'display-lg': ['Inter'],
+            },
+            fontSize: {
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #faf9f6;
+        font-family: 'Inter', sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .security-card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0px 8px 30px rgba(62, 39, 35, 0.12);
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background">
+    <!-- TopAppBar -->
+    <header class="fixed top-0 w-full z-50 bg-surface shadow-[0px_8px_30px_rgba(62,39,35,0.08)]">
+      <div
+        class="flex justify-between items-center px-margin-mobile md:px-gutter h-16 w-full max-w-max-width-desktop mx-auto"
+      >
+        <div class="font-headline-lg-mobile md:font-headline-lg text-primary font-bold">
+          Tampaksiring Smart Cluster
+        </div>
+        <div class="flex items-center gap-4">
+          <span
+            class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-high p-2 rounded-full transition-colors"
+            >notifications</span
+          >
+          <span
+            class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-high p-2 rounded-full transition-colors"
+            >account_circle</span
+          >
+        </div>
+      </div>
+    </header>
+    <!-- Sidebar (Desktop) -->
+    <aside
+      class="fixed left-0 top-0 h-full w-64 hidden lg:flex flex-col py-6 bg-surface-container-low border-r border-outline-variant z-40"
+    >
+      <div class="px-6 mb-8 mt-16">
+        <div class="mb-2">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDshPgHtufSUX7_ZTqvvd3CDvBXTEaUmNQ5z2Jx_-yKxTiOfFtV95bq8yhvnZeUABpHETlvCLcSgPoIz-VaKP3JT_S02EjGpz9uwX0HIbH3RI4-U01Wlf4Af6uODjGd2ehxUI-kB6oL0q81oOw-nvQstUxGmbWzfJNo83h-wDPdUBK_tiVKDbpfFjl9vCyvD62df_8fzBfvmiPj5ORTzJG_NKWggHXY2y4RCTVJfNHCAmtFN05ComoDCP6AVehSeWMjl81l-pQWyF4"
+            alt="Tampaksiring Logo"
+            class="h-16 w-auto object-contain"
+          />
+        </div>
+        <div class="text-label-md text-on-surface-variant">Blok A-12</div>
+      </div>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">payments</span>
+          <span class="font-label-md">Iuran Warga</span>
+        </a>
+        <a
+          class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 mx-2"
+          href="#"
+        >
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+            >admin_panel_settings</span
+          >
+          <span class="font-label-md">Keamanan</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">map</span>
+          <span class="font-label-md">Peta Klaster</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">group</span>
+          <span class="font-label-md">Daftar Warga</span>
+        </a>
+      </nav>
+      <div class="px-4 py-4">
+        <button
+          class="w-full bg-primary text-on-primary font-label-md py-3 rounded-lg hover:opacity-90 transition-opacity"
+        >
+          Lapor Masalah
+        </button>
+      </div>
+      <div class="mt-auto border-t border-outline-variant pt-4">
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-label-md">Pengaturan</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-label-md">Keluar</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content -->
+    <main
+      class="pt-24 pb-32 lg:pl-64 min-h-screen px-margin-mobile md:px-gutter max-w-max-width-desktop mx-auto"
+    >
+      <!-- Hero Section -->
+      <section class="mb-12">
+        <h1 class="font-headline-lg-mobile md:font-headline-lg text-on-surface mb-2">
+          Pusat Informasi Keamanan
+        </h1>
+        <p class="font-body-md text-on-surface-variant max-w-2xl">
+          Kami berkomitmen menjaga lingkungan Tampaksiring Smart Cluster tetap aman dan nyaman.
+          Hubungi personil kami jika Anda memerlukan bantuan segera.
+        </p>
+      </section>
+      <!-- Emergency Banner -->
+      <section
+        class="mb-12 bg-surface-container-highest border border-outline-variant rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-4"
+      >
+        <div class="flex items-center gap-4">
+          <div class="bg-error text-on-error p-3 rounded-full flex items-center justify-center">
+            <span class="material-symbols-outlined">emergency_share</span>
+          </div>
+          <div>
+            <h3 class="font-title-md text-on-surface">Panggilan Darurat Klaster</h3>
+            <p class="font-label-md text-on-surface-variant">
+              Tersedia 24/7 untuk keadaan mendesak.
+            </p>
+          </div>
+        </div>
+        <div class="font-display-lg text-primary tracking-tighter">021-555-9000</div>
+      </section>
+      <!-- Personnel Grid -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        <!-- Security Card 1 -->
+        <div
+          class="security-card-hover bg-surface border border-outline-variant rounded-xl overflow-hidden transition-all duration-300 shadow-[0px_4px_20px_rgba(62,39,35,0.05)]"
+        >
+          <div class="h-64 overflow-hidden">
+            <img
+              class="w-full h-full object-cover grayscale-[20%]"
+              data-alt="A professional security officer in a neat charcoal uniform standing with a friendly and alert posture in a modern residential lobby. The lighting is warm and natural, emphasizing a high-end, secure environment with soft wooden textures in the background. The visual style is professional, polished, and exudes a sense of elite safety and community service."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAp9SnVgD9o85SxW9lhx3P0kNvwoz_KDZPFwxyW0NBCm53QbkA-b7RvTItgGmqHejm_P-ALJk5ASzXoRVNVe6unnB3AA0OOQVnUL0yU_aKb5aOi-dmIgwYPKPsMQC-rFrecZwp735jrlr2xNkM4NepCBZ7MLKonivvxQcd1dJr7Rau3oX7dOfKL14zrfUnjaI2vHIODWFdY4KYR2H4_8v8wJhbat7V-vKhJGqDyutQLHHTenWtdUESiTNf2MnpKGYVsAcMmgpRJuI"
+            />
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h4 class="font-title-md text-on-surface">Pak Budi Santoso</h4>
+                <p class="font-label-md text-on-surface-variant flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">verified_user</span> Komandan
+                  Regu A
+                </p>
+              </div>
+              <span
+                class="bg-green-100 text-green-800 text-[10px] uppercase font-bold px-2 py-1 rounded-full"
+                >Bertugas</span
+              >
+            </div>
+            <button
+              class="w-full bg-primary text-on-primary font-label-md py-3 rounded-lg hover:bg-primary-container transition-colors flex items-center justify-center gap-2"
+              onclick="showModal()"
+            >
+              <span class="material-symbols-outlined text-[18px]">call</span> Hubungi Security
+            </button>
+          </div>
+        </div>
+        <!-- Security Card 2 -->
+        <div
+          class="security-card-hover bg-surface border border-outline-variant rounded-xl overflow-hidden transition-all duration-300 shadow-[0px_4px_20px_rgba(62,39,35,0.05)]"
+        >
+          <div class="h-64 overflow-hidden">
+            <img
+              class="w-full h-full object-cover grayscale-[20%]"
+              data-alt="A focused male security professional wearing a modern dark suit and a discrete earpiece, standing against a clean, minimalist architectural background with neutral stone tiles. The scene is brightly lit with a sophisticated light-mode aesthetic, reflecting a premium corporate or residential safety atmosphere. His expression is calm and helpful, embodying a concierge-style security presence."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuACVJ6vJiwfv4-nAtmCd9rdliq88Oj1ogw-qBGw1JRDMtJQbHbb3-Kua0OZKq2Ew8bHpHrleoT1SXo5hKqDMhi4RxVv9CMJCxuwyuCsfQbalDYpF5yzT3zF69VCyjB2elsLkZ9sppoOS30L2hKxrGyiSDitpMhjN53W7algTPWaIl8xHDuj8SMcVigp11j9zFLx88SxVHl75olx1qJmqF6VeJM_NJ-EPZ7DM6vQ9yCEw8NLW-uS5oD-BAFMKeRyIwS9wSGFTbEg2bE"
+            />
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h4 class="font-title-md text-on-surface">Pak Ahmad Rofiq</h4>
+                <p class="font-label-md text-on-surface-variant flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">verified_user</span> Patroli
+                  Lingkungan
+                </p>
+              </div>
+              <span
+                class="bg-green-100 text-green-800 text-[10px] uppercase font-bold px-2 py-1 rounded-full"
+                >Bertugas</span
+              >
+            </div>
+            <button
+              class="w-full bg-primary text-on-primary font-label-md py-3 rounded-lg hover:bg-primary-container transition-colors flex items-center justify-center gap-2"
+              onclick="showModal()"
+            >
+              <span class="material-symbols-outlined text-[18px]">call</span> Hubungi Security
+            </button>
+          </div>
+        </div>
+        <!-- Security Card 3 -->
+        <div
+          class="security-card-hover bg-surface border border-outline-variant rounded-xl overflow-hidden transition-all duration-300 shadow-[0px_4px_20px_rgba(62,39,35,0.05)]"
+        >
+          <div class="h-64 overflow-hidden">
+            <img
+              class="w-full h-full object-cover grayscale-[20%]"
+              data-alt="A confident security officer standing outside a contemporary gatehouse with soft evening lighting. The sky is a gentle twilight blue, and the building features elegant primary creamy brown accents. The officer is wearing a crisp uniform, looking towards the viewer with a reassuring smile. The overall mood is serene, emphasizing night-time safety and the luxury of the Tampaksiring Smart Cluster."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo522fyVC9aEaVGeAgMjuwWChxnKdz2bjtEy33lUoOck0qH-E-79--P329bMC90uTmOHlPDATYvFXKifKFoZnMJhtefZH5MRHGHOHqK25Rv2PAM3e8q4fE7cnMtHEeEThKSw3h_QsCh8QD20HsblWh8wvfvWXKyjJA-DPibZXKM3-7Ww-HzTPkNFn9YMJy6rRyXzCBL2CVNi2xyRCJxbfIuegDw3QdRWbjt4BZSSv_S5SlDh5s139v_1M3ZtsLNpF3mlYgDo94VY0"
+            />
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h4 class="font-title-md text-on-surface">Pak Heru Prayitno</h4>
+                <p class="font-label-md text-on-surface-variant flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">verified_user</span> Penjaga
+                  Gerbang Utama
+                </p>
+              </div>
+              <span
+                class="bg-primary-fixed text-on-primary-fixed-variant text-[10px] uppercase font-bold px-2 py-1 rounded-full"
+                >Istirahat</span
+              >
+            </div>
+            <button
+              class="w-full border border-primary text-primary font-label-md py-3 rounded-lg hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2"
+              onclick="showModal()"
+            >
+              <span class="material-symbols-outlined text-[18px]">call</span> Hubungi Security
+            </button>
+          </div>
+        </div>
+        <!-- Security Card 4 -->
+        <div
+          class="security-card-hover bg-surface border border-outline-variant rounded-xl overflow-hidden transition-all duration-300 shadow-[0px_4px_20px_rgba(62,39,35,0.05)]"
+        >
+          <div class="h-64 overflow-hidden">
+            <img
+              class="w-full h-full object-cover grayscale-[20%]"
+              data-alt="A high-resolution portrait of a security supervisor in a high-tech monitoring room. In the background, multiple screens show blurred security camera feeds. The room is designed with cool metallic surfaces and warm recessed lighting, creating a high-tech yet approachable vibe. The officer wears a dark blue tactical shirt with professional insignia, looking professional and ready to assist residents."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBqnxrr2lEk4c4eMAI-BIQjl_yqV3oW-psZ_1k90jyc2rRqVY9gIRDKVelZ8naTdYdnrYXXak_U7kEl5KEDWhqyMg3gsR9Qc_VhgivqFl_R1TVqIzXHPFgSD48sw7NYR5p1zc6ULo52Kw8sbPeCDK3SWT2meHLO__bZrvhZ5p-AC4C0iJqVOd7W6E_I0r7RmX1SUH7IvFk0i8EEhg5E5HgIho5W3YQNbTjPos26_pOz0MZUC_zBl9pTVP9IHAAk4m2gNRrGro6d4k"
+            />
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h4 class="font-title-md text-on-surface">Pak Dimas Wijaya</h4>
+                <p class="font-label-md text-on-surface-variant flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">verified_user</span> Monitor
+                  CCTV &amp; IT
+                </p>
+              </div>
+              <span
+                class="bg-green-100 text-green-800 text-[10px] uppercase font-bold px-2 py-1 rounded-full"
+                >Bertugas</span
+              >
+            </div>
+            <button
+              class="w-full bg-primary text-on-primary font-label-md py-3 rounded-lg hover:bg-primary-container transition-colors flex items-center justify-center gap-2"
+              onclick="showModal()"
+            >
+              <span class="material-symbols-outlined text-[18px]">call</span> Hubungi Security
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- Information Note -->
+      <section class="mt-16 p-8 bg-surface border border-outline-variant rounded-2xl">
+        <h3 class="font-title-md text-primary mb-4 flex items-center gap-2">
+          <span class="material-symbols-outlined">info</span> Standar Operasional Prosedur
+        </h3>
+        <ul class="space-y-4 text-on-surface-variant font-body-md">
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+            Patroli keliling dilakukan setiap 2 jam sekali pada area residensial.
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+            Setiap tamu wajib melapor dan menitipkan identitas di gerbang utama.
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+            Warga dapat meminta pengawalan khusus jika tiba di rumah larut malam.
+          </li>
+        </ul>
+      </section>
+    </main>
+    <!-- BottomNavBar (Mobile) -->
+    <nav
+      class="fixed bottom-0 w-full z-50 bg-surface md:hidden border-t border-outline-variant shadow-[0px_-4px_20px_rgba(62,39,35,0.05)]"
+    >
+      <div class="flex justify-around items-center w-full h-20 pb-safe px-2">
+        <div
+          class="flex flex-col items-center justify-center text-on-surface-variant cursor-pointer transition-all active:scale-90 duration-150"
+        >
+          <span class="material-symbols-outlined">home</span>
+          <span class="font-label-sm text-label-sm">Beranda</span>
+        </div>
+        <div
+          class="flex flex-col items-center justify-center text-on-surface-variant cursor-pointer transition-all active:scale-90 duration-150"
+        >
+          <span class="material-symbols-outlined">account_balance_wallet</span>
+          <span class="font-label-sm text-label-sm">Keuangan</span>
+        </div>
+        <div
+          class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 cursor-pointer transition-all active:scale-90 duration-150"
+        >
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+            >admin_panel_settings</span
+          >
+          <span class="font-label-sm text-label-sm">Keamanan</span>
+        </div>
+        <div
+          class="flex flex-col items-center justify-center text-on-surface-variant cursor-pointer transition-all active:scale-90 duration-150"
+        >
+          <span class="material-symbols-outlined">person</span>
+          <span class="font-label-sm text-label-sm">Profil</span>
+        </div>
+      </div>
+    </nav>
+    <!-- Modal "Coming Soon" -->
+    <div
+      class="fixed inset-0 z-[100] hidden bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"
+      id="modal"
+    >
+      <div
+        class="bg-surface max-w-sm w-full rounded-2xl p-8 shadow-[0px_12px_40px_rgba(62,39,35,0.12)] transform transition-all scale-95 opacity-0 duration-300"
+        id="modalContent"
+      >
+        <div class="text-center">
+          <div
+            class="w-16 h-16 bg-primary-fixed flex items-center justify-center rounded-full mx-auto mb-6"
+          >
+            <span class="material-symbols-outlined text-primary text-4xl">construction</span>
+          </div>
+          <h3 class="font-title-md text-on-surface mb-2">Segera Hadir</h3>
+          <p class="font-body-md text-on-surface-variant mb-8">
+            Fitur panggilan langsung melalui aplikasi sedang dalam tahap pengembangan untuk keamanan
+            yang lebih terintegrasi.
+          </p>
+          <button
+            class="w-full bg-primary text-on-primary font-label-md py-3 rounded-lg hover:opacity-90"
+            onclick="hideModal()"
+          >
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function showModal() {
+        const modal = document.getElementById('modal');
+        const content = document.getElementById('modalContent');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+          content.classList.remove('scale-95', 'opacity-0');
+          content.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      }
+
+      function hideModal() {
+        const modal = document.getElementById('modal');
+        const content = document.getElementById('modalContent');
+        content.classList.add('scale-95', 'opacity-0');
+        content.classList.remove('scale-100', 'opacity-100');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+        }, 300);
+      }
+
+      // Close modal on background click
+      document.getElementById('modal').addEventListener('click', function (e) {
+        if (e.target === this) hideModal();
+      });
+    </script>
+  </body>
+</html>

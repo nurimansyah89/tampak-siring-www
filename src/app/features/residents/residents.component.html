@@ -1,0 +1,183 @@
+<app-main-layout>
+  <div class="px-margin-mobile md:px-gutter pt-8 pb-xl">
+    <!-- Page Header -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+      <div>
+        <h2 class="font-headline-lg text-headline-lg text-primary">Daftar Warga</h2>
+        <p class="text-on-surface-variant">Data lengkap penghuni klaster Tampaksiring.</p>
+      </div>
+      <button
+        class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md text-label-md flex items-center gap-2 shadow-sm active:scale-95 transition-transform"
+        (click)="openModal()"
+        type="button"
+      >
+        <span class="material-symbols-outlined">person_add</span>
+        Ajukan Pendaftaran Warga Baru
+      </button>
+    </div>
+
+    <!-- Table Card -->
+    <div
+      class="bg-surface rounded-xl shadow-level-1 overflow-hidden border border-outline-variant"
+    >
+      <!-- Desktop Table View -->
+      <div class="hidden md:block">
+        <app-table [columns]="columns">
+          @for (resident of displayedResidents(); track resident.id) {
+            <tr
+              class="hover:bg-surface-container-low transition-colors group cursor-pointer"
+              [routerLink]="['/residents', resident.id]"
+            >
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-fixed shadow-sm shrink-0"
+                  >
+                    @if (resident.photoUrl) {
+                      <img
+                        [src]="resident.photoUrl"
+                        alt=""
+                        class="w-full h-full object-cover"
+                      />
+                    } @else {
+                      <div
+                        class="w-full h-full bg-primary-fixed flex items-center justify-center"
+                      >
+                        <span class="material-symbols-outlined text-primary">person</span>
+                      </div>
+                    }
+                  </div>
+                  <div class="min-w-0">
+                    <p class="font-title-md text-title-md text-on-surface truncate">
+                      {{ resident.name }}
+                    </p>
+                    <span
+                      class="text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full inline-block mt-0.5"
+                    >
+                      {{ resident.role }}
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-2 text-on-surface-variant">
+                  <span class="material-symbols-outlined text-[20px] shrink-0">home</span>
+                  <p class="font-body-md text-body-md">{{ resident.address }}</p>
+                </div>
+              </td>
+              <td class="px-6 py-4 text-right">
+                <button
+                  class="text-primary font-label-md text-label-md border border-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all"
+                  (click)="openModal(); $event.stopPropagation()"
+                  type="button"
+                >
+                  Hubungi Pemilik
+                </button>
+              </td>
+            </tr>
+          }
+        </app-table>
+      </div>
+
+      <!-- Mobile Card List View -->
+      <div class="block md:hidden divide-y divide-outline-variant">
+        @for (resident of displayedResidents(); track resident.id) {
+          <div
+            class="p-4 flex flex-col gap-3 cursor-pointer hover:bg-surface-container-low transition-colors"
+            [routerLink]="['/residents', resident.id]"
+          >
+            <div class="flex items-center gap-4">
+              <div
+                class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-fixed shadow-sm shrink-0"
+              >
+                @if (resident.photoUrl) {
+                  <img
+                    [src]="resident.photoUrl"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                } @else {
+                  <div
+                    class="w-full h-full bg-primary-fixed flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined text-primary">person</span>
+                  </div>
+                }
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="font-title-md text-title-md text-on-surface truncate">
+                  {{ resident.name }}
+                </p>
+                <span
+                  class="text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full inline-block mt-0.5"
+                >
+                  {{ resident.role }}
+                </span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-on-surface-variant">
+              <span class="material-symbols-outlined text-[20px] shrink-0">home</span>
+              <p class="font-body-md text-body-md">{{ resident.address }}</p>
+            </div>
+            <button
+              class="text-primary font-label-md text-label-md border border-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all self-start"
+              (click)="openModal(); $event.stopPropagation()"
+              type="button"
+            >
+              Hubungi Pemilik
+            </button>
+          </div>
+        }
+      </div>
+
+      <app-pagination
+        [currentPage]="currentPage()"
+        [totalItems]="allResidents().length"
+        [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)"
+      />
+    </div>
+  </div>
+</app-main-layout>
+
+<!-- Modal "Segera Hadir" -->
+@if (showModal()) {
+  <div
+    class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm"
+  >
+    <div
+      class="bg-surface w-full max-w-[480px] mx-4 rounded-2xl p-6 shadow-level-3 border border-outline-variant text-center"
+    >
+      <div
+        class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-4"
+      >
+        <span
+          class="material-symbols-outlined text-primary text-2xl"
+        >construction</span>
+      </div>
+      <h3 class="font-title-md text-title-md text-on-surface mb-1">
+        Segera Hadir
+      </h3>
+      <p class="text-on-surface-variant font-body-md text-body-md mb-6">
+        Fitur komunikasi langsung antar warga sedang dalam tahap pengembangan untuk privasi dan
+        keamanan Anda.
+      </p>
+      <button
+        class="w-full py-3 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:opacity-90 transition-all shadow-md"
+        (click)="closeModal()"
+        type="button"
+      >
+        Dimengerti
+      </button>
+    </div>
+  </div>
+}
+
+<!-- Close modal on Escape key -->
+@if (showModal()) {
+  <div
+    class="sr-only"
+    (keydown.escape)="closeModal()"
+    tabindex="0"
+  ></div>
+}

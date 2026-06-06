@@ -1,0 +1,19 @@
+<nav
+  class="md:hidden fixed bottom-0 w-full z-50 bg-surface border-t border-outline-variant shadow-level-2"
+>
+  <div
+    class="flex overflow-x-auto items-center h-20 gap-4 snap-x snap-mandatory scrollbar-hide scroll-ps-margin-mobile scroll-pe-margin-mobile px-margin-mobile"
+  >
+    @for (item of navItems; track item.label) {
+      <a
+        class="flex flex-col items-center justify-center snap-start px-4 py-1 rounded-xl font-label-sm text-label-sm transition-all duration-150 whitespace-nowrap text-on-surface-variant"
+        [routerLink]="item.link"
+        routerLinkActive="bg-primary-container !text-white font-bold"
+        [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+      >
+        <span class="material-symbols-outlined text-[24px]">{{ item.icon }}</span>
+        <span>{{ item.label }}</span>
+      </a>
+    }
+  </div>
+</nav>

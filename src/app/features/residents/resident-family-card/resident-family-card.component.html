@@ -1,0 +1,24 @@
+<section
+  class="bg-surface-container-lowest rounded-xl p-6 shadow-level-1 border border-outline-variant/30"
+>
+  <div class="flex items-center justify-between mb-6">
+    <h4 class="font-title-md text-title-md text-on-surface">Anggota Keluarga</h4>
+    <span class="text-on-surface-variant font-label-md text-label-md">{{ familyMembers().length }} Anggota</span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    @for (member of familyMembers(); track member.name) {
+      <div
+        class="flex items-center gap-4 p-4 rounded-xl border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
+      >
+        <div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-on-surface-variant">person</span>
+        </div>
+        <div class="min-w-0">
+          <p class="font-label-md text-label-md text-on-surface truncate">{{ member.name }}</p>
+          <p class="text-on-surface-variant font-label-sm text-label-sm">{{ member.relation }}</p>
+        </div>
+      </div>
+    }
+  </div>
+</section>

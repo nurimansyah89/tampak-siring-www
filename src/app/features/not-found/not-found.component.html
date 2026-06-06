@@ -1,0 +1,41 @@
+<app-main-layout>
+  <div class="flex items-center justify-center min-h-[calc(100vh-4rem)] relative px-gutter py-xl">
+    <div
+      class="absolute top-1/4 left-1/4 w-48 h-48 md:w-96 md:h-96 bg-primary-container/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"
+    ></div>
+    <div
+      class="absolute bottom-1/4 right-1/4 w-32 h-32 md:w-64 md:h-64 bg-tertiary/5 rounded-full blur-[60px] md:blur-[80px] pointer-events-none"
+    ></div>
+    <div class="max-w-2xl w-full text-center z-10">
+      <div class="mb-xl relative inline-block">
+        <div
+          class="text-[120px] md:text-[180px] font-display text-display-lg text-primary/10 select-none"
+        >
+          404
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center error-ghost animate-float">
+          <span
+            class="material-symbols-outlined text-primary"
+            style="font-size: 64px; font-variation-settings: 'FILL' 0, 'wght' 200"
+          >search_off</span>
+        </div>
+      </div>
+      <div class="space-y-sm">
+        <h1
+          class="font-headline text-headline-lg md:text-[40px] text-on-background tracking-tight"
+        >
+          Halaman Tidak Ditemukan
+        </h1>
+        <p class="font-body text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+          Maaf, halaman yang Anda cari tidak tersedia atau telah dipindahkan.
+        </p>
+      </div>
+      <div class="mt-lg">
+        <app-button routerLink="/" variant="primary" size="lg" class="inline-flex items-center gap-2">
+          <span class="material-symbols-outlined">arrow_back</span>
+          Kembali ke Dasbor
+        </app-button>
+      </div>
+    </div>
+  </div>
+</app-main-layout>

@@ -1,0 +1,539 @@
+<!doctype html>
+<html class="light" lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Peta Klaster | Tampaksiring Smart Cluster</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-surface-variant': '#4e453c',
+              'on-tertiary-container': '#fffbff',
+              error: '#ba1a1a',
+              'surface-bright': '#fff8f6',
+              'primary-fixed-dim': '#e2c19b',
+              'on-background': '#2b1613',
+              'surface-container-low': '#fff0ee',
+              'secondary-fixed-dim': '#c7c6c4',
+              'tertiary-container': '#bb5808',
+              'inverse-primary': '#e2c19b',
+              secondary: '#5e5f5d',
+              'on-primary-container': '#fffbff',
+              'on-tertiary-fixed-variant': '#763400',
+              'secondary-container': '#e0e0dd',
+              'inverse-on-surface': '#ffedea',
+              'surface-tint': '#735a3a',
+              tertiary: '#974400',
+              'on-primary-fixed-variant': '#594325',
+              'error-container': '#ffdad6',
+              'tertiary-fixed': '#ffdbc9',
+              'primary-container': '#8b704f',
+              primary: '#705838',
+              'surface-container-high': '#ffe2dd',
+              'on-secondary': '#ffffff',
+              'on-secondary-fixed': '#1a1c1a',
+              'on-primary-fixed': '#291801',
+              surface: '#fff8f6',
+              'secondary-fixed': '#e3e2e0',
+              'on-secondary-container': '#626361',
+              'surface-variant': '#ffdad4',
+              background: '#fff8f6',
+              'surface-container': '#ffe9e5',
+              'surface-container-highest': '#ffdad4',
+              'on-tertiary': '#ffffff',
+              'on-error': '#ffffff',
+              'outline-variant': '#d1c4b8',
+              'on-tertiary-fixed': '#321200',
+              'tertiary-fixed-dim': '#ffb68d',
+              'surface-container-lowest': '#ffffff',
+              'primary-fixed': '#ffddb6',
+              'on-error-container': '#93000a',
+              'inverse-surface': '#422a26',
+              'on-surface': '#2b1613',
+              'on-secondary-fixed-variant': '#464745',
+              outline: '#80756b',
+              'surface-dim': '#f8d1cb',
+              'on-primary': '#ffffff',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              lg: '48px',
+              base: '8px',
+              sm: '12px',
+              xl: '80px',
+              gutter: '24px',
+              md: '24px',
+              'max-width-desktop': '1280px',
+              'margin-mobile': '16px',
+              xs: '4px',
+            },
+            fontFamily: {
+              'title-md': ['Inter'],
+              'headline-lg': ['Inter'],
+              'display-lg': ['Inter'],
+              'body-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-lg': ['Inter'],
+              'label-md': ['Inter'],
+            },
+            fontSize: {
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background text-on-background font-body-md min-h-screen">
+    <!-- Top AppBar -->
+    <header
+      class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim shadow-sm border-b border-outline-variant"
+    >
+      <div
+        class="flex justify-between items-center px-margin-mobile md:px-gutter h-16 w-full max-w-max-width-desktop mx-auto"
+      >
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxVYK252Tr4rM3Wuox493SB0WvnWpM5q7b9_eWxWaec-ou6-HMqJ4wlEUT2WllzonMdjV1_edSQ1MmEqn_Rd1d1yy1OfLkfvoRBbLXSdK0_bXFmzP2mkVIvXBEwzd1R3slVT_58hdkYiDxkNxcqbyBQsZgzG21dnz1Iu0vEZFUEmHBKeJrS3lsLXgbmMyPnQVzIETcsUQ-nx9qzOLkHGbcWi3gg2UPS7O8E1vEzdacr--RfNYVQw576asc3N8bW-yIdZHjlocl52E"
+          alt="Tampaksiring Smart Cluster Logo"
+          class="h-12 w-auto object-contain"
+        />
+        <div class="flex items-center gap-4">
+          <span class="material-symbols-outlined text-primary cursor-pointer">notifications</span>
+          <span class="material-symbols-outlined text-primary cursor-pointer">account_circle</span>
+        </div>
+      </div>
+    </header>
+    <!-- Side Navigation (Desktop) -->
+    <aside
+      class="fixed left-0 top-0 h-full hidden lg:flex flex-col py-6 w-64 bg-surface-container-low dark:bg-surface-dim border-r border-outline-variant z-40 pt-20"
+    >
+      <div class="px-6 mb-8">
+        <h2 class="font-title-md text-title-md font-bold text-primary">
+          Tampaksiring Smart Cluster
+        </h2>
+        <p class="text-on-surface-variant font-label-md text-label-md">Blok A-12</p>
+      </div>
+      <nav class="flex-grow space-y-1">
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">payments</span>
+          <span class="font-label-md text-label-md">Iuran Warga</span>
+        </a>
+        <a
+          class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 mx-2 transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+            >map</span
+          >
+          <span class="font-label-md text-label-md">Peta Klaster</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">group</span>
+          <span class="font-label-md text-label-md">Daftar Warga</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">confirmation_number</span>
+          <span class="font-label-md text-label-md">Tiket Keluhan</span>
+        </a>
+      </nav>
+      <div class="mt-auto px-2 space-y-1">
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-label-md text-label-md">Pengaturan</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-label-md text-label-md">Keluar</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main
+      class="pt-24 pb-24 lg:pl-72 lg:pr-12 px-margin-mobile min-h-screen max-w-max-width-desktop mx-auto"
+    >
+      <section class="mb-lg">
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8"
+        >
+          <div style="background-color: #a68966">
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">
+              Peta Klaster Interaktif
+            </h2>
+            <p class="text-on-surface-variant font-body-md text-body-md mt-1">
+              Cari dan temukan informasi rumah di blok cluster Tampaksiring.
+            </p>
+            <div class="absolute inset-0 pointer-events-none">
+              <div
+                class="group pointer-events-auto absolute top-[30%] left-[45%] w-12 h-12 cursor-pointer"
+              >
+                <div
+                  class="hidden group-hover:flex absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-64 bg-surface rounded-2xl shadow-xl border border-outline-variant p-4 flex-col gap-3 z-[60]"
+                >
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden"
+                    >
+                      <span class="material-symbols-outlined text-primary">person</span>
+                    </div>
+                    <div>
+                      <p class="font-label-md text-label-md text-on-surface">Bpk. Ahmad Subarjo</p>
+                      <p class="text-label-sm font-label-sm text-on-surface-variant">Blok A-12</p>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <button
+                      class="w-full py-2 rounded-lg bg-primary text-on-primary text-label-sm font-label-sm"
+                    >
+                      Informasi Rumah
+                    </button>
+                    <button
+                      class="w-full py-2 rounded-lg border border-primary text-primary text-label-sm font-label-sm hover:bg-primary/5"
+                      onclick="showAlert()"
+                    >
+                      Hubungi Pemilik
+                    </button>
+                  </div>
+                  <div
+                    class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-surface"
+                  ></div>
+                </div>
+              </div>
+              <div
+                class="group pointer-events-auto absolute top-[50%] left-[60%] w-12 h-12 cursor-pointer"
+              >
+                <div
+                  class="hidden group-hover:flex absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-64 bg-surface rounded-2xl shadow-xl border border-outline-variant p-4 flex-col gap-3 z-[60]"
+                >
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden"
+                    >
+                      <span class="material-symbols-outlined text-primary">person</span>
+                    </div>
+                    <div>
+                      <p class="font-label-md text-label-md text-on-surface">Ibu Siti Aminah</p>
+                      <p class="text-label-sm font-label-sm text-on-surface-variant">Blok B-05</p>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <button
+                      class="w-full py-2 rounded-lg bg-primary text-on-primary text-label-sm font-label-sm"
+                    >
+                      Informasi Rumah
+                    </button>
+                    <button
+                      class="w-full py-2 rounded-lg border border-primary text-primary text-label-sm font-label-sm hover:bg-primary/5"
+                      onclick="showAlert()"
+                    >
+                      Hubungi Pemilik
+                    </button>
+                  </div>
+                  <div
+                    class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-surface"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button
+              class="bg-primary text-on-primary px-4 py-2 rounded-lg flex items-center gap-2 shadow-md active:scale-95 transition-all"
+            >
+              <span class="material-symbols-outlined">info</span>
+              <span class="font-label-md text-label-md">Panduan Peta</span>
+            </button>
+          </div>
+        </div>
+        <!-- Cluster Map Container -->
+        <div
+          class="relative bg-white rounded-3xl p-4 md:p-8 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant overflow-hidden"
+        >
+          <div
+            class="flex justify-center items-center w-full min-h-[400px] bg-surface-container-low rounded-2xl overflow-hidden"
+            style="background-color: #a68966"
+          >
+            <img
+              alt="Peta Site Plan Tampaksiring Smart Cluster"
+              class="max-w-full h-auto object-contain shadow-sm rounded-lg"
+              data-purpose="site-plan-map"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEV1Ix1Qr2K-VJDeBN28zMepSrCjcbPN56hIyWaaHT_nFWQhEOkudMUTjWbp-ViCWH1HB7MDkqohopIXIt8KXuEBqjQsdF29b6ZLFudqr9tlhTISGG7k2lgRHc7RJgR0gltNbuY0AiCeWbuklzxs7RRNwU-KMb9H1EDEajsBhcg-x6_1cxWKE12EXwR7yxS9Rokqor82-OtNT7NZL4rJ1-aAUVrmX6ySt4J2MGT6T-lq0MP2HAr6yWq8g78wT6MjLPwSiyOzNiPoI"
+            />
+            <div class="absolute inset-0 pointer-events-none">
+              <div
+                class="group pointer-events-auto absolute top-[30%] left-[45%] w-12 h-12 cursor-pointer"
+              >
+                <div
+                  class="hidden group-hover:flex absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-64 bg-surface rounded-2xl shadow-xl border border-outline-variant p-4 flex-col gap-3 z-[60]"
+                >
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden"
+                    >
+                      <span class="material-symbols-outlined text-primary">person</span>
+                    </div>
+                    <div>
+                      <p class="font-label-md text-label-md text-on-surface">Bpk. Ahmad Subarjo</p>
+                      <p class="text-label-sm font-label-sm text-on-surface-variant">Blok A-12</p>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <button
+                      class="w-full py-2 rounded-lg bg-primary text-on-primary text-label-sm font-label-sm"
+                    >
+                      Informasi Rumah
+                    </button>
+                    <button
+                      class="w-full py-2 rounded-lg border border-primary text-primary text-label-sm font-label-sm hover:bg-primary/5"
+                      onclick="showAlert()"
+                    >
+                      Hubungi Pemilik
+                    </button>
+                  </div>
+                  <div
+                    class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-surface"
+                  ></div>
+                </div>
+              </div>
+              <div
+                class="group pointer-events-auto absolute top-[50%] left-[60%] w-12 h-12 cursor-pointer"
+              >
+                <div
+                  class="hidden group-hover:flex absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-64 bg-surface rounded-2xl shadow-xl border border-outline-variant p-4 flex-col gap-3 z-[60]"
+                >
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden"
+                    >
+                      <span class="material-symbols-outlined text-primary">person</span>
+                    </div>
+                    <div>
+                      <p class="font-label-md text-label-md text-on-surface">Ibu Siti Aminah</p>
+                      <p class="text-label-sm font-label-sm text-on-surface-variant">Blok B-05</p>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <button
+                      class="w-full py-2 rounded-lg bg-primary text-on-primary text-label-sm font-label-sm"
+                    >
+                      Informasi Rumah
+                    </button>
+                    <button
+                      class="w-full py-2 rounded-lg border border-primary text-primary text-label-sm font-label-sm hover:bg-primary/5"
+                      onclick="showAlert()"
+                    >
+                      Hubungi Pemilik
+                    </button>
+                  </div>
+                  <div
+                    class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-surface"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Legend -->
+          <div
+            class="mt-8 pt-8 border-t border-outline-variant flex flex-wrap gap-6 justify-center"
+          >
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-primary rounded-xs"></div>
+              <span class="text-label-sm font-label-sm text-on-surface-variant">Berpenghuni</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div
+                class="w-4 h-4 bg-surface-container-high border border-outline-variant rounded-xs"
+              ></div>
+              <span class="text-label-sm font-label-sm text-on-surface-variant">Kosong</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-error-container rounded-xs"></div>
+              <span class="text-label-sm font-label-sm text-on-surface-variant">Perbaikan</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-tertiary-container rounded-xs"></div>
+              <span class="text-label-sm font-label-sm text-on-surface-variant"
+                >Fasilitas Umum</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Cluster Details Grid -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div
+          class="bg-surface rounded-2xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant"
+        >
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center">
+              <span class="material-symbols-outlined text-on-primary-container">home</span>
+            </div>
+            <div>
+              <h3 class="font-title-md text-title-md text-on-surface">Total Unit</h3>
+              <p class="text-display-lg font-display-lg text-primary">124</p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-surface rounded-2xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant"
+        >
+          <div class="flex items-center gap-4 mb-4">
+            <div
+              class="w-12 h-12 rounded-xl bg-tertiary-container flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-on-tertiary-container">people</span>
+            </div>
+            <div>
+              <h3 class="font-title-md text-title-md text-on-surface">Populasi</h3>
+              <p class="text-display-lg font-display-lg text-primary">482</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Bottom NavBar (Mobile) -->
+    <nav
+      class="fixed bottom-0 w-full z-50 bg-surface dark:bg-surface-dim border-t border-outline-variant shadow-[0px_-4px_20px_rgba(62,39,35,0.05)] md:hidden"
+    >
+      <div class="flex justify-around items-center w-full h-20 pb-safe px-2">
+        <a
+          class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">home</span>
+          <span class="font-label-sm text-label-sm">Beranda</span>
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">account_balance_wallet</span>
+          <span class="font-label-sm text-label-sm">Keuangan</span>
+        </a>
+        <a
+          class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1"
+          href="#"
+        >
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+            >map</span
+          >
+          <span class="font-label-sm text-label-sm">Peta</span>
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined">person</span>
+          <span class="font-label-sm text-label-sm">Profil</span>
+        </a>
+      </div>
+    </nav>
+    <!-- Modal Alert "Segera Hadir" -->
+    <div
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/50 backdrop-blur-sm"
+      id="modalAlert"
+    >
+      <div
+        class="bg-surface w-[90%] max-w-md rounded-3xl p-8 shadow-[0px_12px_40px_rgba(62,39,35,0.12)] border border-outline-variant text-center"
+      >
+        <div
+          class="w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-6"
+        >
+          <span class="material-symbols-outlined text-primary text-3xl">upcoming</span>
+        </div>
+        <h3 class="font-headline-lg text-headline-lg text-on-surface mb-2">Segera Hadir</h3>
+        <p class="text-on-surface-variant font-body-md text-body-md mb-8">
+          Fitur detail interaktif sedang dalam tahap pengembangan untuk kenyamanan Anda.
+        </p>
+        <button
+          class="w-full py-4 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:opacity-90 transition-all shadow-md"
+          onclick="hideAlert()"
+        >
+          Mengerti
+        </button>
+      </div>
+    </div>
+    <script>
+      function showAlert() {
+        const modal = document.getElementById('modalAlert');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      function hideAlert() {
+        const modal = document.getElementById('modalAlert');
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+      }
+
+      // Close modal on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') hideAlert();
+      });
+    </script>
+  </body>
+</html>

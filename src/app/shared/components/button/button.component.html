@@ -1,0 +1,36 @@
+<button
+  [type]="type()"
+  [disabled]="disabled() || loading()"
+  class="inline-flex items-center justify-center gap-2 font-label rounded-lg transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100"
+  [class.w-full]="size() !== 'sm'"
+  [class.w-auto]="size() === 'sm'"
+  [class.px-3]="size() === 'sm'"
+  [class.py-2]="size() === 'sm'"
+  [class.text-label-sm]="size() === 'sm'"
+  [class.px-6]="size() === 'md'"
+  [class.py-4]="size() === 'md'"
+  [class.text-label-md]="size() === 'md'"
+  [class.px-8]="size() === 'lg'"
+  [class.py-5]="size() === 'lg'"
+  [class.text-title-md]="size() === 'lg'"
+  [class.bg-primary]="variant() === 'primary'"
+  [class.text-on-primary]="variant() === 'primary'"
+  [class.hover:bg-surface-tint]="variant() === 'primary'"
+  [class.active:scale-[0.98]]="variant() === 'primary'"
+  [class.shadow-md]="variant() === 'primary'"
+  [class.bg-secondary]="variant() === 'secondary'"
+  [class.text-on-secondary]="variant() === 'secondary'"
+  [class.hover:opacity-90]="variant() === 'secondary'"
+  [class.active:scale-[0.98]]="variant() === 'secondary'"
+  [class.border]="variant() === 'outline'"
+  [class.border-outline-variant]="variant() === 'outline'"
+  [class.text-primary]="variant() === 'outline' || variant() === 'ghost'"
+  [class.bg-transparent]="variant() === 'outline' || variant() === 'ghost'"
+  [class.hover:bg-surface]="variant() === 'outline' || variant() === 'ghost'"
+>
+  @if (loading()) {
+    Memproses...
+  } @else {
+    <ng-content />
+  }
+</button>

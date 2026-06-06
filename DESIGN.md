@@ -68,7 +68,7 @@ Palet warna berakar pada warna bumi khas daerah Tampaksiring. Karena tidak mengg
 
 ### Typography
 
-Sistem desain ini menggunakan **Inter** secara eksklusif untuk memberikan kesan yang sangat mudah dibaca, sistematis, dan profesional. Seluruh terminologi harus menggunakan Bahasa Indonesia yang formal dan disempurnakan.
+Sistem desain ini menggunakan **Nunito** secara eksklusif untuk memberikan kesan yang hangat, modern, dan profesional. Seluruh terminologi harus menggunakan Bahasa Indonesia yang formal dan disempurnakan.
 
 #### Panduan Tipografi
 
@@ -80,14 +80,14 @@ Sistem desain ini menggunakan **Inter** secara eksklusif untuk memberikan kesan 
 
 | Token | Font Family | Size | Weight | Line Height | Letter Spacing |
 | --- | --- | --- | --- | --- | --- |
-| `display-lg` | Inter | 48px | 700 (Bold) | 56px | -0.02em |
-| `headline-lg` | Inter | 32px | 600 (SemiBold) | 40px | -0.01em |
-| `headline-lg-mobile` | Inter | 28px | 600 (SemiBold) | 36px | - |
-| `title-md` | Inter | 20px | 600 (SemiBold) | 28px | - |
-| `body-lg` | Inter | 18px | 400 (Regular) | 28px | - |
-| `body-md` | Inter | 16px | 400 (Regular) | 24px | - |
-| `label-md` | Inter | 14px | 500 (Medium) | 20px | 0.01em |
-| `label-sm` | Inter | 12px | 600 (SemiBold) | 16px | - |
+| `display-lg` | Nunito | 48px | 700 (Bold) | 56px | -0.02em |
+| `headline-lg` | Nunito | 32px | 600 (SemiBold) | 40px | -0.01em |
+| `headline-lg-mobile` | Nunito | 28px | 600 (SemiBold) | 36px | - |
+| `title-md` | Nunito | 20px | 600 (SemiBold) | 28px | - |
+| `body-lg` | Nunito | 18px | 400 (Regular) | 28px | - |
+| `body-md` | Nunito | 16px | 400 (Regular) | 24px | - |
+| `label-md` | Nunito | 14px | 500 (Medium) | 20px | 0.01em |
+| `label-sm` | Nunito | 12px | 600 (SemiBold) | 16px | - |
 
 ---
 
@@ -127,6 +127,7 @@ Bahasa bentuk didefinisikan oleh **"Softened Geometry"**. Konsistensi kelengkung
 | `sm` | 0.25rem | 4px |
 | `DEFAULT` | 0.5rem | 8px |
 | `md` | 0.75rem | 12px |
+| `card` | 0.625rem | 10px |
 | `lg` | 1rem | 16px |
 | `xl` | 1.5rem | 24px |
 | `full` | 9999px | Pill / Circle |

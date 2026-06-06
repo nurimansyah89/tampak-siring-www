@@ -1,0 +1,44 @@
+[
+  {
+    "shape": "rect",
+    "coords": [574, 119, 630, 189],
+    "href": "",
+    "alt": "",
+    "title": "Y03-01"
+  },
+  {
+    "shape": "rect",
+    "coords": [632, 118, 672, 187],
+    "href": "",
+    "alt": "",
+    "title": "Y03-03"
+  },
+  {
+    "shape": "rect",
+    "coords": [673, 119, 712, 189],
+    "href": "",
+    "alt": "",
+    "title": "Y03-05"
+  },
+  {
+    "shape": "rect",
+    "coords": [714, 119, 753, 189],
+    "href": "",
+    "alt": "",
+    "title": "Y03-07"
+  },
+  {
+    "shape": "rect",
+    "coords": [754, 119, 796, 190],
+    "href": "",
+    "alt": "",
+    "title": "Y03-09"
+  },
+  {
+    "shape": "rect",
+    "coords": [798, 119, 865, 189],
+    "href": "",
+    "alt": "",
+    "title": "Y03-11"
+  }
+]

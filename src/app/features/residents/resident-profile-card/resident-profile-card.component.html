@@ -1,0 +1,60 @@
+<div
+  class="bg-surface-container-lowest rounded-xl p-6 shadow-level-1 border border-outline-variant/30 flex flex-col items-center text-center"
+>
+  <!-- Avatar Placeholder -->
+  <div class="w-24 h-24 rounded-full bg-primary-fixed flex items-center justify-center mb-6">
+    <span class="material-symbols-outlined text-primary text-5xl">person</span>
+  </div>
+
+  <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-1">
+    {{ resident().name }}
+  </h3>
+  <p
+    class="text-primary font-label-md text-label-md px-4 py-1 bg-primary-fixed rounded-full mb-6"
+  >
+    {{ resident().role }}
+  </p>
+
+  <div class="w-full pt-6 border-t border-outline-variant space-y-4 text-left">
+    <div class="flex items-start gap-3">
+      <span class="material-symbols-outlined text-primary mt-0.5">home</span>
+      <div>
+        <p
+          class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"
+        >
+          Alamat Rumah
+        </p>
+        <p class="text-on-surface font-label-md text-label-md">
+          {{ resident().address }}
+        </p>
+      </div>
+    </div>
+
+    @if (resident().pets.length > 0) {
+      <div class="flex items-start gap-3">
+        <span class="material-symbols-outlined text-primary mt-0.5">pets</span>
+        <div>
+          <p
+            class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"
+          >
+            Binatang Peliharaan
+          </p>
+          @for (pet of resident().pets; track pet.name) {
+            <p class="text-on-surface font-label-md text-label-md">
+              {{ pet.type }} ({{ pet.name }})
+            </p>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <button
+    class="mt-8 w-full py-3 bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95"
+    (click)="contact.emit()"
+    type="button"
+  >
+    <span class="material-symbols-outlined">chat</span>
+    Hubungi Pemilik
+  </button>
+</div>

@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'tertiary-container': '#bb5808',
+              'on-primary': '#ffffff',
+              'on-surface-variant': '#4e453c',
+              'surface-container-highest': '#ffdad4',
+              secondary: '#5e5f5d',
+              'surface-container-low': '#fff0ee',
+              'tertiary-fixed-dim': '#ffb68d',
+              'error-container': '#ffdad6',
+              'on-secondary-container': '#626361',
+              'on-secondary-fixed': '#1a1c1a',
+              'on-primary-fixed': '#291801',
+              'on-tertiary-fixed': '#321200',
+              'primary-fixed': '#ffddb6',
+              'inverse-primary': '#e2c19b',
+              'primary-fixed-dim': '#e2c19b',
+              'surface-container': '#ffe9e5',
+              'on-primary-container': '#fffbff',
+              surface: '#fff8f6',
+              'on-tertiary-container': '#fffbff',
+              'on-surface': '#2b1613',
+              'primary-container': '#8b704f',
+              'surface-variant': '#ffdad4',
+              'inverse-surface': '#422a26',
+              'secondary-fixed-dim': '#c7c6c4',
+              'on-tertiary-fixed-variant': '#763400',
+              error: '#ba1a1a',
+              'surface-container-high': '#ffe2dd',
+              'surface-bright': '#fff8f6',
+              'on-secondary': '#ffffff',
+              'secondary-container': '#e0e0dd',
+              'outline-variant': '#d1c4b8',
+              'surface-container-lowest': '#ffffff',
+              background: '#fff8f6',
+              primary: '#705838',
+              'surface-dim': '#f8d1cb',
+              'on-primary-fixed-variant': '#594325',
+              'on-error-container': '#93000a',
+              'surface-tint': '#735a3a',
+              'on-secondary-fixed-variant': '#464745',
+              'tertiary-fixed': '#ffdbc9',
+              'secondary-fixed': '#e3e2e0',
+              outline: '#80756b',
+              'on-error': '#ffffff',
+              'on-background': '#2b1613',
+              'on-tertiary': '#ffffff',
+              'inverse-on-surface': '#ffedea',
+              tertiary: '#974400',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              base: '8px',
+              lg: '48px',
+              sm: '12px',
+              'max-width-desktop': '1280px',
+              xl: '80px',
+              md: '24px',
+              gutter: '24px',
+              'margin-mobile': '16px',
+              xs: '4px',
+            },
+            fontFamily: {
+              'body-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'headline-lg': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'title-md': ['Inter'],
+              'display-lg': ['Inter'],
+            },
+            fontSize: {
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background text-on-background font-body-md text-body-md overflow-x-hidden">
+    <!-- Top Navigation (Mobile & Desktop Hub) -->
+    <header
+      class="fixed top-0 w-full z-50 bg-surface shadow-md h-16 flex justify-between items-center px-margin-mobile md:px-gutter max-w-max-width-desktop mx-auto left-0 right-0"
+    >
+      <h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">
+        Tampaksiring Smart Cluster
+      </h1>
+      <div class="flex items-center gap-4">
+        <span
+          class="material-symbols-outlined text-primary cursor-pointer p-2 hover:bg-surface-container-high rounded-full transition-colors"
+          >notifications</span
+        >
+        <span
+          class="material-symbols-outlined text-primary cursor-pointer p-2 hover:bg-surface-container-high rounded-full transition-colors"
+          >account_circle</span
+        >
+      </div>
+    </header>
+    <!-- Sidebar Navigation (Desktop Only) -->
+    <aside
+      class="fixed left-0 top-0 h-full w-64 hidden lg:flex flex-col py-6 bg-surface-container-low border-r border-outline-variant z-40 pt-20"
+    >
+      <div class="px-6 mb-8">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-JCrHR61yFwsVQh7XHi7Z-h9gaSnqlIxRhKKzK4GqOQQzuxi3BhF1cVRTVGFMSBqbDebyIVSQvn62cdj9VbSzJHh_E7-CG6YtLZuD5uakm9C6GajAJbUbltXSElznBzoHedxV8CETexWwdqm5IDcHOWWhxnFKD_RuUPnSCKzpUz0QZQEk5s6HCGB8AIte22Hs5cMyN4tEeM8Enwyd4zMCeJ2Ne4IqTOX7UooYNJL-qYAbjz4wmVCZN0RxTBipLos8gLIGW-QixWA"
+          alt="Tampaksiring Smart Cluster Logo"
+          class="h-12 w-auto object-contain mb-2"
+        />
+        <p class="text-label-md font-label-md text-on-surface-variant">Blok A-12</p>
+      </div>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">payments</span>
+          <span class="font-label-md text-label-md">Iuran Warga</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">map</span>
+          <span class="font-label-md text-label-md">Peta Klaster</span>
+        </a>
+        <a
+          class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 mx-2 transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">group</span>
+          <span class="font-label-md text-label-md">Daftar Warga</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">confirmation_number</span>
+          <span class="font-label-md text-label-md">Tiket Keluhan</span>
+        </a>
+      </nav>
+      <div class="mt-auto border-t border-outline-variant pt-4">
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-label-md text-label-md">Pengaturan</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-label-md text-label-md">Keluar</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="pt-24 pb-24 lg:pl-64 min-h-screen px-margin-mobile md:px-gutter">
+      <div class="max-w-max-width-desktop mx-auto">
+        <!-- Page Header Section -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary">Daftar Warga</h2>
+            <p class="text-on-surface-variant">Data lengkap penghuni klaster Tampaksiring.</p>
+          </div>
+          <button
+            class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md text-label-md flex items-center gap-2 shadow-sm active:scale-95 transition-transform"
+            onclick="showModal()"
+          >
+            <span class="material-symbols-outlined">person_add</span>
+            Ajukan Pendaftaran Warga Baru
+          </button>
+        </div>
+        <!-- Modern Data Table Card -->
+        <div
+          class="bg-surface rounded-xl shadow-[0px_4px_20px_rgba(62,39,35,0.05)] overflow-hidden border border-outline-variant"
+        >
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-surface-container-low border-b border-outline-variant">
+                  <th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant">
+                    Foto &amp; Nama Pemilik
+                  </th>
+                  <th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant">
+                    Alamat Rumah
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-md text-label-md text-on-surface-variant text-right"
+                  >
+                    Aksi
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-outline-variant">
+                <!-- Row 1 -->
+                <tr class="hover:bg-surface-container-low transition-colors group">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-4">
+                      <div
+                        class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-fixed shadow-sm"
+                      >
+                        <img
+                          alt="Resident Profile"
+                          class="w-full h-full object-cover"
+                          data-alt="A professional headshot of a friendly Indonesian man in his 40s, wearing a clean linen shirt. The lighting is soft and warm, characteristic of a high-end residential marketing aesthetic. The background is a blurred modern house interior with earthy tones of cream and wood, matching the warm modernity theme."
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn2ep2OpLXQlgjKjaMsiCIR8ZrcCdAO3KOXQWvRb01YCC-4Vpzwm3IXCsLPViIBOQRunBcNVdZO9eUh6NsxJsyUO8hZzDdBMQBNk24WT9TJtgwmmVL78C7mMUXU0amTYZIhtY9XV-zpanWteN3hpZ8ngntRFL4x7dMLnMKr7o2A96RIp362Cur4PG4SdEoo2gLYofNsgMdkIRmBMI0iDQbl2VXCH_3KVko8ltNWn3xjSf2ihgxpRqfWdgwdKyFy5_8EJRNUk0GDu4"
+                        />
+                      </div>
+                      <div>
+                        <p class="font-title-md text-title-md text-on-surface">Bambang Susilo</p>
+                        <span
+                          class="text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full"
+                          >Kepala Keluarga</span
+                        >
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-2 text-on-surface-variant">
+                      <span class="material-symbols-outlined text-[20px]">home</span>
+                      <p class="font-body-md text-body-md">Blok A No. 12, Cluster Utama</p>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <button
+                      class="text-primary font-label-md text-label-md border border-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all"
+                      onclick="showModal()"
+                    >
+                      Hubungi Pemilik
+                    </button>
+                  </td>
+                </tr>
+                <!-- Row 2 -->
+                <tr class="hover:bg-surface-container-low transition-colors group">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-4">
+                      <div
+                        class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-fixed shadow-sm"
+                      >
+                        <img
+                          alt="Resident Profile"
+                          class="w-full h-full object-cover"
+                          data-alt="A portrait of a sophisticated woman in her early 30s with a warm and welcoming expression. She has a polished appearance, lit by natural sunlight coming from a nearby window. The aesthetic is clean, premium, and corporate modern, utilizing a soft color palette of beiges and muted terracotta to match the residential portal's branding."
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDhaYfulbNwl_ASk_JfsMezbN5ThkBzilJwLXAu58j5OOV98YEl7qruPuCezPnppQcT5Cl0B4jhFB4Qg9glMFDTlL80R276lcgaypHh4bHKRCIOjRAE0v64wEIjtwc_k_FKNAElBdKbdXZZuZe_kW831qDhybZdWnG4idaPt-ofFQ9fswQro8rwPOG0ts5ut3KtubtC_TaGP3V-yaYaWwToH8YaRWM8TKKEmOQO8dkXImgqGKvzekw-vrkrnsWy6sCRbo2-Ddikt8"
+                        />
+                      </div>
+                      <div>
+                        <p class="font-title-md text-title-md text-on-surface">Siti Aminah</p>
+                        <span
+                          class="text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full"
+                          >Pemilik Unit</span
+                        >
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-2 text-on-surface-variant">
+                      <span class="material-symbols-outlined text-[20px]">home</span>
+                      <p class="font-body-md text-body-md">Blok B No. 05, Cluster Selatan</p>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <button
+                      class="text-primary font-label-md text-label-md border border-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all"
+                      onclick="showModal()"
+                    >
+                      Hubungi Pemilik
+                    </button>
+                  </td>
+                </tr>
+                <!-- Row 3 -->
+                <tr class="hover:bg-surface-container-low transition-colors group">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-4">
+                      <div
+                        class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-fixed shadow-sm"
+                      >
+                        <img
+                          alt="Resident Profile"
+                          class="w-full h-full object-cover"
+                          data-alt="A friendly man in his 50s with glasses, representing a reliable and established resident. He is dressed in casual business attire. The photograph is taken in a well-lit courtyard with lush greenery in the background, creating a serene and secure community atmosphere. The lighting is bright and even, maintaining the light-mode UI style."
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuASuTBh_lCKMBhFUvEHb1ER26LbGq6hPH6eGO-cz3nba4j5IR-TkTN6jjJKgyJ_5jEJY2_iOVbATxpMZ1JX8AQwr4FftxL0LcT-q8S-3YmwNcv2wXsfNZEZ0IE3bBP7W9LRz86lkIcredtqcchwzLC3R24aoaEXQzfEy9hckUOUkkdf0yuysQL22XMmSKjedtc8PmfKuMPadRq87XQ_J2QVs15jZelniW5Akd7PuqVI0WcVqReuxWMdrLqjB_0HoaWYwSLvvtuM6Qc"
+                        />
+                      </div>
+                      <div>
+                        <p class="font-title-md text-title-md text-on-surface">Hadi Wijaya</p>
+                        <span
+                          class="text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full"
+                          >Kepala Keluarga</span
+                        >
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-2 text-on-surface-variant">
+                      <span class="material-symbols-outlined text-[20px]">home</span>
+                      <p class="font-body-md text-body-md">Blok C No. 22, Cluster Barat</p>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <button
+                      class="text-primary font-label-md text-label-md border border-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all"
+                      onclick="showModal()"
+                    >
+                      Hubungi Pemilik
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination Footer -->
+          <div
+            class="px-6 py-4 bg-surface-container-lowest border-t border-outline-variant flex items-center justify-between"
+          >
+            <p class="text-label-sm font-label-sm text-on-surface-variant">
+              Menampilkan 1-3 dari 45 Warga
+            </p>
+            <div class="flex gap-2">
+              <button
+                class="p-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-high disabled:opacity-50"
+                disabled=""
+              >
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <button class="w-10 h-10 rounded-lg bg-primary text-on-primary font-label-md">
+                1
+              </button>
+              <button
+                class="w-10 h-10 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-high font-label-md"
+              >
+                2
+              </button>
+              <button
+                class="w-10 h-10 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-high font-label-md"
+              >
+                3
+              </button>
+              <button
+                class="p-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-high"
+              >
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Bottom Navigation (Mobile Only) -->
+    <nav
+      class="lg:hidden fixed bottom-0 w-full z-50 bg-surface border-t border-outline-variant shadow-[0px_-4px_20px_rgba(62,39,35,0.05)] h-20 pb-safe px-2 flex justify-around items-center"
+    >
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150"
+        href="#"
+      >
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-label-sm text-label-sm">Beranda</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150"
+        href="#"
+      >
+        <span class="material-symbols-outlined">account_balance_wallet</span>
+        <span class="font-label-sm text-label-sm">Keuangan</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 active:scale-90 duration-150"
+        href="#"
+      >
+        <span class="material-symbols-outlined">support_agent</span>
+        <span class="font-label-sm text-label-sm">Layanan</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150"
+        href="#"
+      >
+        <span class="material-symbols-outlined">person</span>
+        <span class="font-label-sm text-label-sm">Profil</span>
+      </a>
+    </nav>
+    <!-- Modal "Segera Hadir" -->
+    <div
+      class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"
+      id="comingSoonModal"
+    >
+      <div
+        class="bg-surface w-full max-w-md rounded-2xl p-8 shadow-[0px_12px_40px_rgba(62,39,35,0.12)] text-center transform scale-95 transition-transform duration-300 border border-outline-variant"
+      >
+        <div
+          class="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-6"
+        >
+          <span
+            class="material-symbols-outlined text-primary text-[40px]"
+            style="font-variation-settings: 'FILL' 1"
+            >construction</span
+          >
+        </div>
+        <h3 class="font-headline-lg text-headline-lg text-primary mb-2">Segera Hadir</h3>
+        <p class="text-on-surface-variant mb-8 font-body-md text-body-md">
+          Fitur komunikasi langsung antar warga sedang dalam tahap pengembangan untuk privasi dan
+          keamanan Anda.
+        </p>
+        <button
+          class="w-full bg-primary text-on-primary py-4 rounded-xl font-title-md text-title-md hover:brightness-110 transition-all active:scale-[0.98]"
+          onclick="hideModal()"
+        >
+          Dimengerti
+        </button>
+      </div>
+    </div>
+    <script>
+      const modal = document.getElementById('comingSoonModal');
+      const modalContent = modal.querySelector('div');
+
+      function showModal() {
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.classList.add('opacity-100', 'pointer-events-auto');
+        modalContent.classList.remove('scale-95');
+        modalContent.classList.add('scale-100');
+      }
+
+      function hideModal() {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modal.classList.remove('opacity-100', 'pointer-events-auto');
+        modalContent.classList.add('scale-95');
+        modalContent.classList.remove('scale-100');
+      }
+
+      // Close on backdrop click
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) hideModal();
+      });
+    </script>
+  </body>
+</html>

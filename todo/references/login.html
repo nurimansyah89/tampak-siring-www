@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Login - Tampaksiring Smart Cluster</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'tertiary-container': '#bb5808',
+              'on-primary': '#ffffff',
+              'on-surface-variant': '#4e453c',
+              'surface-container-highest': '#ffdad4',
+              secondary: '#5e5f5d',
+              'surface-container-low': '#fff0ee',
+              'tertiary-fixed-dim': '#ffb68d',
+              'error-container': '#ffdad6',
+              'on-secondary-container': '#626361',
+              'on-secondary-fixed': '#1a1c1a',
+              'on-primary-fixed': '#291801',
+              'on-tertiary-fixed': '#321200',
+              'primary-fixed': '#ffddb6',
+              'inverse-primary': '#e2c19b',
+              'primary-fixed-dim': '#e2c19b',
+              'surface-container': '#ffe9e5',
+              'on-primary-container': '#fffbff',
+              surface: '#fff8f6',
+              'on-tertiary-container': '#fffbff',
+              'on-surface': '#2b1613',
+              'primary-container': '#8b704f',
+              'surface-variant': '#ffdad4',
+              'inverse-surface': '#422a26',
+              'secondary-fixed-dim': '#c7c6c4',
+              'on-tertiary-fixed-variant': '#763400',
+              error: '#ba1a1a',
+              'surface-container-high': '#ffe2dd',
+              'surface-bright': '#fff8f6',
+              'on-secondary': '#ffffff',
+              'secondary-container': '#e0e0dd',
+              'outline-variant': '#d1c4b8',
+              'surface-container-lowest': '#ffffff',
+              background: '#fff8f6',
+              primary: '#705838',
+              'surface-dim': '#f8d1cb',
+              'on-primary-fixed-variant': '#594325',
+              'on-error-container': '#93000a',
+              'surface-tint': '#735a3a',
+              'on-secondary-fixed-variant': '#464745',
+              'tertiary-fixed': '#ffdbc9',
+              'secondary-fixed': '#e3e2e0',
+              outline: '#80756b',
+              'on-error': '#ffffff',
+              'on-background': '#2b1613',
+              'on-tertiary': '#ffffff',
+              'inverse-on-surface': '#ffedea',
+              tertiary: '#974400',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              base: '8px',
+              lg: '48px',
+              sm: '12px',
+              'max-width-desktop': '1280px',
+              xl: '80px',
+              md: '24px',
+              gutter: '24px',
+              'margin-mobile': '16px',
+              xs: '4px',
+            },
+            fontFamily: {
+              'body-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'headline-lg': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'title-md': ['Inter'],
+              'display-lg': ['Inter'],
+            },
+            fontSize: {
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #faf9f6;
+        font-family: 'Inter', sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background min-h-screen flex items-center justify-center p-margin-mobile md:p-gutter"
+  >
+    <!-- Login Container -->
+    <main class="w-full max-w-[440px] animate-fade-in">
+      <!-- Logo Area -->
+      <div class="flex flex-col items-center mb-xl">
+        <img
+          alt="Tampaksiring Logo"
+          class="w-24 h-24 mb-sm object-contain"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxVYK252Tr4rM3Wuox493SB0WvnWpM5q7b9_eWxWaec-ou6-HMqJ4wlEUT2WllzonMdjV1_edSQ1MmEqn_Rd1d1yy1OfLkfvoRBbLXSdK0_bXFmzP2mkVIvXBEwzd1R3slVT_58hdkYiDxkNxcqbyBQsZgzG21dnz1Iu0vEZFUEmHBKeJrS3lsLXgbmMyPnQVzIETcsUQ-nx9qzOLkHGbcWi3gg2UPS7O8E1vEzdacr--RfNYVQw576asc3N8bW-yIdZHjlocl52E"
+        />
+        <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary text-center">
+          Tampaksiring
+        </h1>
+        <p class="font-label-md text-label-md text-on-surface-variant text-center opacity-80">
+          Smart Cluster Portal
+        </p>
+      </div>
+      <!-- Login Card -->
+      <div
+        class="bg-surface-container-lowest rounded-xl shadow-level-1 p-md md:p-lg border border-outline-variant/30"
+      >
+        <h2 class="font-title-md text-title-md text-on-surface mb-base">Masuk</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-xl">
+          Silakan masukkan detail akun Anda untuk mengakses layanan warga.
+        </p>
+        <form class="space-y-md">
+          <!-- House Number Input -->
+          <div class="space-y-xs">
+            <label class="font-label-md text-label-md text-on-surface-variant block" for="house_no"
+              >No. Rumah</label
+            >
+            <div class="relative">
+              <span
+                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline"
+                >home</span
+              >
+              <input
+                class="w-full pl-12 pr-4 py-3 bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-md text-body-md text-on-surface outline-none"
+                id="house_no"
+                placeholder="&lt;BLOK-NO&gt;, e.g., Y06-12"
+                type="text"
+              />
+            </div>
+          </div>
+          <!-- Password Input -->
+          <div class="space-y-xs">
+            <div class="flex justify-between items-center">
+              <label
+                class="font-label-md text-label-md text-on-surface-variant block"
+                for="password"
+                >Password</label
+              >
+              <a
+                class="font-label-sm text-label-sm text-primary hover:underline transition-all"
+                href="#"
+                >Lupa Password?</a
+              >
+            </div>
+            <div class="relative">
+              <span
+                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline"
+                >lock</span
+              >
+              <input
+                class="w-full pl-12 pr-12 py-3 bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-md text-body-md text-on-surface outline-none"
+                id="password"
+                placeholder="••••••••"
+                type="password"
+              />
+              <button
+                class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors"
+                type="button"
+              >
+                <span class="material-symbols-outlined">visibility</span>
+              </button>
+            </div>
+          </div>
+          <!-- Captcha Placeholder -->
+          <div
+            class="bg-surface border border-outline-variant rounded-lg p-sm flex items-center justify-between"
+          >
+            <div class="flex items-center gap-sm">
+              <div
+                class="w-6 h-6 border-2 border-outline-variant rounded flex items-center justify-center bg-white cursor-pointer hover:border-primary transition-all"
+                id="captcha-check"
+              >
+                <span
+                  class="material-symbols-outlined text-primary text-body-md hidden"
+                  id="check-icon"
+                  >check</span
+                >
+              </div>
+              <span class="font-label-md text-label-md text-on-surface-variant"
+                >Saya bukan robot</span
+              >
+            </div>
+            <div class="flex flex-col items-center">
+              <span class="material-symbols-outlined text-secondary text-headline-lg"
+                >security</span
+              >
+              <span class="text-[8px] uppercase tracking-widest text-outline">reCAPTCHA</span>
+            </div>
+          </div>
+          <!-- Submit Button -->
+          <button
+            class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-lg shadow-md hover:bg-surface-tint active:scale-[0.98] transition-all duration-200"
+            type="submit"
+          >
+            Login
+          </button>
+        </form>
+        <div class="mt-xl pt-md border-t border-outline-variant/30 flex justify-center">
+          <p class="font-label-sm text-label-sm text-on-surface-variant">
+            Belum memiliki akses?
+            <a class="text-primary font-bold hover:underline" href="#">Hubungi Pengurus</a>
+          </p>
+        </div>
+      </div>
+      <!-- Footer Info -->
+      <footer class="mt-lg text-center">
+        <p class="font-label-sm text-label-sm text-outline">
+          © 2024 Tampaksiring Smart Cluster. All rights reserved.
+        </p>
+        <div class="flex justify-center gap-md mt-sm">
+          <a
+            class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors"
+            href="#"
+            >Kebijakan Privasi</a
+          >
+          <a
+            class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors"
+            href="#"
+            >Bantuan</a
+          >
+        </div>
+      </footer>
+    </main>
+    <script>
+      // Simple Interaction for Captcha simulation
+      const captchaBox = document.getElementById('captcha-check');
+      const checkIcon = document.getElementById('check-icon');
+
+      captchaBox.addEventListener('click', () => {
+        checkIcon.classList.toggle('hidden');
+        captchaBox.classList.toggle('border-primary');
+      });
+
+      // Form Submission Simulation
+      document.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalText = btn.innerText;
+        btn.innerText = 'Memproses...';
+        btn.disabled = true;
+        btn.classList.add('opacity-70', 'cursor-not-allowed');
+
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.disabled = false;
+          btn.classList.remove('opacity-70', 'cursor-not-allowed');
+          alert('Fungsi login ini hanya simulasi UI.');
+        }, 1500);
+      });
+    </script>
+  </body>
+</html>

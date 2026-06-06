@@ -1,0 +1,91 @@
+<main class="bg-background min-h-screen flex items-center justify-center p-margin-mobile md:p-gutter">
+  <div class="w-full max-w-[440px]">
+    <!-- Logo Area -->
+    <div class="flex flex-col items-center mb-xl">
+      <app-logo size="lg" />
+    </div>
+
+    <!-- Login Card -->
+    <div
+      class="bg-surface-container-lowest rounded-xl shadow-level-1 p-md md:p-lg border border-outline-variant/30"
+    >
+      <h2 class="font-title text-title-md font-bold text-on-surface mb-base">Masuk</h2>
+      <p class="font-body text-body-md text-on-surface-variant mb-xl">
+        Silakan masukkan detail akun Anda untuk mengakses layanan warga.
+      </p>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-md">
+        <!-- House Number Input -->
+        <app-input
+          formControlName="houseNo"
+          id="house_no"
+          label="No. Rumah"
+          placeholder="&lt;BLOK-NO&gt;, e.g., Y06-12"
+          leftIcon="home"
+          [error]="form.controls.houseNo.invalid && form.controls.houseNo.touched ? 'No. Rumah wajib diisi' : ''"
+        />
+
+        <!-- Password Input -->
+        <app-input
+          formControlName="password"
+          id="password"
+          label="Password"
+          placeholder="••••••••"
+          leftIcon="lock"
+          [type]="passwordVisible() ? 'text' : 'password'"
+          [error]="form.controls.password.invalid && form.controls.password.touched ? 'Password wajib diisi' : ''"
+        >
+          <a
+            corner-text
+            class="font-label text-label-sm text-primary hover:underline transition-all"
+            routerLink="/auth/forgot-password"
+          >Lupa Password?</a>
+          <button
+            right-slot
+            type="button"
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors cursor-pointer"
+            (click)="togglePasswordVisibility()"
+          >
+            <span class="material-symbols-outlined">
+              {{ passwordVisible() ? 'visibility_off' : 'visibility' }}
+            </span>
+          </button>
+        </app-input>
+
+        <!-- Turnstile Captcha -->
+        <div class="flex justify-center">
+          <app-turnstile />
+        </div>
+
+        <!-- Submit Button -->
+        <app-button type="submit" [loading]="loading()">
+          Login
+        </app-button>
+      </form>
+
+      <div class="mt-xl pt-md border-t border-outline-variant/30 flex justify-center">
+        <p class="font-label text-label-sm text-on-surface-variant">
+          Belum memiliki akses?
+          <a class="text-primary font-bold hover:underline" href="#">Hubungi Pengurus</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer Info -->
+    <footer class="mt-lg text-center">
+      <p class="font-label text-label-sm text-outline">
+        &copy; {{ currentYear }} Tampak Siring Smart Cluster. All rights reserved.
+      </p>
+      <div class="flex justify-center gap-md mt-sm">
+        <a
+          class="font-label text-label-sm text-outline hover:text-primary transition-colors"
+          href="#"
+        >Kebijakan Privasi</a>
+        <a
+          class="font-label text-label-sm text-outline hover:text-primary transition-colors"
+          href="#"
+        >Bantuan</a>
+      </div>
+    </footer>
+  </div>
+</main>

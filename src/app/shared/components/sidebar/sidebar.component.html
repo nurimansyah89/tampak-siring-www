@@ -1,0 +1,56 @@
+<aside
+  class="hidden lg:flex flex-col fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-surface-container-low border-r border-outline-variant z-40 overflow-y-auto"
+>
+  <nav class="flex-1 px-3 space-y-1 pt-6">
+    <a
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <span class="material-symbols-outlined text-[20px]">dashboard</span>
+      <span>Dasbor</span>
+    </a>
+    <a
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/cluster-map"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">map</span>
+      <span>Peta Klaster</span>
+    </a>
+    <a
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/residents"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">group</span>
+      <span>Daftar Warga</span>
+    </a>
+    <a
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/finance"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+      <span>Keuangan Klaster</span>
+    </a>
+
+    <a
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/security"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">security</span>
+      <span>Informasi Security</span>
+    </a>
+    <a
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/complaints"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">confirmation_number</span>
+      <span>Aduan Warga</span>
+    </a>
+  </nav>
+</aside>

@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'surface-container-highest': '#ffdad4',
+              background: '#fff8f6',
+              'surface-tint': '#735a3a',
+              'on-surface-variant': '#4e453c',
+              'outline-variant': '#d1c4b8',
+              'error-container': '#ffdad6',
+              'on-primary': '#ffffff',
+              'tertiary-fixed-dim': '#ffb68d',
+              'tertiary-fixed': '#ffdbc9',
+              'primary-container': '#8b704f',
+              'on-secondary-fixed-variant': '#464745',
+              'primary-fixed-dim': '#e2c19b',
+              'on-tertiary': '#ffffff',
+              'surface-bright': '#fff8f6',
+              surface: '#fff8f6',
+              'surface-container': '#ffe9e5',
+              'inverse-surface': '#422a26',
+              'secondary-fixed-dim': '#c7c6c4',
+              'on-secondary-container': '#626361',
+              'tertiary-container': '#bb5808',
+              'primary-fixed': '#ffddb6',
+              'on-secondary': '#ffffff',
+              'on-error-container': '#93000a',
+              'on-primary-container': '#fffbff',
+              'surface-container-lowest': '#ffffff',
+              'surface-dim': '#f8d1cb',
+              'on-surface': '#2b1613',
+              'inverse-on-surface': '#ffedea',
+              'secondary-fixed': '#e3e2e0',
+              'on-primary-fixed-variant': '#594325',
+              'inverse-primary': '#e2c19b',
+              error: '#ba1a1a',
+              'secondary-container': '#e0e0dd',
+              'surface-variant': '#ffdad4',
+              'on-tertiary-fixed': '#321200',
+              'on-secondary-fixed': '#1a1c1a',
+              'on-tertiary-container': '#fffbff',
+              'surface-container-high': '#ffe2dd',
+              primary: '#705838',
+              'surface-container-low': '#fff0ee',
+              'on-primary-fixed': '#291801',
+              tertiary: '#974400',
+              outline: '#80756b',
+              'on-background': '#2b1613',
+              secondary: '#5e5f5d',
+              'on-error': '#ffffff',
+              'on-tertiary-fixed-variant': '#763400',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              xs: '4px',
+              sm: '12px',
+              'margin-mobile': '16px',
+              md: '24px',
+              lg: '48px',
+              xl: '80px',
+              base: '8px',
+              gutter: '24px',
+              'max-width-desktop': '1280px',
+            },
+            fontFamily: {
+              'label-sm': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'display-lg': ['Inter'],
+              'body-md': ['Inter'],
+              'title-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'headline-lg': ['Inter'],
+              'label-md': ['Inter'],
+            },
+            fontSize: {
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      body {
+        background-color: #fff8f6;
+        color: #2b1613;
+      }
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 24px;
+      }
+      .modal-overlay {
+        backdrop-filter: blur(4px);
+      }
+    </style>
+  </head>
+  <body class="font-body-md text-body-md">
+    <!-- Sidebar Navigation -->
+    <aside
+      class="fixed left-0 top-0 h-full flex flex-col py-6 h-screen w-64 hidden lg:flex flex-col bg-surface-container-low dark:bg-surface-dim border-r border-outline-variant z-40"
+    >
+      <div class="px-6 mb-8">
+        <div class="mb-2">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxVYK252Tr4rM3Wuox493SB0WvnWpM5q7b9_eWxWaec-ou6-HMqJ4wlEUT2WllzonMdjV1_edSQ1MmEqn_Rd1d1yy1OfLkfvoRBbLXSdK0_bXFmzP2mkVIvXBEwzd1R3slVT_58hdkYiDxkNxcqbyBQsZgzG21dnz1Iu0vEZFUEmHBKeJrS3lsLXgbmMyPnQVzIETcsUQ-nx9qzOLkHGbcWi3gg2UPS7O8E1vEzdacr--RfNYVQw576asc3N8bW-yIdZHjlocl52E"
+            alt="Tampaksiring Smart Cluster Logo"
+            class="h-16 w-auto object-contain"
+          />
+        </div>
+        <p class="text-on-surface-variant font-label-md text-label-md mt-1">Blok A-12</p>
+      </div>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">payments</span>
+          <span class="font-label-md text-label-md">Iuran Warga</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">map</span>
+          <span class="font-label-md text-label-md">Peta Klaster</span>
+        </a>
+        <a
+          class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 mx-2 transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">group</span>
+          <span class="font-label-md text-label-md">Daftar Warga</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">confirmation_number</span>
+          <span class="font-label-md text-label-md">Tiket Keluhan</span>
+        </a>
+      </nav>
+      <div class="px-4 mt-auto space-y-1">
+        <button
+          class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-md text-label-md mb-4 hover:opacity-90 transition-opacity"
+        >
+          Lapor Masalah
+        </button>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-label-md text-label-md">Pengaturan</span>
+        </a>
+        <a
+          class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-all duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-label-md text-label-md">Keluar</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="lg:ml-64 min-h-screen pb-20 lg:pb-12">
+      <!-- Header -->
+      <header
+        class="sticky top-0 z-30 bg-surface/80 backdrop-blur-md px-margin-mobile md:px-gutter h-16 flex items-center justify-between shadow-[0px_4px_20px_rgba(62,39,35,0.05)]"
+      >
+        <div class="flex items-center gap-4">
+          <button
+            class="p-2 hover:bg-surface-container rounded-full transition-colors active:scale-95 duration-200"
+          >
+            <span class="material-symbols-outlined text-primary">arrow_back</span>
+          </button>
+          <h2 class="font-title-md text-title-md text-primary font-bold">Daftar Warga</h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+          <div class="w-8 h-8 rounded-full bg-primary-fixed overflow-hidden">
+            <img
+              alt="Admin"
+              class="w-full h-full object-cover"
+              data-alt="A professional headshot of a middle-aged Indonesian man with a friendly smile, set against a soft, neutral studio background. The lighting is warm and even, emphasizing a corporate yet approachable persona. The image follows a high-end residential portal aesthetic with clean lines and natural skin tones."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAYSYVSXpR5M_bSOVrN9KzZaGE5LAmQKuKyp_y2QE6yd5Uo7-SsPHwiPhoXkCCWh49FlLFYakgyNyMupIMOZB9SvSXIjfm33XnXcIRToZ6G4x5BlQaiHMFiFGqjOvKNq7etCdKTCSoI9cZWL9va0jYpEnUvXVi5jSu8Z2VXnb2xpaF1qSmTzS319_SyVTqtzOmWudnHZcIbuaSHbth-S5UIFpGrnvLMGIHEdSnZmZEfhh3cbf3zUg_Pea0S3_4VcNhD9giYzfSMaU"
+            />
+          </div>
+        </div>
+      </header>
+      <div class="max-w-max-width-desktop mx-auto px-margin-mobile md:px-gutter py-8">
+        <!-- Resident Detail Section -->
+        <div class="bento-grid">
+          <!-- Profile Identity Card -->
+          <div
+            class="col-span-12 lg:col-span-4 bg-surface-container-lowest rounded-xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant/30 flex flex-col items-center text-center"
+          >
+            <div class="relative w-48 h-48 mb-6">
+              <div
+                class="w-full h-full rounded-2xl overflow-hidden shadow-lg border-4 border-white"
+              >
+                <img
+                  alt="Foto Pemilik"
+                  class="w-full h-full object-cover"
+                  data-alt="A high-quality portrait of a distinguished Indonesian homeowner named Bambang Susilo, wearing a stylish batik shirt. He is standing in a brightly lit, modern minimalist living room with warm wooden accents and natural sunlight. The mood is welcoming and prestigious, reflecting a premium residential lifestyle with earthy color palettes."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOBVzIfRnxxwp4p9jbdZbVHBYGmYtnU3fHXKe52HtNhdRu1OHOo_AH7Tir-jaq2Q8OCCPRFPbCRfigNdhYkxOqRE-p1VMwVAVJdkLzPI0DVb3ov5GA1qVkHp_gmBx1txXJC44A2DBP3yzlk3QSsMozLWlswSANh7Ni0DJwZBehTnqf6VRJvMiz2qULGAItq1yIQaPSXcHwoyxV7BZOdyOhpFmJS6B8d-YYxJsTTuTrvClFwdarqVQKHdk7gdLz3nP34UH5R9iO178"
+                />
+              </div>
+              <div
+                class="absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 rounded-full border-4 border-surface-container-lowest"
+              ></div>
+            </div>
+            <h3 class="font-headline-lg text-headline-lg text-on-surface mb-1">Bambang Susilo</h3>
+            <p
+              class="text-primary font-label-md text-label-md px-4 py-1 bg-primary-fixed rounded-full mb-6"
+            >
+              Ketua Blok A
+            </p>
+            <div class="w-full pt-6 border-t border-outline-variant space-y-4 text-left">
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary mt-0.5">home</span>
+                <div>
+                  <p
+                    class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"
+                  >
+                    Alamat Rumah
+                  </p>
+                  <p class="text-on-surface font-label-md text-label-md">
+                    Blok A No. 12, Tampaksiring
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary mt-0.5">pets</span>
+                <div>
+                  <p
+                    class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"
+                  >
+                    Informasi Binatang Peliharaan
+                  </p>
+                  <p class="text-on-surface font-label-md text-label-md">
+                    Anjing Golden Retriever (Max)
+                  </p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="mt-8 w-full py-3 bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95"
+              onclick="toggleModal(true)"
+            >
+              <span class="material-symbols-outlined">chat</span>
+              Hubungi Pemilik
+            </button>
+          </div>
+          <!-- Family Members & Activity -->
+          <div class="col-span-12 lg:col-span-8 space-y-6">
+            <!-- Family Members Section -->
+            <section
+              class="bg-surface-container-lowest rounded-xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant/30"
+            >
+              <div class="flex items-center justify-between mb-6">
+                <h4 class="font-title-md text-title-md text-on-surface">Anggota Keluarga</h4>
+                <span class="text-on-surface-variant font-label-md text-label-md">4 Anggota</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Member 1 -->
+                <div
+                  class="flex items-center gap-4 p-4 rounded-xl border border-outline-variant/20 hover:bg-surface-container-low transition-colors cursor-default"
+                >
+                  <div class="w-12 h-12 rounded-full overflow-hidden bg-secondary-fixed">
+                    <img
+                      alt="Family Member"
+                      class="w-full h-full object-cover"
+                      data-alt="A portrait of a serene Indonesian woman in her late 40s, expressing grace and kindness. She is set against a soft-focus garden background with warm, golden-hour lighting. The image maintains the warm modernity aesthetic with high-quality skin textures and professional lighting."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcMPub_Q59CmYxSRKM6nTnfAHbzlKl-_AwAvX7LfgdCKGKzfsF0PVEzcFSmotv4OIj85pNCsEvI4sOwOs6i4SilrNhGZvroReSLdG7UXmoXwpmFdZp7rhWSlwXcyB9Dqq5qcPaNyuMJzfnYJ34mKMLqNwSkRzUSh035dnAXbDB6YVcnD9irDBRUp2AR_lPceoDeAJnK4KNJw5o9Sa2XhkrpMYSQKwtn3Zm-V7RnznPxLmUNNv4A-_uV5AdFOPGgbuBeca3VPoDhJc"
+                    />
+                  </div>
+                  <div>
+                    <p class="font-label-md text-label-md text-on-surface">Siti Aminah</p>
+                    <p class="text-on-surface-variant font-label-sm text-label-sm">Istri</p>
+                  </div>
+                </div>
+                <!-- Member 2 -->
+                <div
+                  class="flex items-center gap-4 p-4 rounded-xl border border-outline-variant/20 hover:bg-surface-container-low transition-colors cursor-default"
+                >
+                  <div class="w-12 h-12 rounded-full overflow-hidden bg-secondary-fixed">
+                    <img
+                      alt="Family Member"
+                      class="w-full h-full object-cover"
+                      data-alt="A portrait of a young adult Indonesian man, around 20 years old, with a trendy haircut and a casual linen shirt. The background is a clean, modern interior with subtle earthy tones. The lighting is bright and airy, fitting the warm modern design system."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRgtpfr6Is7nzSnROI15PElSgZN6V0oNHPg6JtXE-u_qP4mogX8o5svLrj1cPcgjavwu1shisbe5oxwHpIiCRcpxJQwiVm8fh4p3IXh5IzFEbgzChRYmU4DeHaau7aVYhr-jdLx93fMTLpu6Pr2gCt2J_TvEf7bO6-Z0VbqbP_Ig5VMUuB4ux8fsoJijo3tfrEeMDHUpfHLSzDRVa8wMY6nbxcUkG6VuBqUV9WdlYtgplOln4YwOKie3RbZ7txHO4dUcX01HC2lZQ"
+                    />
+                  </div>
+                  <div>
+                    <p class="font-label-md text-label-md text-on-surface">Rian Susilo</p>
+                    <p class="text-on-surface-variant font-label-sm text-label-sm">Anak Pertama</p>
+                  </div>
+                </div>
+                <!-- Member 3 -->
+                <div
+                  class="flex items-center gap-4 p-4 rounded-xl border border-outline-variant/20 hover:bg-surface-container-low transition-colors cursor-default"
+                >
+                  <div class="w-12 h-12 rounded-full overflow-hidden bg-secondary-fixed">
+                    <img
+                      alt="Family Member"
+                      class="w-full h-full object-cover"
+                      data-alt="A cheerful portrait of a young Indonesian woman in her late teens with a bright smile. The style is modern and high-end, featuring soft natural lighting that highlights a clean, sophisticated residential vibe with earthy neutral tones."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGgiEItHA4fTThHK45asAwW_UgpxyeLO5Ov3S5yTsDxzB5uDjwhvdhRKqZH7VkO1ztIVa6D6PWYRHfoFIKHqBujT3hXj0RjhmSnlu3xsKmKJGsI0hg8ZTai01z_yMhLNX5KIO3GAlJN96DtHlYarO6VS48wyC5Yo8otRgj8SWOw96SStTwYqT8u6x3-ioby3w8_TNh5oAT_EF-76heTfVmE8LQ0TcxFJuBJF8HoTpH3BLaJgM7j-EcGvPQonY2i9s8e-xdoNHw6Uo"
+                    />
+                  </div>
+                  <div>
+                    <p class="font-label-md text-label-md text-on-surface">Maya Susilo</p>
+                    <p class="text-on-surface-variant font-label-sm text-label-sm">Anak Kedua</p>
+                  </div>
+                </div>
+                <!-- Member 4 -->
+                <div
+                  class="flex items-center gap-4 p-4 rounded-xl border border-outline-variant/20 hover:bg-surface-container-low transition-colors cursor-default"
+                >
+                  <div class="w-12 h-12 rounded-full overflow-hidden bg-secondary-fixed">
+                    <img
+                      alt="Family Member"
+                      class="w-full h-full object-cover"
+                      data-alt="A portrait of an elderly Indonesian man, representing a grandfather figure, with a wise and calm expression. He is wearing a simple polo shirt in a neutral beige color. The background is a slightly blurred modern porch area with plants, bathed in soft afternoon light."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_niuBjlricZAcxWyKL63nUvbmeVVQULhP7blBUm-ohKAY5KEOqclr6npmpg3l3dfnbyV2eEdZysCixJvJWROIEsmO-bviZxQrXs5n3T0uJ4x28i5YiSURzucnykedgdykSXhcj4C83_d7_RVb4IHn_X6NIkOYXRI8qMdI5D14WYt3eOu0qDen55gsGfd9hEHEICtfTNGq7NMfQkj5QZNvFu1HUIY8P-aXt2ZqEVKZWbdoD49kSe1EVB8s3v83SR5lSVo-1w5XF8s"
+                    />
+                  </div>
+                  <div>
+                    <p class="font-label-md text-label-md text-on-surface">Kartono</p>
+                    <p class="text-on-surface-variant font-label-sm text-label-sm">Orang Tua</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- Property Info & Status -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div
+                class="bg-surface-container-lowest rounded-xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant/30"
+              >
+                <h4
+                  class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-4"
+                >
+                  Status Iuran
+                </h4>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-green-700">check_circle</span>
+                  </div>
+                  <div>
+                    <p class="font-title-md text-title-md text-on-surface">Lunas</p>
+                    <p class="text-on-surface-variant font-label-sm text-label-sm">
+                      Pembayaran terakhir: 5 Okt 2023
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-surface-container-lowest rounded-xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant/30"
+              >
+                <h4
+                  class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-4"
+                >
+                  Kendaraan Terdaftar
+                </h4>
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined text-primary">directions_car</span>
+                  </div>
+                  <div>
+                    <p class="font-title-md text-title-md text-on-surface">2 Unit</p>
+                    <p class="text-on-surface-variant font-label-sm text-label-sm">
+                      Toyota Alphard, Honda HR-V
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- House Preview -->
+            <div
+              class="relative overflow-hidden rounded-xl h-64 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] group"
+            >
+              <img
+                alt="House Image"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                data-alt="A luxurious modern house exterior in a high-end Indonesian residential cluster. The architecture features clean lines, large glass windows, and warm stone cladding. Lush tropical landscaping surrounds the entrance. The lighting is soft evening twilight, creating a warm, prestigious, and secure atmosphere consistent with the cluster's brand."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmldXdQwwo1JL0_nytkbYcOz2Qk8lcmilwYwqE8UvCNcNZXuEO-uwuqJKGoiE8pHrolEk2EeORF6CizM2-VnNZ6XbxYJ5aoFFWWItaNrRl-Gn-137bpubO1UMmxVSxP__eKJNvwqcUWO_i9J_zy2hYhsmXZOn8QZs10You_t6rSkdk1FpjKwx5cBIVKvQJVulAvsw0QgrDxCGYu6_pLAUdoUufvHDrSmqidAILrc7N7p-OC5_tD65Hs-C4AAzKz2ePEGAaHM7ItDY"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6"
+              >
+                <div class="text-white">
+                  <p class="font-headline-lg-mobile text-headline-lg-mobile">Tampak Depan Rumah</p>
+                  <p class="font-label-md text-label-md opacity-80">
+                    Blok A-12 • Arsitektur Modern Kontemporer
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Mobile Bottom Navigation -->
+    <nav
+      class="fixed bottom-0 w-full z-50 bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline shadow-[0px_-4px_20px_rgba(62,39,35,0.05)] flex justify-around items-center h-20 pb-safe px-2 lg:hidden"
+    >
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150"
+        href="#"
+      >
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-label-sm text-label-sm">Beranda</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150"
+        href="#"
+      >
+        <span class="material-symbols-outlined">account_balance_wallet</span>
+        <span class="font-label-sm text-label-sm">Keuangan</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150"
+        href="#"
+      >
+        <span class="material-symbols-outlined">support_agent</span>
+        <span class="font-label-sm text-label-sm">Layanan</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 active:scale-90 duration-150"
+        href="#"
+      >
+        <span class="material-symbols-outlined">person</span>
+        <span class="font-label-sm text-label-sm">Profil</span>
+      </a>
+    </nav>
+    <!-- Modal Coming Soon -->
+    <div
+      class="hidden fixed inset-0 z-[60] flex items-center justify-center px-4"
+      id="comingSoonModal"
+    >
+      <div class="modal-overlay absolute inset-0 bg-black/40" onclick="toggleModal(false)"></div>
+      <div
+        class="relative bg-surface-container-lowest rounded-2xl p-8 max-w-sm w-full text-center shadow-[0px_12px_40px_rgba(62,39,35,0.12)] transform transition-all scale-95 opacity-0 animate-modal-in"
+      >
+        <div
+          class="w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-4"
+        >
+          <span class="material-symbols-outlined text-primary text-3xl">construction</span>
+        </div>
+        <h3 class="font-title-md text-title-md text-on-surface mb-2">Segera Hadir</h3>
+        <p class="text-on-surface-variant font-body-md text-body-md mb-6">
+          Fitur perpesanan langsung sedang dalam tahap pengembangan untuk privasi yang lebih baik.
+        </p>
+        <button
+          class="w-full py-3 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity"
+          onclick="toggleModal(false)"
+        >
+          Dimengerti
+        </button>
+      </div>
+    </div>
+    <style>
+      @keyframes modal-in {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .animate-modal-in {
+        animation: modal-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      }
+    </style>
+    <script>
+      function toggleModal(show) {
+        const modal = document.getElementById('comingSoonModal');
+        if (show) {
+          modal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        } else {
+          modal.classList.add('hidden');
+          document.body.style.overflow = 'auto';
+        }
+      }
+    </script>
+  </body>
+</html>

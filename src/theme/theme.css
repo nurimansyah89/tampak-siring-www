@@ -47,6 +47,7 @@
   --color-on-surface-variant: #4e453c;
   --color-surface-container-lowest: #ffffff;
   --color-surface-container-low: #fff0ee;
+  --color-surface-map: #a1815f;
   --color-surface-container: #ffe9e5;
   --color-surface-container-high: #ffe2dd;
   --color-surface-container-highest: #ffdad4;
@@ -66,11 +67,11 @@
   /* ═══════════════════════════════════════
      TYPOGRAPHY — Font Family
      ═══════════════════════════════════════ */
-  --font-display: "Inter", sans-serif;
-  --font-headline: "Inter", sans-serif;
-  --font-title: "Inter", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-label: "Inter", sans-serif;
+  --font-display: "Nunito", sans-serif;
+  --font-headline: "Nunito", sans-serif;
+  --font-title: "Nunito", sans-serif;
+  --font-body: "Nunito", sans-serif;
+  --font-label: "Nunito", sans-serif;
 
   /* ═══════════════════════════════════════
      TYPOGRAPHY — Font Size
@@ -116,6 +117,7 @@
   --spacing-md: 24px;
   --spacing-lg: 48px;
   --spacing-xl: 80px;
+  --spacing-map-padding: 64px;
   --spacing-gutter: 24px;
   --spacing-margin-mobile: 16px;
 
@@ -130,14 +132,20 @@
   --radius-sm: 0.25rem;
   --radius-default: 0.5rem;
   --radius-md: 0.75rem;
+  --radius-card: 0.625rem;
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
   --radius-full: 9999px;
 
   /* ═══════════════════════════════════════
-     ELEVATION — Box Shadow
-     ═══════════════════════════════════════ */
+      ELEVATION — Box Shadow
+      ═══════════════════════════════════════ */
   --shadow-level-1: 0px 4px 20px rgba(62, 39, 35, 0.05);
   --shadow-level-2: 0px 8px 30px rgba(62, 39, 35, 0.08);
   --shadow-level-3: 0px 12px 40px rgba(62, 39, 35, 0.12);
+
+  /* ═══════════════════════════════════════
+      ANIMATIONS
+      ═══════════════════════════════════════ */
+  --animate-toast-in: toast-in 0.3s ease-out;
 }

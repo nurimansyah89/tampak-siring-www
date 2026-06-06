@@ -1,0 +1,161 @@
+<app-main-layout>
+  <div class="px-margin-mobile md:px-gutter pt-8 pb-xl">
+    <!-- Header Section -->
+    <header class="mb-8">
+      <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary">
+        History Iuran
+      </h1>
+    </header>
+
+    <!-- Summary Cards Section -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-xl">
+      <app-stat-card
+        icon="payments"
+        iconBg="bg-primary-fixed"
+        iconColor="text-primary"
+        label="Total Iuran Dibayar"
+        [value]="'Rp ' + formatCurrency(summary.totalPaid)"
+        [badge]="'Tahun ' + summary.year"
+        badgeClass="text-tertiary bg-tertiary-fixed"
+        accentBorder="border-primary"
+      />
+      <app-stat-card
+        icon="pending_actions"
+        iconBg="bg-error-container"
+        iconColor="text-error"
+        label="Sisa Tunggakan"
+        [value]="'Rp ' + formatCurrency(summary.outstanding)"
+        badge="Perhatian"
+        badgeClass="text-error bg-error-container"
+        accentBorder="border-error"
+      />
+      <app-stat-card
+        icon="calendar_month"
+        iconBg="bg-white/20"
+        iconColor="text-on-primary-container"
+        label="Periode Berjalan"
+        [value]="summary.currentPeriod"
+        variant="filled"
+        [additionalInfo]="'Jatuh tempo: ' + summary.dueDate"
+      />
+    </section>
+
+    <!-- Payment History Section -->
+    <section
+      class="bg-surface-container-lowest rounded-xl shadow-level-1 border border-outline-variant/30 overflow-hidden"
+    >
+      <div
+        class="p-md md:p-gutter border-b border-outline-variant/30 flex flex-col md:flex-row md:items-center justify-between gap-4"
+      >
+        <h2 class="font-title-md text-title-md text-primary">Rincian Pembayaran Bulanan (Max. 12 Bulan)</h2>
+        <div class="flex gap-2">
+          <app-button variant="primary" size="sm">
+            <span class="material-symbols-outlined text-[18px]">download</span>
+            Unduh PDF
+          </app-button>
+        </div>
+      </div>
+
+      <!-- Desktop Table -->
+      <div class="hidden md:block">
+        <app-table [columns]="columns">
+          @for (payment of payments; track payment.month) {
+            <tr
+              class="hover:bg-surface-container-low transition-colors"
+              [class.bg-error-container/10]="payment.status === 'MENUNGGAK'"
+            >
+              <td class="px-md py-4 font-body-md font-bold text-on-surface">{{ payment.month }}</td>
+              <td class="px-md py-4 font-body-md" [class.text-on-surface-variant]="!payment.date">
+                @if (payment.date) {
+                  {{ payment.date }}
+                } @else {
+                  <span class="italic">-</span>
+                }
+              </td>
+              <td class="px-md py-4 font-body-md" [class.text-on-surface-variant]="!payment.method">
+                @if (payment.method) {
+                  {{ payment.method }}
+                } @else {
+                  <span class="italic">-</span>
+                }
+              </td>
+              <td
+                class="px-md py-4 font-body-md text-right"
+                [class.text-error]="payment.status === 'MENUNGGAK'"
+              >
+                Rp {{ formatCurrency(payment.amount) }}
+              </td>
+              <td class="px-md py-4">
+                @if (payment.status === 'LUNAS') {
+                  <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Lunas</span>
+                } @else {
+                  <span class="px-3 py-1 bg-error-container text-error rounded-full text-xs font-bold">Menunggak</span>
+                }
+              </td>
+            </tr>
+          }
+        </app-table>
+      </div>
+
+      <!-- Mobile List -->
+      <div class="md:hidden divide-y divide-outline-variant/30">
+        @for (payment of payments; track payment.month) {
+          <div class="p-4 space-y-2" [class.bg-error-container/5]="payment.status === 'MENUNGGAK'">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-on-surface font-label-md">{{ payment.month }}</span>
+              @if (payment.status === 'LUNAS') {
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-[10px] font-bold">Lunas</span>
+              } @else {
+                <span class="px-3 py-1 bg-error-container text-error rounded-full text-[10px] font-bold">Menunggak</span>
+              }
+            </div>
+            <div class="flex justify-between text-on-surface-variant font-body-md">
+              @if (payment.date) {
+                <span>{{ payment.date }}</span>
+              } @else {
+                <span class="italic text-error">Belum Dibayar</span>
+              }
+              <span
+                class="font-medium"
+                [class.text-error]="payment.status === 'MENUNGGAK'"
+              >Rp {{ formatCurrency(payment.amount) }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Help Section -->
+    <section class="mt-xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center md:w-3/4 md:mx-auto">
+      <div class="order-2 md:order-1">
+        <h4 class="font-title-md text-title-md text-primary mb-2">
+          Punya Pertanyaan Mengenai Tagihan?
+        </h4>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+          Jika Anda merasa ada ketidaksesuaian data pada riwayat pembayaran, silakan hubungi tim
+          administrasi klaster melalui tiket keluhan atau WhatsApp.
+        </p>
+        <div class="flex gap-4">
+          <app-button variant="outline">Bantuan Admin</app-button>
+          <app-button variant="primary">Buat Laporan</app-button>
+        </div>
+      </div>
+      <div
+        class="order-1 md:order-2 rounded-xl overflow-hidden shadow-level-2 aspect-video relative group bg-surface-container-high"
+      >
+        <img
+          alt="Financial Report"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUQ1vwhAYKGfv_r7Goj5_7M1KBLhu4b7yjzbmDcMMqkr46USVIG4vquFBIW_jTxhdGhNuawc7ArKzu4RK2uX6GXzLDq-aLUoFdpgwOlA39mRfZcs5gTUdtHT3DPx3Jo17o_TZmmB24cTCPKqmAiWLT5umb_PTEuMVygpKIZeCgursqI1hAmlfARWrEljdsWykFhq4Po1BR950LiK3M6VgPvKZ-gSMRMs-iNyU50op9QVAe7laOBkMgH8lQ2YM81JQodyqLaE4T7Do"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+        <div class="absolute bottom-4 left-4 text-white">
+          <p class="font-label-sm text-label-sm opacity-80 uppercase tracking-widest">
+            Tips Klaster
+          </p>
+          <h5 class="font-title-md text-title-md">Bayar Tepat Waktu, Klaster Makin Maju</h5>
+        </div>
+      </div>
+    </section>
+  </div>
+</app-main-layout>

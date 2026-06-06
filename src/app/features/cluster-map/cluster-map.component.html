@@ -1,0 +1,188 @@
+<app-main-layout>
+  <div class="px-margin-mobile md:px-gutter pt-8 pb-xl">
+    <!-- Heading -->
+    <div class="mb-8">
+      <h2 class="font-headline-lg text-headline-lg text-primary">Peta Klaster Interaktif</h2>
+      <p class="text-on-surface-variant font-body-md text-body-md mt-1">
+        Cari dan temukan informasi rumah di blok cluster Tampaksiring.
+      </p>
+    </div>
+
+    <!-- 2-Column Layout: Map (left 3/4) + Info (right 1/4) -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <!-- Left Column: Map -->
+      <div class="md:col-span-3">
+        <div
+          class="relative bg-white rounded-3xl p-4 md:p-8 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant overflow-hidden"
+        >
+          <div #imageWrapper (click)="onMapClick($event)" class="flex justify-center items-center w-full min-h-[400px] bg-surface-map rounded-lg overflow-hidden relative p-4 md:p-map-padding">
+            <img
+              #clusterImg
+              src="/cluster-map.png"
+              alt="Peta Site Plan Tampaksiring Smart Cluster"
+              class="max-w-full h-auto object-contain shadow-sm rounded-lg"
+              usemap="#image-map"
+            />
+
+            <map name="image-map">
+              @for (area of areas(); track area.id) {
+                <area
+                  target="_self"
+                  [attr.alt]="area.id"
+                  [attr.title]="area.id"
+                  href="javascript:void(0)"
+                  [attr.coords]="area.coords.join(',')"
+                  shape="rect"
+                  (mouseenter)="onAreaEnter(area)"
+                  (mouseleave)="onAreaLeave()"
+                />
+              }
+            </map>
+
+            @if (hoveredArea(); as area) {
+              <div
+                class="hidden md:block absolute z-[60]"
+                [style.left.px]="tooltipX()"
+                [style.top.px]="tooltipY()"
+                style="transform: translate(-50%, -100%)"
+              >
+                <div
+                  data-tooltip
+                  class="relative mb-3 w-64 bg-surface rounded-2xl shadow-xl border border-outline-variant p-4 flex flex-col gap-3"
+                  (mouseenter)="onTooltipEnter()"
+                  (mouseleave)="onTooltipLeave()"
+                >
+                  <div class="flex items-center gap-3">
+                    @if (area.ownerPhotoUrl) {
+                      <img [src]="area.ownerPhotoUrl" alt="" class="w-10 h-10 rounded-full object-cover shrink-0" />
+                    } @else {
+                      <div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden shrink-0">
+                        <span class="material-symbols-outlined text-primary">person</span>
+                      </div>
+                    }
+                    <div class="min-w-0">
+                      <p class="font-label-md text-label-md text-on-surface truncate">{{ area.ownerName }}</p>
+                      <p class="text-label-sm font-label-sm text-on-surface-variant">{{ area.houseNumber }}</p>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2 items-start">
+                    <app-button variant="secondary" size="sm" (click)="navigateToResident(area)">
+                      Lihat Detail
+                    </app-button>
+                    <app-button variant="primary" size="sm" (click)="openModal()">
+                      Hubungi Pemilik
+                    </app-button>
+                  </div>
+                  <div
+                    class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-surface"
+                  ></div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Unit & Population Info -->
+      <div class="md:col-span-1">
+        <section class="flex flex-col gap-6">
+          <div
+            class="bg-surface rounded-2xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant flex flex-col items-center text-center gap-3 w-full"
+          >
+            <div class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-on-primary-container">home</span>
+            </div>
+            <div>
+              <h3 class="font-title-md text-title-md text-on-surface">Total Unit</h3>
+              <p class="text-display-lg font-display-lg text-primary">124</p>
+            </div>
+          </div>
+          <div
+            class="bg-surface rounded-2xl p-6 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant flex flex-col items-center text-center gap-3 w-full"
+          >
+            <div class="w-12 h-12 rounded-xl bg-tertiary-container flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-on-tertiary-container">people</span>
+            </div>
+            <div>
+              <h3 class="font-title-md text-title-md text-on-surface">Populasi</h3>
+              <p class="text-display-lg font-display-lg text-primary">482</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</app-main-layout>
+
+<!-- Mobile overlay card -->
+@if (hoveredArea(); as area) {
+  <div
+    class="md:hidden fixed inset-0 z-[80] bg-black/50 backdrop-blur-sm flex items-end justify-center"
+    (click)="hoveredArea.set(null)"
+  >
+    <div
+      class="bg-surface mx-4 max-w-[480px] w-[calc(100%-2rem)] rounded-t-2xl p-6 shadow-[0px_12px_40px_rgba(62,39,45,0.12)] border border-outline-variant"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="flex items-center gap-3 mb-4">
+        @if (area.ownerPhotoUrl) {
+          <img [src]="area.ownerPhotoUrl" alt="" class="w-12 h-12 rounded-full object-cover shrink-0" />
+        } @else {
+          <div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden shrink-0">
+            <span class="material-symbols-outlined text-primary text-xl">person</span>
+          </div>
+        }
+        <div class="min-w-0">
+          <p class="font-title-md text-title-md text-on-surface truncate">{{ area.ownerName }}</p>
+          <p class="text-label-sm font-label-sm text-on-surface-variant">{{ area.houseNumber }}</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2 items-start">
+        <app-button variant="secondary" size="sm" (click)="navigateToResident(area)">
+          Lihat Detail
+        </app-button>
+        <app-button variant="primary" size="sm" (click)="openModal()">
+          Hubungi Pemilik
+        </app-button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Modal Alert "Segera Hadir" -->
+@if (showModal()) {
+  <div
+    class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm"
+  >
+    <div
+      class="bg-surface w-full max-w-[480px] mx-4 rounded-2xl p-6 shadow-[0px_12px_40px_rgba(62,39,35,0.12)] border border-outline-variant text-center"
+    >
+      <div
+        class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-4"
+      >
+        <span class="material-symbols-outlined text-primary text-2xl">upcoming</span>
+      </div>
+      <h3 class="font-title-md text-title-md text-on-surface mb-1">
+        Segera Hadir
+      </h3>
+      <p class="text-on-surface-variant font-body-md text-body-md mb-6">
+        Fitur ini sedang dalam tahap pengembangan.
+      </p>
+      <button
+        class="w-full py-3 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:opacity-90 transition-all shadow-md"
+        (click)="closeModal()"
+      >
+        Mengerti
+      </button>
+    </div>
+  </div>
+}
+
+<!-- Close modal on Escape key -->
+@if (showModal()) {
+  <div
+    class="sr-only"
+    (keydown.escape)="closeModal()"
+    tabindex="0"
+  ></div>
+}

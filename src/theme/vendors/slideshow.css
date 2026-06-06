@@ -1,0 +1,16 @@
+.slide {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  position: absolute;
+  inset: 0;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 10;
+}
+
+.dot.active {
+  background-color: white;
+  width: 24px;
+}

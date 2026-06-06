@@ -1,0 +1,38 @@
+[
+  {
+    "id": "Y03-01",
+    "houseNumber": "Y03/01",
+    "ownerName": "Bpk. Ahmad Subarjo",
+    "ownerPhotoUrl": "https://images.pexels.com/photos/29995688/pexels-photo-29995688.jpeg"
+  },
+  {
+    "id": "Y03-03",
+    "houseNumber": "Y03/03",
+    "ownerName": "Ibu Siti Aminah",
+    "ownerPhotoUrl": "https://images.pexels.com/photos/30175869/pexels-photo-30175869.jpeg"
+  },
+  {
+    "id": "Y03-05",
+    "houseNumber": "Y03/05",
+    "ownerName": "Bpk. Hendra Gunawan",
+    "ownerPhotoUrl": "https://images.pexels.com/photos/35459017/pexels-photo-35459017.jpeg"
+  },
+  {
+    "id": "Y03-07",
+    "houseNumber": "Y03/07",
+    "ownerName": "Ibu Dewi Sartika",
+    "ownerPhotoUrl": "https://images.pexels.com/photos/32104243/pexels-photo-32104243.jpeg"
+  },
+  {
+    "id": "Y03-09",
+    "houseNumber": "Y03/09",
+    "ownerName": "Bpk. Agus Prasetyo",
+    "ownerPhotoUrl": "https://images.pexels.com/photos/36739631/pexels-photo-36739631.jpeg"
+  },
+  {
+    "id": "Y03-11",
+    "houseNumber": "Y03/11",
+    "ownerName": "Ibu Rina Marlina",
+    "ownerPhotoUrl": ""
+  }
+]

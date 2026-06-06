@@ -1,0 +1,28 @@
+<div class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 min-w-[280px] w-auto max-w-sm pointer-events-none">
+  @for (toast of toastService.toasts(); track toast.id) {
+    <div
+      class="pointer-events-auto flex items-center gap-3 px-4 py-3 rounded shadow-level-2 animate-toast-in transition-all duration-300"
+      (mouseenter)="stopOnFocus() && toastService.pause(toast.id)"
+      (mouseleave)="stopOnFocus() && toastService.resume(toast.id)"
+      [class.bg-surface-container-high]="toast.variant === 'default'"
+      [class.text-on-surface]="toast.variant === 'default'"
+      [class.bg-primary]="toast.variant === 'primary'"
+      [class.text-on-primary]="toast.variant === 'primary'"
+      [class.bg-tertiary-fixed-dim]="toast.variant === 'success'"
+      [class.text-on-tertiary-fixed]="toast.variant === 'success'"
+      [class.bg-tertiary-fixed]="toast.variant === 'warning'"
+      [class.text-on-tertiary-fixed-variant]="toast.variant === 'warning'"
+      [class.bg-error-container]="toast.variant === 'alert'"
+      [class.text-on-error-container]="toast.variant === 'alert'"
+    >
+      <span class="font-label text-label-md flex-1">{{ toast.message }}</span>
+      <button
+        type="button"
+        class="flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity"
+        (click)="toastService.dismiss(toast.id)"
+      >
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+    </div>
+  }
+</div>
