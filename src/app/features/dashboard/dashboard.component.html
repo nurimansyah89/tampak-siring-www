@@ -56,6 +56,95 @@
       />
     </div>
   </section>
+  <section *ngIf="isAdmin()" class="px-margin-mobile md:px-gutter mt-12">
+    <div class="mb-8">
+      <h2 class="font-title-md text-title-md text-on-surface">Administrasi</h2>
+      <div class="h-1 w-12 bg-primary mt-2 rounded-full"></div>
+    </div>
+    <div class="bento-grid">
+      <app-bento-card
+        icon="dashboard"
+        iconBg="bg-primary-fixed"
+        iconColor="text-primary"
+        title="Dasbor Admin"
+        description="Ringkasan eksekutif dan statistik pengelolaan klaster."
+        actionText="Buka"
+        link="/admin"
+      />
+      <app-bento-card
+        icon="newspaper"
+        iconBg="bg-primary-fixed"
+        iconColor="text-primary"
+        title="Berita & Pengumuman"
+        description="Kelola berita, pengumuman, dan agenda lingkungan klaster."
+        actionText="Kelola"
+        link="/admin/news"
+      />
+      <app-bento-card
+        icon="map"
+        iconBg="bg-surface-container-low"
+        iconColor="text-on-secondary-container"
+        title="Manajemen Peta Klaster"
+        description="Atur blok, fasilitas umum, dan rute lingkungan."
+        actionText="Atur"
+        link="/admin/cluster-map"
+      />
+      <app-bento-card
+        icon="group"
+        iconBg="bg-primary-container"
+        iconColor="text-white"
+        title="Manajemen Warga"
+        description="Kelola data penduduk dan kontak darurat penghuni."
+        actionText="Kelola"
+        link="/admin/residents"
+      />
+      <app-bento-card
+        icon="account_balance_wallet"
+        iconBg="bg-secondary-container"
+        iconColor="text-on-secondary-fixed-variant"
+        title="Manajemen Iuran"
+        description="Atur iuran bulanan, tagihan, dan laporan keuangan."
+        actionText="Atur"
+        link="/admin/finance"
+      />
+      <app-bento-card
+        icon="security"
+        iconBg="bg-tertiary-fixed"
+        iconColor="text-tertiary"
+        title="Manajemen Security"
+        description="Kelola jadwal patroli, akses tamu, dan pos keamanan."
+        actionText="Kelola"
+        link="/admin/security"
+      />
+      <app-bento-card
+        icon="confirmation_number"
+        iconBg="bg-primary-fixed"
+        iconColor="text-primary"
+        title="Manajemen Aduan Warga"
+        description="Kelola dan tindak lanjuti laporan warga."
+        actionText="Kelola"
+        link="/admin/complaints"
+      />
+      <app-bento-card
+        icon="admin_panel_settings"
+        iconBg="bg-surface-container-low"
+        iconColor="text-on-secondary-container"
+        title="Manajemen Admin"
+        description="Atur hak akses dan akun pengguna sistem."
+        actionText="Atur"
+        link="/admin/users"
+      />
+      <app-bento-card
+        icon="settings"
+        iconBg="bg-primary-container"
+        iconColor="text-white"
+        title="Pengaturan"
+        description="Konfigurasi sistem dan preferensi aplikasi."
+        actionText="Buka"
+        link="/admin/settings"
+      />
+    </div>
+  </section>
   <div class="px-gutter mt-xl pb-lg">
     <app-footer />
   </div>

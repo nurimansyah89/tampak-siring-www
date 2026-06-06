@@ -37,14 +37,14 @@ describe('ComplaintsComponent', () => {
   });
 
   it('should filter complaints on search', () => {
-    component.onSearch('lampu');
+    component.onSearchInput('lampu');
     fixture.detectChanges();
     expect(component.filteredComplaints().length).toBe(1);
     expect(component.filteredComplaints()[0].title).toContain('Lampu');
   });
 
   it('should clear search filter', () => {
-    component.onSearch('');
+    component.onSearchInput('');
     fixture.detectChanges();
     expect(component.filteredComplaints().length).toBe(component.allComplaints().length);
   });
@@ -53,5 +53,34 @@ describe('ComplaintsComponent', () => {
     component.isSubmitting.set(false);
     component.onSubmit();
     expect(component.isSubmitting()).toBe(false);
+  });
+
+  it('should sort by title ascending on first click', () => {
+    component.onSortChange('title');
+    fixture.detectChanges();
+    const titles = component.sortedComplaints().map((c) => c.title);
+    const sorted = [...titles].sort((a, b) => a.localeCompare(b));
+    expect(titles).toEqual(sorted);
+  });
+
+  it('should toggle sort order on same field click', () => {
+    component.onSortChange('title');
+    const firstOrder = component.sortOrder();
+    component.onSortChange('title');
+    expect(component.sortOrder()).not.toBe(firstOrder);
+  });
+
+  it('should sort by date descending by default', () => {
+    component.onSortChange('date');
+    fixture.detectChanges();
+    const dates = component.sortedComplaints().map((c) => c.date);
+    const sorted = [...dates].sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
+    expect(dates).toEqual(sorted);
+  });
+
+  it('should reset to page 1 on sort change', () => {
+    component.currentPage.set(3);
+    component.onSortChange('status');
+    expect(component.currentPage()).toBe(1);
   });
 });

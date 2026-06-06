@@ -1,0 +1,485 @@
+<!doctype html>
+
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Add New Banner - SmartCluster Admin</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-surface': '#2b1613',
+              'on-secondary-container': '#626361',
+              'on-secondary-fixed-variant': '#464745',
+              'on-primary-fixed-variant': '#594325',
+              'surface-container-low': '#fff0ee',
+              'on-surface-variant': '#4e453c',
+              'outline-variant': '#d1c4b8',
+              'on-primary-fixed': '#291801',
+              'inverse-surface': '#422a26',
+              'secondary-container': '#e0e0dd',
+              'surface-bright': '#fff8f6',
+              'surface-container': '#ffe9e5',
+              'on-secondary-fixed': '#1a1c1a',
+              primary: '#705838',
+              'on-tertiary-container': '#fffbff',
+              'on-tertiary': '#ffffff',
+              'on-secondary': '#ffffff',
+              surface: '#fff8f6',
+              'on-primary': '#ffffff',
+              'tertiary-fixed': '#ffdbc9',
+              'on-tertiary-fixed': '#321200',
+              'surface-container-high': '#ffe2dd',
+              'surface-tint': '#735a3a',
+              'surface-container-highest': '#ffdad4',
+              secondary: '#5e5f5d',
+              'error-container': '#ffdad6',
+              'on-error-container': '#93000a',
+              'secondary-fixed': '#e3e2e0',
+              outline: '#80756b',
+              'surface-container-lowest': '#ffffff',
+              tertiary: '#974400',
+              'on-tertiary-fixed-variant': '#763400',
+              'primary-fixed-dim': '#e2c19b',
+              'surface-variant': '#ffdad4',
+              'primary-container': '#8b704f',
+              'on-primary-container': '#fffbff',
+              'inverse-primary': '#e2c19b',
+              'tertiary-container': '#bb5808',
+              background: '#fff8f6',
+              'tertiary-fixed-dim': '#ffb68d',
+              'inverse-on-surface': '#ffedea',
+              error: '#ba1a1a',
+              'on-error': '#ffffff',
+              'secondary-fixed-dim': '#c7c6c4',
+              'on-background': '#2b1613',
+              'primary-fixed': '#ffddb6',
+              'surface-dim': '#f8d1cb',
+            },
+            borderRadius: {
+              DEFAULT: '8px',
+              lg: '8px',
+              xl: '12px',
+              full: '9999px',
+            },
+            spacing: {
+              xs: '4px',
+              xl: '80px',
+              'margin-mobile': '16px',
+              md: '24px',
+              base: '8px',
+              lg: '48px',
+              sm: '12px',
+              'max-width-desktop': '1280px',
+              gutter: '24px',
+            },
+            fontFamily: {
+              'label-sm': ['Inter'],
+              'label-md': ['Inter'],
+              'headline-lg': ['Inter'],
+              'title-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'body-md': ['Inter'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #faf9f6;
+      }
+      .form-card {
+        box-shadow: 0px 4px 20px rgba(62, 39, 35, 0.05);
+      }
+      .active-tab {
+        background-color: #8b704f;
+        color: #fffbff;
+      }
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #705838 !important;
+        box-shadow: 0 0 0 1px #705838;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-surface">
+    <!-- Sidebar Navigation -->
+    <aside
+      class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant flex flex-col p-base space-y-2 z-40 hidden md:flex"
+    >
+      <div class="px-4 py-6 mb-4">
+        <h1 class="font-title-md text-title-md text-on-surface leading-tight">
+          Cluster Management
+        </h1>
+        <p class="font-label-sm text-on-surface-variant">Admin Portal</p>
+      </div>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="flex items-center px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">dashboard</span>
+          <span class="font-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">group</span>
+          <span class="font-label-md">Residents</span>
+        </a>
+        <a
+          class="flex items-center px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">payments</span>
+          <span class="font-label-md">Fees &amp; Iuran</span>
+        </a>
+        <a
+          class="flex items-center px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">security</span>
+          <span class="font-label-md">Security Logs</span>
+        </a>
+        <a
+          class="flex items-center px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">forum</span>
+          <span class="font-label-md">Complaints</span>
+        </a>
+        <!-- Active Menu -->
+        <a
+          class="flex items-center px-4 py-3 bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">newspaper</span>
+          <span class="font-label-md">News Feed</span>
+        </a>
+        <a
+          class="flex items-center px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">admin_panel_settings</span>
+          <span class="font-label-md">Admin Management</span>
+        </a>
+      </nav>
+      <div class="pt-4 border-t border-outline-variant space-y-1">
+        <a
+          class="flex items-center px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">help</span>
+          <span class="font-label-md">Support</span>
+        </a>
+        <a
+          class="flex items-center px-4 py-3 text-error hover:bg-error-container rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined mr-3">logout</span>
+          <span class="font-label-md">Logout</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <div class="md:ml-64 min-h-screen flex flex-col">
+      <!-- Top Navigation Bar -->
+      <header
+        class="flex justify-between items-center w-full px-gutter h-16 sticky top-0 z-50 bg-surface shadow-[0px_4px_20px_rgba(62,39,35,0.05)]"
+      >
+        <div class="flex items-center">
+          <button class="md:hidden mr-4">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <span class="font-headline-lg text-headline-lg text-primary">SmartCluster Admin</span>
+        </div>
+        <div class="flex items-center space-x-4">
+          <div class="relative hidden sm:block">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline"
+              >search</span
+            >
+            <input
+              class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full w-64 text-sm focus:ring-1 focus:ring-primary"
+              placeholder="Search..."
+              type="text"
+            />
+          </div>
+          <button
+            class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors relative"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+            <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+          </button>
+          <div class="flex items-center space-x-3 ml-2 border-l border-outline-variant pl-4">
+            <div class="text-right hidden lg:block">
+              <p class="font-label-md text-on-surface">Admin User</p>
+              <p class="text-[10px] text-on-surface-variant uppercase tracking-wider">
+                Super Admin
+              </p>
+            </div>
+            <img
+              alt="Admin Avatar"
+              class="w-10 h-10 rounded-full object-cover border-2 border-primary-fixed-dim"
+              data-alt="A professional headshot of a middle-aged man with a friendly expression, wearing a clean white shirt. The background is a soft, blurred office setting with warm sunlight filtering through. The overall mood is professional and modern, matching the warm earthy tones of a premium residential portal dashboard."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtI4uH-cgfVJuwKHIMiTCtwGp4ptKCM4UO5bOgIb76HV09CcRgH5HDA3g__1GYVg9lATWrJk2aTBUKxVOJM6CuY3f7nSmb9vRHvFRLbdNXb5-EH0pWBEAMdbyDKWqyHDkt7iBy8DtDpjnaPZZohHQN1w390tpfHjedc9BHHlMOrl-z2R--mf_1zAUKvCDXMF_PFGXuOeqHmNfqpOOyR7vuryBmExfNgC18EFkVJwAS72VX5HlYT6TNq6kLPxW-sp69u90FPzGwUyA"
+            />
+          </div>
+        </div>
+      </header>
+      <!-- Main Canvas -->
+      <main class="p-md md:p-lg max-w-5xl mx-auto w-full">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center space-x-2 text-on-surface-variant font-label-md mb-6">
+          <a class="hover:text-primary transition-colors" href="#">News Feed</a>
+          <span class="material-symbols-outlined text-sm">chevron_right</span>
+          <span class="text-primary font-semibold">Add New Banner</span>
+        </nav>
+        <!-- Page Header -->
+        <div class="mb-8">
+          <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Tambah Banner Baru</h2>
+          <p class="font-body-md text-on-surface-variant">
+            Buat pengumuman atau promosi visual baru untuk tampil di halaman utama aplikasi
+            penghuni.
+          </p>
+        </div>
+        <!-- Form Container -->
+        <div class="bg-surface border border-outline-variant rounded-xl form-card overflow-hidden">
+          <form class="p-md md:p-8 space-y-8" id="bannerForm">
+            <!-- Section: Details -->
+            <div class="grid grid-cols-1 gap-6">
+              <div class="space-y-2">
+                <label class="font-label-md text-on-surface" for="judul"
+                  >Judul Banner <span class="text-error">*</span></label
+                >
+                <input
+                  class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface focus:border-primary transition-all"
+                  id="judul"
+                  name="judul"
+                  placeholder="Masukkan judul banner..."
+                  required=""
+                  type="text"
+                />
+              </div>
+              <div class="space-y-2">
+                <label class="font-label-md text-on-surface" for="deskripsi"
+                  >Deskripsi/Isi Berita</label
+                >
+                <textarea
+                  class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface focus:border-primary transition-all"
+                  id="deskripsi"
+                  name="deskripsi"
+                  placeholder="Tuliskan deskripsi singkat atau detail berita di sini..."
+                  rows="4"
+                ></textarea>
+              </div>
+            </div>
+            <!-- Section: Media -->
+            <div class="space-y-4">
+              <label class="font-label-md text-on-surface"
+                >Unggah Gambar Banner <span class="text-error">*</span></label
+              >
+              <div class="relative group">
+                <input accept="image/*" class="hidden" id="imageUpload" type="file" />
+                <label
+                  class="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-outline-variant rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-all cursor-pointer overflow-hidden group"
+                  for="imageUpload"
+                >
+                  <div
+                    class="flex flex-col items-center justify-center p-6 text-center"
+                    id="uploadPlaceholder"
+                  >
+                    <div
+                      class="w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                    >
+                      <span class="material-symbols-outlined text-primary text-3xl"
+                        >cloud_upload</span
+                      >
+                    </div>
+                    <p class="font-title-md text-on-surface mb-1">
+                      Klik untuk unggah atau seret gambar
+                    </p>
+                    <p class="font-label-sm text-on-surface-variant mb-4">
+                      PNG, JPG, or WEBP (Max. 5MB)
+                    </p>
+                    <div
+                      class="px-4 py-2 bg-surface rounded-lg border border-outline-variant text-primary font-semibold text-sm"
+                    >
+                      Rekomendasi: 1200 x 600 px
+                    </div>
+                  </div>
+                  <img
+                    class="hidden absolute inset-0 w-full h-full object-cover"
+                    data-alt="A placeholder for an uploaded banner image. This would be a high-resolution, wide landscape photo showing a luxury residential clubhouse with a shimmering pool at sunset. The lighting is golden and warm, casting long shadows on the elegant stone architecture and manicured tropical gardens. The aesthetic is prestigious and inviting, aligned with the warm modernity of the SmartCluster brand."
+                    id="imagePreview"
+                  />
+                </label>
+              </div>
+            </div>
+            <!-- Section: Additional -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="space-y-2">
+                <label class="font-label-md text-on-surface" for="link"
+                  >Tautan/Link (Opsional)</label
+                >
+                <div class="relative">
+                  <span
+                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm"
+                    >link</span
+                  >
+                  <input
+                    class="w-full pl-10 pr-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface focus:border-primary transition-all"
+                    id="link"
+                    name="link"
+                    placeholder="https://example.com/details"
+                    type="url"
+                  />
+                </div>
+              </div>
+              <div class="space-y-3">
+                <label class="font-label-md text-on-surface">Status Publikasi</label>
+                <div
+                  class="flex items-center space-x-6 p-1 bg-surface-container-low rounded-lg w-fit"
+                >
+                  <label
+                    class="relative flex items-center cursor-pointer px-4 py-2 rounded-md transition-all has-[:checked]:bg-primary has-[:checked]:text-on-primary"
+                  >
+                    <input checked="" class="sr-only" name="status" type="radio" value="aktif" />
+                    <span class="font-label-md">Aktif</span>
+                  </label>
+                  <label
+                    class="relative flex items-center cursor-pointer px-4 py-2 rounded-md transition-all has-[:checked]:bg-primary has-[:checked]:text-on-primary"
+                  >
+                    <input class="sr-only" name="status" type="radio" value="non-aktif" />
+                    <span class="font-label-md">Non-Aktif</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- Action Buttons -->
+            <div
+              class="flex flex-col sm:flex-row items-center justify-end space-y-4 sm:space-y-0 sm:space-x-4 pt-8 border-t border-outline-variant"
+            >
+              <button
+                class="w-full sm:w-auto px-8 py-3 rounded-lg border border-primary text-primary font-semibold hover:bg-surface-container-high transition-all active:scale-95"
+                type="button"
+              >
+                Batal
+              </button>
+              <button
+                class="w-full sm:w-auto px-8 py-3 rounded-lg bg-primary text-on-primary font-semibold shadow-md hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center"
+                type="submit"
+              >
+                <span class="material-symbols-outlined mr-2">save</span>
+                Simpan Banner
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- Hint Section -->
+        <div
+          class="mt-8 flex items-start space-x-3 p-4 bg-surface-container-highest/30 border border-surface-container-highest rounded-lg"
+        >
+          <span class="material-symbols-outlined text-tertiary">info</span>
+          <div>
+            <p class="font-label-md text-on-surface">Tips Banner</p>
+            <p class="text-sm text-on-surface-variant">
+              Banner yang Anda simpan akan muncul di carousel halaman depan aplikasi SmartCluster
+              milik warga. Pastikan gambar berkualitas tinggi dan teks tidak terlalu panjang agar
+              mudah dibaca di layar ponsel.
+            </p>
+          </div>
+        </div>
+      </main>
+      <!-- Footer for copyright/version -->
+      <footer
+        class="mt-auto py-6 px-gutter border-t border-outline-variant text-center text-on-surface-variant text-xs"
+      >
+        © 2024 Tampaksiring Smart Cluster Management Portal. v2.4.0
+      </footer>
+    </div>
+    <script>
+      // Micro-interaction for image upload preview
+      const imageUpload = document.getElementById('imageUpload');
+      const imagePreview = document.getElementById('imagePreview');
+      const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+
+      imageUpload.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            imagePreview.src = event.target.result;
+            imagePreview.classList.remove('hidden');
+            uploadPlaceholder.classList.add('hidden');
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Form submission animation/logic
+      const bannerForm = document.getElementById('bannerForm');
+      bannerForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalContent = submitBtn.innerHTML;
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML =
+          '<span class="material-symbols-outlined animate-spin mr-2">progress_activity</span> Menyimpan...';
+
+        // Simulate API call
+        setTimeout(() => {
+          submitBtn.innerHTML =
+            '<span class="material-symbols-outlined mr-2">check_circle</span> Berhasil!';
+          submitBtn.classList.remove('bg-primary');
+          submitBtn.classList.add('bg-green-600');
+
+          setTimeout(() => {
+            alert('Banner baru berhasil ditambahkan!');
+            // In a real app, window.location.href = 'news-feed.html';
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalContent;
+            submitBtn.classList.remove('bg-green-600');
+            submitBtn.classList.add('bg-primary');
+          }, 1000);
+        }, 1500);
+      });
+
+      // Handle Radio Buttons Styling
+      const radios = document.querySelectorAll('input[name="status"]');
+      radios.forEach((radio) => {
+        radio.addEventListener('change', () => {
+          // Tailwind handles styling via has-[:checked] but this ensures clean state
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<div class="relative inline-block text-left">
+  <app-button
+    variant="outline"
+    size="sm"
+    (click)="toggle()"
+  >
+    <span class="material-symbols-outlined text-[18px]">sort</span>
+    Urutkan
+  </app-button>
+
+  @if (isOpen()) {
+    <div
+      class="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-lg border border-outline-variant bg-surface shadow-level-2"
+    >
+      <div class="py-1">
+        @for (item of items(); track item.value) {
+          <button
+            class="w-full text-left px-4 py-2.5 font-body-md text-body-md transition-colors hover:bg-surface-container-low"
+            [class.text-primary]="item.value === selected()"
+            (click)="select(item.value)"
+          >
+            {{ item.label }}
+          </button>
+        }
+      </div>
+    </div>
+  }
+</div>

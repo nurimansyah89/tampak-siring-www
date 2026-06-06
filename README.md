@@ -7,6 +7,12 @@ Volume yang digunakan:
 - `tampaksiring-node-modules` → `/app/node_modules` (persistent dependencies)
 - `${PWD}` → `/app` (project source code)
 
+## Build Image
+Untuk membangun image Docker, jalankan perintah berikut:
+```powershell
+docker build -t tampaksiring:latest .
+```
+
 ## Development server
 
 Jalankan development server dengan perintah:

@@ -1,0 +1,603 @@
+<!doctype html>
+
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'tertiary-fixed-dim': '#ffb68d',
+              background: '#fff8f6',
+              'surface-container-high': '#ffe2dd',
+              error: '#ba1a1a',
+              'primary-fixed-dim': '#e2c19b',
+              'on-secondary-fixed-variant': '#464745',
+              'secondary-fixed': '#e3e2e0',
+              'outline-variant': '#d1c4b8',
+              'on-secondary-container': '#626361',
+              'inverse-on-surface': '#ffedea',
+              'on-primary-container': '#fffbff',
+              'error-container': '#ffdad6',
+              'on-tertiary-container': '#fffbff',
+              outline: '#80756b',
+              'on-tertiary': '#ffffff',
+              'primary-fixed': '#ffddb6',
+              'on-surface-variant': '#4e453c',
+              'on-surface': '#2b1613',
+              'on-error-container': '#93000a',
+              'surface-variant': '#ffdad4',
+              'on-error': '#ffffff',
+              'on-primary-fixed': '#291801',
+              'surface-container': '#ffe9e5',
+              surface: '#fff8f6',
+              'on-secondary': '#ffffff',
+              'surface-tint': '#735a3a',
+              'surface-container-low': '#fff0ee',
+              'secondary-fixed-dim': '#c7c6c4',
+              'on-tertiary-fixed': '#321200',
+              primary: '#705838',
+              'surface-container-highest': '#ffdad4',
+              'on-primary': '#ffffff',
+              'inverse-primary': '#e2c19b',
+              'on-tertiary-fixed-variant': '#763400',
+              'secondary-container': '#e0e0dd',
+              'on-background': '#2b1613',
+              tertiary: '#974400',
+              'tertiary-container': '#bb5808',
+              'inverse-surface': '#422a26',
+              'tertiary-fixed': '#ffdbc9',
+              'on-primary-fixed-variant': '#594325',
+              secondary: '#5e5f5d',
+              'surface-dim': '#f8d1cb',
+              'primary-container': '#8b704f',
+              'on-secondary-fixed': '#1a1c1a',
+              'surface-container-lowest': '#ffffff',
+              'surface-bright': '#fff8f6',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              xs: '4px',
+              md: '24px',
+              xl: '80px',
+              gutter: '24px',
+              lg: '48px',
+              'max-width-desktop': '1280px',
+              'margin-mobile': '16px',
+              base: '8px',
+            },
+            fontFamily: {
+              'display-lg': ['Inter'],
+              'title-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'headline-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-md': ['Inter'],
+              'body-lg': ['Inter'],
+            },
+            fontSize: {
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #faf9f6;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+        vertical-align: middle;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #d1c4b8;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background">
+    <!-- Sidebar Wrapper -->
+    <aside
+      class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant flex flex-col p-base space-y-2 z-50"
+    >
+      <div class="px-md py-lg">
+        <h1 class="font-title-md text-title-md text-on-surface">Cluster Management</h1>
+        <p class="font-label-md text-label-md text-on-surface-variant">Admin Portal</p>
+      </div>
+      <nav class="flex-1 space-y-1 overflow-y-auto custom-scrollbar px-2">
+        <!-- Navigation items from JSON -->
+        <a
+          class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 font-label-md text-label-md rounded-lg active:translate-x-1 transition-transform"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
+        </a>
+        <a
+          class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 font-label-md text-label-md rounded-lg active:translate-x-1 transition-transform"
+          href="#"
+        >
+          <span class="material-symbols-outlined">group</span>
+          Residents
+        </a>
+        <a
+          class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 font-label-md text-label-md rounded-lg active:translate-x-1 transition-transform"
+          href="#"
+        >
+          <span class="material-symbols-outlined">payments</span>
+          Fees &amp; Iuran
+        </a>
+        <a
+          class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 font-label-md text-label-md rounded-lg active:translate-x-1 transition-transform"
+          href="#"
+        >
+          <span class="material-symbols-outlined">security</span>
+          Security Logs
+        </a>
+        <a
+          class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 font-label-md text-label-md rounded-lg active:translate-x-1 transition-transform"
+          href="#"
+        >
+          <span class="material-symbols-outlined">forum</span>
+          Complaints
+        </a>
+        <!-- Active State: News Feed -->
+        <a
+          class="flex items-center gap-3 px-md py-3 bg-primary-container text-on-primary-container font-semibold rounded-lg active:translate-x-1 transition-transform font-label-md text-label-md"
+          href="#"
+        >
+          <span class="material-symbols-outlined">newspaper</span>
+          News Feed
+        </a>
+        <a
+          class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 font-label-md text-label-md rounded-lg active:translate-x-1 transition-transform"
+          href="#"
+        >
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+          Admin Management
+        </a>
+      </nav>
+      <div class="pt-base border-t border-outline-variant px-2 space-y-1">
+        <a
+          class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 font-label-md text-label-md rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">help</span>
+          Support
+        </a>
+        <a
+          class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 font-label-md text-label-md rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          Logout
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="ml-64 min-h-screen">
+      <!-- TopAppBar -->
+      <header
+        class="flex justify-between items-center w-full px-gutter h-16 sticky top-0 z-40 bg-surface shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border-b border-outline-variant/30"
+      >
+        <div class="flex items-center gap-4">
+          <span class="font-headline-lg text-headline-lg text-primary">SmartCluster Admin</span>
+        </div>
+        <div class="flex items-center gap-gutter">
+          <div class="relative hidden lg:block">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              >search</span
+            >
+            <input
+              class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 w-64 focus:ring-2 focus:ring-primary text-body-md font-body-md outline-none"
+              placeholder="Cari data..."
+              type="text"
+            />
+          </div>
+          <div class="flex items-center gap-4">
+            <button
+              class="material-symbols-outlined text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors cursor-pointer"
+            >
+              notifications
+            </button>
+            <button
+              class="material-symbols-outlined text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors cursor-pointer"
+            >
+              settings
+            </button>
+            <div
+              class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-primary/20"
+            >
+              <img
+                alt="Admin Avatar"
+                class="w-full h-full object-cover"
+                data-alt="A professional headshot of a middle-aged male administrator with a warm smile, wearing a sharp business-casual linen shirt. The portrait is set against a soft-focus background of a modern, sun-drenched office space with warm wooden accents and clay-colored walls, following a premium residential portal aesthetic."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL2F30QS2PXq6iWzb46fs3mUivIaYumFfl27S8ap80cyK_L7QV7SkAoe44aihCDg7KeNIJ6AC7b1z26zpwErX4po-f_f93wtg_PVJ-OPGk12ewl2ZBoe4W3nVdLMGzniOmYffX6zIfcKhxs7W1aFk3VdaKsFlCZC292OZ72CTbysNfVxQjVQbwAijjUDcUWSguRPgBP6zVr_Q14dJzFBQLSlRcRvVvVENm2KATU4ui6xv8BH29fSf_jiXL5AzRIsUir2dFLm0z1h4"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Dashboard Content -->
+      <div class="p-gutter max-w-max-width-desktop mx-auto">
+        <!-- Header Section -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-xl gap-4">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">
+              Manajemen News Feed
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Kelola banner dan informasi terbaru untuk penghuni cluster.
+            </p>
+          </div>
+          <button
+            class="flex items-center justify-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md text-label-md hover:brightness-110 active:scale-95 transition-all shadow-md"
+          >
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+              >add</span
+            >
+            Tambah Banner Baru
+          </button>
+        </div>
+        <!-- Bento Grid / News Feed Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-md mb-xl">
+          <div
+            class="bg-surface-container-low p-md rounded-xl border border-outline-variant flex flex-col justify-between h-32"
+          >
+            <span class="text-on-surface-variant font-label-md text-label-md"
+              >Total Banner Aktif</span
+            >
+            <div class="flex items-end justify-between">
+              <span class="text-4xl font-bold text-primary">12</span>
+              <span class="material-symbols-outlined text-primary text-3xl opacity-30"
+                >visibility</span
+              >
+            </div>
+          </div>
+          <div
+            class="bg-surface-container-low p-md rounded-xl border border-outline-variant flex flex-col justify-between h-32"
+          >
+            <span class="text-on-surface-variant font-label-md text-label-md"
+              >Tayangan Minggu Ini</span
+            >
+            <div class="flex items-end justify-between">
+              <span class="text-4xl font-bold text-primary">1.248</span>
+              <span class="material-symbols-outlined text-primary text-3xl opacity-30"
+                >trending_up</span
+              >
+            </div>
+          </div>
+          <div
+            class="bg-surface-container-low p-md rounded-xl border border-outline-variant flex flex-col justify-between h-32"
+          >
+            <span class="text-on-surface-variant font-label-md text-label-md"
+              >Banner Non-Aktif</span
+            >
+            <div class="flex items-end justify-between">
+              <span class="text-4xl font-bold text-primary">4</span>
+              <span class="material-symbols-outlined text-primary text-3xl opacity-30"
+                >pause_circle</span
+              >
+            </div>
+          </div>
+        </div>
+        <!-- Management Table Container -->
+        <div
+          class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(62,39,35,0.05)]"
+        >
+          <div
+            class="px-md py-4 border-b border-outline-variant flex items-center justify-between bg-surface-container-lowest"
+          >
+            <h3 class="font-title-md text-title-md text-on-surface">Daftar Banner Berita</h3>
+            <div class="flex gap-2">
+              <button
+                class="p-2 hover:bg-surface-container rounded-lg transition-colors border border-outline-variant"
+              >
+                <span class="material-symbols-outlined text-on-surface-variant">filter_list</span>
+              </button>
+              <button
+                class="p-2 hover:bg-surface-container rounded-lg transition-colors border border-outline-variant"
+              >
+                <span class="material-symbols-outlined text-on-surface-variant">sort</span>
+              </button>
+            </div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr
+                  class="bg-surface-container-low text-on-surface-variant font-label-md text-label-md"
+                >
+                  <th class="px-md py-4 font-semibold">Banner</th>
+                  <th class="px-md py-4 font-semibold">Judul &amp; Deskripsi</th>
+                  <th class="px-md py-4 font-semibold">Status</th>
+                  <th class="px-md py-4 font-semibold text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-outline-variant">
+                <!-- Row 1 -->
+                <tr class="hover:bg-surface-container-lowest transition-colors group">
+                  <td class="px-md py-4 w-40">
+                    <div class="w-32 h-20 rounded-lg overflow-hidden border border-outline-variant">
+                      <img
+                        alt="Pool Banner"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        data-alt="A stunning, high-resolution photograph of a luxurious Olympic-sized swimming pool at sunset. The water is crystal clear with gentle ripples, reflecting a warm orange and purple sky. Surroundings include premium teak lounge chairs and lush tropical landscaping under soft architectural lighting, evoking a sense of prestige and modern community belonging."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcILVcjE-I6zGeY-Li0Ee_TSUteauFAy6OLgbFsSyNxBaSaxf7wxUq4PkR6utPMEmQZpAK1Sgx2MWsDuST1NwH0fbtKAXQli7NOz4xPIwzOQdcrB-2OJqpsQtU5u2w6TatCLnv3LcQmnRmef6yHFidfbAx7m9PnXTmrV41ZL44tUV-0_bMerrFFbirzvLTxD-hpXQOseZavElNwl1mVfhGyOBTrxmGic8x8I6RBG-ulqSN5Jb7ybisyXhOFYvSsRMQJ2c_UY16bw4"
+                      />
+                    </div>
+                  </td>
+                  <td class="px-md py-4">
+                    <h4 class="font-title-md text-body-lg font-bold text-on-surface mb-1">
+                      Clubhouse Grand Opening
+                    </h4>
+                    <p class="font-body-md text-label-md text-on-surface-variant line-clamp-2">
+                      Rayakan pembukaan fasilitas clubhouse baru akhir pekan ini dengan berbagai
+                      acara menarik.
+                    </p>
+                  </td>
+                  <td class="px-md py-4">
+                    <span
+                      class="px-3 py-1 bg-green-100 text-green-800 text-xs font-bold rounded-full border border-green-200"
+                      >AKTIF</span
+                    >
+                  </td>
+                  <td class="px-md py-4 text-right">
+                    <div class="flex justify-end gap-2">
+                      <button
+                        class="p-2 text-primary hover:bg-primary-container hover:text-on-primary-container rounded-lg transition-all active:scale-90"
+                        title="Edit"
+                      >
+                        <span class="material-symbols-outlined">edit</span>
+                      </button>
+                      <button
+                        class="p-2 text-error hover:bg-error-container hover:text-on-error-container rounded-lg transition-all active:scale-90"
+                        title="Hapus"
+                      >
+                        <span class="material-symbols-outlined">delete</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 2 -->
+                <tr class="hover:bg-surface-container-lowest transition-colors group">
+                  <td class="px-md py-4 w-40">
+                    <div class="w-32 h-20 rounded-lg overflow-hidden border border-outline-variant">
+                      <img
+                        alt="Maintenance Banner"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        data-alt="A clean, professional close-up of a high-tech electrical panel with modern digital meters and neatly organized wiring. The scene is brightly lit with a neutral, sterile aesthetic, emphasizing reliability and technical precision. Soft shadows and a shallow depth of field focus on the maintenance aspect, fitting for a residential infrastructure update announcement."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2Rds7BwVA0958SfUlqiObgh6kddkr82o-ejnnIvBmmNSeO2GWUgWxMg3bQQU4I4l8UZMZ7f03ZtHPK5avbdGN3ew_16hO3MXlAEVMYuAwdn9qLIgWraaQnQjPCErvpswWL169dr6lfWIlFJGE5U631mlnWxyOBLK6GJIwnBAS4jfJb2uJfA3Ozzminm2dSh0LMRS5DlhMoerkDIhuaiwiqXUvKPknsJCORPA72NjuIL3-ZRSwjqjSfatiMD-Y33yjty2mFP9UEis"
+                      />
+                    </div>
+                  </td>
+                  <td class="px-md py-4">
+                    <h4 class="font-title-md text-body-lg font-bold text-on-surface mb-1">
+                      Maintenance Schedule
+                    </h4>
+                    <p class="font-body-md text-label-md text-on-surface-variant line-clamp-2">
+                      Pemberitahuan pemeliharaan rutin jaringan listrik di area Blok A dan B pada
+                      hari Selasa depan.
+                    </p>
+                  </td>
+                  <td class="px-md py-4">
+                    <span
+                      class="px-3 py-1 bg-green-100 text-green-800 text-xs font-bold rounded-full border border-green-200"
+                      >AKTIF</span
+                    >
+                  </td>
+                  <td class="px-md py-4 text-right">
+                    <div class="flex justify-end gap-2">
+                      <button
+                        class="p-2 text-primary hover:bg-primary-container hover:text-on-primary-container rounded-lg transition-all active:scale-90"
+                        title="Edit"
+                      >
+                        <span class="material-symbols-outlined">edit</span>
+                      </button>
+                      <button
+                        class="p-2 text-error hover:bg-error-container hover:text-on-error-container rounded-lg transition-all active:scale-90"
+                        title="Hapus"
+                      >
+                        <span class="material-symbols-outlined">delete</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 3 -->
+                <tr class="hover:bg-surface-container-lowest transition-colors group">
+                  <td class="px-md py-4 w-40">
+                    <div class="w-32 h-20 rounded-lg overflow-hidden border border-outline-variant">
+                      <img
+                        alt="Security Banner"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        data-alt="A conceptual security image featuring a blurred view of a modern gatehouse at night, illuminated by soft golden floodlights. A subtle, digital overlay of a shield icon and circuit patterns reinforces the theme of high-tech protection. The overall mood is calm and secure, utilizing a palette of deep navy and warm amber to suggest professional guardianship."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeSXvlLbrFQ87IfvlylIGzG_-xhoklT2Jfh3Gwz6UeRohAAWgwK5UjfYhFc90dKIz6lYIw7xW4KTlbwvg4n-Src-loZb2CmWyUQ1xU42o-Ol4msorzrJjRpvZZovQ5Je0clCm_A1nKIrLD4s_etNQ3rIH9GPQ06j_ymHgyRx1R_-jz2LaM0xYOO31IkjHdYdSdT6Bmko_RqbLHTJ3GJ6jbmxY5foieNO46l-vuKOTRHB7dzg7GlPZQP3gqjCAoHKRX7Eh5zDr9Fy4"
+                      />
+                    </div>
+                  </td>
+                  <td class="px-md py-4">
+                    <h4 class="font-title-md text-body-lg font-bold text-on-surface mb-1">
+                      Security Reminder
+                    </h4>
+                    <p class="font-body-md text-label-md text-on-surface-variant line-clamp-2">
+                      Mohon pastikan stiker akses kendaraan terpasang dengan benar untuk kenyamanan
+                      bersama.
+                    </p>
+                  </td>
+                  <td class="px-md py-4">
+                    <span
+                      class="px-3 py-1 bg-surface-container text-on-surface-variant text-xs font-bold rounded-full border border-outline-variant"
+                      >NON-AKTIF</span
+                    >
+                  </td>
+                  <td class="px-md py-4 text-right">
+                    <div class="flex justify-end gap-2">
+                      <button
+                        class="p-2 text-primary hover:bg-primary-container hover:text-on-primary-container rounded-lg transition-all active:scale-90"
+                        title="Edit"
+                      >
+                        <span class="material-symbols-outlined">edit</span>
+                      </button>
+                      <button
+                        class="p-2 text-error hover:bg-error-container hover:text-on-error-container rounded-lg transition-all active:scale-90"
+                        title="Hapus"
+                      >
+                        <span class="material-symbols-outlined">delete</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            class="px-md py-4 bg-surface-container-low border-t border-outline-variant flex items-center justify-between"
+          >
+            <span class="font-label-md text-label-md text-on-surface-variant"
+              >Menampilkan 3 dari 16 banner</span
+            >
+            <div class="flex gap-2">
+              <button
+                class="px-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface-variant disabled:opacity-50"
+                disabled=""
+              >
+                Previous
+              </button>
+              <button class="px-4 py-2 bg-primary text-on-primary rounded-lg shadow-sm">
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Facility Promotion Card (Specialized Component) -->
+        <div
+          class="mt-xl bg-surface-container-highest rounded-2xl p-lg flex flex-col md:flex-row items-center gap-lg border border-outline-variant overflow-hidden relative"
+        >
+          <div class="absolute top-0 right-0 p-gutter opacity-10 pointer-events-none">
+            <span class="material-symbols-outlined text-[120px]">newspaper</span>
+          </div>
+          <div class="flex-1 z-10">
+            <h3 class="font-headline-lg text-headline-lg text-primary mb-md">
+              Optimalkan Informasi Warga
+            </h3>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">
+              Pastikan setiap pengumuman penting tersampaikan dengan visual yang menarik. Gunakan
+              banner resolusi tinggi (1200x600px) untuk hasil terbaik di dashboard aplikasi warga.
+            </p>
+            <button
+              class="bg-primary text-on-primary px-8 py-3 rounded-lg font-title-md hover:brightness-110 shadow-lg active:scale-95 transition-all"
+            >
+              Lihat Panduan Visual
+            </button>
+          </div>
+          <div class="flex-shrink-0 z-10 w-full md:w-80">
+            <div
+              class="aspect-video bg-surface-container rounded-xl overflow-hidden shadow-xl border-4 border-surface rotate-2"
+            >
+              <img
+                alt="Guide Image"
+                class="w-full h-full object-cover"
+                data-alt="An overhead aesthetic shot of a modern architectural firm's workspace. Natural light pours over a clean oak desk where architectural blueprints, a sleek laptop, and a cup of artisan coffee sit neatly. The atmosphere is quiet and focused, perfectly representing the professional design and planning standards required for the residential community's news feed."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsnxy1EkJmcLb_9Z_LcdTQ4j_5A2AQH8WW0U5NG--gr0m8F4XxZ8fVXxVZhKj7uxoEjadRPoIhFlTcpHmEQIFMYeLcUJbY6nKfaDAUq06YnvPyMqo2qUPCZNw_pr3Y6mqaQu7fFlEnoNBmDMc57tb1Lm8cRq2u2OKZBpZbHbJ2YmMnubQInrSi440XhCGTz_4qBmCViM0ruWp3ynAkktleb4iyvuTmydPG8cqU3eVMos4NH5JF3swuLFZ-8UQnG6YvDxSzyp_w8Jg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <footer class="mt-xl py-lg border-t border-outline-variant px-gutter">
+        <div
+          class="max-w-max-width-desktop mx-auto flex flex-col md:flex-row justify-between items-center gap-md"
+        >
+          <p class="font-label-md text-label-md text-on-surface-variant">
+            © 2024 SmartCluster Admin Portal. Seluruh hak cipta dilindungi.
+          </p>
+          <div class="flex gap-lg">
+            <a
+              class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+              href="#"
+              >Syarat &amp; Ketentuan</a
+            >
+            <a
+              class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+              href="#"
+              >Kebijakan Privasi</a
+            >
+          </div>
+        </div>
+      </footer>
+    </main>
+    <!-- Micro-interaction JS -->
+    <script>
+      // Simple logic for row highlighting or button effects if needed
+      document.querySelectorAll('tbody tr').forEach((row) => {
+        row.addEventListener('click', (e) => {
+          if (!e.target.closest('button')) {
+            // Logic for selecting row if needed
+            console.log('Row clicked');
+          }
+        });
+      });
+
+      // Search bar interaction
+      const searchInput = document.querySelector('input[type="text"]');
+      searchInput.addEventListener('focus', () => {
+        searchInput.parentElement.classList.add('ring-2', 'ring-primary');
+      });
+      searchInput.addEventListener('blur', () => {
+        searchInput.parentElement.classList.remove('ring-2', 'ring-primary');
+      });
+    </script>
+  </body>
+</html>

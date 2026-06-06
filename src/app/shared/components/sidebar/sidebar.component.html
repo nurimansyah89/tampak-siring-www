@@ -52,5 +52,92 @@
       <span class="material-symbols-outlined text-[20px]">confirmation_number</span>
       <span>Aduan Warga</span>
     </a>
+
+    <div *ngIf="isAdmin()" class="px-4 pt-6 pb-1">
+      <p class="text-label-sm text-outline font-semibold uppercase tracking-wider">Admin</p>
+    </div>
+
+    <a
+      *ngIf="isAdmin()"
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/admin"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <span class="material-symbols-outlined text-[20px]">dashboard</span>
+      <span>Dasbor Admin</span>
+    </a>
+    <a
+      *ngIf="isAdmin()"
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/admin/news"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">newspaper</span>
+      <span>Berita & Pengumuman</span>
+    </a>
+    <a
+      *ngIf="isAdmin()"
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/admin/cluster-map"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">map</span>
+      <span>Manajemen Peta Klaster</span>
+    </a>
+    <a
+      *ngIf="isAdmin()"
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/admin/residents"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">group</span>
+      <span>Manajemen Warga</span>
+    </a>
+    <a
+      *ngIf="isAdmin()"
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/admin/finance"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+      <span>Manajemen Iuran</span>
+    </a>
+    <a
+      *ngIf="isAdmin()"
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/admin/security"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">security</span>
+      <span>Manajemen Security</span>
+    </a>
+    <a
+      *ngIf="isAdmin()"
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/admin/complaints"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">confirmation_number</span>
+      <span>Manajemen Aduan Warga</span>
+    </a>
+    <a
+      *ngIf="isAdmin()"
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/admin/users"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+      <span>Manajemen Admin</span>
+    </a>
+    <a
+      *ngIf="isAdmin()"
+      class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all duration-200"
+      routerLink="/admin/settings"
+      routerLinkActive="bg-primary-fixed text-primary font-bold"
+    >
+      <span class="material-symbols-outlined text-[20px]">settings</span>
+      <span>Pengaturan</span>
+    </a>
   </nav>
 </aside>

@@ -1,0 +1,117 @@
+<app-main-layout>
+  <div class="px-margin-mobile md:px-gutter pt-8 pb-xl">
+    <div class="mb-8">
+      <h2 class="font-headline-lg text-headline-lg text-primary">Manajemen Peta Klaster</h2>
+      <p class="text-on-surface-variant font-body-md text-body-md mt-1">
+        Kelola informasi pemilik rumah dengan mengklik area di peta cluster.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2">
+        <div
+          class="bg-white rounded-3xl p-4 shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant overflow-hidden"
+        >
+          <div
+            class="relative flex justify-center items-center min-h-[400px] bg-surface-map rounded-lg overflow-hidden"
+            [class.cursor-pointer]="!!hoveredArea()"
+            (mousemove)="onMapMove($event)"
+            (mouseleave)="onMapLeave()"
+            (click)="onMapClick($event)"
+          >
+            <img
+              #clusterImg
+              src="/cluster-map.png"
+              alt="Peta Site Plan Tampaksiring Smart Cluster"
+              class="max-w-full h-auto object-contain"
+            />
+
+            <!-- Hover highlight overlay -->
+            <div
+              class="absolute z-10 pointer-events-none transition-opacity duration-200"
+              [class.opacity-0]="!hoveredArea()"
+              [style.left.px]="highlightLeft()"
+              [style.top.px]="highlightTop()"
+              [style.width.px]="highlightWidth()"
+              [style.height.px]="highlightHeight()"
+              style="background: rgba(139, 90, 43, 0.55)"
+            ></div>
+
+            <!-- Dots removed - hover/click uses area hit detection directly -->
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-1">
+        @if (isEditing(); as editing) {
+          <div
+            class="bg-surface-container-lowest rounded-2xl p-6 shadow-lg border border-outline-variant"
+          >
+            <h3 class="font-title-md text-title-md text-primary mb-4">Edit Area</h3>
+            <div class="flex flex-col gap-4">
+              <!-- Preview Foto Pemilik -->
+              <div class="flex items-center gap-3">
+                @if (ownerPhotoUrl) {
+                  <img
+                    [src]="ownerPhotoUrl"
+                    alt=""
+                    class="w-12 h-12 rounded-full object-cover shrink-0"
+                  />
+                } @else {
+                  <div
+                    class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden shrink-0"
+                  >
+                    <span class="material-symbols-outlined text-primary">person</span>
+                  </div>
+                }
+                <div class="min-w-0">
+                  <p class="font-label-md text-label-md text-on-surface truncate">
+                    {{ ownerName || '-' }}
+                  </p>
+                  <p class="text-label-sm font-label-sm text-on-surface-variant">
+                    {{ editingArea()?.id }}
+                  </p>
+                </div>
+              </div>
+
+              <app-input label="ID Unit" [ngModel]="editingArea()?.id" [disabled]="true" />
+              <app-input label="No. Rumah" placeholder="Contoh: Y03/01" [(ngModel)]="houseNumber" />
+              <app-input
+                label="Nama Pemilik"
+                placeholder="Contoh: Bpk. Ahmad Subarjo"
+                [(ngModel)]="ownerName"
+              />
+              <app-input
+                label="URL Foto Pemilik"
+                placeholder="https://..."
+                [(ngModel)]="ownerPhotoUrl"
+              />
+              <div class="flex gap-2">
+                <div class="flex-1">
+                  <app-button variant="secondary" (click)="cancelEdit()"> Batal </app-button>
+                </div>
+                <div class="flex-1">
+                  <app-button variant="primary" (click)="saveArea()"> Simpan </app-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        } @else {
+          <div
+            class="bg-surface-container-lowest rounded-2xl p-6 shadow-lg border border-outline-variant text-center"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center mx-auto mb-4"
+            >
+              <span class="material-symbols-outlined text-primary text-2xl">info</span>
+            </div>
+            <p class="text-on-surface-variant font-body-md text-body-md">
+              Arahkan kursor ke area di peta untuk melihat highlight, lalu klik untuk mengedit
+              informasi pemilik rumah.
+            </p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</app-main-layout>

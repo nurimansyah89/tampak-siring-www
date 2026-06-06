@@ -8,6 +8,7 @@ import { PaginationComponent } from '../../shared/components/pagination/paginati
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { ToggleComponent } from '../../shared/components/toggle/toggle.component';
 import { FileUploadComponent } from '../../shared/components/file-upload/file-upload.component';
+import { DropdownComponent, DropdownItem } from '../../shared/components/dropdown/dropdown.component';
 import { Complaint, MOCK_COMPLAINTS, Priority, Status } from './complaints.model';
 
 const PAGE_SIZE = 5;
@@ -23,6 +24,7 @@ const PAGE_SIZE = 5;
     ButtonComponent,
     ToggleComponent,
     FileUploadComponent,
+    DropdownComponent,
     FormsModule,
   ],
   templateUrl: './complaints.component.html',
@@ -37,6 +39,27 @@ export class ComplaintsComponent {
   protected readonly searchQuery = signal<string>('');
   protected readonly isSearching = signal(false);
   protected readonly currentPage = signal<number>(1);
+  protected readonly sortBy = signal<string>('date');
+  protected readonly sortOrder = signal<'asc' | 'desc'>('desc');
+
+  protected readonly sortOptions: DropdownItem[] = [
+    { label: 'Tanggal', value: 'date' },
+    { label: 'Judul', value: 'title' },
+    { label: 'Prioritas', value: 'priority' },
+    { label: 'Status', value: 'status' },
+  ];
+
+  private readonly priorityWeight: Record<string, number> = {
+    Tinggi: 3,
+    Sedang: 2,
+    Rendah: 1,
+  };
+
+  private readonly statusWeight: Record<string, number> = {
+    Selesai: 3,
+    Proses: 2,
+    Terkirim: 1,
+  };
   protected readonly isSubmitting = signal<boolean>(false);
   protected readonly allComplaints = signal<Complaint[]>(MOCK_COMPLAINTS);
 
@@ -60,10 +83,51 @@ export class ComplaintsComponent {
     );
   });
 
+  protected readonly sortedComplaints = computed(() => {
+    const list = this.filteredComplaints();
+    const field = this.sortBy();
+    const order = this.sortOrder();
+    const sorted = [...list].sort((a, b) => {
+      let cmp = 0;
+      switch (field) {
+        case 'date':
+          cmp = new Date(a.date).getTime() - new Date(b.date).getTime();
+          break;
+        case 'title':
+          cmp = a.title.localeCompare(b.title);
+          break;
+        case 'priority':
+          cmp = (this.priorityWeight[a.priority] ?? 0) - (this.priorityWeight[b.priority] ?? 0);
+          break;
+        case 'status':
+          cmp = (this.statusWeight[a.status] ?? 0) - (this.statusWeight[b.status] ?? 0);
+          break;
+      }
+      return order === 'desc' ? -cmp : cmp;
+    });
+    return sorted;
+  });
+
   protected readonly displayedComplaints = computed(() => {
     const start = (this.currentPage() - 1) * PAGE_SIZE;
-    return this.filteredComplaints().slice(start, start + PAGE_SIZE);
+    return this.sortedComplaints().slice(start, start + PAGE_SIZE);
   });
+
+  protected onSortChange(value: string): void {
+    if (this.sortBy() === value) {
+      this.sortOrder.update((o) => (o === 'asc' ? 'desc' : 'asc'));
+    } else {
+      this.sortBy.set(value);
+      const defaultOrders: Record<string, 'asc' | 'desc'> = {
+        date: 'desc',
+        title: 'asc',
+        priority: 'desc',
+        status: 'asc',
+      };
+      this.sortOrder.set(defaultOrders[value] ?? 'asc');
+    }
+    this.currentPage.set(1);
+  }
 
   protected readonly columns: Column[] = [
     { key: 'date', header: 'Tanggal' },

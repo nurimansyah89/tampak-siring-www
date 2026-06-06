@@ -42,8 +42,14 @@ export class ClusterMapComponent implements OnDestroy {
   protected readonly clusterImg = viewChild<ElementRef<HTMLImageElement>>('clusterImg');
 
   protected readonly hoveredArea = signal<ClusterArea | null>(null);
+  protected readonly selectedArea = signal<ClusterArea | null>(null);
   protected readonly tooltipX = signal(0);
   protected readonly tooltipY = signal(0);
+  protected readonly highlightLeft = signal(0);
+  protected readonly highlightTop = signal(0);
+  protected readonly highlightWidth = signal(0);
+  protected readonly highlightHeight = signal(0);
+  protected readonly placement = signal<'top' | 'bottom'>('top');
   protected readonly areas = signal<ClusterArea[]>([]);
   protected readonly isLoading = signal(true);
 
@@ -99,24 +105,59 @@ export class ClusterMapComponent implements OnDestroy {
     clearTimeout(this.leaveTimeout);
   }
 
-  protected onAreaEnter(area: ClusterArea): void {
+  protected onMapMove(event: MouseEvent): void {
     if (!this.isHoverDevice) return;
-    clearTimeout(this.leaveTimeout);
-    this.hoveredArea.set(area);
-    this.positionTooltip(area);
+    if (this.selectedArea()) return;
+
+    const target = event.target as HTMLElement;
+    if (target.closest('[data-tooltip]')) return;
+
+    const imgEl = this.clusterImg()?.nativeElement;
+    if (!imgEl || !imgEl.naturalWidth) return;
+
+    const rect = imgEl.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
+    const x = ((event.clientX - rect.left) / rect.width) * imgEl.naturalWidth;
+    const y = ((event.clientY - rect.top) / rect.height) * imgEl.naturalHeight;
+
+    if (x < 0 || y < 0 || x > imgEl.naturalWidth || y > imgEl.naturalHeight) return;
+
+    const hit = this.areas().find((a) => {
+      const [c1, c2, c3, c4] = a.coords;
+      const minX = Math.min(c1, c3);
+      const maxX = Math.max(c1, c3);
+      const minY = Math.min(c2, c4);
+      const maxY = Math.max(c2, c4);
+      return x >= minX && x <= maxX && y >= minY && y <= maxY;
+    });
+
+    if (hit) {
+      clearTimeout(this.leaveTimeout);
+      if (this.hoveredArea()?.id !== hit.id) {
+        this.hoveredArea.set(hit);
+        this.updateHighlightRect(hit);
+      }
+    } else {
+      if (this.isTooltipHovered) return;
+      this.startLeaveTimer();
+    }
   }
 
   protected onAreaLeave(): void {
     if (!this.isHoverDevice) return;
     if (this.isTooltipHovered) return;
+    if (this.selectedArea()) return;
     this.startLeaveTimer();
   }
 
   protected toggleArea(area: ClusterArea): void {
-    if (this.hoveredArea()?.id === area.id) {
-      this.hoveredArea.set(null);
+    if (this.selectedArea()?.id === area.id) {
+      this.selectedArea.set(null);
     } else {
+      this.selectedArea.set(area);
       this.hoveredArea.set(area);
+      this.updateHighlightRect(area);
       this.positionTooltip(area);
     }
   }
@@ -147,6 +188,7 @@ export class ClusterMapComponent implements OnDestroy {
       this.toggleArea(clicked);
     } else {
       this.hoveredArea.set(null);
+      this.selectedArea.set(null);
     }
   }
 
@@ -175,14 +217,48 @@ export class ClusterMapComponent implements OnDestroy {
     const wrapperRect = wrapper.getBoundingClientRect();
     const imgRect = imgEl.getBoundingClientRect();
 
-    this.tooltipX.set(imgRect.left - wrapperRect.left + fracX * imgRect.width);
-    this.tooltipY.set(imgRect.top - wrapperRect.top + fracY * imgRect.height);
+    const cx = imgRect.left - wrapperRect.left + fracX * imgRect.width;
+    const cy = imgRect.top - wrapperRect.top + fracY * imgRect.height;
+
+    // Estimate tooltip dimensions: w-64 = 256px, height ~260px
+    const estH = 260;
+    const gap = 16;
+
+    if (cy < estH + gap && wrapperRect.height - cy >= estH + gap) {
+      this.placement.set('bottom');
+    } else {
+      this.placement.set('top');
+    }
+
+    this.tooltipX.set(cx);
+    this.tooltipY.set(cy);
+  }
+
+  private updateHighlightRect(area: ClusterArea): void {
+    const imgEl = this.clusterImg()?.nativeElement;
+    if (!imgEl) return;
+
+    const [x1, y1, x2, y2] = area.coords;
+    const fracX1 = x1 / imgEl.naturalWidth;
+    const fracY1 = y1 / imgEl.naturalHeight;
+    const fracX2 = x2 / imgEl.naturalWidth;
+    const fracY2 = y2 / imgEl.naturalHeight;
+
+    const wrapper = imgEl.parentElement!;
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const imgRect = imgEl.getBoundingClientRect();
+
+    this.highlightLeft.set(imgRect.left - wrapperRect.left + fracX1 * imgRect.width);
+    this.highlightTop.set(imgRect.top - wrapperRect.top + fracY1 * imgRect.height);
+    this.highlightWidth.set((fracX2 - fracX1) * imgRect.width);
+    this.highlightHeight.set((fracY2 - fracY1) * imgRect.height);
   }
 
   private startLeaveTimer(): void {
+    clearTimeout(this.leaveTimeout);
     this.leaveTimeout = setTimeout(() => {
       this.hoveredArea.set(null);
-    }, 300);
+    }, 50);
   }
 
   protected navigateToResident(area: ClusterArea): void {

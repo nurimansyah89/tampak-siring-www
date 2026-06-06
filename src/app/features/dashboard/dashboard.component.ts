@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { NgIf } from '@angular/common';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { SlideshowComponent } from '../../shared/components/slideshow/slideshow.component';
 import { BentoCardComponent } from '../../shared/components/bento-card/bento-card.component';
 import { BottomNavComponent } from '../../shared/components/bottom-nav/bottom-nav.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
+import { AuthService } from '../auth/auth.service';
+import { environment } from '../../../environments/environment';
 import type { Slide } from '../../shared/components/slideshow/slideshow.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NavbarComponent, SlideshowComponent, BentoCardComponent, BottomNavComponent, FooterComponent],
+  imports: [NgIf, NavbarComponent, SlideshowComponent, BentoCardComponent, BottomNavComponent, FooterComponent],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
+  private readonly authService = inject(AuthService);
+  protected readonly isAdmin = computed(() => environment.devAdmin || (this.authService.currentUser()?.isAdmin ?? false));
   protected readonly slides: Slide[] = [
     {
       image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&q=80',

@@ -19,6 +19,20 @@ describe('AuthService', () => {
     expect(result.error).toBeUndefined();
   });
 
+  it('should set currentUser as admin on successful login', () => {
+    service.login('Y06-12', 'abcd123456');
+    const user = service.currentUser();
+    expect(user).toBeTruthy();
+    expect(user?.houseNo).toBe('Y06-12');
+    expect(user?.isAdmin).toBe(true);
+  });
+
+  it('should clear currentUser on logout', () => {
+    service.login('Y06-12', 'abcd123456');
+    service.logout();
+    expect(service.currentUser()).toBeNull();
+  });
+
   it('should ignore case for house number', () => {
     const result = service.login('y06-12', 'abcd123456');
     expect(result.success).toBe(true);

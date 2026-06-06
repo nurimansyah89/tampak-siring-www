@@ -1,0 +1,261 @@
+<app-main-layout>
+  <div class="px-margin-mobile md:px-gutter pt-8 pb-xl">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-label-md text-on-surface-variant mb-6">
+      <a class="hover:text-primary transition-colors" routerLink="/admin/news">
+        Berita & Pengumuman
+      </a>
+      <span class="material-symbols-outlined text-sm">chevron_right</span>
+      <span class="text-primary font-semibold">Buat Baru</span>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="mb-8">
+      <h1 class="font-headline-lg text-headline-lg text-primary mb-2">
+        Buat Berita & Pengumuman Baru
+      </h1>
+      <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        Buat konten berita atau pengumuman baru untuk ditampilkan kepada penghuni cluster.
+      </p>
+    </header>
+
+    <!-- Form Card -->
+    <form (ngSubmit)="onSubmit()" class="bg-surface border border-outline-variant rounded-xl shadow-level-1 overflow-hidden max-w-3xl">
+      <div class="p-md md:p-8 space-y-8">
+        <!-- Section: Detail -->
+        <section class="space-y-6">
+          <h2 class="font-title-md text-title-md text-on-surface pb-2 border-b border-outline-variant/30">
+            Detail Berita
+          </h2>
+
+          <div class="space-y-2">
+            <label class="font-label-md text-label-md text-on-surface-variant" for="judul">
+              Judul Berita <span class="text-error">*</span>
+            </label>
+            <input
+              id="judul"
+              type="text"
+              class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary"
+              placeholder="Masukkan judul berita..."
+              [value]="judul()"
+              (input)="judul.set($any($event.target).value)"
+            />
+            @if (judulError()) {
+              <p class="text-label-sm text-error">{{ judulError() }}</p>
+            }
+          </div>
+
+          <!-- Kategori -->
+          <div class="space-y-2">
+            <label class="font-label-md text-label-md text-on-surface-variant">
+              Kategori <span class="text-error">*</span>
+            </label>
+            <div class="flex items-center gap-4 p-1 bg-surface-container-low rounded-lg w-fit">
+              <label
+                class="relative flex items-center cursor-pointer px-5 py-2.5 rounded-md transition-all has-[:checked]:bg-primary has-[:checked]:text-on-primary text-label-md text-on-surface-variant"
+              >
+                <input
+                  type="radio"
+                  name="kategori"
+                  value="Berita"
+                  class="sr-only"
+                  checked
+                  (change)="kategori.set('Berita')"
+                />
+                <span>Berita</span>
+              </label>
+              <label
+                class="relative flex items-center cursor-pointer px-5 py-2.5 rounded-md transition-all has-[:checked]:bg-primary has-[:checked]:text-on-primary text-label-md text-on-surface-variant"
+              >
+                <input
+                  type="radio"
+                  name="kategori"
+                  value="Pengumuman"
+                  class="sr-only"
+                  (change)="kategori.set('Pengumuman')"
+                />
+                <span>Pengumuman</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Deskripsi -->
+          <div class="space-y-2">
+            <label class="font-label-md text-label-md text-on-surface-variant" for="deskripsi">
+              Deskripsi/Isi Berita
+            </label>
+            <textarea
+              id="deskripsi"
+              class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary"
+              placeholder="Tuliskan deskripsi atau detail berita di sini..."
+              rows="5"
+              [value]="deskripsi()"
+              (input)="deskripsi.set($any($event.target).value)"
+            ></textarea>
+          </div>
+        </section>
+
+        <!-- Section: Media -->
+        <section class="space-y-4">
+          <h2 class="font-title-md text-title-md text-on-surface pb-2 border-b border-outline-variant/30">
+            Media
+          </h2>
+
+          <label class="font-label-md text-label-md text-on-surface-variant">
+            Unggah Gambar Banner <span class="text-error">*</span>
+          </label>
+
+          @if (!gambarPreview()) {
+            <label
+              class="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-outline-variant rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-all cursor-pointer overflow-hidden"
+            >
+              <input
+                type="file"
+                accept="image/*"
+                class="hidden"
+                (change)="onGambarSelected($event)"
+              />
+              <div class="flex flex-col items-center justify-center p-6 text-center">
+                <div
+                  class="w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                >
+                  <span class="material-symbols-outlined text-primary text-3xl">cloud_upload</span>
+                </div>
+                <p class="font-title-md text-title-md text-on-surface mb-1">
+                  Klik untuk unggah gambar
+                </p>
+                <p class="font-label-sm text-label-sm text-on-surface-variant mb-4">
+                  PNG, JPG, atau WEBP (Maks. 5MB)
+                </p>
+                <div
+                  class="px-4 py-2 bg-surface rounded-lg border border-outline-variant text-primary font-semibold text-label-sm"
+                >
+                  Rekomendasi: 1200 x 600 px
+                </div>
+              </div>
+            </label>
+          } @else {
+            <div
+              class="relative w-full h-64 rounded-xl overflow-hidden border border-outline-variant bg-surface-container-low"
+            >
+              <img
+                class="w-full h-full object-cover"
+                [src]="gambarPreview()"
+                alt="Preview gambar banner"
+              />
+              <button
+                type="button"
+                (click)="removeGambar()"
+                class="absolute top-3 right-3 flex items-center justify-center w-10 h-10 bg-surface rounded-full shadow-level-2 hover:bg-surface-container-high transition-colors"
+              >
+                <span class="material-symbols-outlined text-xl leading-none text-on-surface-variant">close</span>
+              </button>
+            </div>
+          }
+
+          @if (gambarError()) {
+            <p class="text-label-sm text-error">{{ gambarError() }}</p>
+          }
+        </section>
+
+        <!-- Section: Opsional -->
+        <section class="space-y-6">
+          <h2 class="font-title-md text-title-md text-on-surface pb-2 border-b border-outline-variant/30">
+            Pengaturan Tambahan
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label class="font-label-md text-label-md text-on-surface-variant" for="tautan">
+                Tautan/Link (Opsional)
+              </label>
+              <div class="relative">
+                <span
+                  class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-sm pointer-events-none"
+                >link</span>
+                <input
+                  id="tautan"
+                  type="url"
+                  class="w-full pl-11 pr-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary"
+                  placeholder="https://example.com/details"
+                  [value]="tautan()"
+                  (input)="tautan.set($any($event.target).value)"
+                />
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label class="font-label-md text-label-md text-on-surface-variant">
+                Status Publikasi
+              </label>
+              <div class="flex items-center gap-4 p-1 bg-surface-container-low rounded-lg w-fit">
+                <label
+                  class="relative flex items-center cursor-pointer px-5 py-2.5 rounded-md transition-all has-[:checked]:bg-primary has-[:checked]:text-on-primary text-label-md text-on-surface-variant"
+                >
+                  <input
+                    type="radio"
+                    name="status"
+                    value="Aktif"
+                    class="sr-only"
+                    checked
+                    (change)="status.set('Aktif')"
+                  />
+                  <span>Aktif</span>
+                </label>
+                <label
+                  class="relative flex items-center cursor-pointer px-5 py-2.5 rounded-md transition-all has-[:checked]:bg-primary has-[:checked]:text-on-primary text-label-md text-on-surface-variant"
+                >
+                  <input
+                    type="radio"
+                    name="status"
+                    value="Non-Aktif"
+                    class="sr-only"
+                    (change)="status.set('Non-Aktif')"
+                  />
+                  <span>Non-Aktif</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <div
+          class="flex flex-col sm:flex-row items-center justify-end gap-4 pt-8 border-t border-outline-variant"
+        >
+          <a
+            routerLink="/admin/news"
+            class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 rounded-lg border border-primary text-primary font-label-md font-semibold hover:bg-surface-container-high transition-all active:scale-95"
+          >
+            Batal
+          </a>
+          <app-button
+            variant="primary"
+            size="md"
+            type="submit"
+            [loading]="isSubmitting()"
+            [disabled]="isSubmitting()"
+          >
+            <span class="material-symbols-outlined">save</span>
+            Simpan Berita
+          </app-button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Hint Section -->
+    <div
+      class="mt-8 flex items-start gap-3 p-4 bg-surface-container-highest/30 border border-surface-container-highest rounded-lg max-w-3xl"
+    >
+      <span class="material-symbols-outlined text-tertiary shrink-0">info</span>
+      <div>
+        <p class="font-label-md text-label-md text-on-surface mb-1">Tips Konten</p>
+        <p class="font-label-sm text-label-sm text-on-surface-variant">
+          Berita yang Anda simpan akan muncul di halaman berita dan pengumuman aplikasi. Pastikan
+          gambar berkualitas tinggi dan judul tidak terlalu panjang agar mudah dibaca di layar
+          ponsel.
+        </p>
+      </div>
+    </div>
+  </div>
+</app-main-layout>

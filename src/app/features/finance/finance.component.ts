@@ -10,7 +10,8 @@ import {
   MOCK_SUMMARY,
   MonthlyCashFlow,
 } from './finance.model';
-import Chart from 'chart.js/auto';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-finance',
@@ -140,7 +141,7 @@ export class FinanceComponent implements OnDestroy {
                 size: 12,
               },
               color: '#4e453c',
-              callback: (value) => {
+               callback: (value: any) => {
                 if (typeof value === 'number') {
                   if (value >= 1000000) return `Rp${(value / 1000000).toFixed(0)}jt`;
                   if (value >= 1000) return `Rp${(value / 1000).toFixed(0)}rb`;

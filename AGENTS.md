@@ -49,6 +49,7 @@ Ketika membuat, melakukan *refactoring*, atau menerjemahkan referensi kode menta
 - SELALU gunakan aturan-aturan/skill dari angular dalam pembuatan komponen dan logicnya
 - Gunakan best-practices angular model "Feature Base", jadi setiap fitur minimal mempunyai rute masing-masing (Tapi tidak wajib punya rute, terkait kondisi dan persyaratan)
 - Selalu gunakan mode rute `Server` (Bukan `Pre-Render`) pada setiap pembuatan/inisiasi fitur yang mempunyai rute
+- Fitur-fitur admin (yang berada di bawah path `/admin/*`) WAJIB ditempatkan di dalam folder `src/app/features/admin/<nama-fitur>/`, bukan folder terpisah di `src/app/features/`
 
 ## Instruksi dan Aturan WAJIB Konfigurasi Environment
 

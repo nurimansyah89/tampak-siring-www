@@ -36,6 +36,11 @@ export const routes: Routes = [
       import('./features/finance/finance.routes').then((m) => m.financeRoutes),
   },
   {
+    path: 'admin',
+    loadChildren: () =>
+      import('./features/admin/admin.routes').then((m) => m.adminRoutes),
+  },
+  {
     path: 'me',
     loadComponent: () =>
       import('./features/me/me.component').then((m) => m.MeComponent),

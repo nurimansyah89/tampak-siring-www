@@ -42,14 +42,11 @@
                 class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
               >search</span>
             </div>
-            <app-button variant="outline" size="sm">
-              <span class="material-symbols-outlined text-[18px]">filter_list</span>
-              Filter
-            </app-button>
-            <app-button variant="outline" size="sm">
-              <span class="material-symbols-outlined text-[18px]">sort</span>
-              Urutkan
-            </app-button>
+            <app-dropdown
+              [items]="sortOptions"
+              [selected]="sortBy()"
+              (selectionChange)="onSortChange($event)"
+            />
           </div>
         </div>
 
