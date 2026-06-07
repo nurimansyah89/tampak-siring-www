@@ -1,0 +1,226 @@
+<app-main-layout>
+  <div class="px-margin-mobile md:px-gutter pt-8 pb-xl">
+    <!-- Hero Header -->
+    <div class="mb-lg">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+        <div>
+          <nav class="flex items-center gap-2 text-on-surface-variant mb-2">
+            <span class="font-label-sm text-label-sm">Portal Admin</span>
+            <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+            <span class="font-label-sm text-label-sm text-primary">Pengaturan Sistem</span>
+          </nav>
+          <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
+            Pengaturan Sistem
+          </h2>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-2xl">
+            Konfigurasi parameter klaster, kelola ketersediaan portal, dan sesuaikan pesan sistem untuk ekosistem warga Tampaksiring Smart Cluster.
+          </p>
+        </div>
+        <app-button variant="primary" [loading]="isSaving()" (click)="saveChanges()">
+          Simpan Perubahan
+        </app-button>
+      </div>
+    </div>
+
+    <!-- Bento Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+      <!-- Maintenance Mode -->
+      <section class="lg:col-span-8 bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30">
+        <div class="flex items-start justify-between mb-6">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-error-container/30 rounded-lg text-error">
+              <span class="material-symbols-outlined text-[32px]">construction</span>
+            </div>
+            <div>
+              <h3 class="font-title-md text-title-md text-on-surface">Mode Pemeliharaan</h3>
+              <p class="font-label-md text-label-md text-on-surface-variant">
+                Kontrol akses global untuk warga
+              </p>
+            </div>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              class="sr-only peer"
+              [checked]="maintenanceMode()"
+              (change)="toggleMaintenance()"
+            />
+            <div class="w-14 h-8 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+            <span
+              class="ml-3 font-label-md text-label-md transition-colors"
+              [class.text-primary]="maintenanceMode()"
+              [class.text-on-surface-variant]="!maintenanceMode()"
+            >{{ maintenanceMode() ? 'AKTIF' : 'NONAKTIF' }}</span>
+          </label>
+        </div>
+
+        <div class="bg-surface-container/30 p-md rounded-md mb-6 border-l-4 border-primary">
+          <p class="font-body-md text-body-md text-on-surface">
+            Mengaktifkan Mode Pemeliharaan akan menonaktifkan akses ke Dasbor Warga untuk semua pengguna untuk sementara. Pesan pemeliharaan akan ditampilkan sebagai gantinya.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <label class="block font-label-md text-label-md text-on-surface font-semibold" for="maintenance-msg">
+            Pesan Pemeliharaan Kustom
+          </label>
+          <div class="relative">
+            <textarea
+              id="maintenance-msg"
+              class="w-full bg-surface-bright border border-outline-variant rounded-xl p-4 focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-body-md text-on-surface-variant resize-none"
+              placeholder="Contoh: Saat ini kami sedang melakukan pemeliharaan sistem terjadwal..."
+              rows="4"
+              [value]="maintenanceMessage()"
+              (input)="setMaintenanceMessage($event)"
+            ></textarea>
+            <div class="absolute bottom-3 right-4 text-on-surface-variant text-[12px] opacity-60">
+              Markdown didukung
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-1">
+            @for (tmpl of messageTemplates; track tmpl.label) {
+              <span
+                class="px-3 py-1 bg-secondary-container/50 rounded-full font-label-sm text-label-sm text-on-secondary-container cursor-pointer hover:bg-secondary-container transition-colors"
+                (click)="setTemplateMessage(tmpl.value)"
+              >{{ tmpl.label }}</span>
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Sidebar -->
+      <aside class="lg:col-span-4 space-y-gutter">
+        <!-- Live Preview -->
+        <div class="bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30">
+          <h4 class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant mb-4">
+            Pratinjau Langsung
+          </h4>
+          <div class="aspect-video bg-surface-container rounded-lg border border-outline-variant/30 overflow-hidden relative">
+            <div class="w-full h-full flex items-center justify-center bg-surface-container-high">
+              <div class="text-center p-4">
+                <span class="material-symbols-outlined text-4xl text-outline mb-2">web</span>
+                <p class="text-label-sm text-on-surface-variant">Pratinjau Dasbor Warga</p>
+              </div>
+            </div>
+            @if (maintenanceMode()) {
+              <div class="absolute inset-0 bg-black/40 flex items-center justify-center text-white p-4 text-center">
+                <div>
+                  <span class="material-symbols-outlined text-4xl mb-2">engineering</span>
+                  <p class="text-sm font-bold">Pemeliharaan Aktif</p>
+                </div>
+              </div>
+            }
+          </div>
+          <p class="text-[12px] text-on-surface-variant mt-3 italic">
+            Beginilah tampilan portal bagi warga saat pemeliharaan aktif.
+          </p>
+        </div>
+
+        <!-- System Information -->
+        <div class="bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30">
+          <h4 class="font-label-md text-label-md text-on-surface mb-4">Informasi Sistem</h4>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+              <span class="text-on-surface-variant text-label-md">Versi Saat Ini</span>
+              <span class="font-label-md text-primary font-bold">v2.4.1-stabil</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+              <span class="text-on-surface-variant text-label-md">Status Server</span>
+              <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <span class="font-label-md text-green-700">Sehat</span>
+              </div>
+            </div>
+            <div class="flex justify-between items-center py-2">
+              <span class="text-on-surface-variant text-label-md">Warga Aktif</span>
+              <span class="font-label-md text-on-surface">142 Daring</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Secondary Settings -->
+      <div class="lg:col-span-12 grid md:grid-cols-2 gap-gutter">
+        <!-- Notification Preferences -->
+        <div class="bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="material-symbols-outlined text-primary">mail</span>
+            <h3 class="font-title-md text-title-md text-on-surface">
+              Preferensi Notifikasi
+            </h3>
+          </div>
+          <div class="space-y-4">
+            <app-toggle
+              icon="notifications"
+              label="Peringatan Sistem Email"
+              description="Kirim error server ke email admin"
+              [checked]="emailAlerts()"
+              (checkedChange)="emailAlerts.set($event)"
+            />
+            <app-toggle
+              icon="assessment"
+              label="Laporan Penggunaan Mingguan"
+              description="Ringkasan aktivitas klaster otomatis"
+              [checked]="weeklyReports()"
+              (checkedChange)="weeklyReports.set($event)"
+            />
+          </div>
+        </div>
+
+        <!-- Auto-Updates -->
+        <div class="bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="material-symbols-outlined text-primary">system_update</span>
+            <h3 class="font-title-md text-title-md text-on-surface">
+              Pembaruan Otomatis
+            </h3>
+          </div>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="font-label-md text-label-md text-on-surface">Patch Keamanan</p>
+                <p class="text-[12px] text-on-surface-variant">
+                  Terapkan pembaruan kritis secara otomatis
+                </p>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="px-3 py-1 bg-primary-fixed-dim text-on-primary-fixed text-[10px] font-bold rounded-full uppercase tracking-tighter">
+                  Direkomendasikan
+                </span>
+                <button
+                  type="button"
+                  role="switch"
+                  [attr.aria-checked]="securityPatches()"
+                  (click)="securityPatches.update((v) => !v)"
+                  class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full transition-colors duration-200"
+                  [class.bg-primary]="securityPatches()"
+                  [class.bg-outline-variant]="!securityPatches()"
+                >
+                  <span
+                    class="inline-block h-5 w-5 transform rounded-full bg-white transition-transform duration-200 shadow-sm"
+                    [class.translate-x-[22px]]="securityPatches()"
+                    [class.translate-x-[2px]]="!securityPatches()"
+                  ></span>
+                </button>
+              </div>
+            </div>
+            <app-toggle
+              icon="backup"
+              label="Cadangan Data Malam Hari"
+              description="Backup otomatis pukul 03:00 WITA"
+              [checked]="nightlyBackups()"
+              (checkedChange)="nightlyBackups.set($event)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Footer Action Bar -->
+    <div class="md:hidden fixed bottom-20 left-0 right-0 p-4 bg-surface border-t border-outline-variant/20 flex gap-3 z-40">
+      <app-button variant="primary" size="md" [loading]="isSaving()" (click)="saveChanges()" class="!w-full">
+        Simpan
+      </app-button>
+    </div>
+  </div>
+</app-main-layout>

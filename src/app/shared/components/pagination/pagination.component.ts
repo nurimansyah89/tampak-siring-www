@@ -9,6 +9,7 @@ export class PaginationComponent {
   readonly currentPage = input.required<number>();
   readonly totalItems = input.required<number>();
   readonly pageSize = input<number>(10);
+  readonly label = input<string>('Item');
 
   readonly pageChange = output<number>();
 

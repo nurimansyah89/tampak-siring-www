@@ -1,0 +1,133 @@
+export interface AdminUser {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  roleClass: string;
+  lastLogin: string;
+  status: 'Active' | 'Offline';
+  avatar: string | null;
+}
+
+export const MOCK_USERS: AdminUser[] = [
+  {
+    id: '1',
+    name: 'Ahmad Hidayat',
+    email: 'ahmad.h@tampaksiring.id',
+    role: 'Super Admin',
+    roleClass: 'bg-tertiary-fixed text-on-tertiary-fixed-variant',
+    lastLogin: '2 menit lalu',
+    status: 'Active',
+    avatar: null,
+  },
+  {
+    id: '2',
+    name: 'Siti Aminah',
+    email: 'siti.a@tampaksiring.id',
+    role: 'Finance Lead',
+    roleClass: 'bg-primary-fixed text-on-primary-fixed-variant',
+    lastLogin: '3 jam lalu',
+    status: 'Active',
+    avatar: null,
+  },
+  {
+    id: '3',
+    name: 'Budi Santoso',
+    email: 'budi.s@tampaksiring.id',
+    role: 'Security Officer',
+    roleClass: 'bg-secondary-fixed text-on-secondary-fixed-variant',
+    lastLogin: 'Kemarin, 18:45',
+    status: 'Offline',
+    avatar: null,
+  },
+  {
+    id: '4',
+    name: 'Dewi Lestari',
+    email: 'dewi.l@tampaksiring.id',
+    role: 'Resident Manager',
+    roleClass: 'bg-primary-fixed text-on-primary-fixed-variant',
+    lastLogin: '1 jam lalu',
+    status: 'Active',
+    avatar: null,
+  },
+  {
+    id: '5',
+    name: 'Eko Prasetyo',
+    email: 'eko.p@tampaksiring.id',
+    role: 'Super Admin',
+    roleClass: 'bg-tertiary-fixed text-on-tertiary-fixed-variant',
+    lastLogin: '30 menit lalu',
+    status: 'Active',
+    avatar: null,
+  },
+  {
+    id: '6',
+    name: 'Fitri Handayani',
+    email: 'fitri.h@tampaksiring.id',
+    role: 'Finance Staff',
+    roleClass: 'bg-primary-fixed text-on-primary-fixed-variant',
+    lastLogin: '5 jam lalu',
+    status: 'Active',
+    avatar: null,
+  },
+  {
+    id: '7',
+    name: 'Gilang Ramadhan',
+    email: 'gilang.r@tampaksiring.id',
+    role: 'Security Officer',
+    roleClass: 'bg-secondary-fixed text-on-secondary-fixed-variant',
+    lastLogin: 'Kemarin, 22:10',
+    status: 'Offline',
+    avatar: null,
+  },
+  {
+    id: '8',
+    name: 'Hana Safitri',
+    email: 'hana.s@tampaksiring.id',
+    role: 'Admin Staff',
+    roleClass: 'bg-primary-fixed text-on-primary-fixed-variant',
+    lastLogin: '1 hari lalu',
+    status: 'Offline',
+    avatar: null,
+  },
+  {
+    id: '9',
+    name: 'Irfan Hakim',
+    email: 'irfan.h@tampaksiring.id',
+    role: 'Super Admin',
+    roleClass: 'bg-tertiary-fixed text-on-tertiary-fixed-variant',
+    lastLogin: '10 menit lalu',
+    status: 'Active',
+    avatar: null,
+  },
+  {
+    id: '10',
+    name: 'Joko Supriyanto',
+    email: 'joko.s@tampaksiring.id',
+    role: 'Maintenance Lead',
+    roleClass: 'bg-primary-fixed text-on-primary-fixed-variant',
+    lastLogin: '2 hari lalu',
+    status: 'Offline',
+    avatar: null,
+  },
+  {
+    id: '11',
+    name: 'Kartika Dewi',
+    email: 'kartika.d@tampaksiring.id',
+    role: 'Finance Lead',
+    roleClass: 'bg-primary-fixed text-on-primary-fixed-variant',
+    lastLogin: '4 jam lalu',
+    status: 'Active',
+    avatar: null,
+  },
+  {
+    id: '12',
+    name: 'Lukman Nugraha',
+    email: 'lukman.n@tampaksiring.id',
+    role: 'Admin Staff',
+    roleClass: 'bg-primary-fixed text-on-primary-fixed-variant',
+    lastLogin: '3 hari lalu',
+    status: 'Offline',
+    avatar: null,
+  },
+];

@@ -1,6 +1,5 @@
 import { Component, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonComponent } from '../button/button.component';
 
 export interface Comment {
   id: string;
@@ -13,7 +12,7 @@ export interface Comment {
 
 @Component({
   selector: 'app-discussion',
-  imports: [FormsModule, ButtonComponent],
+  imports: [FormsModule],
   templateUrl: './discussion.component.html',
 })
 export class DiscussionComponent {

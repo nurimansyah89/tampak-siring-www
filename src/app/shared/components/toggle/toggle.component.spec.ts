@@ -19,15 +19,15 @@ describe('ToggleComponent', () => {
     fixture.detectChanges();
 
     const button = fixture.nativeElement.querySelector('button');
-    expect(fixture.componentInstance.checked()).toBe(false);
+    expect(fixture.componentInstance._checked()).toBe(false);
 
     button.click();
     fixture.detectChanges();
-    expect(fixture.componentInstance.checked()).toBe(true);
+    expect(fixture.componentInstance._checked()).toBe(true);
 
     button.click();
     fixture.detectChanges();
-    expect(fixture.componentInstance.checked()).toBe(false);
+    expect(fixture.componentInstance._checked()).toBe(false);
   });
 
   it('should emit checkedChange on toggle', () => {
@@ -57,7 +57,7 @@ describe('ToggleComponent', () => {
     fixture.detectChanges();
 
     fixture.componentInstance.writeValue(true);
-    expect(fixture.componentInstance.checked()).toBe(true);
+    expect(fixture.componentInstance._checked()).toBe(true);
   });
 
   it('should register onChange callback', () => {

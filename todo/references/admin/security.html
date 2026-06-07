@@ -1,0 +1,473 @@
+<!doctype html>
+<html class="light" lang="en" style="">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Security Operations Command | Smart Residence</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'surface-container-lowest': '#ffffff',
+              'on-secondary': '#ffffff',
+              'primary-fixed-dim': '#e2c19b',
+              'primary-fixed': '#ffddb6',
+              'on-surface-variant': '#4e453c',
+              'on-tertiary-container': '#fffbff',
+              surface: '#fff8f6',
+              'on-error-container': '#93000a',
+              'surface-variant': '#ffdad4',
+              'on-secondary-fixed': '#1a1c1a',
+              'on-secondary-container': '#626361',
+              error: '#ba1a1a',
+              'secondary-fixed-dim': '#c7c6c4',
+              secondary: '#5e5f5d',
+              'tertiary-fixed': '#ffdbc9',
+              'tertiary-container': '#bb5808',
+              'on-surface': '#2b1613',
+              'on-primary-container': '#fffbff',
+              'surface-tint': '#735a3a',
+              'surface-container': '#ffe9e5',
+              'on-primary': '#ffffff',
+              'on-tertiary-fixed-variant': '#763400',
+              'on-tertiary': '#ffffff',
+              'secondary-fixed': '#e3e2e0',
+              'outline-variant': '#d1c4b8',
+              'surface-container-low': '#fff0ee',
+              'surface-container-highest': '#ffdad4',
+              'on-tertiary-fixed': '#321200',
+              primary: '#705838',
+              'tertiary-fixed-dim': '#ffb68d',
+              'surface-bright': '#fff8f6',
+              'primary-container': '#8b704f',
+              'on-primary-fixed-variant': '#594325',
+              'on-background': '#2b1613',
+              'error-container': '#ffdad6',
+              tertiary: '#974400',
+              outline: '#80756b',
+              'surface-dim': '#f8d1cb',
+              'on-primary-fixed': '#291801',
+              'inverse-surface': '#422a26',
+              background: '#fff8f6',
+              'inverse-on-surface': '#ffedea',
+              'surface-container-high': '#ffe2dd',
+              'on-secondary-fixed-variant': '#464745',
+              'on-error': '#ffffff',
+              'inverse-primary': '#e2c19b',
+              'secondary-container': '#e0e0dd',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              xl: '80px',
+              'max-width-desktop': '1280px',
+              sm: '12px',
+              md: '24px',
+              lg: '48px',
+              xs: '4px',
+              'margin-mobile': '16px',
+              gutter: '24px',
+              base: '8px',
+            },
+            fontFamily: {
+              'body-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'display-lg': ['Inter'],
+              'title-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'label-md': ['Inter'],
+              'headline-lg': ['Inter'],
+            },
+            fontSize: {
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #fff8f6;
+        color: #2b1613;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .custom-shadow {
+        box-shadow: 0px 4px 20px rgba(62, 39, 35, 0.05);
+      }
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+      }
+    </style>
+  </head>
+  <body class="font-body-md text-body-md overflow-x-hidden">
+    <!-- Side Navigation Shell -->
+    <aside
+      class="h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-inverse-surface shadow-sm flex flex-col p-md gap-base hidden md:flex z-50"
+    >
+      <div class="mb-lg">
+        <h1 class="font-title-md text-title-md font-bold text-primary dark:text-primary-fixed-dim">
+          Smart Residence
+        </h1>
+        <p class="text-label-sm text-on-surface-variant">Admin Portal</p>
+      </div>
+      <nav class="flex flex-col gap-base flex-1">
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">map</span>
+          <span class="font-label-md text-label-md">Cluster Map</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">group</span>
+          <span class="font-label-md text-label-md">Residents</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">payments</span>
+          <span class="font-label-md text-label-md">Fees &amp; Iuran</span>
+        </a>
+        <!-- Active State: Security Logs -->
+        <a
+          class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">security</span>
+          <span class="font-label-md text-label-md">Security Logs</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">emergency_home</span>
+          <span class="font-label-md text-label-md">Complaints</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">newspaper</span>
+          <span class="font-label-md text-label-md">News Feed</span> </a
+        ><a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+          <span class="font-label-md text-label-md">Admin Management</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200 mt-auto"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-label-md text-label-md">Settings</span>
+        </a>
+      </nav>
+    </aside>
+    <!-- Top App Bar Shell -->
+    <header
+      class="fixed top-0 right-0 md:w-[calc(100%-16rem)] h-16 bg-surface dark:bg-surface-dim shadow-md flex justify-between items-center px-md z-40 w-full"
+    >
+      <div class="flex items-center gap-md">
+        <span class="md:hidden material-symbols-outlined text-primary cursor-pointer">menu</span>
+        <div class="relative hidden sm:block">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          >
+          <input
+            class="pl-10 pr-4 py-2 bg-surface-container-lowest rounded-full border-none focus:ring-2 focus:ring-primary w-64 text-label-md"
+            placeholder="Search logs..."
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="flex items-center gap-sm">
+        <button
+          class="hover:bg-surface-container-high rounded-full p-2 transition-all active:opacity-80 relative"
+        >
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="absolute top-2 right-2 w-2 h-2 bg-tertiary rounded-full"></span>
+        </button>
+        <div
+          class="flex items-center gap-sm ml-sm cursor-pointer hover:bg-surface-container-high rounded-lg p-1 transition-all"
+        >
+          <img
+            alt="Admin Profile"
+            class="w-8 h-8 rounded-full border-2 border-primary"
+            data-alt="A professional headshot of a middle-aged security manager with a kind but authoritative expression. He is wearing a charcoal grey tactical polo shirt with a subtle gold embroidered logo on the chest. The background is a brightly lit, clean administrative office with warm wood accents, consistent with a high-end corporate residential facility style."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIGtQ075U5gQJ7ZAnMljmGknkWa7T6lwsNVwx9QflWBO7noQa8MtS-Q-mRenpnUqw7MZh4qpQ5TsxU_QJZyHmwCr-cwFdMO_GSHP5M-6Ynn475DkCjl_cogWn7L09NawGAZVVfTOMfFxbQZi--zj243KaGqXBN084tHEGVKu2TR3RjDIpfOTahLFs2uT8MW-rJzNk143ehu4DQeLEjWj3oNqJgZdRD5CtRJepa7KZ8Cc2Yg3ULvAdhjX68SJuImbjnldll16dziLM"
+          />
+          <div class="hidden lg:block">
+            <p class="font-label-md text-label-md font-bold leading-none">Command Center</p>
+            <p class="text-[10px] text-on-surface-variant">Admin Level 4</p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="pt-16 md:pl-64 min-h-screen">
+      <div class="p-md md:p-lg max-w-max-width-desktop mx-auto">
+        <!-- Bento Dashboard Header -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-xl">
+          <!-- Status Highlight -->
+          <div
+            class="lg:col-span-8 bg-surface-container-lowest custom-shadow rounded-xl p-md flex flex-col justify-between overflow-hidden relative border-l-4 border-primary"
+          >
+            <div class="z-10">
+              <div class="flex items-center gap-2 mb-sm">
+                <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+                <span class="text-label-sm font-bold text-primary tracking-wider uppercase"
+                  >System Status</span
+                >
+              </div>
+              <h2 class="font-headline-lg text-headline-lg mb-xs">Perimeter Secured</h2>
+              <p class="text-on-surface-variant font-body-md max-w-lg">
+                All automated gate systems, CCTV nodes, and sensor grids are reporting nominal
+                performance. Last patrol completed 12 minutes ago by Unit 2.
+              </p>
+            </div>
+            <div class="flex gap-md mt-md z-10">
+              <button
+                class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md flex items-center gap-2 hover:opacity-90 transition-all"
+              >
+                <span class="material-symbols-outlined">add</span>Tambah Security
+              </button>
+            </div>
+            <!-- Abstract Background Pattern -->
+            <div
+              class="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-surface-container-low to-transparent flex items-center justify-center"
+            >
+              <div class="w-full h-full bg-primary/5 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary/20 text-[80px]"
+                  >verified_user</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Duty Profile -->
+          <div class="lg:col-span-4 bg-primary text-on-primary custom-shadow rounded-xl p-md">
+            <div class="flex justify-between items-start mb-md">
+              <span class="text-label-sm font-bold opacity-80 uppercase tracking-widest"
+                >Guard on Duty</span
+              >
+            </div>
+            <div class="flex items-center gap-md">
+              <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white/20">
+                <img
+                  alt="Guard Profile"
+                  data-alt="A close-up portrait of a male security professional in a clean, professional uniform with a gold-toned badge. He has a focused and vigilant expression, looking slightly past the camera. The lighting is soft and directional, highlighting the textures of his high-quality tactical vest and the professional, warm-toned interior of a secure control room in the background."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW3xfPXMYT1zc1ylvsp4yjnDOnbt_Sl2CYaiUa43AYTe3lAAFYgY1363-obbhWeHWTxkzXr2Jk4cKgRDud_qPgKue1MnMkCTFOHSfSWoVGtiEWzhVORejsza3_VlgEFXfCl_AYRWDWoS7RvDHWNnim6q4ApB6m5kK3M50_khCF5H6Io6wLPRxPV6R3g1YZagvrwTOfxDqYc3v4YZ6LhJLoYHIGp7ChW__QozZlnIgc9L-vtiPQykleUmKJibomGMw0nSdBCa4DlrQ"
+                />
+              </div>
+              <div>
+                <p class="font-title-md text-title-md">Officer Marcus V.</p>
+                <p class="opacity-70 text-label-md">Senior Patrol Supervisor</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+          <!-- Live Visitor Logs Table -->
+          <section
+            class="lg:col-span-8 bg-surface-container-lowest custom-shadow rounded-xl overflow-hidden"
+          >
+            <div class="p-md flex justify-between items-center border-b border-outline-variant">
+              <h3 class="font-title-md text-title-md flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">badge</span>Security Personnel
+              </h3>
+              <span
+                class="bg-surface-container-high px-3 py-1 rounded-full text-label-sm font-bold text-primary"
+                >12 Total Personnel</span
+              >
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-surface-container-low text-on-surface-variant">
+                    <th class="px-md py-3 font-label-md text-label-md">Name</th>
+                    <th class="px-md py-3 font-label-md text-label-md">Contact</th>
+                    <th class="px-md py-3 font-label-md text-label-md">Status</th>
+                    <th class="px-md py-3 font-label-md text-label-md">Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant">
+                  <tr class="hover:bg-surface-container-low transition-colors">
+                    <td class="px-md py-4">
+                      <div class="flex items-center gap-2">
+                        <div
+                          class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold"
+                        >
+                          MV
+                        </div>
+                        <span class="font-body-md font-medium">Marcus V.</span>
+                      </div>
+                    </td>
+                    <td class="px-md py-4 text-on-surface-variant">Ext. 401</td>
+                    <td class="px-md py-4">
+                      <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-500 rounded-full"></span
+                        ><span class="text-on-surface-variant">Aktif</span>
+                      </div>
+                    </td>
+                    <td class="px-md py-4">
+                      <div class="flex gap-2">
+                        <button
+                          class="text-primary hover:underline text-[10px] font-bold flex items-center gap-1"
+                        >
+                          <span class="material-symbols-outlined text-sm">edit</span>Update</button
+                        ><button
+                          class="text-error hover:underline text-[10px] font-bold flex items-center gap-1"
+                        >
+                          <span class="material-symbols-outlined text-sm">delete</span>Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-surface-container-low transition-colors">
+                    <td class="px-md py-4">
+                      <div class="flex items-center gap-2">
+                        <div
+                          class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold"
+                        >
+                          SL
+                        </div>
+                        <span class="font-body-md font-medium">Sarah L.</span>
+                      </div>
+                    </td>
+                    <td class="px-md py-4 text-on-surface-variant">Ext. 405</td>
+                    <td class="px-md py-4">
+                      <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-outline-variant rounded-full"></span
+                        ><span class="text-on-surface-variant">Absen</span>
+                      </div>
+                    </td>
+                    <td class="px-md py-4">
+                      <div class="flex gap-2">
+                        <button
+                          class="text-primary hover:underline text-[10px] font-bold flex items-center gap-1"
+                        >
+                          <span class="material-symbols-outlined text-sm">edit</span>Update</button
+                        ><button
+                          class="text-error hover:underline text-[10px] font-bold flex items-center gap-1"
+                        >
+                          <span class="material-symbols-outlined text-sm">delete</span>Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <!-- Recent Incident Reports -->
+          <aside class="lg:col-span-4 flex flex-col gap-gutter"></aside>
+        </div>
+      </div>
+    </main>
+    <!-- Mobile Navigation Shell (Bottom Nav) -->
+    <nav
+      class="fixed bottom-0 left-0 right-0 h-16 bg-surface dark:bg-surface-dim shadow-lg flex md:hidden items-center justify-around z-50"
+    >
+      <button class="flex flex-col items-center gap-1 text-on-surface-variant">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span class="text-[10px]">Dashboard</span>
+      </button>
+      <button class="flex flex-col items-center gap-1 text-on-surface-variant">
+        <span class="material-symbols-outlined">map</span>
+        <span class="text-[10px]">Map</span>
+      </button>
+      <button class="flex flex-col items-center gap-1 text-primary">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+          >security</span
+        >
+        <span class="text-[10px] font-bold">Security</span>
+      </button>
+      <button class="flex flex-col items-center gap-1 text-on-surface-variant">
+        <span class="material-symbols-outlined">emergency_home</span>
+        <span class="text-[10px]">Alerts</span>
+      </button>
+      <button class="flex flex-col items-center gap-1 text-on-surface-variant">
+        <span class="material-symbols-outlined">account_circle</span>
+        <span class="text-[10px]">Profile</span>
+      </button>
+    </nav>
+    <!-- Floating Action Button for Emergency (Only on relevant pages) -->
+
+    <script>
+      // Simple interactive effect for table rows
+      document.querySelectorAll('tbody tr').forEach((row) => {
+        row.addEventListener('click', () => {
+          row.classList.add('scale-[0.98]', 'bg-surface-container-highest');
+          setTimeout(() => {
+            row.classList.remove('scale-[0.98]');
+          }, 100);
+        });
+      });
+
+      // Search bar interaction
+      const searchInput = document.querySelector('input[type="text"]');
+      searchInput.addEventListener('focus', () => {
+        searchInput.parentElement.classList.add('ring-2', 'ring-primary');
+      });
+      searchInput.addEventListener('blur', () => {
+        searchInput.parentElement.classList.remove('ring-2', 'ring-primary');
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,593 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Add New Admin | Tampaksiring Smart Cluster</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'surface-tint': '#735a3a',
+              'on-primary-fixed-variant': '#594325',
+              'secondary-fixed': '#e3e2e0',
+              'primary-fixed': '#ffddb6',
+              'on-error-container': '#93000a',
+              'inverse-primary': '#e2c19b',
+              'surface-container-highest': '#ffdad4',
+              'primary-container': '#8b704f',
+              primary: '#705838',
+              'on-tertiary-container': '#fffbff',
+              surface: '#fff8f6',
+              'on-secondary-container': '#626361',
+              'primary-fixed-dim': '#e2c19b',
+              'tertiary-container': '#bb5808',
+              'on-secondary': '#ffffff',
+              'surface-container-high': '#ffe2dd',
+              'surface-dim': '#f8d1cb',
+              secondary: '#5e5f5d',
+              'on-error': '#ffffff',
+              error: '#ba1a1a',
+              'on-primary-container': '#fffbff',
+              'inverse-on-surface': '#ffedea',
+              'on-tertiary': '#ffffff',
+              'on-background': '#2b1613',
+              'inverse-surface': '#422a26',
+              'surface-container-lowest': '#ffffff',
+              'on-surface': '#2b1613',
+              'tertiary-fixed': '#ffdbc9',
+              'secondary-container': '#e0e0dd',
+              'error-container': '#ffdad6',
+              'outline-variant': '#d1c4b8',
+              'on-surface-variant': '#4e453c',
+              'surface-container-low': '#fff0ee',
+              'surface-container': '#ffe9e5',
+              'surface-variant': '#ffdad4',
+              outline: '#80756b',
+              'surface-bright': '#fff8f6',
+              'on-primary-fixed': '#291801',
+              'on-tertiary-fixed-variant': '#763400',
+              'on-secondary-fixed-variant': '#464745',
+              'secondary-fixed-dim': '#c7c6c4',
+              'on-primary': '#ffffff',
+              tertiary: '#974400',
+              'tertiary-fixed-dim': '#ffb68d',
+              background: '#fff8f6',
+              'on-tertiary-fixed': '#321200',
+              'on-secondary-fixed': '#1a1c1a',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              md: '24px',
+              'margin-mobile': '16px',
+              xs: '4px',
+              lg: '48px',
+              'max-width-desktop': '1280px',
+              gutter: '24px',
+              sm: '12px',
+              base: '8px',
+              xl: '80px',
+            },
+            fontFamily: {
+              'title-md': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'display-lg': ['Inter'],
+              'body-md': ['Inter'],
+              'headline-lg': ['Inter'],
+              'label-sm': ['Inter'],
+            },
+            fontSize: {
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      body {
+        background-color: #fff8f6;
+        font-family: 'Inter', sans-serif;
+      }
+      .form-input-shadow {
+        box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+      }
+    </style>
+  </head>
+  <body class="flex overflow-hidden">
+    <!-- SideNavBar (Authority Source: JSON) -->
+    <aside
+      class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant/30 py-6 px-4 z-40 shadow-[0px_4px_20px_rgba(62,39,35,0.05)]"
+    >
+      <div class="mb-10 px-4">
+        <h1 class="font-title-md text-title-md text-primary-container tracking-tight">
+          Admin Portal
+        </h1>
+        <p class="text-on-surface-variant font-label-md text-label-md opacity-70">
+          Cluster Management
+        </p>
+      </div>
+      <nav class="flex-1 space-y-2 overflow-y-auto">
+        <!-- Active state determined by intent: Admin Management -->
+        <a
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg group"
+          href="#"
+        >
+          <span class="material-symbols-outlined group-hover:scale-110 transition-transform"
+            >dashboard</span
+          >
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg group"
+          href="#"
+        >
+          <span class="material-symbols-outlined group-hover:scale-110 transition-transform"
+            >map</span
+          >
+          <span class="font-label-md text-label-md">Cluster Map</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg group"
+          href="#"
+        >
+          <span class="material-symbols-outlined group-hover:scale-110 transition-transform"
+            >group</span
+          >
+          <span class="font-label-md text-label-md">Residents</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg group"
+          href="#"
+        >
+          <span class="material-symbols-outlined group-hover:scale-110 transition-transform"
+            >payments</span
+          >
+          <span class="font-label-md text-label-md">Fees &amp; Iuran</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg group"
+          href="#"
+        >
+          <span class="material-symbols-outlined group-hover:scale-110 transition-transform"
+            >security</span
+          >
+          <span class="font-label-md text-label-md">Security Logs</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg group"
+          href="#"
+        >
+          <span class="material-symbols-outlined group-hover:scale-110 transition-transform"
+            >emergency_home</span
+          >
+          <span class="font-label-md text-label-md">Complaints</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg group"
+          href="#"
+        >
+          <span class="material-symbols-outlined group-hover:scale-110 transition-transform"
+            >newspaper</span
+          >
+          <span class="font-label-md text-label-md">News Feed</span>
+        </a>
+        <!-- ACTIVE TAB -->
+        <a
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 bg-primary text-on-primary rounded-lg font-bold"
+          href="#"
+        >
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+            >admin_panel_settings</span
+          >
+          <span class="font-label-md text-label-md">Admin Management</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg group"
+          href="#"
+        >
+          <span class="material-symbols-outlined group-hover:scale-110 transition-transform"
+            >settings</span
+          >
+          <span class="font-label-md text-label-md">Settings</span>
+        </a>
+      </nav>
+      <div class="pt-6 mt-6 border-t border-outline-variant/20">
+        <div class="flex items-center gap-3 px-2">
+          <img
+            alt="Admin User Profile"
+            class="w-10 h-10 rounded-full object-cover border-2 border-primary-fixed"
+            data-alt="A professional headshot of a middle-aged male administrator with a friendly expression. He is wearing a modern business-casual outfit, set against a blurred background of a sophisticated, high-end residential clubhouse interior. The lighting is warm and natural, reinforcing a sense of approachable authority and prestige consistent with a luxury community management role."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOT5dfBCgQ8QOjgdGsZvwvsTC2ro0TadZA8rs-H-FESPV513y0X5MOJWYrMq7Ki7fxrAam-r8GucaxlNDcYtMH3n_eVIHYfQpUAVmMCJU290f38oihMiVsYIzAbOK-oWh-yM9e_9zC9CQjGqhcqbLclBS1Tj9j1zUetIhwJ-0NMkyeg64pSbbP3vVqcN6XXnUTeu4jBIlw9jncdYlXOJNELxduIsPYtA-jzIEHtsXloFsvPfPb5j_MPGlURvhYVpM6A4Sh5yuD_L0"
+          />
+          <div class="flex flex-col">
+            <span class="font-label-md text-label-md text-on-surface font-bold">Budi Santoso</span>
+            <span class="text-[10px] uppercase tracking-wider text-primary font-bold"
+              >Super Admin</span
+            >
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="flex-1 md:ml-64 min-h-screen relative flex flex-col">
+      <!-- TopNavBar (Authority Source: JSON) -->
+      <header
+        class="sticky top-0 z-50 flex justify-between items-center w-full px-gutter bg-surface/95 backdrop-blur-sm h-16 shadow-[0px_8px_30px_rgba(62,39,35,0.08)]"
+      >
+        <div class="flex items-center gap-6">
+          <button class="md:hidden p-2 text-on-surface-variant">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div
+            class="hidden md:flex items-center bg-secondary-container/30 px-4 py-2 rounded-full border border-outline-variant/20"
+          >
+            <span class="material-symbols-outlined text-on-surface-variant mr-2">search</span>
+            <input
+              class="bg-transparent border-none focus:ring-0 text-body-md font-body-md w-64 placeholder:text-on-surface-variant/50"
+              placeholder="Search resources..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center">
+          <h2 class="font-headline-lg text-headline-lg text-primary tracking-tight mr-auto md:mr-0">
+            Tampaksiring Smart Cluster
+          </h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            class="p-2 rounded-full hover:bg-secondary-container/50 transition-colors cursor-pointer active:scale-95 duration-200"
+          >
+            <span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+          </button>
+          <button
+            class="p-2 rounded-full hover:bg-secondary-container/50 transition-colors cursor-pointer active:scale-95 duration-200"
+          >
+            <span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+          </button>
+        </div>
+      </header>
+      <!-- Content Area -->
+      <section
+        class="p-gutter max-w-max-desktop mx-auto w-full flex-1 animate-in fade-in duration-700"
+      >
+        <!-- Breadcrumbs -->
+        <nav
+          class="flex items-center gap-2 text-on-surface-variant/60 font-label-sm text-label-sm mb-6"
+        >
+          <a class="hover:text-primary transition-colors" href="#">Admin Portal</a>
+          <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+          <a class="hover:text-primary transition-colors" href="#">Admin Management</a>
+          <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+          <span class="text-on-surface font-bold">Add New Admin</span>
+        </nav>
+        <div class="mb-10">
+          <h3 class="font-headline-lg text-headline-lg text-on-surface mb-2">
+            Register New Administrative Staff
+          </h3>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+            Create a new access profile for the smart cluster ecosystem. Ensure all contact details
+            are accurate to maintain secure communication and role-based permissions.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+          <!-- Left: Form Card -->
+          <div
+            class="lg:col-span-8 bg-surface-container-lowest rounded-xl p-md shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant/10"
+          >
+            <form class="space-y-6" id="adminForm">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Full Name -->
+                <div class="space-y-2">
+                  <label
+                    class="block font-label-md text-label-md text-on-surface-variant"
+                    for="fullName"
+                    >Full Name</label
+                  >
+                  <div class="relative group">
+                    <input
+                      class="w-full bg-surface/50 border border-outline-variant/40 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-body-md form-input-shadow"
+                      id="fullName"
+                      placeholder="e.g. Raden Mas Bagus"
+                      required=""
+                      type="text"
+                    />
+                    <span
+                      class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-primary transition-colors"
+                      >person</span
+                    >
+                  </div>
+                </div>
+                <!-- Email Address -->
+                <div class="space-y-2">
+                  <label
+                    class="block font-label-md text-label-md text-on-surface-variant"
+                    for="email"
+                    >Email Address</label
+                  >
+                  <div class="relative group">
+                    <input
+                      class="w-full bg-surface/50 border border-outline-variant/40 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-body-md form-input-shadow"
+                      id="email"
+                      placeholder="admin@tampaksiring.id"
+                      required=""
+                      type="email"
+                    />
+                    <span
+                      class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-primary transition-colors"
+                      >mail</span
+                    >
+                  </div>
+                </div>
+                <!-- Role Dropdown -->
+                <div class="space-y-2">
+                  <label
+                    class="block font-label-md text-label-md text-on-surface-variant"
+                    for="role"
+                    >Role</label
+                  >
+                  <div class="relative">
+                    <select
+                      class="w-full bg-surface/50 border border-outline-variant/40 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-body-md appearance-none form-input-shadow"
+                      id="role"
+                      required=""
+                    >
+                      <option disabled="" selected="" value="">Select a role...</option>
+                      <option value="super_admin">Super Admin</option>
+                      <option value="finance_lead">Finance Lead</option>
+                      <option value="security_officer">Security Officer</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                    <span
+                      class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none"
+                      >arrow_drop_down</span
+                    >
+                  </div>
+                </div>
+                <!-- Phone Number -->
+                <div class="space-y-2">
+                  <label
+                    class="block font-label-md text-label-md text-on-surface-variant"
+                    for="phone"
+                    >Phone Number</label
+                  >
+                  <div class="relative group">
+                    <input
+                      class="w-full bg-surface/50 border border-outline-variant/40 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-body-md form-input-shadow"
+                      id="phone"
+                      placeholder="+62 812-xxxx-xxxx"
+                      required=""
+                      type="tel"
+                    />
+                    <span
+                      class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-primary transition-colors"
+                      >phone_iphone</span
+                    >
+                  </div>
+                </div>
+                <!-- Password -->
+                <div class="space-y-2 md:col-span-2">
+                  <label
+                    class="block font-label-md text-label-md text-on-surface-variant"
+                    for="password"
+                    >Password</label
+                  >
+                  <div class="relative group">
+                    <input
+                      class="w-full bg-surface/50 border border-outline-variant/40 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-body-md form-input-shadow"
+                      id="password"
+                      placeholder="••••••••••••"
+                      required=""
+                      type="password"
+                    />
+                    <button
+                      class="absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant hover:text-primary transition-colors"
+                      type="button"
+                    >
+                      <span class="material-symbols-outlined">visibility_off</span>
+                    </button>
+                  </div>
+                  <p class="text-[11px] text-on-surface-variant/60 mt-1">
+                    Minimum 8 characters with a mix of letters, numbers, and symbols.
+                  </p>
+                </div>
+              </div>
+              <!-- Form Actions -->
+              <div
+                class="pt-8 flex flex-col sm:flex-row items-center gap-4 border-t border-outline-variant/20"
+              >
+                <button
+                  class="w-full sm:w-auto px-10 py-3 bg-primary text-on-primary font-bold rounded-lg hover:bg-primary-container transition-all active:scale-95 shadow-md"
+                  type="submit"
+                >
+                  Save Admin
+                </button>
+                <button
+                  class="w-full sm:w-auto px-10 py-3 bg-transparent border border-primary text-primary font-bold rounded-lg hover:bg-primary/5 transition-all active:scale-95"
+                  type="button"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- Right: Information & Visuals -->
+          <div class="lg:col-span-4 space-y-6">
+            <!-- Helper Card -->
+            <div class="bg-primary/5 border border-primary/20 rounded-xl p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="bg-primary-fixed p-2 rounded-lg">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    style="font-variation-settings: 'FILL' 1"
+                    >verified_user</span
+                  >
+                </div>
+                <h4 class="font-title-md text-title-md text-on-surface">Security Protocol</h4>
+              </div>
+              <ul class="space-y-3">
+                <li class="flex gap-3 items-start">
+                  <span class="material-symbols-outlined text-primary text-[18px] mt-0.5"
+                    >check_circle</span
+                  >
+                  <p class="text-label-md text-on-surface-variant">
+                    Credentials will be sent via encrypted email to the recipient.
+                  </p>
+                </li>
+                <li class="flex gap-3 items-start">
+                  <span class="material-symbols-outlined text-primary text-[18px] mt-0.5"
+                    >check_circle</span
+                  >
+                  <p class="text-label-md text-on-surface-variant">
+                    The new admin will be required to change their password on first login.
+                  </p>
+                </li>
+                <li class="flex gap-3 items-start">
+                  <span class="material-symbols-outlined text-primary text-[18px] mt-0.5"
+                    >check_circle</span
+                  >
+                  <p class="text-label-md text-on-surface-variant">
+                    All actions performed by this user will be logged in the security logs.
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <!-- Decorative Branding Image -->
+            <div class="rounded-xl overflow-hidden relative h-64 group shadow-lg">
+              <img
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                data-alt="An architectural close-up of a premium, modern residential development in a lush tropical setting like Bali. The image showcases clean lines, natural stone cladding, and warm wood accents under soft, late-afternoon golden-hour sunlight. The atmosphere is quiet, secure, and upscale, emphasizing the 'Smart Cluster' identity of the Tampaksiring development with a warm, earthy color palette."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt_FiBREWZMNxBu-sfUrR0-Yk-UJyry9vrwaOZDYkzxSgDU6BzV1-KMZEUH1ge9WNYGR4K3ZJArxgblQT5aP03vtihQHiflkAP50KpG08erRXWGQY2GmwdFnG3xPOZqOcvpWBM-koHVUL8tC1LbKSj4Yw6RMxav1k3yaC4065Wo-LbO-uqh1oOAkEW_yIep31b76eraOmQjLaXw1fkXxYd58FL0Vk1cTzIyr8y0uqtgkcu023KKu6-_E2d6nsZBEz30j-GOEtPhAc"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-6"
+              >
+                <div>
+                  <p class="text-on-primary font-bold text-lg">Excellence in Security</p>
+                  <p class="text-on-primary/80 text-sm">Managing the future of Tampaksiring</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Footer Decoration -->
+      <footer class="p-8 text-center text-on-surface-variant/40 font-label-sm">
+        <p>© 2024 Tampaksiring Smart Cluster Management Systems. All rights reserved.</p>
+      </footer>
+    </main>
+    <!-- Success Modal (Hidden by default) -->
+    <div
+      class="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm hidden animate-in fade-in duration-300"
+      id="successModal"
+    >
+      <div
+        class="bg-surface-container-lowest rounded-2xl p-md max-w-md w-full shadow-[0px_12px_40px_rgba(62,39,35,0.12)] border border-outline-variant/20 text-center scale-95 transition-transform"
+      >
+        <div
+          class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
+          <span class="material-symbols-outlined text-primary text-5xl">task_alt</span>
+        </div>
+        <h3 class="font-headline-lg text-headline-lg text-on-surface mb-2">Admin Created</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-8">
+          New administrator account has been successfully registered. An invitation email has been
+          sent.
+        </p>
+        <button
+          class="w-full py-3 bg-primary text-on-primary font-bold rounded-lg hover:bg-primary-container transition-all"
+          onclick="closeModal()"
+        >
+          Dismiss
+        </button>
+      </div>
+    </div>
+    <script>
+      const adminForm = document.getElementById('adminForm');
+      const successModal = document.getElementById('successModal');
+
+      adminForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Show success state
+        successModal.classList.remove('hidden');
+        successModal.querySelector('div > div').classList.add('scale-100');
+        successModal.querySelector('div > div').classList.remove('scale-95');
+      });
+
+      function closeModal() {
+        successModal.classList.add('hidden');
+        adminForm.reset();
+      }
+
+      // Dropdown styling for better visual feedback
+      const select = document.getElementById('role');
+      select.addEventListener('change', function () {
+        this.classList.add('text-on-surface');
+        this.classList.remove('text-on-surface-variant/50');
+      });
+
+      // Hover effect for nav items
+      document.querySelectorAll('aside nav a').forEach((item) => {
+        item.addEventListener('mouseenter', () => {
+          const icon = item.querySelector('.material-symbols-outlined');
+          if (icon && !item.classList.contains('bg-primary')) {
+            icon.style.fontVariationSettings = "'FILL' 1";
+          }
+        });
+        item.addEventListener('mouseleave', () => {
+          const icon = item.querySelector('.material-symbols-outlined');
+          if (icon && !item.classList.contains('bg-primary')) {
+            icon.style.fontVariationSettings = "'FILL' 0";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,542 @@
+<!doctype html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Manage Security Personnel | SmartCluster Admin</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-tertiary-container': '#fffbff',
+              'on-primary': '#ffffff',
+              'secondary-fixed': '#e3e2e0',
+              'primary-fixed': '#ffddb6',
+              'on-secondary-container': '#626361',
+              'inverse-primary': '#e2c19b',
+              'inverse-surface': '#422a26',
+              'on-tertiary-fixed': '#321200',
+              'outline-variant': '#d1c4b8',
+              'on-primary-container': '#fffbff',
+              'on-primary-fixed-variant': '#594325',
+              'on-surface-variant': '#4e453c',
+              'surface-bright': '#fff8f6',
+              background: '#fff8f6',
+              tertiary: '#974400',
+              'on-secondary-fixed': '#1a1c1a',
+              'on-secondary': '#ffffff',
+              'on-background': '#2b1613',
+              'on-surface': '#2b1613',
+              error: '#ba1a1a',
+              'surface-container-lowest': '#ffffff',
+              'secondary-container': '#e0e0dd',
+              'on-tertiary-fixed-variant': '#763400',
+              'primary-container': '#8b704f',
+              'on-secondary-fixed-variant': '#464745',
+              'surface-container': '#ffe9e5',
+              'error-container': '#ffdad6',
+              'surface-container-high': '#ffe2dd',
+              'tertiary-fixed-dim': '#ffb68d',
+              'surface-tint': '#735a3a',
+              'surface-container-highest': '#ffdad4',
+              'on-error-container': '#93000a',
+              'surface-container-low': '#fff0ee',
+              'secondary-fixed-dim': '#c7c6c4',
+              secondary: '#5e5f5d',
+              'on-tertiary': '#ffffff',
+              'on-error': '#ffffff',
+              'surface-variant': '#ffdad4',
+              'primary-fixed-dim': '#e2c19b',
+              'inverse-on-surface': '#ffedea',
+              'tertiary-fixed': '#ffdbc9',
+              'tertiary-container': '#bb5808',
+              surface: '#fff8f6',
+              outline: '#80756b',
+              'surface-dim': '#f8d1cb',
+              primary: '#705838',
+              'on-primary-fixed': '#291801',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              'margin-mobile': '16px',
+              md: '24px',
+              xs: '4px',
+              xl: '80px',
+              base: '8px',
+              sm: '12px',
+              'max-width-desktop': '1280px',
+              lg: '48px',
+              gutter: '24px',
+            },
+            fontFamily: {
+              'title-md': ['Inter'],
+              'label-md': ['Inter'],
+              'display-lg': ['Inter'],
+              'headline-lg': ['Inter'],
+              'body-lg': ['Inter'],
+              'body-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+            },
+            fontSize: {
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #faf9f6;
+        color: #2b1613;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .raised-card {
+        box-shadow: 0px 4px 20px rgba(62, 39, 35, 0.05);
+      }
+      .floating-nav {
+        box-shadow: 0px 8px 30px rgba(62, 39, 35, 0.08);
+      }
+    </style>
+  </head>
+  <body class="font-body-md text-body-md bg-background">
+    <!-- SideNavBar Anchor -->
+    <aside
+      class="fixed left-0 top-0 h-full w-72 bg-surface border-r border-outline-variant flex flex-col p-4 gap-2 z-[60] hidden md:flex"
+    >
+      <div class="flex items-center gap-3 px-2 mb-6">
+        <img
+          alt="Smart Cluster Logo"
+          class="w-10 h-10 rounded-lg object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8J-YpeRaLMbGBgqFO4ODwYBOnMXzx56rzJ2bh4xere-MigeqLimmDuNrfRJqaWzPtreOxQmoopxxaI-TIejYqhtBr5wvpZJf7Sz70Thfg94VheS5bLReNWl-2oC7nlubRnnkiRwjuaC_uVHLoGKbzHMyB2IicHNSoeXEQkQ04dBvS9n6bOBl2296_aUH23pLenF7rO4uPg8sLq-zILQFDeh_AtWeU9r9ABodaSLEN7vWB8Y7h2B_T5lz1GmR85c2jpyRWzRVP1b4"
+        />
+        <div>
+          <h2 class="font-title-md text-title-md font-bold text-primary">SmartCluster Admin</h2>
+          <p class="text-[10px] uppercase tracking-wider text-on-surface-variant opacity-70">
+            Residential Portal
+          </p>
+        </div>
+      </div>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="map">map</span>
+          <span class="font-label-md text-label-md">Cluster Map</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="groups">groups</span>
+          <span class="font-label-md text-label-md">Residents</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="payments">payments</span>
+          <span class="font-label-md text-label-md">Fees</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-primary-container bg-primary-container rounded-lg font-bold"
+          href="#"
+        >
+          <span
+            class="material-symbols-outlined"
+            data-icon="security"
+            style="font-variation-settings: 'FILL' 1"
+            >security</span
+          >
+          <span class="font-label-md text-label-md">Security</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="feedback">feedback</span>
+          <span class="font-label-md text-label-md">Complaints</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="admin_panel_settings"
+            >admin_panel_settings</span
+          >
+          <span class="font-label-md text-label-md">Admin Management</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="settings">settings</span>
+          <span class="font-label-md text-label-md">Settings</span>
+        </a>
+      </nav>
+      <div class="mt-auto p-2">
+        <div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl">
+          <div
+            class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold"
+          >
+            JD
+          </div>
+          <div class="overflow-hidden">
+            <p class="font-label-md text-label-md truncate">John Doe</p>
+            <p class="text-[10px] text-on-surface-variant truncate">Chief Administrator</p>
+          </div>
+          <button class="ml-auto text-on-surface-variant">
+            <span class="material-symbols-outlined" data-icon="logout">logout</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="md:ml-72 min-h-screen flex flex-col">
+      <!-- TopAppBar Anchor -->
+      <header
+        class="flex justify-between items-center w-full px-md py-4 bg-surface-bright border-b border-outline-variant sticky top-0 z-50"
+      >
+        <div class="flex items-center gap-4">
+          <button class="md:hidden text-primary">
+            <span class="material-symbols-outlined" data-icon="menu">menu</span>
+          </button>
+          <div class="relative hidden sm:block">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline"
+              data-icon="search"
+              >search</span
+            >
+            <input
+              class="pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-full text-label-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none w-64 transition-all"
+              placeholder="Search personnel..."
+              type="text"
+            />
+          </div>
+          <h1 class="font-title-md text-title-md font-bold text-primary ml-2">Admin Portal</h1>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant relative"
+          >
+            <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+            <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+          </button>
+          <button
+            class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant"
+          >
+            <span class="material-symbols-outlined" data-icon="help">help</span>
+          </button>
+          <div class="h-8 w-[1px] bg-outline-variant mx-1"></div>
+          <img
+            alt="Administrator Profile"
+            class="w-8 h-8 rounded-full border border-outline-variant"
+            data-alt="A professional headshot of a middle-aged man with a warm, confident expression. He is wearing a minimalist, high-end corporate attire in a brightly lit, modern architectural setting. The lighting is soft and diffused, emphasizing a clean and premium professional aesthetic consistent with a luxury residential brand."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH00Y_P_IwH80qhtpLBgvGLooLDhKLIohHhVLzGMMDSmqI3x6-WRpArWsvMEfSPOPCdXC_TqVNu_bSHNKRp1GUabb_M8AruJvi3cF64uuVkOzMPpw-GqBFObX-dhh_78v0zBU7CnBSXAUoSx_2acYQFBgiIpRBPA0dKUpd4UhD34rwZ2n5533un89rNz0UBv0_A1WNe8JoTYG1TbzxAqB3rXJMV9oBxRLTceTTJV4uefAokww9SqAQrTG-ds9eMfiY-BHo2avhF8Q"
+          />
+        </div>
+      </header>
+      <!-- Form Canvas -->
+      <div class="p-4 md:p-8 max-w-5xl mx-auto w-full">
+        <div class="mb-8">
+          <nav class="flex items-center gap-2 text-label-md text-on-surface-variant mb-4">
+            <a class="hover:text-primary transition-colors" href="#">Security Management</a>
+            <span class="material-symbols-outlined text-[14px]" data-icon="chevron_right"
+              >chevron_right</span
+            >
+            <span class="text-primary font-bold">Personnel Form</span>
+          </nav>
+          <h2 class="font-headline-lg text-headline-lg text-on-background">
+            Manage Security Personnel
+          </h2>
+          <p class="text-on-surface-variant mt-1">
+            Register new staff or update existing security profile information for Tampaksiring
+            Smart Cluster.
+          </p>
+        </div>
+        <form class="space-y-6">
+          <!-- Main Grid Layout -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left Column: Photo & Status -->
+            <div class="lg:col-span-1 space-y-6">
+              <!-- Profile Photo Card -->
+              <div
+                class="bg-surface-container-lowest p-6 rounded-xl raised-card border border-outline-variant flex flex-col items-center"
+              >
+                <h3 class="font-title-md text-title-md mb-6 self-start">Profile Photo</h3>
+                <div class="relative group">
+                  <div
+                    class="w-48 h-48 rounded-2xl bg-surface-container-low border-2 border-dashed border-outline-variant flex flex-center items-center justify-center overflow-hidden transition-all group-hover:border-primary"
+                  >
+                    <div class="text-center p-4">
+                      <span
+                        class="material-symbols-outlined text-outline text-4xl mb-2"
+                        data-icon="add_a_photo"
+                        >add_a_photo</span
+                      >
+                      <p class="text-label-sm text-outline">Click to upload or drag photo</p>
+                    </div>
+                    <!-- Hidden Input for Photo -->
+                    <input class="absolute inset-0 opacity-0 cursor-pointer" type="file" />
+                  </div>
+                </div>
+                <p class="text-label-sm text-on-surface-variant mt-4 text-center">
+                  Supported formats: JPG, PNG. Max size 2MB.
+                </p>
+              </div>
+              <!-- Status Selection Card -->
+              <div
+                class="bg-surface-container-lowest p-6 rounded-xl raised-card border border-outline-variant"
+              >
+                <h3 class="font-title-md text-title-md mb-4">Current Status</h3>
+                <div class="space-y-3">
+                  <label
+                    class="flex items-center p-3 rounded-lg border border-outline-variant hover:bg-surface-container-low cursor-pointer transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5"
+                  >
+                    <input
+                      checked=""
+                      class="w-4 h-4 text-primary focus:ring-primary border-outline-variant"
+                      name="status"
+                      type="radio"
+                      value="Active"
+                    />
+                    <span class="ml-3 flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                      <span class="font-label-md text-label-md">Active</span>
+                    </span>
+                  </label>
+                  <label
+                    class="flex items-center p-3 rounded-lg border border-outline-variant hover:bg-surface-container-low cursor-pointer transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5"
+                  >
+                    <input
+                      class="w-4 h-4 text-primary focus:ring-primary border-outline-variant"
+                      name="status"
+                      type="radio"
+                      value="On Break"
+                    />
+                    <span class="ml-3 flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
+                      <span class="font-label-md text-label-md">On Break</span>
+                    </span>
+                  </label>
+                  <label
+                    class="flex items-center p-3 rounded-lg border border-outline-variant hover:bg-surface-container-low cursor-pointer transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5"
+                  >
+                    <input
+                      class="w-4 h-4 text-primary focus:ring-primary border-outline-variant"
+                      name="status"
+                      type="radio"
+                      value="Offline"
+                    />
+                    <span class="ml-3 flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-outline"></span>
+                      <span class="font-label-md text-label-md">Offline</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- Right Column: Form Details -->
+            <div class="lg:col-span-2 space-y-6">
+              <!-- Personal Details Card -->
+              <div
+                class="bg-surface-container-lowest p-6 rounded-xl raised-card border border-outline-variant"
+              >
+                <h3 class="font-title-md text-title-md mb-6">Personnel Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="flex flex-col gap-2">
+                    <label class="text-label-md font-bold text-on-surface">Full Name</label>
+                    <input
+                      class="px-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg text-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                      placeholder="e.g. Budi Santoso"
+                      type="text"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <label class="text-label-md font-bold text-on-surface"
+                      >Security ID / Employee Number</label
+                    >
+                    <input
+                      class="px-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg text-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                      placeholder="e.g. SEC-2023-089"
+                      type="text"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <label class="text-label-md font-bold text-on-surface">Shift Assignment</label>
+                    <select
+                      class="px-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg text-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all appearance-none cursor-pointer"
+                    >
+                      <option disabled="" selected="" value="">Select shift...</option>
+                      <option value="A">Shift A (06:00 - 14:00)</option>
+                      <option value="B">Shift B (14:00 - 22:00)</option>
+                      <option value="C">Shift C (22:00 - 06:00)</option>
+                    </select>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <label class="text-label-md font-bold text-on-surface">Phone Number</label>
+                    <input
+                      class="px-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg text-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                      placeholder="+62 812-XXXX-XXXX"
+                      type="tel"
+                    />
+                  </div>
+                  <div class="md:col-span-2 flex flex-col gap-2">
+                    <label class="text-label-md font-bold text-on-surface">Assignment Area</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <label
+                        class="relative flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5 group"
+                      >
+                        <input class="hidden" name="area" type="radio" value="Main Entrance" />
+                        <span
+                          class="material-symbols-outlined text-outline group-has-[:checked]:text-primary mb-1"
+                          data-icon="gate"
+                          >gate</span
+                        >
+                        <span class="text-label-md text-center">Main Entrance</span>
+                      </label>
+                      <label
+                        class="relative flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5 group"
+                      >
+                        <input class="hidden" name="area" type="radio" value="South Sector" />
+                        <span
+                          class="material-symbols-outlined text-outline group-has-[:checked]:text-primary mb-1"
+                          data-icon="explore"
+                          >explore</span
+                        >
+                        <span class="text-label-md text-center">South Sector</span>
+                      </label>
+                      <label
+                        class="relative flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-all has-[:checked]:border-primary has-[:checked]:bg-primary/5 group"
+                      >
+                        <input class="hidden" name="area" type="radio" value="Clubhouse" />
+                        <span
+                          class="material-symbols-outlined text-outline group-has-[:checked]:text-primary mb-1"
+                          data-icon="apartment"
+                          >apartment</span
+                        >
+                        <span class="text-label-md text-center">Clubhouse</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Notes & Instructions Card -->
+              <div
+                class="bg-surface-container-lowest p-6 rounded-xl raised-card border border-outline-variant"
+              >
+                <h3 class="font-title-md text-title-md mb-6">Special Instructions &amp; Notes</h3>
+                <div class="flex flex-col gap-2">
+                  <label class="text-label-md font-bold text-on-surface">Internal Notes</label>
+                  <textarea
+                    class="px-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg text-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none"
+                    placeholder="Enter any specific duties, medical considerations, or administrative notes regarding this personnel..."
+                    rows="4"
+                  ></textarea>
+                  <p class="text-[12px] text-on-surface-variant italic">
+                    Notes are only visible to the administrative team.
+                  </p>
+                </div>
+              </div>
+              <!-- Action Buttons -->
+              <div class="flex items-center justify-end gap-4 pt-4 pb-12">
+                <button
+                  class="px-8 py-3 rounded-lg border border-primary text-primary font-bold hover:bg-primary/5 transition-all"
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  class="px-10 py-3 rounded-lg bg-primary text-on-primary font-bold shadow-md hover:opacity-90 transition-all flex items-center gap-2"
+                  type="submit"
+                >
+                  <span class="material-symbols-outlined" data-icon="save">save</span>
+                  Save Personnel
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+    <!-- Background Decoration -->
+    <div
+      class="fixed top-0 right-0 -z-10 w-1/3 h-1/2 bg-gradient-to-bl from-primary/5 to-transparent pointer-events-none"
+    ></div>
+    <script>
+      // Micro-interaction for form inputs
+      const inputs = document.querySelectorAll('input, select, textarea');
+      inputs.forEach((input) => {
+        input.addEventListener('focus', () => {
+          input.parentElement.querySelector('label')?.classList.add('text-primary');
+        });
+        input.addEventListener('blur', () => {
+          input.parentElement.querySelector('label')?.classList.remove('text-primary');
+        });
+      });
+
+      // Simple feedback for file upload simulation
+      const fileUpload = document.querySelector('input[type="file"]');
+      if (fileUpload) {
+        fileUpload.addEventListener('change', (e) => {
+          if (e.target.files.length > 0) {
+            const fileName = e.target.files[0].name;
+            const container = fileUpload.closest('.group').querySelector('p');
+            container.innerText = 'Selected: ' + fileName;
+            container.classList.add('text-primary', 'font-bold');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

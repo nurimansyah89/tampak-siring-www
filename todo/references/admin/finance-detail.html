@@ -1,0 +1,443 @@
+<!doctype html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Detail Bukti Pembayaran Iuran</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'inverse-primary': '#e2c19b',
+              'tertiary-fixed': '#ffdbc9',
+              'secondary-fixed-dim': '#c7c6c4',
+              'on-primary': '#ffffff',
+              'inverse-on-surface': '#ffedea',
+              surface: '#fff8f6',
+              error: '#ba1a1a',
+              'surface-tint': '#735a3a',
+              'surface-container-highest': '#ffdad4',
+              'on-primary-fixed-variant': '#594325',
+              outline: '#80756b',
+              'on-tertiary': '#ffffff',
+              'secondary-fixed': '#e3e2e0',
+              primary: '#705838',
+              'on-error': '#ffffff',
+              'on-surface-variant': '#4e453c',
+              'error-container': '#ffdad6',
+              'tertiary-fixed-dim': '#ffb68d',
+              'on-tertiary-fixed-variant': '#763400',
+              tertiary: '#974400',
+              secondary: '#5e5f5d',
+              'outline-variant': '#d1c4b8',
+              'surface-container-lowest': '#ffffff',
+              'primary-fixed': '#ffddb6',
+              'on-tertiary-fixed': '#321200',
+              'surface-container-high': '#ffe2dd',
+              'inverse-surface': '#422a26',
+              'tertiary-container': '#bb5808',
+              'surface-container': '#ffe9e5',
+              'secondary-container': '#e0e0dd',
+              'on-background': '#2b1613',
+              'on-secondary': '#ffffff',
+              'surface-dim': '#f8d1cb',
+              'surface-bright': '#fff8f6',
+              'surface-container-low': '#fff0ee',
+              'primary-fixed-dim': '#e2c19b',
+              'on-secondary-container': '#626361',
+              'on-primary-fixed': '#291801',
+              'on-error-container': '#93000a',
+              'on-secondary-fixed-variant': '#464745',
+              background: '#fff8f6',
+              'on-secondary-fixed': '#1a1c1a',
+              'primary-container': '#8b704f',
+              'surface-variant': '#ffdad4',
+              'on-tertiary-container': '#fffbff',
+              'on-surface': '#2b1613',
+              'on-primary-container': '#fffbff',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              xs: '4px',
+              xl: '80px',
+              md: '24px',
+              lg: '48px',
+              sm: '12px',
+              'max-width-desktop': '1280px',
+              gutter: '24px',
+              'margin-mobile': '16px',
+              base: '8px',
+            },
+            fontFamily: {
+              'label-sm': ['Inter'],
+              'headline-lg': ['Inter'],
+              'body-md': ['Inter'],
+              'display-lg': ['Inter'],
+              'body-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'title-md': ['Inter'],
+            },
+            fontSize: {
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .proof-area {
+        background-image: radial-gradient(#d1c4b8 0.5px, transparent 0.5px);
+        background-size: 16px 16px;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background font-body-md">
+    <!-- Sidebar Navigation -->
+    <aside
+      class="h-screen w-64 fixed left-0 top-0 bg-surface shadow-sm flex flex-col border-r border-outline-variant z-50"
+    >
+      <div class="p-6 flex items-center gap-3">
+        <img
+          alt="Residential Portal Logo"
+          class="w-10 h-10 rounded-lg"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV7bxcX9zhWvlq51kG_AqocpheFncA1QJWiQR3CAsWSIORmjBF7w4XqcOTJKp7ItQXG4NhQYELYFKc6Z7y8N6KaMJeK0clQYnhtWndZ-54nkz1C0owBqAhzNuelTxNsBHnWEXwVcZVvgdj2R75J3dlmhwopqmXUmExx53hPTjYQph1aoXC-IqbQqH_VBeVdhjrKLRzWD-z_I5izrCaNLFy2RjBfvmgs_FkKFiO8fvgvfqbD7AU1XjyBBVWWOqqIGo2Ax-46e34I6A"
+        />
+        <div>
+          <h1 class="text-title-md font-title-md text-primary">Residential Portal</h1>
+          <p class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">
+            Management Office
+          </p>
+        </div>
+      </div>
+      <nav class="flex-1 px-2 space-y-1">
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">group</span>
+          <span class="font-label-md text-label-md">Residents</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-primary font-bold border-r-4 border-primary bg-surface-container transition-colors"
+          href="#"
+        >
+          <span class="material-symbols-outlined">payments</span>
+          <span class="font-label-md text-label-md">Fees &amp; Iuran</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">security</span>
+          <span class="font-label-md text-label-md">Security</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">feedback</span>
+          <span class="font-label-md text-label-md">Complaints</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">newspaper</span>
+          <span class="font-label-md text-label-md">News Feed</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-label-md text-label-md">Settings</span>
+        </a>
+      </nav>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="ml-64 min-h-screen">
+      <!-- Top App Bar -->
+      <header
+        class="flex justify-between items-center h-16 px-md bg-surface-container-lowest shadow-sm sticky top-0 z-40"
+      >
+        <div class="flex items-center gap-4">
+          <a class="p-2 hover:bg-surface-container rounded-full transition-colors" href="#">
+            <span class="material-symbols-outlined text-primary">arrow_back</span>
+          </a>
+          <div>
+            <h2 class="font-title-md text-title-md text-on-surface">Detail Bukti Pembayaran</h2>
+            <p class="text-label-sm font-label-sm text-on-surface-variant">
+              TXN-ID: #PAY-20231015-0842
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <div class="h-8 w-[1px] bg-outline-variant"></div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <p class="text-label-md font-label-md text-on-surface">Admin Workspace</p>
+              <p class="text-[10px] text-on-surface-variant">Super Admin</p>
+            </div>
+            <img
+              alt="Admin Avatar"
+              class="w-8 h-8 rounded-full border border-outline-variant"
+              data-alt="A professional headshot of a middle-aged male administrator in a clean office environment. He is wearing a crisp white button-down shirt and glasses, smiling warmly at the camera. The background is a soft-focus office with minimalist warm brown decor and high-key lighting, maintaining a corporate yet inviting aesthetic."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsZ6wDT2_SalMP9sj8vfQCBLRjmYshYncGivxRuKeDUHd3Ar7WBssqIODF0V2bzDtARNA2S3Izu9nP16hdl1DbPWdOMDm-SUICN1jKrmxzqpJmcVpG2mR-02MyHSr9hwTokMxPjSJe6IXp0z7A8tE7HDgCto-6_ByFQejUcH6Lw9ww0OlL0AaX9AyU3ftQKnjijuRHRbXsZlKY_J_fC0D-6IUKbajD_mz2exaLD6dPBr1x1fLS8krqmXhUxVQp24XTuEfwY0Cbs84"
+            />
+          </div>
+        </div>
+      </header>
+      <!-- Content Area -->
+      <div class="p-md max-w-max-desktop mx-auto space-y-md">
+        <div class="grid grid-cols-12 gap-gutter">
+          <!-- Left Column: Details & Info -->
+          <div class="col-span-12 lg:col-span-4 space-y-md">
+            <!-- Resident Info Card -->
+            <section
+              class="bg-surface-container-lowest p-md rounded-xl shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant"
+            >
+              <h3 class="font-label-sm text-label-sm uppercase tracking-widest text-primary mb-4">
+                Informasi Warga
+              </h3>
+              <div class="space-y-4">
+                <div class="flex items-start gap-4">
+                  <div
+                    class="bg-primary-fixed text-on-primary-fixed w-12 h-12 rounded-lg flex items-center justify-center shrink-0"
+                  >
+                    <span class="material-symbols-outlined">person</span>
+                  </div>
+                  <div>
+                    <p class="font-title-md text-title-md text-on-surface leading-tight">
+                      Bambang Pamungkas
+                    </p>
+                    <p class="text-body-md text-on-surface-variant">Penghuni Tetap</p>
+                  </div>
+                </div>
+                <div class="pt-4 border-t border-outline-variant grid grid-cols-2 gap-4">
+                  <div>
+                    <p class="text-label-sm text-on-surface-variant">Blok / No</p>
+                    <p class="font-label-md text-on-surface">Block A - 12</p>
+                  </div>
+                  <div>
+                    <p class="text-label-sm text-on-surface-variant">Periode Iuran</p>
+                    <p class="font-label-md text-on-surface">Oktober 2023</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- Payment Summary Card -->
+            <section
+              class="bg-surface-container-lowest p-md rounded-xl shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant"
+            >
+              <h3 class="font-label-sm text-label-sm uppercase tracking-widest text-primary mb-4">
+                Rincian Pembayaran
+              </h3>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <span class="text-on-surface-variant">Jumlah Dibayar</span>
+                  <span class="text-title-md font-bold text-primary">Rp 350.000</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-on-surface-variant">Metode</span>
+                  <span class="font-label-md flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">account_balance</span>
+                    Bank Transfer
+                  </span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-on-surface-variant">Tanggal Bayar</span>
+                  <span class="font-label-md">15 Okt 2023, 08:30</span>
+                </div>
+              </div>
+            </section>
+            <!-- Admin History/Notes -->
+          </div>
+          <!-- Right Column: Payment Proof & Actions -->
+          <div class="col-span-12 lg:col-span-8 space-y-md">
+            <!-- Proof Display -->
+            <div
+              class="bg-surface-container-lowest p-md rounded-xl shadow-[0px_8px_30px_rgba(62,39,35,0.08)] border border-outline-variant flex flex-col h-full"
+            >
+              <div class="flex justify-between items-center mb-6">
+                <h3 class="font-title-md text-title-md text-on-surface flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary">receipt_long</span>
+                  Bukti Bayar
+                </h3>
+                <div class="flex gap-2">
+                  <button
+                    class="flex items-center gap-2 px-4 py-2 text-label-md border border-outline text-on-surface-variant rounded-lg hover:bg-surface-container transition-all"
+                  >
+                    <span class="material-symbols-outlined text-[20px]">download</span>
+                    Unduh
+                  </button>
+                  <button
+                    class="flex items-center gap-2 px-4 py-2 text-label-md border border-outline text-on-surface-variant rounded-lg hover:bg-surface-container transition-all"
+                  >
+                    <span class="material-symbols-outlined text-[20px]">zoom_in</span>
+                    Perbesar
+                  </button>
+                </div>
+              </div>
+              <div
+                class="proof-area flex-1 min-h-[500px] border-2 border-dashed border-outline-variant rounded-xl flex items-center justify-center p-md overflow-hidden relative group"
+              >
+                <img
+                  alt="Payment Receipt Screenshot"
+                  class="max-w-full max-h-[600px] shadow-lg rounded-md transform group-hover:scale-[1.02] transition-transform duration-500"
+                  data-alt="A clean, clear photograph of a bank transfer receipt displayed on a modern smartphone screen. The screen shows transaction details like the amount of 350,000, account names, and a success confirmation badge. The phone is held against a warm, earthy-toned wooden tabletop with soft sunlight filtering in from the side, creating a professional and trustworthy atmosphere."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0XeqrA0Y771SENDzwqFn04UwYm8ylBslw81Z9Q9jqG7W9tqWW1PXPbSY9r5OxbOd23FHWZb7gGHbJDIKkY5xAl4s5N6CalEPcUuldP5s4eIiUC324hYd8h0CHyPK8BVWoR-o_nrIKe3q4cf0WD1WAQifTUjUgHzCyXt0zH8KJo5rH9dK-hyYf_9qPTE1aKQ_nSnl_eK6q7uXrgqwdX6hkMzRY97g30fy2pUWi37k4JHEp8g-WpYbohoTjCbPm3LN1ThEEVjeIct0"
+                />
+                <!-- Overlay Watermark -->
+                <div
+                  class="absolute inset-0 pointer-events-none opacity-[0.03] flex items-center justify-center select-none rotate-[-30deg]"
+                >
+                  <span class="text-9xl font-black">RESIDENTIAL PORTAL</span>
+                </div>
+              </div>
+              <!-- Action Bar -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Reject Modal -->
+    <div
+      class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-[100] items-center justify-center p-margin-mobile hidden"
+      id="rejectModal"
+    >
+      <div
+        class="bg-surface-container-lowest w-full max-w-md rounded-2xl shadow-[0px_12px_40px_rgba(62,39,35,0.12)] p-md transform transition-all duration-300 scale-95 opacity-0"
+        id="modalContent"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-title-md font-bold text-on-surface">Alasan Penolakan</h3>
+          <button class="p-1 hover:bg-surface-container rounded-full" onclick="closeRejectModal()">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <p class="text-body-md text-on-surface-variant mb-4">
+          Mohon berikan alasan mengapa bukti pembayaran ini ditolak agar warga dapat melakukan
+          koreksi.
+        </p>
+        <textarea
+          class="w-full h-32 bg-surface-container-low border border-outline-variant rounded-lg p-3 text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-none transition-all"
+          placeholder="Contoh: Bukti transfer tidak terbaca atau nominal tidak sesuai..."
+        ></textarea>
+        <div class="mt-8 flex gap-3">
+          <button
+            class="flex-1 px-4 py-3 border border-outline text-on-surface-variant rounded-lg font-bold hover:bg-surface-container transition-colors"
+            onclick="closeRejectModal()"
+          >
+            Batal
+          </button>
+          <button
+            class="flex-1 px-4 py-3 bg-error text-white rounded-lg font-bold hover:opacity-90 transition-colors"
+          >
+            Tolak Sekarang
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Toast Notification -->
+    <div
+      class="fixed bottom-8 right-8 bg-inverse-surface text-inverse-on-surface px-6 py-4 rounded-xl shadow-xl transform transition-transform duration-500 flex items-center gap-3 z-[110] translate-y-24"
+      id="toast"
+    >
+      <span class="material-symbols-outlined text-inverse-primary" id="toastIcon"
+        >check_circle</span
+      >
+      <span class="font-label-md" id="toastText">Pembayaran berhasil diverifikasi</span>
+    </div>
+    <script>
+      function openRejectModal() {
+        const modal = document.getElementById('rejectModal');
+        const content = document.getElementById('modalContent');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => {
+          content.classList.remove('scale-95', 'opacity-0');
+          content.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      }
+
+      function closeRejectModal() {
+        const modal = document.getElementById('rejectModal');
+        const content = document.getElementById('modalContent');
+        content.classList.add('scale-95', 'opacity-0');
+        content.classList.remove('scale-100', 'opacity-100');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+        }, 300);
+      }
+
+      function verifyPayment() {
+        const toast = document.getElementById('toast');
+        toast.classList.remove('translate-y-24');
+        toast.classList.add('translate-y-0');
+
+        setTimeout(() => {
+          toast.classList.add('translate-y-24');
+          toast.classList.remove('translate-y-0');
+        }, 3000);
+      }
+
+      // Close modal on backdrop click
+      document.getElementById('rejectModal').addEventListener('click', (e) => {
+        if (e.target.id === 'rejectModal') closeRejectModal();
+      });
+    </script>
+  </body>
+</html>

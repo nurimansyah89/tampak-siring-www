@@ -1,0 +1,610 @@
+<!doctype html>
+
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Daftar Warga - Tampaksiring Smart Cluster</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'surface-container-lowest': '#ffffff',
+              'secondary-container': '#e0e0dd',
+              'on-tertiary-fixed-variant': '#763400',
+              'on-surface': '#2b1613',
+              error: '#ba1a1a',
+              'on-background': '#2b1613',
+              'surface-container-high': '#ffe2dd',
+              'surface-container': '#ffe9e5',
+              'error-container': '#ffdad6',
+              'on-secondary-fixed-variant': '#464745',
+              'primary-container': '#8b704f',
+              'on-error-container': '#93000a',
+              'surface-container-highest': '#ffdad4',
+              'surface-tint': '#735a3a',
+              'tertiary-fixed-dim': '#ffb68d',
+              'surface-container-low': '#fff0ee',
+              'secondary-fixed-dim': '#c7c6c4',
+              secondary: '#5e5f5d',
+              'tertiary-fixed': '#ffdbc9',
+              'surface-variant': '#ffdad4',
+              'primary-fixed-dim': '#e2c19b',
+              'inverse-on-surface': '#ffedea',
+              'on-tertiary': '#ffffff',
+              'on-error': '#ffffff',
+              outline: '#80756b',
+              'tertiary-container': '#bb5808',
+              surface: '#fff8f6',
+              primary: '#705838',
+              'on-primary-fixed': '#291801',
+              'surface-dim': '#f8d1cb',
+              'secondary-fixed': '#e3e2e0',
+              'primary-fixed': '#ffddb6',
+              'on-secondary-container': '#626361',
+              'on-tertiary-container': '#fffbff',
+              'on-primary': '#ffffff',
+              'inverse-primary': '#e2c19b',
+              'inverse-surface': '#422a26',
+              'on-tertiary-fixed': '#321200',
+              'on-primary-fixed-variant': '#594325',
+              'outline-variant': '#d1c4b8',
+              'on-primary-container': '#fffbff',
+              'surface-bright': '#fff8f6',
+              background: '#fff8f6',
+              'on-surface-variant': '#4e453c',
+              'on-secondary-fixed': '#1a1c1a',
+              tertiary: '#974400',
+              'on-secondary': '#ffffff',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              sm: '12px',
+              'max-width-desktop': '1280px',
+              lg: '48px',
+              gutter: '24px',
+              base: '8px',
+              xs: '4px',
+              xl: '80px',
+              'margin-mobile': '16px',
+              md: '24px',
+            },
+            fontFamily: {
+              'label-md': ['Inter'],
+              'display-lg': ['Inter'],
+              'title-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'headline-lg': ['Inter'],
+              'label-sm': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-md': ['Inter'],
+            },
+            fontSize: {
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #faf9f6;
+      } /* Level 0 Surface */
+      .card-elevation-1 {
+        box-shadow: 0px 4px 20px rgba(62, 39, 35, 0.05);
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .active-nav-bg {
+        background-color: #e0e0dd;
+      }
+    </style>
+  </head>
+  <body class="font-body-md text-on-surface">
+    <!-- Desktop Side Navigation Shell -->
+    <aside
+      class="hidden md:flex flex-col h-full w-64 fixed left-0 top-0 bg-surface shadow-sm border-r border-outline-variant p-4 z-50"
+    >
+      <div class="flex items-center gap-3 mb-8 px-2">
+        <img
+          alt="Cluster Logo"
+          class="w-10 h-10 rounded-lg object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGXRRa5VpenM6Y76fWn-wXHewK9e8R83rhv5rN-azXYEruuBcbXz2gh3-81OGTROWQM0PkGiS1WiPX9kqpJdI-PB6jbsV6z4jbFqQS8KL8AP6UCgW6YtS0xXG8N7BwaqfC6ASyFEnSWPt9X1z5UvGw6ySq_ejBphYHQLQ8aJtYJSjX_FAfbB5toe5WuNpOfD1pgxF_gfsw8dW5b23AOHYioeIwcHA_B0m2BvXsd2B5hjHWEGzET_gaSYFa8-KKR9f0HRGXe-C57f0"
+        />
+        <div>
+          <h1 class="font-headline-lg text-[18px] leading-tight font-bold text-primary">
+            Tampaksiring
+          </h1>
+          <p class="font-label-sm text-on-surface-variant opacity-70">Smart Cluster</p>
+        </div>
+      </div>
+      <nav class="flex-grow space-y-1">
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+          <span class="font-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="groups">groups</span>
+          <span class="font-label-md">Residents</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="payments">payments</span>
+          <span class="font-label-md">Fees</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="security">security</span>
+          <span class="font-label-md">Security</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="report_problem">report_problem</span>
+          <span class="font-label-md">Complaints</span>
+        </a>
+      </nav>
+      <div class="mt-auto border-t border-outline-variant pt-4 space-y-1">
+        <button
+          class="w-full mb-4 flex items-center justify-center gap-2 bg-error text-white py-3 rounded-lg font-bold transition-transform active:scale-95"
+        >
+          <span class="material-symbols-outlined" data-icon="emergency">emergency</span>
+          <span class="font-label-md">Emergency Call</span>
+        </button>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="settings">settings</span>
+          <span class="font-label-md">Settings</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="logout">logout</span>
+          <span class="font-label-md">Logout</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Top App Bar -->
+    <header
+      class="fixed top-0 right-0 left-0 md:left-64 h-16 bg-surface-container-lowest shadow-sm flex justify-between items-center px-6 z-40"
+    >
+      <div class="flex items-center gap-4">
+        <span class="md:hidden material-symbols-outlined text-primary cursor-pointer">menu</span>
+        <div class="relative hidden sm:block">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm"
+            >search</span
+          >
+          <input
+            class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-1.5 text-sm w-64 focus:ring-2 focus:ring-primary"
+            placeholder="Cari warga atau blok..."
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <button
+          class="p-2 hover:bg-surface-container-high rounded-full transition-opacity active:opacity-80"
+        >
+          <span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications"
+            >notifications</span
+          >
+        </button>
+        <button
+          class="p-2 hover:bg-surface-container-high rounded-full transition-opacity active:opacity-80"
+        >
+          <span class="material-symbols-outlined text-on-surface-variant" data-icon="help"
+            >help</span
+          >
+        </button>
+        <div class="h-8 w-px bg-outline-variant mx-1"></div>
+        <div class="flex items-center gap-3">
+          <p class="hidden lg:block font-label-md text-on-surface">Admin Tampaksiring</p>
+          <div class="w-8 h-8 rounded-full overflow-hidden bg-primary-container">
+            <img
+              alt="User Profile"
+              class="w-full h-full object-cover"
+              data-alt="A professional close-up portrait of a male administrative worker in a clean modern office. He is smiling warmly, dressed in a corporate casual light-colored shirt. The background is softly blurred showing a contemporary workspace with warm, natural sunlight filtering through a window, creating a prestigious yet approachable professional atmosphere consistent with a luxury residential cluster management portal."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9ynC57X9JBmNlPnxI5ovI-Oq9h0esQQhv72OiYd6wDOC5gLWwXrgUcDr6_23qQiJ1PgWref0ixbF4XqI-6gYJD4LoIbMw-LBJJZ9gynFmi2EWjR1x53rh1Ms8_3xuRffFiNF8IzAu9Vg-YegWhrsoBdYRH2oANriJ8fJTVe22YWICaoGsdh60fjAuw5PitaJ2ZIbsFLEK2g1Jt_T7CmoaidS7pxSBPaPPrPn9Gt25-3D8PYMUbVecqCrQLbAcljbXTR2A8mJi2-k"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main
+      class="pt-24 pb-12 px-margin-mobile md:px-gutter lg:px-md md:ml-64 max-w-max-width-desktop mx-auto"
+    >
+      <!-- Header Section -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <h2 class="font-headline-lg-mobile md:font-headline-lg text-on-surface font-bold">
+            Daftar Warga
+          </h2>
+          <p class="font-body-md text-on-surface-variant mt-1">
+            Kelola dan pantau data seluruh warga klaster.
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button
+            class="flex items-center gap-2 border border-primary text-primary px-5 py-2.5 rounded-lg font-label-md hover:bg-surface-container-low transition-colors"
+          >
+            <span class="material-symbols-outlined text-[18px]">download</span>
+            Export
+          </button>
+          <button
+            class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-label-md hover:opacity-90 shadow-sm transition-transform active:scale-95"
+          >
+            <span class="material-symbols-outlined text-[18px]">person_add</span>
+            Add New Resident
+          </button>
+        </div>
+      </div>
+      <!-- Summary Stats Bento Grid -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div
+          class="card-elevation-1 bg-surface-container-lowest rounded-xl p-md flex items-center gap-6 border border-outline-variant/30"
+        >
+          <div
+            class="w-14 h-14 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center text-primary"
+          >
+            <span class="material-symbols-outlined text-3xl">group</span>
+          </div>
+          <div>
+            <p class="text-on-surface-variant font-label-md">Total Residents</p>
+            <h3 class="text-3xl font-bold text-on-surface">1,284</h3>
+          </div>
+        </div>
+        <div
+          class="card-elevation-1 bg-surface-container-lowest rounded-xl p-md flex items-center gap-6 border border-outline-variant/30"
+        >
+          <div
+            class="w-14 h-14 rounded-full bg-tertiary-fixed/20 flex items-center justify-center text-tertiary"
+          >
+            <span class="material-symbols-outlined text-3xl">home_work</span>
+          </div>
+          <div>
+            <p class="text-on-surface-variant font-label-md">Occupied Units</p>
+            <h3 class="text-3xl font-bold text-on-surface">94%</h3>
+          </div>
+        </div>
+        <div
+          class="card-elevation-1 bg-surface-container-lowest rounded-xl p-md flex items-center gap-6 border border-outline-variant/30"
+        >
+          <div
+            class="w-14 h-14 rounded-full bg-error-container flex items-center justify-center text-error"
+          >
+            <span class="material-symbols-outlined text-3xl">pending_actions</span>
+          </div>
+          <div>
+            <p class="text-on-surface-variant font-label-md">Pending Approvals</p>
+            <h3 class="text-3xl font-bold text-on-surface">08</h3>
+          </div>
+        </div>
+      </section>
+      <!-- Main Data Table Section -->
+      <section
+        class="card-elevation-1 bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/30"
+      >
+        <!-- Table Controls -->
+        <div
+          class="p-4 md:p-6 border-b border-outline-variant/20 flex flex-col sm:flex-row justify-between items-center gap-4"
+        >
+          <div class="relative w-full sm:w-96">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              >search</span
+            >
+            <input
+              class="w-full bg-surface border border-outline-variant/50 rounded-lg pl-10 pr-4 py-2.5 font-body-md focus:ring-2 focus:ring-primary focus:border-primary"
+              placeholder="Search by name, block or email..."
+              type="text"
+            />
+          </div>
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <button
+              class="flex-1 sm:flex-none flex items-center justify-center gap-2 border border-outline-variant text-on-surface-variant px-4 py-2.5 rounded-lg hover:bg-surface-container transition-colors"
+            >
+              <span class="material-symbols-outlined text-[20px]">filter_list</span>
+              Filter
+            </button>
+          </div>
+        </div>
+        <!-- Responsive Table Wrapper -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead class="bg-surface-container-low border-b border-outline-variant/20">
+              <tr>
+                <th class="px-6 py-4 font-label-md text-on-surface-variant">Name</th>
+                <th class="px-6 py-4 font-label-md text-on-surface-variant">House Block</th>
+                <th class="px-6 py-4 font-label-md text-on-surface-variant">Phone Number</th>
+                <th class="px-6 py-4 font-label-md text-on-surface-variant">Status</th>
+                <th class="px-6 py-4 font-label-md text-on-surface-variant text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant/10">
+              <!-- Resident Row 1 -->
+              <tr class="hover:bg-surface-container-low/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary-fixed-dim font-bold text-sm"
+                    >
+                      JD
+                    </div>
+                    <div>
+                      <p class="font-title-md text-[15px] text-on-surface">John Doe</p>
+                      <p class="text-sm text-on-surface-variant opacity-70">johndoe@email.com</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-on-surface font-body-md">Block A, No. 12</td>
+                <td class="px-6 py-4 text-on-surface-variant font-body-md">+62 812-3456-7890</td>
+                <td class="px-6 py-4">
+                  <span
+                    class="px-3 py-1 rounded-full bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-bold"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="p-1 hover:bg-surface-container-high rounded-full transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Resident Row 2 -->
+              <tr class="hover:bg-surface-container-low/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary-fixed-dim font-bold text-sm"
+                    >
+                      AS
+                    </div>
+                    <div>
+                      <p class="font-title-md text-[15px] text-on-surface">Alice Smith</p>
+                      <p class="text-sm text-on-surface-variant opacity-70">alice.s@email.com</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-on-surface font-body-md">Block B, No. 05</td>
+                <td class="px-6 py-4 text-on-surface-variant font-body-md">+62 813-9876-5432</td>
+                <td class="px-6 py-4">
+                  <span
+                    class="px-3 py-1 rounded-full bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-bold"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="p-1 hover:bg-surface-container-high rounded-full transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Resident Row 3 -->
+              <tr class="hover:bg-surface-container-low/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary-fixed-dim font-bold text-sm"
+                    >
+                      RJ
+                    </div>
+                    <div>
+                      <p class="font-title-md text-[15px] text-on-surface">Robert Junior</p>
+                      <p class="text-sm text-on-surface-variant opacity-70">robert.jr@email.com</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-on-surface font-body-md">Block C, No. 22</td>
+                <td class="px-6 py-4 text-on-surface-variant font-body-md">+62 856-7890-1234</td>
+                <td class="px-6 py-4">
+                  <span
+                    class="px-3 py-1 rounded-full bg-[#FFF3E0] text-[#E65100] text-[12px] font-bold"
+                    >Inactive</span
+                  >
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="p-1 hover:bg-surface-container-high rounded-full transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Resident Row 4 -->
+              <tr class="hover:bg-surface-container-low/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary-fixed-dim font-bold text-sm"
+                    >
+                      MK
+                    </div>
+                    <div>
+                      <p class="font-title-md text-[15px] text-on-surface">Maria Kim</p>
+                      <p class="text-sm text-on-surface-variant opacity-70">m.kim@email.com</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-on-surface font-body-md">Block A, No. 01</td>
+                <td class="px-6 py-4 text-on-surface-variant font-body-md">+62 811-2233-4455</td>
+                <td class="px-6 py-4">
+                  <span
+                    class="px-3 py-1 rounded-full bg-[#E8F5E9] text-[#2E7D32] text-[12px] font-bold"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="p-1 hover:bg-surface-container-high rounded-full transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <div
+          class="px-6 py-4 border-t border-outline-variant/20 flex flex-col sm:flex-row justify-between items-center gap-4"
+        >
+          <p class="text-sm text-on-surface-variant">Showing 1 to 4 of 1,284 entries</p>
+          <div class="flex items-center gap-2">
+            <button
+              class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors disabled:opacity-50"
+              disabled=""
+            >
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button
+              class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold"
+            >
+              1
+            </button>
+            <button
+              class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors"
+            >
+              2
+            </button>
+            <button
+              class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors"
+            >
+              3
+            </button>
+            <span class="px-2 text-on-surface-variant">...</span>
+            <button
+              class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors"
+            >
+              32
+            </button>
+            <button
+              class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors"
+            >
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- Facility Promo Card (Additional Section for Visual Variety) -->
+      <section class="mt-12">
+        <div class="relative w-full h-64 rounded-2xl overflow-hidden shadow-lg group">
+          <img
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            data-alt="A wide-angle landscape photograph of a luxurious, crystal clear swimming pool in a high-end residential cluster at sunset. The water reflects the warm golden and purple hues of the sky. Surrounding the pool are modern lounge chairs and lush tropical landscaping. The lighting is ethereal and sophisticated, emphasizing a lifestyle of leisure and prestige that aligns with the Tampaksiring Smart Cluster's premium aesthetic."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhiUUl4swkErP1NpR5Ei8mMgSmHNX__pFnlZT6DZc5ZNYJkp3GC-G4f47RAy0-FWlc0r9X79Tj23K-LRCiXfiKUtirt3XKB5508K-8XwVwSoA-akG4eQD6T-Rnk4w8ZkxUHcNuSKtMQUZ0RsaPLGg_xKGMaQJzNBXlXCdkQp4mB8lcpJTwwVwFpmIRoTUttbY0aYFjcCEfmaCyqBU_RnGgdSJWr4MliskHTCUQXJR7MoqCCzmUk5RdnRpU4FkiT4plI-P9lS0pMNw"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex flex-col justify-center px-10"
+          >
+            <h4 class="font-headline-lg text-white mb-2">Clubhouse Baru Kini Dibuka</h4>
+            <p class="text-white/80 max-w-md mb-6">
+              Nikmati fasilitas premium kolam renang dan ruang pertemuan eksklusif hanya untuk warga
+              Tampaksiring.
+            </p>
+            <div>
+              <button
+                class="bg-white text-primary px-8 py-3 rounded-lg font-bold hover:bg-primary hover:text-white transition-all shadow-lg active:scale-95"
+              >
+                Pesan Sekarang
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Mobile Bottom NavBar Shell -->
+    <nav
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-[0_-4px_20px_rgba(0,0,0,0.05)] h-16 flex justify-around items-center z-50 px-4"
+    >
+      <a class="flex flex-col items-center gap-0.5 text-on-surface-variant" href="#">
+        <span class="material-symbols-outlined text-[24px]">dashboard</span>
+        <span class="text-[10px] font-bold">Home</span>
+      </a>
+      <a class="flex flex-col items-center gap-0.5 text-primary" href="#">
+        <span
+          class="material-symbols-outlined text-[24px]"
+          style="font-variation-settings: 'FILL' 1"
+          >groups</span
+        >
+        <span class="text-[10px] font-bold">Warga</span>
+      </a>
+      <a class="flex flex-col items-center gap-0.5 text-on-surface-variant" href="#">
+        <span class="material-symbols-outlined text-[24px]">payments</span>
+        <span class="text-[10px] font-bold">Iuran</span>
+      </a>
+      <a class="flex flex-col items-center gap-0.5 text-on-surface-variant" href="#">
+        <span class="material-symbols-outlined text-[24px]">security</span>
+        <span class="text-[10px] font-bold">Akses</span>
+      </a>
+    </nav>
+    <script>
+      // Simple micro-interaction for active state scaling
+      document.querySelectorAll('button, a').forEach((el) => {
+        el.addEventListener('mousedown', () => el.classList.add('scale-95'));
+        el.addEventListener('mouseup', () => el.classList.remove('scale-95'));
+        el.addEventListener('mouseleave', () => el.classList.remove('scale-95'));
+      });
+    </script>
+  </body>
+</html>

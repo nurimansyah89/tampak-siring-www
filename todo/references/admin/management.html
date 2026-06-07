@@ -1,0 +1,608 @@
+<!doctype html>
+<html class="light" lang="en" style="">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'surface-container-lowest': '#ffffff',
+              'on-secondary': '#ffffff',
+              'primary-fixed-dim': '#e2c19b',
+              'primary-fixed': '#ffddb6',
+              'on-surface-variant': '#4e453c',
+              'on-tertiary-container': '#fffbff',
+              surface: '#fff8f6',
+              'on-error-container': '#93000a',
+              'surface-variant': '#ffdad4',
+              'on-secondary-fixed': '#1a1c1a',
+              'on-secondary-container': '#626361',
+              error: '#ba1a1a',
+              'secondary-fixed-dim': '#c7c6c4',
+              secondary: '#5e5f5d',
+              'tertiary-fixed': '#ffdbc9',
+              'tertiary-container': '#bb5808',
+              'on-surface': '#2b1613',
+              'on-primary-container': '#fffbff',
+              'surface-tint': '#735a3a',
+              'surface-container': '#ffe9e5',
+              'on-primary': '#ffffff',
+              'on-tertiary-fixed-variant': '#763400',
+              'on-tertiary': '#ffffff',
+              'secondary-fixed': '#e3e2e0',
+              'outline-variant': '#d1c4b8',
+              'surface-container-low': '#fff0ee',
+              'surface-container-highest': '#ffdad4',
+              'on-tertiary-fixed': '#321200',
+              primary: '#705838',
+              'tertiary-fixed-dim': '#ffb68d',
+              'surface-bright': '#fff8f6',
+              'primary-container': '#8b704f',
+              'on-primary-fixed-variant': '#594325',
+              'on-background': '#2b1613',
+              'error-container': '#ffdad6',
+              tertiary: '#974400',
+              outline: '#80756b',
+              'surface-dim': '#f8d1cb',
+              'on-primary-fixed': '#291801',
+              'inverse-surface': '#422a26',
+              background: '#fff8f6',
+              'inverse-on-surface': '#ffedea',
+              'surface-container-high': '#ffe2dd',
+              'on-secondary-fixed-variant': '#464745',
+              'on-error': '#ffffff',
+              'inverse-primary': '#e2c19b',
+              'secondary-container': '#e0e0dd',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              xl: '80px',
+              'max-width-desktop': '1280px',
+              sm: '12px',
+              md: '24px',
+              lg: '48px',
+              xs: '4px',
+              'margin-mobile': '16px',
+              gutter: '24px',
+              base: '8px',
+            },
+            fontFamily: {
+              'body-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'display-lg': ['Inter'],
+              'title-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'label-md': ['Inter'],
+              'headline-lg': ['Inter'],
+            },
+            fontSize: {
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      body {
+        background-color: #fff8f6;
+        color: #2b1613;
+      }
+      .tonal-elevation-1 {
+        box-shadow: 0px 4px 20px rgba(62, 39, 35, 0.05);
+      }
+      .tonal-elevation-2 {
+        box-shadow: 0px 8px 30px rgba(62, 39, 35, 0.08);
+      }
+    </style>
+  </head>
+  <body class="font-body-md text-body-md overflow-x-hidden">
+    <!-- SideNavBar Shell -->
+    <aside
+      class="h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-inverse-surface shadow-sm z-50 flex flex-col p-md gap-base"
+    >
+      <div class="mb-lg px-4">
+        <div class="w-20 mb-2">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG4owgeQSdCBZ4CZhAIPjgwHkaRfB1ay4wn2bAyKRJ2I1PXREhkvur8FAojFbmKTN5GByTEJ1Ejsw3c5MqNHrzfvnFObCbBLYfo6b2HJyE8oth_eRC29kjgTgcAf5FrOWnQTomvcl6zKO7ViQMqc12JkQ12WgojykUt2vEa_nvFUTv6X_pZ7IYfF46DEEzZzOr_eawRp8HoZH0bvppLyReoyKOl5nmQ25O1r2_rC8INNbnx9YxQyIVZs97L9lAG-1X72FjmuR_M1M"
+            alt="Tampak Siring Logo"
+            class="w-full h-auto object-contain"
+          />
+        </div>
+        <p class="font-label-md text-label-md text-on-surface-variant opacity-70">Admin Portal</p>
+      </div>
+      <nav class="flex flex-col gap-2">
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+          <span class="font-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="map">map</span>
+          <span class="font-label-md">Cluster Map</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="group">group</span>
+          <span class="font-label-md">Residents</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="payments">payments</span>
+          <span class="font-label-md">Fees &amp; Iuran</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="security">security</span>
+          <span class="font-label-md">Security Logs</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="emergency_home">emergency_home</span>
+          <span class="font-label-md">Complaints</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg transition-transform active:scale-95"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="admin_panel_settings"
+            >admin_panel_settings</span
+          >
+          <span class="font-label-md">Admin Management</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="settings">settings</span>
+          <span class="font-label-md">Settings</span>
+        </a>
+      </nav>
+      <div class="mt-auto px-4 py-4 bg-surface-container-low rounded-xl">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary"
+          >
+            <span class="material-symbols-outlined">person</span>
+          </div>
+          <div>
+            <p class="font-label-md font-bold">Admin Utama</p>
+            <p class="text-[10px] uppercase tracking-wider text-primary">Super Admin</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content Shell -->
+    <main class="ml-64 min-h-screen">
+      <!-- TopAppBar -->
+      <header
+        class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-surface dark:bg-surface-dim shadow-md z-40 flex justify-between items-center px-md"
+      >
+        <div class="flex items-center gap-4 w-1/3">
+          <div class="relative w-full">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              >search</span
+            >
+            <input
+              class="w-full bg-surface-container-lowest border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary transition-all"
+              placeholder="Search administrators..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-base">
+          <button
+            class="hover:bg-surface-container-high rounded-full p-2 transition-all active:opacity-80"
+          >
+            <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+          </button>
+          <button
+            class="hover:bg-surface-container-high rounded-full p-2 transition-all active:opacity-80"
+          >
+            <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+          </button>
+          <div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+        </div>
+      </header>
+      <!-- Page Canvas -->
+      <div class="pt-24 px-md pb-md max-w-max-width-desktop mx-auto">
+        <!-- Header Section with Actions -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-lg">
+          <div>
+            <h1 class="font-headline-lg text-headline-lg text-primary mb-2">
+              Admin Management &amp; Access Control
+            </h1>
+            <p class="text-on-surface-variant max-w-2xl">
+              Configure administrative access levels, manage security protocols, and audit
+              system-wide permissions for the Smart Residence ecosystem.
+            </p>
+          </div>
+          <div class="flex gap-sm">
+            <button
+              class="flex items-center gap-2 px-md py-sm border border-primary text-primary rounded-lg font-label-md hover:bg-surface-container-low transition-colors"
+            >
+              <span class="material-symbols-outlined text-[20px]">edit_square</span>
+              Edit Roles
+            </button>
+            <button
+              class="flex items-center gap-2 px-md py-sm bg-primary text-white rounded-lg font-label-md shadow-sm hover:opacity-90 transition-opacity"
+            >
+              <span class="material-symbols-outlined text-[20px]">person_add</span>
+              Add New Admin
+            </button>
+          </div>
+        </div>
+        <!-- Bento Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-md mb-xl">
+          <div
+            class="bg-surface-container-lowest p-md rounded-xl tonal-elevation-1 border-l-4 border-primary"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <span
+                class="material-symbols-outlined text-primary p-2 bg-surface-container rounded-lg"
+                >groups</span
+              >
+              <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full"
+                >+2 this month</span
+              >
+            </div>
+            <p class="font-label-md text-on-surface-variant">Total Administrators</p>
+            <h3 class="font-display-lg text-display-lg text-primary">12</h3>
+          </div>
+          <div
+            class="bg-surface-container-lowest p-md rounded-xl tonal-elevation-1 border-l-4 border-tertiary"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <span class="material-symbols-outlined text-tertiary p-2 bg-tertiary-fixed rounded-lg"
+                >verified_user</span
+              >
+            </div>
+            <p class="font-label-md text-on-surface-variant">Super Admins</p>
+            <h3 class="font-display-lg text-display-lg text-tertiary">3</h3>
+          </div>
+          <div
+            class="bg-surface-container-lowest p-md rounded-xl tonal-elevation-1 border-l-4 border-secondary"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <span
+                class="material-symbols-outlined text-secondary p-2 bg-secondary-fixed rounded-lg"
+                >manage_accounts</span
+              >
+            </div>
+            <p class="font-label-md text-on-surface-variant">Active Roles</p>
+            <h3 class="font-display-lg text-display-lg text-secondary">8</h3>
+          </div>
+        </div>
+        <!-- Administrator List Table -->
+        <div class="bg-surface-container-lowest rounded-xl tonal-elevation-1 overflow-hidden mb-xl">
+          <div class="px-md py-4 border-b border-outline-variant flex justify-between items-center">
+            <h4 class="font-title-md text-on-surface">Administrator List</h4>
+            <div class="flex gap-2">
+              <button class="p-2 hover:bg-surface-container rounded-lg transition-colors">
+                <span class="material-symbols-outlined">filter_list</span>
+              </button>
+              <button class="p-2 hover:bg-surface-container rounded-lg transition-colors">
+                <span class="material-symbols-outlined">download</span>
+              </button>
+            </div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr
+                  class="bg-surface-container-low text-on-surface-variant"
+                  style="transform: translateY(0px)"
+                >
+                  <th class="px-md py-4 font-label-md uppercase tracking-wider">Administrator</th>
+                  <th class="px-md py-4 font-label-md uppercase tracking-wider">Role</th>
+                  <th class="px-md py-4 font-label-md uppercase tracking-wider">Last Login</th>
+                  <th class="px-md py-4 font-label-md uppercase tracking-wider">Status</th>
+                  <th class="px-md py-4 font-label-md uppercase tracking-wider text-right">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-outline-variant">
+                <!-- Row 1 -->
+                <tr
+                  class="hover:bg-surface-container-lowest transition-colors group"
+                  style="transform: translateY(0px)"
+                >
+                  <td class="px-md py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 rounded-full bg-primary-fixed-dim flex-shrink-0">
+                        <img
+                          alt="Admin Profile"
+                          class="w-full h-full rounded-full object-cover"
+                          data-alt="A professional headshot of a middle-aged man with short dark hair and a friendly, confident expression. He is wearing a minimalist dark blazer over a crisp white shirt, set against a softly blurred architectural background with warm natural lighting. The visual style is high-end corporate portraiture with a refined, tactile aesthetic and natural skin tones."
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxBF3TDZxDqFlWrXK7w4_5w3k3kFE2RBQexE_O-w4F6eETpOsu1tQEuwkh4Cu21QF7KHiHNfdPrMlDD4KuN4SPhtzPUmcil6foFWs1kYs6Zo73Oqn0BzEI8QzSycftE8Sz8tA5kJSkCEidlnQxGrhIV1ggWBksMuWRKJOD3GkTgJvZ149QUQVPGz3-YR6bmogVX0NGrec3UJQa7jeuXJqrDdpaBQhC9q0Xqwh800I_Hr9Tq6hJUkjpgVbEe5Yz3BnLtqjgTsTS0eY"
+                        />
+                      </div>
+                      <div>
+                        <p class="font-body-md font-bold text-on-surface">Ahmad Hidayat</p>
+                        <p class="text-xs text-on-surface-variant">ahmad.h@smartresidence.id</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-md py-4">
+                    <span
+                      class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full text-[11px] font-bold uppercase tracking-tight"
+                      >Super Admin</span
+                    >
+                  </td>
+                  <td class="px-md py-4 text-on-surface-variant text-sm">2 mins ago</td>
+                  <td class="px-md py-4">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                      <span class="text-sm font-medium">Active</span>
+                    </div>
+                  </td>
+                  <td class="px-md py-4 text-right">
+                    <div class="flex justify-end gap-1">
+                      <button
+                        class="text-on-surface-variant hover:text-primary p-2 transition-colors"
+                        title="Edit"
+                      >
+                        <span class="material-symbols-outlined text-[20px]">edit</span></button
+                      ><button
+                        class="text-on-surface-variant hover:text-error p-2 transition-colors"
+                        title="Deactivate"
+                      >
+                        <span class="material-symbols-outlined text-[20px]">block</span></button
+                      ><button
+                        class="text-on-surface-variant hover:text-error p-2 transition-colors"
+                        title="Delete"
+                      >
+                        <span class="material-symbols-outlined text-[20px]">delete</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 2 -->
+                <tr
+                  class="hover:bg-surface-container-lowest transition-colors group"
+                  style="transform: translateY(0px)"
+                >
+                  <td class="px-md py-4">
+                    <div class="flex items-center gap-3">
+                      <div
+                        class="w-10 h-10 rounded-full bg-surface-container flex-shrink-0 flex items-center justify-center"
+                      >
+                        <span class="material-symbols-outlined text-primary">person</span>
+                      </div>
+                      <div>
+                        <p class="font-body-md font-bold text-on-surface">Siti Aminah</p>
+                        <p class="text-xs text-on-surface-variant">siti.a@smartresidence.id</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-md py-4">
+                    <span
+                      class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-[11px] font-bold uppercase tracking-tight"
+                      >Finance Lead</span
+                    >
+                  </td>
+                  <td class="px-md py-4 text-on-surface-variant text-sm">3 hours ago</td>
+                  <td class="px-md py-4">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                      <span class="text-sm font-medium">Active</span>
+                    </div>
+                  </td>
+                  <td class="px-md py-4 text-right">
+                    <div class="flex justify-end gap-1">
+                      <button
+                        class="text-on-surface-variant hover:text-primary p-2 transition-colors"
+                        title="Edit"
+                      >
+                        <span class="material-symbols-outlined text-[20px]">edit</span></button
+                      ><button
+                        class="text-on-surface-variant hover:text-error p-2 transition-colors"
+                        title="Deactivate"
+                      >
+                        <span class="material-symbols-outlined text-[20px]">block</span></button
+                      ><button
+                        class="text-on-surface-variant hover:text-error p-2 transition-colors"
+                        title="Delete"
+                      >
+                        <span class="material-symbols-outlined text-[20px]">delete</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 3 -->
+                <tr
+                  class="hover:bg-surface-container-lowest transition-colors group"
+                  style="transform: translateY(0px)"
+                >
+                  <td class="px-md py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 rounded-full bg-primary-fixed-dim flex-shrink-0">
+                        <img
+                          alt="Admin Profile"
+                          class="w-full h-full rounded-full object-cover"
+                          data-alt="A profile photograph of a young professional woman with a calm, analytical expression. She has sleek black hair and is wearing a cream-colored minimalist sweater. The lighting is soft and directional, creating gentle shadows that emphasize a warm, high-end residential interior design aesthetic. The color palette is composed of soft earth tones and warm whites."
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAoiuPtf2eKZNflDvXD1kg7K_Fdkg7pNcOhL5vKcDgCd8VHkRaXHhPycNBY62bGEcIkwj_NAn_NyquvmFA9VyQbR38j0WhmW7kWrMnm9CqrBAL45NOlHx52rneuDMsEpDuLxh0KTNojFcl0pzrgvpjfSPHvI6ABwU87jH2ewL87tDrVtkbtioBCbX_B1wU9vyZPVglIaa8ggbsxS4WNH_VcK4xQlF9hWf7zJ5XNmmvIpB9HxMPSoNtiU8Llq4Q4Eq1pARxJ3_lACU"
+                        />
+                      </div>
+                      <div>
+                        <p class="font-body-md font-bold text-on-surface">Budi Santoso</p>
+                        <p class="text-xs text-on-surface-variant">budi.s@smartresidence.id</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-md py-4">
+                    <span
+                      class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-[11px] font-bold uppercase tracking-tight"
+                      >Security Officer</span
+                    >
+                  </td>
+                  <td class="px-md py-4 text-on-surface-variant text-sm">Yesterday, 18:45</td>
+                  <td class="px-md py-4">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-outline"></span>
+                      <span class="text-sm font-medium">Offline</span>
+                    </div>
+                  </td>
+                  <td class="px-md py-4 text-right">
+                    <div class="flex justify-end gap-1">
+                      <button
+                        class="text-on-surface-variant hover:text-primary p-2 transition-colors"
+                        title="Edit"
+                      >
+                        <span class="material-symbols-outlined text-[20px]">edit</span></button
+                      ><button
+                        class="text-on-surface-variant hover:text-error p-2 transition-colors"
+                        title="Deactivate"
+                      >
+                        <span class="material-symbols-outlined text-[20px]">block</span></button
+                      ><button
+                        class="text-on-surface-variant hover:text-error p-2 transition-colors"
+                        title="Delete"
+                      >
+                        <span class="material-symbols-outlined text-[20px]">delete</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="p-md bg-surface-container-low flex justify-between items-center">
+            <p class="text-xs text-on-surface-variant">Showing 1-3 of 12 Administrators</p>
+            <div class="flex gap-1">
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container transition-colors"
+              >
+                <span class="material-symbols-outlined text-sm">chevron_left</span>
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white text-xs font-bold"
+              >
+                1
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container transition-colors text-xs"
+              >
+                2
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container transition-colors text-xs"
+              >
+                3
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container transition-colors"
+              >
+                <span class="material-symbols-outlined text-sm">chevron_right</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Security Compliance Footer Section -->
+        <section
+          class="bg-primary-container/10 border border-primary-container/30 rounded-2xl p-lg flex flex-col md:flex-row gap-lg items-center tonal-elevation-1"
+        >
+          <div
+            class="flex-shrink-0 w-20 h-20 bg-primary-container rounded-full flex items-center justify-center shadow-lg"
+          >
+            <span
+              class="material-symbols-outlined text-on-primary-container text-4xl"
+              style="font-variation-settings: 'FILL' 1"
+              >gpp_maybe</span
+            >
+          </div>
+          <div class="flex-1">
+            <h5 class="font-title-md text-primary mb-2">Security Compliance Reminder</h5>
+            <p class="text-on-surface-variant body-md leading-relaxed">
+              To maintain our high-end security standards, please ensure all administrators have
+              enabled <strong>Two-Factor Authentication (2FA)</strong>. Any accounts without 2FA
+              activity for more than 30 days will be automatically suspended. All role changes are
+              logged and visible in the
+              <a class="text-primary font-bold underline decoration-primary/30" href="#"
+                >Security Logs</a
+              >
+              section.
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <button
+              class="px-lg py-sm bg-primary text-white rounded-full font-label-md hover:scale-[1.02] transition-transform shadow-md"
+            >
+              Review Protocol
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script>
+      // Simple micro-interaction for rows
+      document.querySelectorAll('tr').forEach((row) => {
+        row.addEventListener('mouseenter', () => {
+          row.style.transform = 'translateY(-1px)';
+        });
+        row.addEventListener('mouseleave', () => {
+          row.style.transform = 'translateY(0)';
+        });
+      });
+    </script>
+  </body>
+</html>

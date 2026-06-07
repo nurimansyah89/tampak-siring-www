@@ -1,0 +1,478 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Record Payment - Tampaksiring Smart Cluster</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'surface-tint': '#735a3a',
+              'on-error': '#ffffff',
+              'outline-variant': '#d1c4b8',
+              'on-tertiary-fixed': '#321200',
+              'on-secondary-fixed': '#1a1c1a',
+              'surface-dim': '#f8d1cb',
+              'secondary-container': '#e0e0dd',
+              'primary-fixed-dim': '#e2c19b',
+              'tertiary-fixed': '#ffdbc9',
+              error: '#ba1a1a',
+              'on-secondary-container': '#626361',
+              background: '#fff8f6',
+              'on-secondary': '#ffffff',
+              'surface-container-low': '#fff0ee',
+              'on-tertiary-container': '#fffbff',
+              'on-primary-fixed': '#291801',
+              'on-primary': '#ffffff',
+              outline: '#80756b',
+              'inverse-primary': '#e2c19b',
+              'surface-container': '#ffe9e5',
+              'on-error-container': '#93000a',
+              'surface-container-highest': '#ffdad4',
+              'surface-bright': '#fff8f6',
+              'secondary-fixed-dim': '#c7c6c4',
+              'primary-fixed': '#ffddb6',
+              'primary-container': '#8b704f',
+              primary: '#705838',
+              'on-primary-container': '#fffbff',
+              'on-surface-variant': '#4e453c',
+              'on-tertiary-fixed-variant': '#763400',
+              'on-primary-fixed-variant': '#594325',
+              'on-background': '#2b1613',
+              'on-secondary-fixed-variant': '#464745',
+              'tertiary-container': '#bb5808',
+              'on-surface': '#2b1613',
+              tertiary: '#974400',
+              'surface-container-lowest': '#ffffff',
+              surface: '#fff8f6',
+              'on-tertiary': '#ffffff',
+              'surface-container-high': '#ffe2dd',
+              'secondary-fixed': '#e3e2e0',
+              'error-container': '#ffdad6',
+              'tertiary-fixed-dim': '#ffb68d',
+              'inverse-surface': '#422a26',
+              secondary: '#5e5f5d',
+              'inverse-on-surface': '#ffedea',
+              'surface-variant': '#ffdad4',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              sm: '12px',
+              md: '24px',
+              gutter: '24px',
+              lg: '48px',
+              base: '8px',
+              'margin-mobile': '16px',
+              xl: '80px',
+              xs: '4px',
+              'max-width-desktop': '1280px',
+            },
+            fontFamily: {
+              'label-sm': ['Inter'],
+              'headline-lg': ['Inter'],
+              'display-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-md': ['Inter'],
+              'title-md': ['Inter'],
+            },
+            fontSize: {
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <!-- Sidebar Navigation (Desktop) -->
+    <aside
+      class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant/30 py-6 px-4 z-40 shadow-[0px_4px_20px_rgba(62,39,35,0.05)]"
+    >
+      <div class="mb-10 px-4">
+        <h1 class="font-title-md text-title-md text-primary-container">Admin Portal</h1>
+        <p class="text-on-surface-variant font-label-md text-[12px]">Cluster Management</p>
+      </div>
+      <nav class="flex-1 space-y-2">
+        <!-- DASHBOARD -->
+        <div
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg"
+        >
+          <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+          <span class="font-label-md">Dashboard</span>
+        </div>
+        <!-- CLUSTER MAP -->
+        <div
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg"
+        >
+          <span class="material-symbols-outlined" data-icon="map">map</span>
+          <span class="font-label-md">Cluster Map</span>
+        </div>
+        <!-- FEES & IURAN (Active for this context) -->
+        <div
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 bg-primary text-on-primary rounded-lg font-bold"
+        >
+          <span class="material-symbols-outlined" data-icon="payments">payments</span>
+          <span class="font-label-md">Fees &amp; Iuran</span>
+        </div>
+        <!-- RESIDENTS -->
+        <div
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg"
+        >
+          <span class="material-symbols-outlined" data-icon="group">group</span>
+          <span class="font-label-md">Residents</span>
+        </div>
+        <!-- SECURITY -->
+        <div
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg"
+        >
+          <span class="material-symbols-outlined" data-icon="security">security</span>
+          <span class="font-label-md">Security Logs</span>
+        </div>
+        <!-- COMPLAINTS -->
+        <div
+          class="flex items-center gap-3 px-4 py-3 cursor-pointer transition-transform active:scale-98 text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-lg"
+        >
+          <span class="material-symbols-outlined" data-icon="emergency_home">emergency_home</span>
+          <span class="font-label-md">Complaints</span>
+        </div>
+      </nav>
+      <div class="mt-auto border-t border-outline-variant/20 pt-4 px-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden">
+          <img
+            alt="Admin User Profile"
+            class="w-full h-full object-cover"
+            data-alt="A professional headshot of a middle-aged man with a warm and welcoming smile, set against a blurred office background with soft lighting. The image maintains a high-end corporate aesthetic with warm, natural tones that align with the brand's earthy palette of creams and browns."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9orEr0xfk5vuosbWB2CyGTihjVsSfMbmhV-vwB_nyO5vUXo2GSwz_q6bUaxn6kMm0fSEbQK1hLcf8Ms5dFQOw1pbpTk3lSCZUvU2p4idzeIUXdRdhSVBj_E3_s1hI9jEdyTb5qNsy77321WCajRfPphUr27RNHOJ2MtPDmYk0Ei8wqdIsnA8YRIMKNVVzYL8Jl_M5vqHqkIuuahz9UyQ__eqQ99MDqM29Tpu6s0ZWmWQGHrgvB9d_iU6xSc7nvNZEE-dnTDH5cxs"
+          />
+        </div>
+        <div>
+          <p class="font-label-md text-on-surface font-bold">Admin User</p>
+          <p class="text-[12px] text-on-surface-variant">Super Admin</p>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="md:ml-64 min-h-screen">
+      <!-- Top Navigation Bar -->
+      <header
+        class="sticky top-0 z-30 flex justify-between items-center w-full px-gutter py-4 bg-surface/95 backdrop-blur-sm shadow-[0px_8px_30px_rgba(62,39,35,0.08)]"
+      >
+        <div class="flex items-center gap-4">
+          <button
+            class="p-2 hover:bg-secondary-container/50 rounded-full transition-colors active:scale-95 duration-200"
+            onclick="history.back()"
+          >
+            <span class="material-symbols-outlined text-primary" data-icon="arrow_back"
+              >arrow_back</span
+            >
+          </button>
+          <h2 class="font-headline-lg text-headline-lg text-primary">Tampaksiring Smart Cluster</h2>
+        </div>
+        <div class="flex items-center gap-4">
+          <div
+            class="hidden md:flex bg-secondary-container/30 px-4 py-2 rounded-full items-center gap-2"
+          >
+            <span
+              class="material-symbols-outlined text-on-surface-variant text-body-md"
+              data-icon="search"
+              >search</span
+            >
+            <input
+              class="bg-transparent border-none focus:ring-0 text-body-md w-48"
+              placeholder="Search data..."
+              type="text"
+            />
+          </div>
+          <div class="flex gap-2">
+            <span
+              class="material-symbols-outlined p-2 cursor-pointer text-primary"
+              data-icon="notifications"
+              >notifications</span
+            >
+            <span
+              class="material-symbols-outlined p-2 cursor-pointer text-primary"
+              data-icon="account_circle"
+              >account_circle</span
+            >
+          </div>
+        </div>
+      </header>
+      <!-- Content Canvas -->
+      <div class="max-w-max-width-desktop mx-auto p-margin-mobile md:p-gutter">
+        <!-- Breadcrumbs & Title -->
+        <div class="mb-lg">
+          <div class="flex items-center gap-2 text-on-surface-variant font-label-sm mb-2">
+            <span>Fees &amp; Iuran</span>
+            <span class="material-symbols-outlined text-[14px]" data-icon="chevron_right"
+              >chevron_right</span
+            >
+            <span class="text-primary font-bold">Record Payment</span>
+          </div>
+          <h3 class="font-headline-lg text-headline-lg text-on-background">
+            Record Resident Payment
+          </h3>
+        </div>
+        <!-- Main Form Card -->
+        <div
+          class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant/20 overflow-hidden"
+        >
+          <!-- Resident Info Summary (Read-only Header) -->
+          <div class="bg-primary/5 p-md border-b border-outline-variant/30">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined text-primary" data-icon="person"
+                    >person</span
+                  >
+                </div>
+                <div>
+                  <p class="text-on-surface-variant font-label-sm uppercase tracking-wider">
+                    Resident Name
+                  </p>
+                  <p class="font-title-md text-title-md text-on-background">Bambang Pamungkas</p>
+                </div>
+              </div>
+              <div>
+                <p class="text-on-surface-variant font-label-sm uppercase tracking-wider">
+                  Address / Unit
+                </p>
+                <p class="font-title-md text-title-md text-on-background">Block A - 12</p>
+              </div>
+              <div>
+                <p class="text-on-surface-variant font-label-sm uppercase tracking-wider">
+                  Payment Period
+                </p>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-tertiary" data-icon="calendar_month"
+                    >calendar_month</span
+                  >
+                  <p class="font-title-md text-title-md text-on-background">October 2023</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Form Section -->
+          <form class="p-md md:p-lg space-y-lg">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+              <!-- Left Column: Details -->
+              <div class="space-y-md">
+                <div>
+                  <label class="block font-label-md text-on-surface-variant mb-2"
+                    >Payment Date</label
+                  >
+                  <div class="relative">
+                    <input
+                      class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none"
+                      type="date"
+                      value="2023-10-25"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label class="block font-label-md text-on-surface-variant mb-2"
+                    >Amount Paid (IDR)</label
+                  >
+                  <div class="relative flex items-center">
+                    <span class="absolute left-4 text-on-surface-variant font-body-md">Rp</span>
+                    <input
+                      class="w-full bg-surface border border-outline-variant rounded-lg pl-12 pr-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none font-bold text-primary"
+                      type="text"
+                      value="350.000"
+                    />
+                  </div>
+                  <p class="mt-2 text-label-sm text-on-surface-variant italic font-normal">
+                    Expected monthly fee: Rp 350.000
+                  </p>
+                </div>
+                <div>
+                  <label class="block font-label-md text-on-surface-variant mb-2"
+                    >Payment Method</label
+                  >
+                  <select
+                    class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none appearance-none"
+                  >
+                    <option value="transfer">Bank Transfer</option>
+                    <option value="ewallet">E-Wallet</option>
+                    <option value="cash">Cash</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-label-md text-on-surface-variant mb-2"
+                    >Reference Number / Transaction ID</label
+                  >
+                  <input
+                    class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none"
+                    placeholder="TXN-9823102293"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <!-- Right Column: Media & Notes -->
+              <div class="space-y-md">
+                <div>
+                  <label class="block font-label-md text-on-surface-variant mb-2"
+                    >Upload Proof of Payment</label
+                  >
+                  <div
+                    class="border-2 border-dashed border-outline-variant/50 rounded-xl p-lg flex flex-col items-center justify-center bg-surface-container-low hover:bg-secondary-container/20 transition-all cursor-pointer group"
+                    id="drop-area"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                    >
+                      <span
+                        class="material-symbols-outlined text-primary text-[32px]"
+                        data-icon="cloud_upload"
+                        >cloud_upload</span
+                      >
+                    </div>
+                    <p class="font-title-md text-on-background mb-1">Click or drag image here</p>
+                    <p class="text-label-sm text-on-surface-variant">PNG, JPG or PDF up to 5MB</p>
+                    <input class="hidden" id="file-upload" type="file" />
+                  </div>
+                </div>
+                <div>
+                  <label class="block font-label-md text-on-surface-variant mb-2"
+                    >Internal Notes</label
+                  >
+                  <textarea
+                    class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none resize-none"
+                    placeholder="Add any special notes about this payment..."
+                    rows="4"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <!-- Actions -->
+            <div
+              class="flex flex-col md:flex-row justify-end items-center gap-4 pt-lg border-t border-outline-variant/20"
+            >
+              <button
+                class="w-full md:w-auto px-8 py-3 rounded-lg border border-primary text-primary font-bold hover:bg-primary/5 transition-colors active:scale-95"
+                type="button"
+              >
+                Cancel
+              </button>
+              <button
+                class="w-full md:w-auto px-10 py-3 rounded-lg bg-primary text-on-primary font-bold shadow-lg hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-2"
+                type="submit"
+              >
+                <span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                Save Payment
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- Footer Meta -->
+        <div
+          class="mt-md flex items-center justify-center text-on-surface-variant gap-2 opacity-60"
+        >
+          <span class="material-symbols-outlined text-[16px]" data-icon="lock">lock</span>
+          <p class="text-label-sm">
+            Secure administrative portal. All actions are logged for security audits.
+          </p>
+        </div>
+      </div>
+    </main>
+    <!-- Mobile Navigation Bar -->
+    <nav
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-surface/95 backdrop-blur-md flex justify-around items-center py-3 z-50 border-t border-outline-variant/10"
+    >
+      <div class="flex flex-col items-center gap-1 text-on-surface-variant">
+        <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+        <span class="text-[10px]">Dashboard</span>
+      </div>
+      <div class="flex flex-col items-center gap-1 text-primary font-bold">
+        <span class="material-symbols-outlined" data-icon="payments">payments</span>
+        <span class="text-[10px]">Iuran</span>
+      </div>
+      <div class="flex flex-col items-center gap-1 text-on-surface-variant">
+        <span class="material-symbols-outlined" data-icon="group">group</span>
+        <span class="text-[10px]">Residents</span>
+      </div>
+      <div class="flex flex-col items-center gap-1 text-on-surface-variant">
+        <span class="material-symbols-outlined" data-icon="settings">settings</span>
+        <span class="text-[10px]">Settings</span>
+      </div>
+    </nav>
+    <script>
+      // Simple micro-interaction for the file upload area
+      const dropArea = document.getElementById('drop-area');
+      const fileInput = document.getElementById('file-upload');
+
+      dropArea.addEventListener('click', () => fileInput.click());
+
+      dropArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropArea.classList.add('bg-secondary-container/50', 'border-primary');
+      });
+
+      ['dragleave', 'drop'].forEach((eventName) => {
+        dropArea.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropArea.classList.remove('bg-secondary-container/50', 'border-primary');
+        });
+      });
+
+      // Form submission prevention for demo
+      document.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Payment successfully recorded for Bambang Pamungkas!');
+      });
+    </script>
+  </body>
+</html>

@@ -43,18 +43,17 @@
   </div>
   <div class="flex-1 flex gap-2">
     <textarea
-      class="flex-1 bg-surface border border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none h-20"
+      class="flex-1 bg-surface border border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none h-30"
       placeholder="Tulis komentar atau info tambahan..."
       [ngModel]="newComment()"
       (ngModelChange)="newComment.set($event)"
     ></textarea>
-    <app-button
-      variant="primary"
-      size="sm"
-      class="self-end"
+    <button
+      class="w-10 h-10 flex items-center justify-center bg-primary text-on-primary rounded-full hover:opacity-90 transition-all cursor-pointer shrink-0 self-end"
+      type="button"
       (click)="onSend()"
     >
-      <span class="material-symbols-outlined">send</span>
-    </app-button>
+      <span class="material-symbols-outlined text-[20px]">send</span>
+    </button>
   </div>
 </div>

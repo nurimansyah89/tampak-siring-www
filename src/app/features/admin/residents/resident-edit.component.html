@@ -1,0 +1,263 @@
+<app-main-layout>
+  <div class="px-margin-mobile md:px-gutter pt-8 pb-xl">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-label-md text-on-surface-variant mb-6">
+      <a class="hover:text-primary transition-colors" routerLink="/admin/residents">
+        Manajemen Warga
+      </a>
+      <span class="material-symbols-outlined text-sm">chevron_right</span>
+      <span class="text-primary font-semibold">Update Informasi</span>
+    </nav>
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+      <div class="flex items-center justify-center py-20">
+        <span class="material-symbols-outlined text-4xl text-primary animate-spin">sync</span>
+      </div>
+    } @else {
+      <!-- Page Header -->
+      <header class="mb-8">
+        <h1 class="font-headline-lg text-headline-lg text-primary mb-2">
+          Update Informasi Warga
+        </h1>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Perbarui informasi detail penghuni dalam sistem cluster.
+        </p>
+      </header>
+
+      <!-- Form -->
+      <form (ngSubmit)="onSubmit()" class="max-w-4xl space-y-6">
+        <!-- Section: Informasi Pemilik -->
+        <section class="bg-surface border border-outline-variant rounded-xl shadow-level-1 overflow-hidden">
+          <div class="p-md md:p-8 space-y-6">
+            <h2 class="font-title-md text-title-md text-on-surface pb-2 border-b border-outline-variant/30 flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">person</span>
+              Informasi Pemilik
+            </h2>
+
+            <!-- Foto Profil -->
+            <div class="flex flex-col md:flex-row items-start gap-6">
+              <div class="relative shrink-0">
+                <input id="fotoProfilInput" type="file" accept="image/jpeg,image/png" class="hidden" (change)="onFotoSelected($event)" />
+                @if (fotoProfilPreview(); as preview) {
+                  <div class="w-24 h-24 rounded-full border-2 border-primary/30 overflow-hidden">
+                    <img class="w-full h-full object-cover" [src]="preview" alt="Preview foto profil" />
+                  </div>
+                  <button type="button" (click)="hapusFoto()" class="absolute -bottom-1 -right-1 flex items-center justify-center w-9 h-9 bg-error text-white rounded-full shadow-level-2 hover:brightness-110 transition-all">
+                    <span class="material-symbols-outlined text-sm leading-none">close</span>
+                  </button>
+                } @else {
+                  <div class="w-24 h-24 rounded-full bg-surface-container-low border-2 border-dashed border-primary/30 flex flex-col items-center justify-center text-on-surface-variant overflow-hidden">
+                    <span class="material-symbols-outlined text-4xl opacity-20">add_a_photo</span>
+                  </div>
+                  <button type="button" (click)="triggerFileInput()" class="absolute -bottom-1 -right-1 flex items-center justify-center w-9 h-9 bg-primary text-white rounded-full shadow-level-2 hover:brightness-110 transition-all">
+                    <span class="material-symbols-outlined text-sm leading-none">edit</span>
+                  </button>
+                }
+              </div>
+              <div class="flex-1 pt-1">
+                <p class="font-label-md text-label-md text-on-surface mb-1">Foto Profil</p>
+                <p class="font-body-md text-body-md text-on-surface-variant text-sm mb-3">
+                  Unggah foto formal pemilik properti (Maks. 2MB, JPG/PNG)
+                </p>
+                <button type="button" (click)="triggerFileInput()" class="text-primary font-semibold text-sm hover:underline">Unggah Foto</button>
+                @if (fotoProfilError()) {
+                  <p class="text-label-sm text-error mt-2">{{ fotoProfilError() }}</p>
+                }
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label class="font-label-md text-label-md text-on-surface-variant" for="namaLengkap">Nama Lengkap</label>
+                <input id="namaLengkap" type="text" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Contoh: Budi Santoso" [value]="namaLengkap()" (input)="namaLengkap.set($any($event.target).value)" />
+              </div>
+              <div class="space-y-2">
+                <label class="font-label-md text-label-md text-on-surface-variant" for="nik">NIK (Nomor Induk Kependudukan)</label>
+                <input id="nik" type="number" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary" placeholder="16 Digit NIK" [value]="nik()" (input)="nik.set($any($event.target).value)" />
+              </div>
+              <div class="space-y-2">
+                <label class="font-label-md text-label-md text-on-surface-variant" for="nomorTelepon">Nomor Telepon</label>
+                <div class="flex">
+                  <span class="inline-flex items-center px-4 rounded-l-lg border border-r-0 border-outline-variant bg-surface-container text-on-surface-variant text-body-md">+62</span>
+                  <input id="nomorTelepon" type="tel" class="w-full px-4 py-3 rounded-r-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary" placeholder="8123456789" [value]="nomorTelepon()" (input)="nomorTelepon.set($any($event.target).value)" />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <label class="font-label-md text-label-md text-on-surface-variant" for="email">Email</label>
+                <input id="email" type="email" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary" placeholder="budi@example.com" [value]="email()" (input)="email.set($any($event.target).value)" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Detail Properti -->
+        <section class="bg-surface border border-outline-variant rounded-xl shadow-level-1 overflow-hidden">
+          <div class="p-md md:p-8 space-y-6">
+            <h2 class="font-title-md text-title-md text-on-surface pb-2 border-b border-outline-variant/30 flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">home</span>
+              Detail Properti
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label class="font-label-md text-label-md text-on-surface-variant" for="blokProperti">Blok Properti</label>
+                <select id="blokProperti" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary" [value]="blokProperti()" (change)="blokProperti.set($any($event.target).value)">
+                  <option disabled value="">Pilih Blok</option>
+                  @for (blok of daftarBlok; track blok) {
+                    <option [value]="blok">{{ blok }}</option>
+                  }
+                </select>
+              </div>
+              <div class="space-y-2">
+                <label class="font-label-md text-label-md text-on-surface-variant" for="nomorRumah">Nomor Rumah</label>
+                <input id="nomorRumah" type="text" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Contoh: 12A" [value]="nomorRumah()" (input)="nomorRumah.set($any($event.target).value)" />
+              </div>
+              <div class="space-y-2">
+                <label class="font-label-md text-label-md text-on-surface-variant">Status Kepemilikan</label>
+                <div class="flex items-center gap-4 p-1 bg-surface-container-low rounded-lg w-fit">
+                  <label class="relative flex items-center cursor-pointer px-5 py-2.5 rounded-md transition-all has-[:checked]:bg-primary has-[:checked]:text-on-primary text-label-md text-on-surface-variant">
+                    <input type="radio" name="statusKepemilikan" value="Pemilik" class="sr-only" [checked]="statusKepemilikan() === 'Pemilik'" (change)="statusKepemilikan.set('Pemilik')" />
+                    <span>Pemilik</span>
+                  </label>
+                  <label class="relative flex items-center cursor-pointer px-5 py-2.5 rounded-md transition-all has-[:checked]:bg-primary has-[:checked]:text-on-primary text-label-md text-on-surface-variant">
+                    <input type="radio" name="statusKepemilikan" value="Penyewa" class="sr-only" [checked]="statusKepemilikan() === 'Penyewa'" (change)="statusKepemilikan.set('Penyewa')" />
+                    <span>Penyewa</span>
+                  </label>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <label class="font-label-md text-label-md text-on-surface-variant" for="tipeRumah">Tipe Rumah</label>
+                <select id="tipeRumah" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary" [value]="tipeRumah()" (change)="tipeRumah.set($any($event.target).value)">
+                  <option disabled value="">Pilih Tipe</option>
+                  @for (tipe of daftarTipeRumah; track tipe.value) {
+                    <option [value]="tipe.value">{{ tipe.label }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Anggota Keluarga -->
+        <section class="bg-surface border border-outline-variant rounded-xl shadow-level-1 overflow-hidden">
+          <div class="p-md md:p-8 space-y-6">
+            <div class="flex items-center justify-between pb-2 border-b border-outline-variant/30">
+              <h2 class="font-title-md text-title-md text-on-surface flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary">groups</span>
+                Anggota Keluarga
+              </h2>
+              <button type="button" (click)="tambahAnggota()" class="flex items-center gap-1 text-primary font-semibold text-label-md hover:opacity-80 transition-opacity">
+                <span class="material-symbols-outlined text-lg">add_circle</span>
+                Tambah Anggota
+              </button>
+            </div>
+
+            <div class="space-y-3">
+              @for (anggota of anggotaKeluarga(); track trackByIndex($index); let i = $index) {
+                <div class="flex flex-col md:flex-row gap-3 items-start md:items-end bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/20">
+                  <div class="flex-1 w-full space-y-2">
+                    <label class="font-label-md text-label-md text-on-surface-variant">Nama Lengkap</label>
+                    <input type="text" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Nama Anggota" />
+                  </div>
+                  <div class="flex-1 w-full space-y-2">
+                    <label class="font-label-md text-label-md text-on-surface-variant">Hubungan Keluarga</label>
+                    <select class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary">
+                      @for (hub of daftarHubungan; track hub) {
+                        <option [value]="hub" [selected]="anggota.hubungan === hub">{{ hub }}</option>
+                      }
+                    </select>
+                  </div>
+                  <button type="button" (click)="hapusAnggota(i)" class="flex items-center justify-center w-10 h-10 shrink-0 text-error hover:bg-error-container rounded-lg transition-colors">
+                    <span class="material-symbols-outlined leading-none">delete</span>
+                  </button>
+                </div>
+              } @empty {
+                <div class="flex flex-col items-center justify-center py-8 text-center">
+                  <span class="material-symbols-outlined text-4xl text-outline mb-2">groups</span>
+                  <p class="font-body-md text-body-md text-on-surface-variant">Tidak ada anggota keluarga</p>
+                  <p class="font-label-sm text-label-sm text-outline mt-1">Klik "Tambah Anggota" untuk menambahkan</p>
+                </div>
+              }
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Informasi Hewan Peliharaan -->
+        <section class="bg-surface border border-outline-variant rounded-xl shadow-level-1 overflow-hidden">
+          <div class="p-md md:p-8 space-y-6">
+            <div class="flex items-center justify-between pb-2 border-b border-outline-variant/30">
+              <h2 class="font-title-md text-title-md text-on-surface flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary">pets</span>
+                Informasi Hewan Peliharaan
+              </h2>
+              <button type="button" (click)="tambahHewan()" class="flex items-center gap-1 text-primary font-semibold text-label-md hover:opacity-80 transition-opacity">
+                <span class="material-symbols-outlined text-lg">add_circle</span>
+                Tambah Peliharaan
+              </button>
+            </div>
+
+            <div class="space-y-3">
+              @for (hewan of hewanPeliharaan(); track trackByIndex($index); let i = $index) {
+                <div class="flex flex-col md:flex-row gap-3 items-start md:items-end bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/20">
+                  <div class="flex-1 w-full space-y-2">
+                    <label class="font-label-md text-label-md text-on-surface-variant">Jenis Hewan</label>
+                    <input type="text" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Contoh: Anjing, Kucing, Burung" />
+                  </div>
+                  <div class="w-full md:w-40 space-y-2">
+                    <label class="font-label-md text-label-md text-on-surface-variant">Jumlah</label>
+                    <input type="number" min="0" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary" placeholder="0" />
+                  </div>
+                  <button type="button" (click)="hapusHewan(i)" class="flex items-center justify-center w-10 h-10 shrink-0 text-error hover:bg-error-container rounded-lg transition-colors">
+                    <span class="material-symbols-outlined leading-none">delete</span>
+                  </button>
+                </div>
+              } @empty {
+                <div class="flex flex-col items-center justify-center py-8 text-center">
+                  <span class="material-symbols-outlined text-4xl text-outline mb-2">pets</span>
+                  <p class="font-body-md text-body-md text-on-surface-variant">Tidak ada hewan peliharaan</p>
+                  <p class="font-label-sm text-label-sm text-outline mt-1">Klik "Tambah Peliharaan" untuk menambahkan</p>
+                </div>
+              }
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Approval -->
+        <section class="bg-surface border border-outline-variant rounded-xl shadow-level-1 overflow-hidden">
+          <div class="p-md md:p-8 space-y-6">
+            <h2 class="font-title-md text-title-md text-on-surface pb-2 border-b border-outline-variant/30 flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">verified_user</span>
+              Status Warga
+            </h2>
+
+            <div class="space-y-2">
+              <label class="font-label-md text-label-md text-on-surface-variant">Status Approval</label>
+              <div class="flex items-center gap-4 p-1 bg-surface-container-low rounded-lg w-fit">
+                <label class="relative flex items-center cursor-pointer px-5 py-2.5 rounded-md transition-all has-[:checked]:bg-primary has-[:checked]:text-on-primary text-label-md text-on-surface-variant">
+                  <input type="radio" name="statusApproval" value="ya" class="sr-only" [checked]="statusApproval() === 'ya'" (change)="statusApproval.set('ya')" />
+                  <span>Ya</span>
+                </label>
+                <label class="relative flex items-center cursor-pointer px-5 py-2.5 rounded-md transition-all has-[:checked]:bg-primary has-[:checked]:text-on-primary text-label-md text-on-surface-variant">
+                  <input type="radio" name="statusApproval" value="tidak" class="sr-only" [checked]="statusApproval() === 'tidak'" (change)="statusApproval.set('tidak')" />
+                  <span>Tidak</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-end gap-4 pt-6">
+          <a routerLink="/admin/residents" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 rounded-lg border border-primary text-primary font-label-md font-semibold hover:bg-surface-container-high transition-all active:scale-95">
+            Batal
+          </a>
+          <app-button variant="primary" size="md" type="submit" [loading]="isSubmitting()" [disabled]="isSubmitting()">
+            <span class="material-symbols-outlined">save</span>
+            Simpan Perubahan
+          </app-button>
+        </div>
+      </form>
+    }
+  </div>
+</app-main-layout>

@@ -59,4 +59,91 @@ Please use this skill when creating or updating related information about chart.
 
 ---
 
+## Common Issues & Fixes
+
+### Chart.js animation tidak muncul atau chart tidak tampil (SSR / Angular)
+
+**Root cause:** Canvas parent element tidak memiliki height definitif saat Chart.js diinisialisasi. Ini sering terjadi di CSS Grid + `flex-1` combo — grid row height bergantung pada konten, sementara `flex-1` butuh parent height sebagai referensi (circular dependency).
+
+**Solusi:**
+
+1. **Parent card harus punya height minimum:**
+   ```html
+   <div class="..." style="min-height: 340px;">
+   ```
+
+2. **Chart wrapper pakai fixed height (bukan `flex-1`):**
+   ```html
+   <div style="height: 256px;">
+     <canvas id="myChart" class="w-full h-full block"></canvas>
+   </div>
+   ```
+
+3. **Init chart pakai polling sampai parent punya height:**
+   ```typescript
+   afterNextRender(() => {
+     const tryInit = () => {
+       const canvas = document.getElementById('myChart') as HTMLCanvasElement;
+       if (canvas && canvas.parentElement && canvas.parentElement.offsetHeight > 0) {
+         this.initChart();
+       } else {
+         requestAnimationFrame(tryInit);
+       }
+     };
+     requestAnimationFrame(tryInit);
+   });
+   ```
+
+**Pattern lengkap untuk komponen Angular + SSR:**
+```typescript
+import { Component, OnDestroy, afterNextRender } from '@angular/core';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
+
+@Component({...})
+export class MyComponent implements OnDestroy {
+  private chart: Chart | null = null;
+
+  constructor() {
+    afterNextRender(() => {
+      const tryInit = () => {
+        const canvas = document.getElementById('myChart') as HTMLCanvasElement;
+        if (canvas?.parentElement?.offsetHeight) {
+          this.initChart();
+        } else {
+          requestAnimationFrame(tryInit);
+        }
+      };
+      requestAnimationFrame(tryInit);
+    });
+  }
+
+  private initChart(): void {
+    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    this.chart = new Chart(ctx, {
+      type: 'bar',
+      data: { ... },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 1000, easing: 'easeOutQuart' },
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false } },
+          y: { beginAtZero: true, grid: { color: '#d1c4b8' } },
+        },
+      },
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.chart?.destroy();
+  }
+}
+```
+
 > Use all references to create or update charts.

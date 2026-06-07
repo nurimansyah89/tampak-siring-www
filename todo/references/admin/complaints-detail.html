@@ -1,0 +1,504 @@
+<!doctype html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin Portal - Ticket #COMP-8821</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              tertiary: '#974400',
+              'surface-container-high': '#ffe2dd',
+              'surface-container-highest': '#ffdad4',
+              secondary: '#5e5f5d',
+              error: '#ba1a1a',
+              'surface-container-low': '#fff0ee',
+              'on-primary': '#ffffff',
+              'error-container': '#ffdad6',
+              'on-secondary-fixed': '#1a1c1a',
+              'inverse-primary': '#e2c19b',
+              'tertiary-container': '#bb5808',
+              'on-surface': '#2b1613',
+              'tertiary-fixed-dim': '#ffb68d',
+              'secondary-container': '#e0e0dd',
+              'secondary-fixed-dim': '#c7c6c4',
+              'on-secondary-container': '#626361',
+              'surface-bright': '#fff8f6',
+              'primary-container': '#8b704f',
+              primary: '#705838',
+              'on-background': '#2b1613',
+              outline: '#80756b',
+              'on-tertiary': '#ffffff',
+              'surface-variant': '#ffdad4',
+              'primary-fixed-dim': '#e2c19b',
+              background: '#fff8f6',
+              'inverse-on-surface': '#ffedea',
+              'on-primary-fixed-variant': '#594325',
+              'outline-variant': '#d1c4b8',
+              'on-primary-container': '#fffbff',
+              'surface-tint': '#735a3a',
+              'on-secondary': '#ffffff',
+              'on-tertiary-fixed-variant': '#763400',
+              'on-tertiary-fixed': '#321200',
+              'on-secondary-fixed-variant': '#464745',
+              'primary-fixed': '#ffddb6',
+              'on-surface-variant': '#4e453c',
+              'on-error-container': '#93000a',
+              'surface-dim': '#f8d1cb',
+              'surface-container': '#ffe9e5',
+              'inverse-surface': '#422a26',
+              'on-tertiary-container': '#fffbff',
+              'secondary-fixed': '#e3e2e0',
+              'on-primary-fixed': '#291801',
+              surface: '#fff8f6',
+              'tertiary-fixed': '#ffdbc9',
+              'surface-container-lowest': '#ffffff',
+              'on-error': '#ffffff',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              'margin-mobile': '16px',
+              lg: '48px',
+              gutter: '24px',
+              base: '8px',
+              sm: '12px',
+              md: '24px',
+              xs: '4px',
+              xl: '80px',
+              'max-width-desktop': '1280px',
+            },
+            fontFamily: {
+              'body-md': ['Inter'],
+              'title-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'display-lg': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'headline-lg': ['Inter'],
+              'body-lg': ['Inter'],
+              'label-md': ['Inter'],
+            },
+            fontSize: {
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #fff8f6;
+        font-family: 'Inter', sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #d1c4b8;
+        border-radius: 10px;
+      }
+      .glass-card {
+        background: rgba(255, 248, 246, 0.7);
+        backdrop-filter: blur(10px);
+      }
+    </style>
+  </head>
+  <body class="flex min-h-screen text-on-surface">
+    <!-- SideNavBar (The Anchor) -->
+    <aside
+      class="fixed left-0 h-full w-72 bg-surface dark:bg-surface-dim border-r border-outline-variant dark:border-outline shadow-sm dark:shadow-none flex flex-col p-4 gap-2 z-50"
+    >
+      <div class="flex items-center gap-3 mb-8 px-2">
+        <div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
+          <span
+            class="material-symbols-outlined text-on-primary-container"
+            style="font-variation-settings: 'FILL' 1"
+            >domain</span
+          >
+        </div>
+        <div>
+          <h1
+            class="font-title-md text-title-md font-bold text-primary dark:text-primary-fixed-dim leading-tight"
+          >
+            SmartCluster Admin
+          </h1>
+          <p class="text-label-sm text-on-surface-variant">Residential Portal</p>
+        </div>
+      </div>
+      <nav class="flex flex-col gap-1">
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg font-label-md text-label-md"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span> Dashboard
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg font-label-md text-label-md"
+          href="#"
+        >
+          <span class="material-symbols-outlined">map</span> Cluster Map
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg font-label-md text-label-md"
+          href="#"
+        >
+          <span class="material-symbols-outlined">groups</span> Residents
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg font-label-md text-label-md"
+          href="#"
+        >
+          <span class="material-symbols-outlined">payments</span> Fees
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg font-label-md text-label-md"
+          href="#"
+        >
+          <span class="material-symbols-outlined">security</span> Security
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-primary-container bg-primary-container rounded-lg font-bold font-label-md text-label-md"
+          href="#"
+        >
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+            >feedback</span
+          >
+          Complaints
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg font-label-md text-label-md"
+          href="#"
+        >
+          <span class="material-symbols-outlined">admin_panel_settings</span> Admin Management
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg font-label-md text-label-md"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span> Settings
+        </a>
+      </nav>
+      <div class="mt-auto p-4 bg-surface-container-low rounded-xl">
+        <div class="flex items-center gap-3">
+          <img
+            alt="Administrator Profile"
+            class="w-10 h-10 rounded-full object-cover border-2 border-primary"
+            data-alt="A professional headshot of a mid-career male administrator wearing a modern suit, set against a blurred warm office interior with soft afternoon sunlight. The photography is clean and high-end, utilizing a warm earthy color palette that aligns with a prestigious corporate residential portal. The expression is welcoming and confident."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQccJXqDz539YAKWZ96M6hjV1vyyFiDaiMdpuJcyM9B72sv4hjiWWt13MWCZz1s8y_OqbiTMXmg8VR6gA5Umt0CScASlnxnyMKnK2v5voQPC8spr9cKWuXt6kb2sSDM_ko97m2WLUTaYhPeyd1_BIVv4tGAYZ5OINqfWVf8K5lBc31mFkaA_4e1eVrYPXk9ZRBiq1GqQ_PcRHp-j8EGZXT1OGkAS3XaT0RU3sNv6MPpoEDmH1Pj_7p3YvRzKjr9KLT4qBhoqnUdhs"
+          />
+          <div>
+            <p class="font-label-md text-label-md font-bold">Admin Sarah</p>
+            <p class="text-xs text-on-surface-variant">Super Admin</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content Wrapper -->
+    <div class="flex-1 ml-72 flex flex-col min-h-screen">
+      <!-- TopAppBar -->
+      <header
+        class="flex justify-between items-center w-full px-md py-4 sticky top-0 z-40 bg-surface-bright dark:bg-surface-container-lowest border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none"
+      >
+        <div class="flex items-center gap-4">
+          <div class="relative">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              >search</span
+            >
+            <input
+              class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full w-80 text-sm focus:ring-2 focus:ring-primary/20 outline-none"
+              placeholder="Search tickets, residents..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <button
+            class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors"
+          >
+            <span class="material-symbols-outlined">help</span>
+          </button>
+          <div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+          <span class="font-title-md text-title-md font-bold text-primary">Admin Portal</span>
+        </div>
+      </header>
+      <!-- Canvas Area -->
+      <main class="flex-1 p-md max-w-max-desktop mx-auto w-full">
+        <!-- Breadcrumbs -->
+        <nav
+          class="flex items-center gap-2 mb-6 text-on-surface-variant font-label-md text-label-md"
+        >
+          <a class="hover:text-primary transition-colors" href="#">Complaints</a>
+          <span class="material-symbols-outlined text-sm">chevron_right</span>
+          <span class="text-primary font-bold">Ticket #COMP-8821</span>
+        </nav>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter items-start">
+          <!-- Ticket Thread & Reply (Main Column) -->
+          <div class="lg:col-span-2 space-y-gutter">
+            <!-- Main Ticket Content -->
+            <section class="bg-surface shadow-sm rounded-xl border border-outline-variant p-md">
+              <div class="flex justify-between items-start mb-6">
+                <div>
+                  <h2 class="font-headline-lg text-headline-lg mb-2">
+                    Infrastructure - Waste Collection
+                  </h2>
+                  <p class="text-on-surface-variant font-body-md text-body-md">
+                    Submitted on Oct 24, 2023 • 09:15 AM
+                  </p>
+                </div>
+                <div class="flex gap-2">
+                  <span
+                    class="px-3 py-1 bg-error-container text-on-error-container rounded-full text-label-sm font-label-sm flex items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-[14px]">priority_high</span> Urgent
+                  </span>
+                  <span
+                    class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-label-sm font-label-sm"
+                    >In Progress</span
+                  >
+                </div>
+              </div>
+              <!-- Message Thread -->
+              <div class="space-y-6">
+                <!-- Original Complaint -->
+                <div class="flex gap-4">
+                  <div
+                    class="w-10 h-10 shrink-0 rounded-full bg-secondary-container flex items-center justify-center text-secondary"
+                  >
+                    <span class="material-symbols-outlined">person</span>
+                  </div>
+                  <div
+                    class="flex-1 bg-surface-container-low p-4 rounded-xl rounded-tl-none border border-outline-variant/30"
+                  >
+                    <p class="font-bold text-on-surface mb-1">
+                      John Doe
+                      <span class="font-normal text-xs ml-2 text-on-surface-variant">09:15 AM</span>
+                    </p>
+                    <p class="text-body-md text-on-surface-variant leading-relaxed">
+                      The waste collection truck hasn't visited Block A for the past three days.
+                      There is a significant buildup of trash bags near the entrance of No. 12, and
+                      it's starting to smell quite bad. This is becoming a health hazard. Could you
+                      please check the schedule?
+                    </p>
+                  </div>
+                </div>
+                <!-- Admin Reply Placeholder (Example) -->
+                <div class="flex gap-4 flex-row-reverse">
+                  <div
+                    class="w-10 h-10 shrink-0 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container"
+                  >
+                    <span class="material-symbols-outlined">support_agent</span>
+                  </div>
+                  <div
+                    class="flex-1 bg-primary-container/10 p-4 rounded-xl rounded-tr-none border border-primary/20"
+                  >
+                    <p class="font-bold text-primary mb-1 text-right">
+                      Admin Sarah
+                      <span class="font-normal text-xs mr-2 text-on-surface-variant">10:45 AM</span>
+                    </p>
+                    <p class="text-body-md text-on-surface-variant leading-relaxed text-right">
+                      Hello Mr. Doe, we apologize for the inconvenience. We are currently contacting
+                      the waste management partner to verify why the collection was missed. We will
+                      update you as soon as we have a resolution.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- Reply Area -->
+            <section
+              class="bg-surface shadow-sm rounded-xl border border-outline-variant overflow-hidden"
+            >
+              <div
+                class="p-4 bg-surface-container border-b border-outline-variant flex items-center justify-between"
+              >
+                <span class="font-label-md text-label-md font-bold">Write a Reply</span>
+                <div class="flex gap-2">
+                  <button
+                    class="p-1.5 hover:bg-surface-container-high rounded transition-colors text-on-surface-variant"
+                  >
+                    <span class="material-symbols-outlined text-[20px]">format_bold</span>
+                  </button>
+                  <button
+                    class="p-1.5 hover:bg-surface-container-high rounded transition-colors text-on-surface-variant"
+                  >
+                    <span class="material-symbols-outlined text-[20px]">format_italic</span>
+                  </button>
+                  <button
+                    class="p-1.5 hover:bg-surface-container-high rounded transition-colors text-on-surface-variant"
+                  >
+                    <span class="material-symbols-outlined text-[20px]">attach_file</span>
+                  </button>
+                </div>
+              </div>
+              <div class="p-4">
+                <textarea
+                  class="w-full min-h-[150px] bg-transparent border-none focus:ring-0 text-body-md resize-none"
+                  placeholder="Type your response to the resident here..."
+                  style="outline: none"
+                ></textarea>
+              </div>
+              <div
+                class="p-4 bg-surface-bright border-t border-outline-variant flex items-center justify-end gap-3"
+              >
+                <button
+                  class="px-6 py-2.5 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all flex items-center gap-2"
+                >
+                  <span
+                    class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1"
+                    >send</span
+                  >
+                  Send Reply
+                </button>
+              </div>
+            </section>
+          </div>
+          <!-- Ticket Info & Actions (Sidebar Column) -->
+          <div class="space-y-gutter">
+            <!-- Resident Details Card -->
+            <section class="bg-surface shadow-sm rounded-xl border border-outline-variant p-md">
+              <h3 class="font-title-md text-title-md mb-4 text-primary">Resident Details</h3>
+              <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                  <img
+                    alt="John Doe"
+                    class="w-12 h-12 rounded-full object-cover"
+                    data-alt="A portrait of a male resident in his 30s, looking friendly and professional, with a soft-focus background of a modern living room. The image has high clarity, warm tones, and natural lighting, consistent with a high-end residential portal aesthetic."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxKgB-Vc-eS66s8CqtUAg0HfuHtfaQ_cUolqPVKjZcEUf58ievBmYSgCUIBdTvihjI5UMEy8HUwz1S0z6rDWHaMNdz6qql-qeb9aBtTrshMKh_dWwxIASfxkdcMFt4GfU3qOM6tufTxhVYY2Y3_CAlEudCO4DJ4ngvR-AfKXhY1Za0eVK_74jAeMJFq9Gah38It1gpdyaubN-cgSdlqbyXRQa_MY7rkmOqM45jcKGUiKuf8RSO5WOyQ91VnRyY9Pa4ZNKTf8gx7H0"
+                  />
+                  <div>
+                    <p class="font-bold text-on-surface">John Doe</p>
+                    <p class="text-xs text-on-surface-variant">Resident since 2021</p>
+                  </div>
+                </div>
+                <div class="h-[1px] bg-outline-variant"></div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <p
+                      class="text-xs text-on-surface-variant uppercase tracking-wider font-bold mb-1"
+                    >
+                      Unit
+                    </p>
+                    <p class="font-label-md text-label-md">Block A, No. 12</p>
+                  </div>
+                  <div>
+                    <p
+                      class="text-xs text-on-surface-variant uppercase tracking-wider font-bold mb-1"
+                    >
+                      Category
+                    </p>
+                    <p class="font-label-md text-label-md">Infrastructure</p>
+                  </div>
+                </div>
+                <button
+                  class="w-full py-2 border border-primary text-primary rounded-lg text-label-sm font-label-sm hover:bg-primary/5 transition-colors"
+                >
+                  View Full Profile
+                </button>
+              </div>
+            </section>
+            <!-- Ticket Actions Card -->
+            <section class="bg-surface shadow-sm rounded-xl border border-outline-variant p-md">
+              <h3 class="font-title-md text-title-md mb-4 text-primary">Admin Actions</h3>
+              <div class="flex flex-col gap-3">
+                <button
+                  class="w-full py-3 bg-tertiary text-on-tertiary rounded-lg font-label-md text-label-md hover:opacity-90 transition-all flex items-center justify-center gap-2"
+                >
+                  <span class="material-symbols-outlined text-[20px]">task_alt</span> Mark as
+                  Resolved
+                </button>
+                <button
+                  class="w-full py-3 bg-surface-container-high text-on-surface-variant rounded-lg font-label-md text-label-md hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"
+                >
+                  <span class="material-symbols-outlined text-[20px]">lock</span> Close Ticket
+                </button>
+                <div class="pt-2 border-t border-outline-variant mt-2">
+                  <button
+                    class="w-full py-3 text-error border border-error/30 rounded-lg font-label-md text-label-md hover:bg-error/5 transition-all flex items-center justify-center gap-2"
+                  >
+                    <span class="material-symbols-outlined text-[20px]">delete</span> Delete Ticket
+                  </button>
+                </div>
+              </div>
+            </section>
+            <!-- Announcement Banner Placeholder -->
+            <section
+              class="p-4 bg-tertiary-container text-on-tertiary-container rounded-xl flex items-center gap-3"
+            >
+              <span class="material-symbols-outlined text-3xl">info</span>
+              <div>
+                <p class="font-bold text-sm">System Update</p>
+                <p class="text-xs opacity-90">Maintenance scheduled for Oct 26, 2:00 AM.</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- Micro-interaction for Textarea -->
+    <script>
+      const textarea = document.querySelector('textarea');
+      textarea.addEventListener('focus', () => {
+        textarea.closest('section').classList.add('ring-2', 'ring-primary/10');
+      });
+      textarea.addEventListener('blur', () => {
+        textarea.closest('section').classList.remove('ring-2', 'ring-primary/10');
+      });
+
+      // Basic mobile menu toggle logic if needed in the future
+      console.log('Portal UI Initialized - Earthy Modern Theme');
+    </script>
+  </body>
+</html>

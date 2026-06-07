@@ -1,14 +1,9 @@
-import { Component, OnDestroy, afterNextRender, signal, inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, OnDestroy, afterNextRender, signal } from '@angular/core';
 import { MainLayoutComponent } from '../../layouts/main-layout/main-layout.component';
 import { TableComponent, Column } from '../../shared/components/table/table.component';
-import {
-  MOCK_METRICS,
-  MOCK_REVENUE,
-  MOCK_ACTIVITIES,
-  MOCK_PERSONNEL,
-} from './admin.model';
-import type { Chart } from 'chart.js';
+import { MOCK_METRICS, MOCK_REVENUE, MOCK_ACTIVITIES, MOCK_PERSONNEL } from './admin.model';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-admin',
@@ -16,13 +11,11 @@ import type { Chart } from 'chart.js';
   templateUrl: './admin.component.html',
 })
 export class AdminComponent implements OnDestroy {
-  private readonly platformId = inject(PLATFORM_ID);
   private chart: Chart | null = null;
   protected readonly chartReady = signal(false);
 
   constructor() {
     afterNextRender(() => {
-      if (!isPlatformBrowser(this.platformId)) return;
       this.chartReady.set(true);
       requestAnimationFrame(() => this.initChart());
     });
@@ -41,10 +34,7 @@ export class AdminComponent implements OnDestroy {
     { key: 'lastPatrol', header: 'Patroli Terakhir' },
   ];
 
-  private async initChart(): Promise<void> {
-    const { Chart, registerables } = await import('chart.js');
-    registerables.forEach((r: any) => Chart.register(r));
-
+  private initChart(): void {
     const canvas = document.getElementById('revenueChart') as HTMLCanvasElement;
     if (!canvas) return;
 
@@ -74,7 +64,7 @@ export class AdminComponent implements OnDestroy {
           },
           tooltip: {
             callbacks: {
-               label: (context: any) => {
+              label: (context: any) => {
                 const value = context.parsed.y as number;
                 if (value >= 1000000) return `Rp ${(value / 1000000).toFixed(1)} jt`;
                 if (value >= 1000) return `Rp ${(value / 1000).toFixed(0)} rb`;
@@ -106,7 +96,7 @@ export class AdminComponent implements OnDestroy {
                 size: 12,
               },
               color: '#4e453c',
-               callback: (value: any) => {
+              callback: (value: any) => {
                 if (typeof value === 'number') {
                   if (value >= 1000000) return `Rp${(value / 1000000).toFixed(0)}jt`;
                   if (value >= 1000) return `Rp${(value / 1000).toFixed(0)}rb`;

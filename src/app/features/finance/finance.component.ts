@@ -46,7 +46,7 @@ export class FinanceComponent implements OnDestroy {
         (t) =>
           t.description.toLowerCase().includes(query) ||
           t.ref.toLowerCase().includes(query) ||
-          t.date.toLowerCase().includes(query)
+          t.date.toLowerCase().includes(query),
       );
     }
     if (!this.showAll() && !query) {
@@ -63,9 +63,7 @@ export class FinanceComponent implements OnDestroy {
   ];
 
   protected readonly maxCashFlow = computed(() => {
-    return Math.max(
-      ...this.cashFlow.flatMap((m) => [m.pemasukan, m.pengeluaran])
-    );
+    return Math.max(...this.cashFlow.flatMap((m) => [m.pemasukan, m.pengeluaran]));
   });
 
   protected onSearchInput(value: string): void {
@@ -141,7 +139,7 @@ export class FinanceComponent implements OnDestroy {
                 size: 12,
               },
               color: '#4e453c',
-               callback: (value: any) => {
+              callback: (value: any) => {
                 if (typeof value === 'number') {
                   if (value >= 1000000) return `Rp${(value / 1000000).toFixed(0)}jt`;
                   if (value >= 1000) return `Rp${(value / 1000).toFixed(0)}rb`;

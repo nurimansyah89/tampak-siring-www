@@ -44,10 +44,10 @@
     </section>
 
     <!-- Revenue Chart + Recent Activities -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-lg">
+    <div class="flex flex-col lg:flex-row gap-gutter mb-lg">
       <!-- Revenue Chart -->
       <section
-        class="lg:col-span-2 bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30"
+        class="lg:flex-[2] bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30"
       >
         <div class="flex justify-between items-center mb-md">
           <h3 class="font-title-md text-title-md text-on-surface">Statistik Pendapatan</h3>
@@ -60,16 +60,14 @@
             </select>
           </div>
         </div>
-        @if (chartReady()) {
-          <div class="h-64">
-            <canvas id="revenueChart"></canvas>
-          </div>
-        }
+        <div class="h-64">
+          <canvas id="revenueChart" class="w-full h-full block"></canvas>
+        </div>
       </section>
 
       <!-- Recent Activities -->
       <aside
-        class="bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30"
+        class="lg:flex-1 bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30"
       >
         <h3 class="font-title-md text-title-md text-on-surface mb-md">Aktivitas Terbaru</h3>
         <div class="space-y-md">

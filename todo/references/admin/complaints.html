@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      body {
+        background-color: #fff8f6;
+        font-family: 'Inter', sans-serif;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #d1c4b8;
+        border-radius: 10px;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'surface-container-lowest': '#ffffff',
+              'on-secondary': '#ffffff',
+              'primary-fixed-dim': '#e2c19b',
+              'primary-fixed': '#ffddb6',
+              'on-surface-variant': '#4e453c',
+              'on-tertiary-container': '#fffbff',
+              surface: '#fff8f6',
+              'on-error-container': '#93000a',
+              'surface-variant': '#ffdad4',
+              'on-secondary-fixed': '#1a1c1a',
+              'on-secondary-container': '#626361',
+              error: '#ba1a1a',
+              'secondary-fixed-dim': '#c7c6c4',
+              secondary: '#5e5f5d',
+              'tertiary-fixed': '#ffdbc9',
+              'tertiary-container': '#bb5808',
+              'on-surface': '#2b1613',
+              'on-primary-container': '#fffbff',
+              'surface-tint': '#735a3a',
+              'surface-container': '#ffe9e5',
+              'on-primary': '#ffffff',
+              'on-tertiary-fixed-variant': '#763400',
+              'on-tertiary': '#ffffff',
+              'secondary-fixed': '#e3e2e0',
+              'outline-variant': '#d1c4b8',
+              'surface-container-low': '#fff0ee',
+              'surface-container-highest': '#ffdad4',
+              'on-tertiary-fixed': '#321200',
+              primary: '#705838',
+              'tertiary-fixed-dim': '#ffb68d',
+              'surface-bright': '#fff8f6',
+              'primary-container': '#8b704f',
+              'on-primary-fixed-variant': '#594325',
+              'on-background': '#2b1613',
+              'error-container': '#ffdad6',
+              tertiary: '#974400',
+              outline: '#80756b',
+              'surface-dim': '#f8d1cb',
+              'on-primary-fixed': '#291801',
+              'inverse-surface': '#422a26',
+              background: '#fff8f6',
+              'inverse-on-surface': '#ffedea',
+              'surface-container-high': '#ffe2dd',
+              'on-secondary-fixed-variant': '#464745',
+              'on-error': '#ffffff',
+              'inverse-primary': '#e2c19b',
+              'secondary-container': '#e0e0dd',
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
+            },
+            spacing: {
+              xl: '80px',
+              'max-width-desktop': '1280px',
+              sm: '12px',
+              md: '24px',
+              lg: '48px',
+              xs: '4px',
+              'margin-mobile': '16px',
+              gutter: '24px',
+              base: '8px',
+            },
+            fontFamily: {
+              'body-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'display-lg': ['Inter'],
+              'title-md': ['Inter'],
+              'label-sm': ['Inter'],
+              'label-md': ['Inter'],
+              'headline-lg': ['Inter'],
+            },
+            fontSize: {
+              'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'headline-lg-mobile': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+              'display-lg': [
+                '48px',
+                { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'title-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+              'label-sm': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+              'label-md': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' },
+              ],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background text-on-background">
+    <!-- SideNavBar -->
+    <aside
+      class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-high shadow-sm flex flex-col p-md gap-base z-50"
+    >
+      <div class="flex flex-col gap-xs mb-lg">
+        <span class="font-title-md text-title-md font-bold text-primary dark:text-primary-fixed-dim"
+          >Smart Residence</span
+        >
+        <span class="font-label-md text-label-md text-on-surface-variant">Admin Portal</span>
+      </div>
+      <nav class="flex flex-col gap-base flex-1">
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="map">map</span>
+          <span class="font-label-md text-label-md">Cluster Map</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="group">group</span>
+          <span class="font-label-md text-label-md">Residents</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="payments">payments</span>
+          <span class="font-label-md text-label-md">Fees &amp; Iuran</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="security">security</span>
+          <span class="font-label-md text-label-md">Security Logs</span>
+        </a>
+        <!-- Active Tab: Complaints -->
+        <a
+          class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="emergency_home">emergency_home</span>
+          <span class="font-label-md text-label-md">Complaints</span> </a
+        ><a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="newspaper">newspaper</span>
+          <span class="font-label-md text-label-md">News Feed</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="admin_panel_settings"
+            >admin_panel_settings</span
+          >
+          <span class="font-label-md text-label-md">Admin Management</span>
+        </a>
+        <a
+          class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors duration-200 mt-auto"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="settings">settings</span>
+          <span class="font-label-md text-label-md">Settings</span>
+        </a>
+      </nav>
+    </aside>
+    <!-- TopAppBar -->
+    <header
+      class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-surface-container-lowest dark:bg-surface-container shadow-md flex justify-between items-center px-md z-40"
+    >
+      <div class="flex items-center gap-md flex-1">
+        <div class="relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            data-icon="search"
+            >search</span
+          >
+          <input
+            class="w-full pl-10 pr-4 py-2 bg-surface border-none focus:ring-1 focus:ring-primary rounded-full font-body-md text-body-md"
+            placeholder="Search tickets, residents..."
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="flex items-center gap-sm">
+        <button class="hover:bg-surface-container-high rounded-full p-2 transition-all">
+          <span class="material-symbols-outlined text-primary" data-icon="notifications"
+            >notifications</span
+          >
+        </button>
+        <div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+        <button
+          class="flex items-center gap-2 hover:bg-surface-container-high rounded-full p-1 transition-all"
+        >
+          <img
+            alt="Admin Profile"
+            class="w-8 h-8 rounded-full"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkPA-xS7VjDTLQODeqs44dhZK8t0_UYt-s4VUR6FCMI5VH5Rnp2M4JhBKgZP7rV22mvNJtZcovq17O2EBP_MbN-SYjphrEUA94DuLygZLJ5nKG-Zg96KJzjweM0z9jSrq00c73cBt47mM6VPzsX7-c7PJVgaWP3yPbfx5mfi7jPsqf3v_7vSpZyXVOesPcHP644G9biBr-KO17zY4RBhzV_aNClhOmpQy7WuALOqG6f-ZwaYvVCSzE0M61tVkyXzbgx_0Wf7Q6NGw"
+          />
+          <span class="font-label-md text-label-md pr-2">Admin Portal</span>
+        </button>
+      </div>
+    </header>
+    <!-- Main Content -->
+    <main class="ml-64 pt-20 p-md min-h-screen">
+      <div class="max-w-max-width-desktop mx-auto flex flex-col gap-lg">
+        <!-- Page Header & Action -->
+        <div class="flex justify-between items-end">
+          <div>
+            <h1 class="font-headline-lg text-headline-lg text-on-surface">Complaints Management</h1>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Monitor and resolve resident requests and reports.
+            </p>
+          </div>
+          <button
+            class="bg-primary text-on-primary px-6 py-3 rounded-lg flex items-center gap-2 hover:opacity-90 transition-opacity font-label-md text-label-md shadow-sm active:scale-95 transition-transform"
+          >
+            <span class="material-symbols-outlined" data-icon="add">add</span>
+            Register New Ticket
+          </button>
+        </div>
+        <!-- Stats Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-md">
+          <div
+            class="col-span-1 bg-surface-container-lowest p-md rounded-xl shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant/30 flex flex-col gap-base"
+          >
+            <span
+              class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider"
+              >Open Tickets</span
+            >
+            <div class="flex items-baseline gap-2">
+              <span class="font-display-lg text-display-lg text-tertiary">14</span>
+              <span class="text-error font-label-sm text-label-sm flex items-center">
+                <span class="material-symbols-outlined text-sm" data-icon="trending_up"
+                  >trending_up</span
+                >
+                12%
+              </span>
+            </div>
+            <div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+              <div class="bg-tertiary h-full w-[65%]"></div>
+            </div>
+          </div>
+          <div
+            class="col-span-1 bg-surface-container-lowest p-md rounded-xl shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant/30 flex flex-col gap-base"
+          >
+            <span
+              class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider"
+              >Avg. Resolution</span
+            >
+            <div class="flex items-baseline gap-2">
+              <span class="font-display-lg text-display-lg text-primary">4.2h</span>
+              <span class="text-primary font-label-sm text-label-sm flex items-center">
+                <span class="material-symbols-outlined text-sm" data-icon="trending_down"
+                  >trending_down</span
+                >
+                0.8h
+              </span>
+            </div>
+            <div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+              <div class="bg-primary h-full w-[80%]"></div>
+            </div>
+          </div>
+          <div
+            class="col-span-2 bg-surface-container-lowest p-md rounded-xl shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant/30 flex flex-col justify-between"
+          >
+            <div class="flex justify-between items-start">
+              <div>
+                <span
+                  class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider"
+                  >Complaint Trends</span
+                >
+                <p class="font-label-sm text-label-sm text-on-surface-variant/70">
+                  Past 7 days volume
+                </p>
+              </div>
+              <div class="flex gap-1">
+                <span class="w-3 h-3 rounded-full bg-primary/30"></span>
+                <span class="w-3 h-3 rounded-full bg-primary/60"></span>
+                <span class="w-3 h-3 rounded-full bg-primary"></span>
+              </div>
+            </div>
+            <!-- Simplified Visual Chart Placeholder -->
+            <div class="flex items-end gap-3 h-16 mt-4">
+              <div
+                class="flex-1 bg-surface-container-high rounded-t-sm transition-all hover:bg-primary-container"
+                style="height: 40%"
+              ></div>
+              <div
+                class="flex-1 bg-surface-container-high rounded-t-sm transition-all hover:bg-primary-container"
+                style="height: 60%"
+              ></div>
+              <div
+                class="flex-1 bg-surface-container-high rounded-t-sm transition-all hover:bg-primary-container"
+                style="height: 30%"
+              ></div>
+              <div
+                class="flex-1 bg-surface-container-high rounded-t-sm transition-all hover:bg-primary-container"
+                style="height: 85%"
+              ></div>
+              <div
+                class="flex-1 bg-surface-container-high rounded-t-sm transition-all hover:bg-primary-container"
+                style="height: 50%"
+              ></div>
+              <div
+                class="flex-1 bg-surface-container-high rounded-t-sm transition-all hover:bg-primary-container"
+                style="height: 90%"
+              ></div>
+              <div class="flex-1 bg-primary rounded-t-sm shadow-sm" style="height: 70%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Complaint List Section -->
+        <div
+          class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(62,39,35,0.05)] border border-outline-variant/30 overflow-hidden"
+        >
+          <!-- Filters Bar -->
+          <div
+            class="px-md py-4 border-b border-outline-variant/30 flex flex-wrap items-center justify-between gap-md"
+          >
+            <div class="flex gap-base">
+              <button
+                class="px-4 py-2 bg-surface-container-high rounded-full font-label-md text-label-md text-primary"
+              >
+                All Tickets
+              </button>
+              <button
+                class="px-4 py-2 hover:bg-surface-container-high rounded-full font-label-md text-label-md text-on-surface-variant transition-colors"
+              >
+                Infrastructure
+              </button>
+              <button
+                class="px-4 py-2 hover:bg-surface-container-high rounded-full font-label-md text-label-md text-on-surface-variant transition-colors"
+              >
+                Security
+              </button>
+              <button
+                class="px-4 py-2 hover:bg-surface-container-high rounded-full font-label-md text-label-md text-on-surface-variant transition-colors"
+              >
+                Billing
+              </button>
+            </div>
+            <div class="flex gap-sm">
+              <button
+                class="flex items-center gap-2 px-3 py-2 border border-outline-variant rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors"
+              >
+                <span class="material-symbols-outlined text-sm" data-icon="filter_list"
+                  >filter_list</span
+                >
+                Priority
+              </button>
+              <button
+                class="flex items-center gap-2 px-3 py-2 border border-outline-variant rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors"
+              >
+                <span class="material-symbols-outlined text-sm" data-icon="calendar_month"
+                  >calendar_month</span
+                >
+                Date Range
+              </button>
+            </div>
+          </div>
+          <!-- List Header -->
+          <div
+            class="grid grid-cols-12 px-md py-3 bg-surface-container-low/50 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+          >
+            <div class="col-span-3">Ticket ID &amp; Category</div>
+            <div class="col-span-3">Resident &amp; Location</div>
+            <div class="col-span-2">Priority</div>
+            <div class="col-span-2">Status</div>
+            <div class="col-span-2 text-right">Actions</div>
+          </div>
+          <!-- List Items -->
+          <div class="divide-y divide-outline-variant/20">
+            <!-- Item 1 -->
+            <div
+              class="grid grid-cols-12 px-md py-4 items-center hover:bg-surface-container-low/30 transition-colors group"
+            >
+              <div class="col-span-3 flex flex-col">
+                <span class="font-label-md text-label-md text-primary font-bold">#COMP-8821</span>
+                <span class="font-body-md text-body-md text-on-surface">Infrastructure</span>
+              </div>
+              <div class="col-span-3 flex items-center gap-3">
+                <div
+                  class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-secondary font-bold text-xs"
+                >
+                  JD
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-md text-label-md">John Doe</span>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant"
+                    >Block A, No. 12</span
+                  >
+                </div>
+              </div>
+              <div class="col-span-2">
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full bg-error/10 text-error font-label-sm text-label-sm"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-error mr-2"></span>
+                  Urgent
+                </span>
+              </div>
+              <div class="col-span-2">
+                <span
+                  class="px-3 py-1 rounded-full bg-tertiary-container/10 text-tertiary font-label-sm text-label-sm border border-tertiary-container/20"
+                  >New</span
+                >
+              </div>
+              <div class="col-span-2 text-right">
+                <button
+                  class="px-4 py-1.5 bg-surface-container-high hover:bg-surface-container-highest text-primary font-label-sm text-label-sm rounded-lg transition-colors duration-200"
+                >
+                  View Detail
+                </button>
+              </div>
+            </div>
+            <!-- Item 2 -->
+            <div
+              class="grid grid-cols-12 px-md py-4 items-center hover:bg-surface-container-low/30 transition-colors group"
+            >
+              <div class="col-span-3 flex flex-col">
+                <span class="font-label-md text-label-md text-primary font-bold">#COMP-8819</span>
+                <span class="font-body-md text-body-md text-on-surface">Street Lighting</span>
+              </div>
+              <div class="col-span-3 flex items-center gap-3">
+                <div
+                  class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs"
+                >
+                  AS
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-md text-label-md">Alice Smith</span>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant"
+                    >Block C, No. 04</span
+                  >
+                </div>
+              </div>
+              <div class="col-span-2">
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-label-sm"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-tertiary mr-2"></span>
+                  High
+                </span>
+              </div>
+              <div class="col-span-2">
+                <span
+                  class="px-3 py-1 rounded-full bg-primary-container/10 text-primary font-label-sm text-label-sm border border-primary-container/20"
+                  >In Progress</span
+                >
+              </div>
+              <div class="col-span-2 text-right">
+                <button
+                  class="px-4 py-1.5 bg-surface-container-high hover:bg-surface-container-highest text-primary font-label-sm text-label-sm rounded-lg transition-colors duration-200"
+                >
+                  View Detail
+                </button>
+              </div>
+            </div>
+            <!-- Item 3 -->
+            <div
+              class="grid grid-cols-12 px-md py-4 items-center hover:bg-surface-container-low/30 transition-colors group"
+            >
+              <div class="col-span-3 flex flex-col">
+                <span class="font-label-md text-label-md text-primary font-bold">#COMP-8792</span>
+                <span class="font-body-md text-body-md text-on-surface">Waste Collection</span>
+              </div>
+              <div class="col-span-3 flex items-center gap-3">
+                <div
+                  class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed-variant font-bold text-xs"
+                >
+                  RK
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-md text-label-md">Robert King</span>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant"
+                    >Block B, No. 25</span
+                  >
+                </div>
+              </div>
+              <div class="col-span-2">
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-secondary mr-2"></span>
+                  Normal
+                </span>
+              </div>
+              <div class="col-span-2">
+                <span
+                  class="px-3 py-1 rounded-full bg-green-100 text-green-700 font-label-sm text-label-sm border border-green-200"
+                  >Resolved</span
+                >
+              </div>
+              <div class="col-span-2 text-right">
+                <button
+                  class="px-4 py-1.5 bg-surface-container-high hover:bg-surface-container-highest text-primary font-label-sm text-label-sm rounded-lg transition-colors duration-200"
+                >
+                  View Detail
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- List Footer -->
+          <div class="px-md py-4 bg-surface-container-low/30 flex justify-between items-center">
+            <span class="font-label-sm text-label-sm text-on-surface-variant"
+              >Showing 3 of 14 tickets</span
+            >
+            <div class="flex gap-xs">
+              <button
+                class="p-2 hover:bg-surface-container-high rounded-lg disabled:opacity-30"
+                disabled=""
+              >
+                <span class="material-symbols-outlined text-sm" data-icon="arrow_back_ios"
+                  >arrow_back_ios</span
+                >
+              </button>
+              <button
+                class="w-8 h-8 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm"
+              >
+                1
+              </button>
+              <button
+                class="w-8 h-8 hover:bg-surface-container-high rounded-lg font-label-sm text-label-sm"
+              >
+                2
+              </button>
+              <button
+                class="w-8 h-8 hover:bg-surface-container-high rounded-lg font-label-sm text-label-sm"
+              >
+                3
+              </button>
+              <button class="p-2 hover:bg-surface-container-high rounded-lg">
+                <span class="material-symbols-outlined text-sm" data-icon="arrow_forward_ios"
+                  >arrow_forward_ios</span
+                >
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Facility Highlights / Announcement (Tactile Influence) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-xl">
+          <div class="relative h-48 rounded-2xl overflow-hidden group">
+            <img
+              alt="Maintenance Personnel"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              data-alt="A professional technician in high-visibility safety gear inspecting complex electrical infrastructure inside a modern residential facility. The lighting is crisp and natural, highlighting clean metallic surfaces and professional tools. The aesthetic is bright and corporate-modern, using warm neutral tones. The scene conveys reliability, efficiency, and expert maintenance care within a premium environment."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGF6zwlW1RGGIjXHZIkM5IrBYwad4rmCJHH1XchDE0uAzGf1RSuqwEvtXffVaB6Rxs3G9y6A9lBjuOhnp-WnH5a02wmIFIOWJismY74UW0XIo8RUN4Cy5pM6Kuik0D0sRtM5uqFuQXIYmlN0Hy54vK8emgmQdecUx9Bsa9PcILRIq632JxHFbMgqZMi73FNSjqH8Qf8RIrgvF85eJpbHjkHmD2uBEJ9atO03nTL3IAWoBF43QMwJdlupBwrrvcwrpAB1RigwV8vPg"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-md flex flex-col justify-end"
+            >
+              <h3 class="text-white font-title-md text-title-md">Active Maintenance Teams</h3>
+              <p class="text-white/80 font-body-md text-body-md">
+                4 teams currently dispatched across sectors.
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-primary/5 border border-primary/10 rounded-2xl p-md flex flex-col justify-center gap-base"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-on-primary shadow-lg"
+              >
+                <span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+              </div>
+              <div>
+                <h3 class="font-title-md text-title-md text-primary">System Notification</h3>
+                <p class="font-label-sm text-label-sm text-primary/70 uppercase">
+                  Immediate Action Required
+                </p>
+              </div>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Scheduled elevator maintenance for Block A starts tomorrow at 09:00 AM. Please ensure
+              all residents are notified via the mobile app push channel.
+            </p>
+            <button
+              class="self-start mt-2 px-6 py-2 border border-primary text-primary rounded-full font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-all"
+            >
+              Broadcast Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- FAB (Suppressed based on logic for details, but kept here as it's a dashboard-like context for creation) -->
+    <button
+      class="fixed bottom-8 right-8 w-14 h-14 bg-tertiary text-on-tertiary rounded-2xl shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50"
+    >
+      <span
+        class="material-symbols-outlined"
+        data-icon="edit_note"
+        style="font-variation-settings: 'FILL' 1"
+        >edit_note</span
+      >
+    </button>
+    <script>
+      // Simple micro-interactions for trend bars
+      document.querySelectorAll('.flex-1.bg-surface-container-high').forEach((bar) => {
+        bar.addEventListener('mouseenter', () => {
+          bar.style.transform = 'scaleY(1.1)';
+        });
+        bar.addEventListener('mouseleave', () => {
+          bar.style.transform = 'scaleY(1)';
+        });
+      });
+
+      // Search highlight effect
+      const searchInput = document.querySelector('input[type="text"]');
+      searchInput.addEventListener('focus', () => {
+        searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+      });
+      searchInput.addEventListener('blur', () => {
+        searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+      });
+    </script>
+  </body>
+</html>

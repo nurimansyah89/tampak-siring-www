@@ -1,0 +1,116 @@
+<app-main-layout>
+  <div class="px-margin-mobile md:px-gutter pt-8 pb-xl">
+    <!-- Breadcrumbs & Header -->
+    <div class="mb-lg">
+      <div class="flex items-center gap-2 text-on-surface-variant font-label-sm mb-2">
+        <a routerLink="/admin/finance" class="hover:text-primary transition-colors">Manajemen Iuran</a>
+        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+        <span class="text-primary font-bold">Detail Bukti Pembayaran</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <button (click)="goBack()" class="p-2 hover:bg-surface-container rounded-full transition-colors" type="button">
+          <span class="material-symbols-outlined text-primary">arrow_back</span>
+        </button>
+        <div>
+          <h2 class="font-headline-lg text-headline-lg text-on-background">Detail Bukti Pembayaran</h2>
+          <p class="text-label-sm font-label-sm text-on-surface-variant">{{ payment()?.transactionId }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-gutter">
+      <!-- Left Column: Informasi & Rincian -->
+      <div class="col-span-12 lg:col-span-4 space-y-md">
+        <!-- Informasi Warga -->
+        <section class="bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30">
+          <h3 class="font-label-sm text-label-sm uppercase tracking-widest text-primary mb-4">Informasi Warga</h3>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="bg-primary-fixed text-on-primary-fixed w-12 h-12 rounded-lg flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined">person</span>
+              </div>
+              <div>
+                <p class="font-title-md text-title-md text-on-surface leading-tight">{{ payment()?.residentName }}</p>
+                <p class="text-body-md text-on-surface-variant">{{ payment()?.residentType }}</p>
+              </div>
+            </div>
+            <div class="pt-4 border-t border-outline-variant grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-label-sm text-on-surface-variant">Blok / No</p>
+                <p class="font-label-md text-on-surface">{{ payment()?.block }}</p>
+              </div>
+              <div>
+                <p class="text-label-sm text-on-surface-variant">Periode Iuran</p>
+                <p class="font-label-md text-on-surface">{{ payment()?.period }}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Rincian Pembayaran -->
+        <section class="bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30">
+          <h3 class="font-label-sm text-label-sm uppercase tracking-widest text-primary mb-4">Rincian Pembayaran</h3>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <span class="text-on-surface-variant">Jumlah Dibayar</span>
+              <span class="text-title-md font-bold text-primary">{{ formatAmount(payment()?.amount ?? 0) }}</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-on-surface-variant">Metode</span>
+              <span class="font-label-md flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">{{ getMethodIcon(payment()?.paymentMethod ?? '') }}</span>
+                {{ payment()?.paymentMethod }}
+              </span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-on-surface-variant">Tanggal Bayar</span>
+              <span class="font-label-md">{{ payment()?.paymentDate }}</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right Column: Bukti Bayar -->
+      <div class="col-span-12 lg:col-span-8 space-y-md">
+        <div class="bg-surface-container-lowest p-md rounded-xl shadow-level-2 border border-outline-variant/30 flex flex-col">
+          <!-- Bukti Header -->
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <h3 class="font-title-md text-title-md text-on-surface flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">receipt_long</span>
+              Bukti Bayar
+            </h3>
+            <div class="flex gap-2">
+              <button (click)="downloadProof()" class="flex items-center gap-2 px-4 py-2 text-label-md border border-outline text-on-surface-variant rounded-lg hover:bg-surface-container transition-all cursor-pointer" type="button">
+                <span class="material-symbols-outlined text-[20px]">download</span>
+                Unduh
+              </button>
+              <button (click)="openLightbox()" class="flex items-center gap-2 px-4 py-2 text-label-md border border-outline text-on-surface-variant rounded-lg hover:bg-surface-container transition-all cursor-pointer" type="button">
+                <span class="material-symbols-outlined text-[20px]">zoom_in</span>
+                Perbesar
+              </button>
+            </div>
+          </div>
+
+          <!-- Proof Image -->
+          <div class="flex-1 min-h-[400px] md:min-h-[500px] border-2 border-dashed border-outline-variant rounded-xl flex items-center justify-center p-md overflow-hidden relative group bg-surface-container-low">
+            <img
+              [src]="payment()?.proofImageUrl"
+              alt="Bukti Pembayaran"
+              class="max-w-full max-h-[600px] shadow-lg rounded-md transform group-hover:scale-[1.02] transition-transform duration-500"
+            />
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</app-main-layout>
+
+<!-- Lightbox -->
+@if (showLightbox()) {
+  <app-lightbox
+    [images]="[payment()?.proofImageUrl ?? '']"
+    [(currentIndex)]="lightboxIndex"
+    (close)="closeLightbox()"
+  />
+}

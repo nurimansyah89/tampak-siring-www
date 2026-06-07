@@ -1,0 +1,167 @@
+<app-main-layout>
+  <div class="px-margin-mobile md:px-gutter pt-8 pb-xl">
+    <!-- Header Section -->
+    <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-lg">
+      <div>
+        <h2 class="font-headline-lg text-headline-lg text-primary">Manajemen Aduan Warga</h2>
+        <p class="text-body-md text-on-surface-variant mt-1">Pantau dan kelola laporan warga klaster.</p>
+      </div>
+    </header>
+
+    <!-- Stats Grid -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-lg items-start">
+      <!-- Open Tickets -->
+      <div class="bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30 flex flex-col gap-2">
+        <span class="text-on-surface-variant font-label-md uppercase tracking-wider">Tiket Terbuka</span>
+        <div class="flex items-baseline gap-2">
+          <span class="font-display-lg text-display-lg text-tertiary">{{ stats().open }}</span>
+          <span class="text-error font-label-sm flex items-center">
+            <span class="material-symbols-outlined text-sm">trending_up</span>
+            {{ stats().openTrend }}
+          </span>
+        </div>
+        <div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+          <div class="bg-tertiary h-full" [style.width.%]="stats().openProgress"></div>
+        </div>
+      </div>
+
+      <!-- Complaint Trends -->
+      <div class="col-span-1 md:col-span-2 bg-surface-container-lowest p-md rounded-xl shadow-level-1 border border-outline-variant/30" style="min-height: 340px;">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <span class="text-on-surface-variant font-label-md uppercase tracking-wider">Tren Aduan</span>
+            <p class="font-label-sm text-on-surface-variant/70">Volume 7 hari terakhir</p>
+          </div>
+        </div>
+        <div style="height: 256px;">
+          <canvas id="trendChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Complaint List Section -->
+    <section class="bg-surface rounded-xl border border-outline-variant shadow-level-1 overflow-hidden">
+      <!-- Filter Bar -->
+      <div class="px-md py-4 border-b border-outline-variant/30 flex flex-wrap items-center justify-between gap-md">
+        <div class="flex gap-base flex-wrap">
+          @for (cat of categories(); track cat) {
+            <button
+              class="px-4 py-2 rounded-full font-label-md transition-colors"
+              [class.bg-surface-container-high]="activeCategory() === cat"
+              [class.text-primary]="activeCategory() === cat"
+              [class.text-on-surface-variant]="activeCategory() !== cat"
+              [class.hover:bg-surface-container-high]="activeCategory() !== cat"
+              (click)="onCategoryChange(cat)"
+            >
+              @if (cat === 'Semua') { Semua Tiket } @else { {{ cat }} }
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Desktop Table -->
+      <div class="hidden md:block">
+        <app-table [columns]="columns">
+          @for (complaint of displayedComplaints(); track complaint.id) {
+            <tr class="hover:bg-surface-container-high transition-colors">
+              <td class="px-md py-4">
+                <div class="flex flex-col">
+                  <span class="font-label-md text-primary font-bold">{{ complaint.ticketId }}</span>
+                  <span class="font-body-md text-on-surface">{{ complaint.category }}</span>
+                </div>
+              </td>
+              <td class="px-md py-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-secondary font-bold text-xs">
+                    {{ complaint.initials }}
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="font-label-md">{{ complaint.resident }}</span>
+                    <span class="font-label-sm text-on-surface-variant">{{ complaint.location }}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="px-md py-4 text-center">
+                <span class="inline-flex items-center px-3 py-1 rounded-full font-label-sm {{ getPriorityClass(complaint.priority) }}">
+                  <span class="w-1.5 h-1.5 rounded-full mr-2 {{ getPriorityDot(complaint.priority) }}"></span>
+                  {{ complaint.priority }}
+                </span>
+              </td>
+              <td class="px-md py-4 text-center">
+                <span class="px-3 py-1 rounded-full font-label-sm {{ getStatusClass(complaint.status) }}">
+                  {{ complaint.status }}
+                </span>
+              </td>
+              <td class="px-md py-4 text-right">
+                <div class="flex justify-end gap-2">
+                  <a
+                    [routerLink]="complaint.id"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-label-sm font-label-sm text-primary border border-primary/30 hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95"
+                  >
+                    <span class="material-symbols-outlined text-[16px]">visibility</span>
+                    Detail
+                  </a>
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td [attr.colspan]="columns.length" class="px-md py-8 text-center text-on-surface-variant font-body-md">
+                Tidak ada aduan ditemukan.
+              </td>
+            </tr>
+          }
+        </app-table>
+      </div>
+
+      <!-- Mobile Card View -->
+      <div class="block md:hidden divide-y divide-outline-variant/30">
+        @for (complaint of displayedComplaints(); track complaint.id) {
+          <a [routerLink]="complaint.id" class="p-4 flex flex-col gap-3 hover:bg-surface-container-low transition-colors block">
+            <div class="flex items-center justify-between">
+              <span class="font-label-md text-primary font-bold">{{ complaint.ticketId }}</span>
+              <span class="font-body-md text-on-surface">{{ complaint.category }}</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-secondary font-bold text-xs">
+                {{ complaint.initials }}
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="font-label-md truncate">{{ complaint.resident }}</p>
+                <p class="font-label-sm text-on-surface-variant truncate">{{ complaint.location }}</p>
+              </div>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center px-3 py-1 rounded-full font-label-sm {{ getPriorityClass(complaint.priority) }}">
+                  <span class="w-1.5 h-1.5 rounded-full mr-2 {{ getPriorityDot(complaint.priority) }}"></span>
+                  {{ complaint.priority }}
+                </span>
+                <span class="px-3 py-1 rounded-full font-label-sm {{ getStatusClass(complaint.status) }}">
+                  {{ complaint.status }}
+                </span>
+              </div>
+              <span class="inline-flex items-center gap-1 text-label-sm text-primary font-semibold">
+                Detail
+                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+              </span>
+            </div>
+          </a>
+        } @empty {
+          <div class="p-8 text-center text-on-surface-variant font-body-md">
+            Tidak ada aduan ditemukan.
+          </div>
+        }
+      </div>
+
+      <!-- Pagination -->
+      <app-pagination
+        [currentPage]="currentPage()"
+        [totalItems]="sortedComplaints().length"
+        [pageSize]="5"
+        label="Aduan"
+        (pageChange)="onPageChange($event)"
+      />
+    </section>
+  </div>
+</app-main-layout>
