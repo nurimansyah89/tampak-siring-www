@@ -78,7 +78,6 @@ Ketika membuat, melakukan *refactoring*, atau menerjemahkan referensi kode menta
 - Setiap penambahan skill lewat skills.sh, WAJIB gunakan opsi `-y` agar bersifat non-interactive
 - SELALU pastikan hasil build dalam kondisi clean (no error, no warning) sebelum melanjutkan ke task berikutnya
 - SELALU gunakan bahasa Indonesia dalam dokumentasi. Kecuali kodingan, WAJIB bahasa Inggris (komentar, deklarasi, dll.)
-- SELALU gunakan git yang ada didalam container saat melakukan aksi-aksi terkait git (`commit/pull/push/etc`)
 - SELALU membuat/meng-update file spesifikasi test jika ada penambahan/update UI/Logic
 
 ## Aturan umum yang DILARANG dilakukan
