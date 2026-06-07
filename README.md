@@ -66,6 +66,22 @@ docker run --rm `
 
 Build artifacts akan tersimpan di `dist/` directory.
 
+## Running SSR (Server-Side Rendering)
+
+Setelah build, jalankan production SSR server dengan perintah:
+
+```powershell
+docker run --rm -it `
+    -v tampaksiring-home:/root `
+    -v tampaksiring-node-modules:/app/node_modules `
+    -v ${PWD}:/app `
+    -e NG_ALLOWED_HOSTS="*" `
+    -p 4000:4000 `
+    tampaksiring:latest npm run serve:ssr:tampaksiring
+```
+
+Buka browser dan navigasi ke `http://localhost:4000/`.
+
 ## Running unit tests
 
 ```powershell
